@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>PixCrush · 图片压缩 & 格式转换 · QuickToolLab</title>
+    <meta charset="UTF-8">
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PixCrush 免费在线图片压缩与格式转换工具，支持 JPG、PNG、WebP、BMP、GIF 批量处理，本地运行不上传服务器，隐私安全，无需安装，即开即用。">
+    <meta name="keywords" content="图片压缩,在线图片压缩,图片格式转换,WebP转换,PNG压缩,JPG压缩,免费图片工具,batch image compression">
+    <meta name="theme-color" content="#0a0a10">
+    <link rel="canonical" href="https://quicktoolab.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolab.com/">
+    <meta property="og:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
+    <meta property="og:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器，隐私安全。">
+    <meta property="og:image" content="https://quicktoolab.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
+    <meta name="twitter:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器。">
+    <meta name="twitter:image" content="https://quicktoolab.com/og-image.png">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/><path d='M20 14 L27 14 M24 11 L27 14 L24 17' fill='none' stroke='%23fb923c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --accent:   #f97316;
+            --accent2:  #fb923c;
+            --accentlo: rgba(249,115,22,.12);
+            --green:    #22c55e;
+        }
+        [data-theme="dark"] {
+            --bg:      #0a0a10;
+            --surface: #111118;
+            --surface2:#18181f;
+            --border:  #222230;
+            --text:    #ededf5;
+            --muted:   #5a5a72;
+        }
+        [data-theme="light"] {
+            --bg:      #f2f2f7;
+            --surface: #ffffff;
+            --surface2:#e8e8f0;
+            --border:  #d8d8e8;
+            --text:    #16161f;
+            --muted:   #7a7a96;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg); color: var(--text);
+            font-family: 'Outfit', sans-serif; font-weight: 400;
+            line-height: 1.6; min-height: 100vh; overflow-x: hidden;
+            transition: background .3s, color .3s;
+        }
+
+        [data-theme="dark"] body::before {
+            content: ''; position: fixed; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");
+            pointer-events: none; z-index: 0;
+        }
+        [data-theme="dark"] body::after {
+            content: ''; position: fixed;
+            top: -300px; left: 50%; transform: translateX(-50%);
+            width: 900px; height: 700px;
+            background: radial-gradient(ellipse, rgba(249,115,22,.06) 0%, transparent 65%);
+            pointer-events: none; z-index: 0;
+        }
+
+        /* ── NAV ── */
+        header {
+            position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid var(--border);
+            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            backdrop-filter: blur(18px);
+            transition: background .3s, border-color .3s;
+        }
+        .nav {
+            max-width: 1040px; margin: 0 auto;
+            padding: 0 20px; height: 58px;
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+        }
+        .nav-left { display: flex; align-items: center; gap: 16px; flex: 1; min-width: 0; }
+        .nav-home-link { flex-shrink: 0; transition: color .2s; }
+        .nav-home-link:hover { color: var(--accent) !important; }
+        .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+        .logo-mark {
+            width: 34px; height: 34px; border-radius: 9px;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff;
+        }
+        .logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); transition: color .3s; }
+        .logo-name span { color: var(--accent); }
+
+        .nav-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
+
+        /* lang switcher */
+        .lang-sw {
+            display: flex; gap: 2px;
+            background: var(--surface2); border: 1px solid var(--border);
+            border-radius: 10px; padding: 3px;
+            transition: background .3s, border-color .3s;
+        }
+        .lang-btn {
+            padding: 4px 9px; border-radius: 7px; border: none;
+            background: transparent; color: var(--muted);
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            transition: all .18s; font-family: 'Outfit', sans-serif;
+        }
+        .lang-btn.active { background: var(--accent); color: #fff; }
+        .lang-btn:not(.active):hover { color: var(--text); }
+
+        /* theme btn */
+        .theme-btn {
+            width: 36px; height: 36px; border-radius: 10px;
+            border: 1px solid var(--border); background: var(--surface2);
+            color: var(--muted); cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all .2s;
+        }
+        .theme-btn:hover { color: var(--accent); border-color: var(--accent); }
+        [data-theme="dark"] .icon-sun  { display: none; }
+        [data-theme="dark"] .icon-moon { display: block; }
+        [data-theme="light"] .icon-sun  { display: block; }
+        [data-theme="light"] .icon-moon { display: none; }
+
+        /* ── MAIN ── */
+        main { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 52px 20px 100px; }
+
+        /* hero */
+        .hero { text-align: center; margin-bottom: 48px; animation: up .55s ease both; }
+        .hero h1 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(44px, 9vw, 88px); letter-spacing: 4px; line-height: 1;
+            background: linear-gradient(120deg, var(--text) 40%, var(--accent));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+            margin-bottom: 14px;
+        }
+        .hero p { color: var(--muted); font-size: 15px; max-width: 420px; margin: 0 auto; transition: color .3s; }
+        .hero-pills { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
+        .pill {
+            padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border);
+            font-size: 12px; color: var(--muted); font-weight: 500;
+            display: flex; align-items: center; gap: 5px; transition: border-color .3s, color .3s;
+        }
+        .pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+
+        /* dropzone */
+        .dropzone {
+            border: 2px dashed var(--border); border-radius: 20px; padding: 52px 24px;
+            text-align: center; cursor: pointer;
+            transition: border-color .25s, background .25s;
+            background: var(--surface); margin-bottom: 28px;
+            animation: up .55s .08s ease both; position: relative; overflow: hidden;
+        }
+        [data-theme="dark"] .dropzone::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 50% 0%, rgba(249,115,22,.07), transparent 60%);
+            pointer-events: none;
+        }
+        .dropzone:hover, .dropzone.drag-over { border-color: var(--accent); background: var(--surface2); }
+        .drop-icon {
+            width: 56px; height: 56px; border-radius: 14px;
+            background: var(--accentlo); border: 1px solid rgba(249,115,22,.2);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 18px; color: var(--accent);
+        }
+        .dropzone h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text); transition: color .3s; }
+        .dropzone p { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; transition: color .3s; }
+        .browse-btn {
+            display: inline-flex; align-items: center; gap: 7px;
+            padding: 9px 20px; border-radius: 10px;
+            background: var(--accentlo); border: 1px solid rgba(249,115,22,.3);
+            color: var(--accent2); font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: background .2s, transform .15s; font-family: 'Outfit', sans-serif;
+        }
+        .browse-btn:hover { background: rgba(249,115,22,.2); transform: translateY(-1px); }
+        #file-input { display: none; }
+
+        /* settings */
+        .settings-row {
+            display: grid; grid-template-columns: 1fr 1fr 1fr;
+            gap: 14px; margin-bottom: 28px; animation: up .55s .12s ease both;
+        }
+        @media (max-width: 640px) { .settings-row { grid-template-columns: 1fr; } }
+        .setting-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 18px 20px;
+            transition: background .3s, border-color .3s;
+        }
+        .setting-label {
+            font-size: 11px; font-weight: 600; color: var(--muted);
+            text-transform: uppercase; letter-spacing: .7px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 6px; transition: color .3s;
+        }
+        .setting-label svg { color: var(--accent); }
+        .format-grid, .maxw-grid { display: flex; gap: 6px; flex-wrap: wrap; }
+        .fmt-btn, .maxw-btn {
+            padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
+            background: transparent; color: var(--muted);
+            font-size: 12px; font-weight: 600; cursor: pointer;
+            transition: all .18s; font-family: 'Outfit', sans-serif;
+        }
+        .maxw-btn { padding: 5px 10px; }
+        .fmt-btn:hover, .maxw-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+        .fmt-btn.active, .maxw-btn.active { background: var(--accentlo); border-color: var(--accent); color: var(--accent); }
+        .quality-display {
+            font-family: 'Bebas Neue', sans-serif; font-size: 28px;
+            color: var(--accent); letter-spacing: 2px; line-height: 1; margin-bottom: 8px;
+        }
+        input[type=range] {
+            -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
+            border-radius: 2px; background: var(--border); outline: none; cursor: pointer;
+            transition: background .3s;
+        }
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+            background: var(--accent); cursor: pointer;
+            box-shadow: 0 0 0 3px rgba(249,115,22,.2); transition: box-shadow .2s;
+        }
+        input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 5px rgba(249,115,22,.3); }
+
+        /* queue */
+        .queue-header {
+            display: flex; align-items: center; justify-content: space-between;
+            margin-bottom: 14px; flex-wrap: wrap; gap: 10px;
+        }
+        .queue-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 20px;
+            letter-spacing: 2px; color: var(--text); transition: color .3s;
+        }
+        .queue-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-ghost {
+            padding: 7px 14px; border-radius: 9px; border: 1px solid var(--border);
+            background: transparent; color: var(--muted); font-size: 12px; font-weight: 600;
+            cursor: pointer; transition: all .18s; font-family: 'Outfit', sans-serif;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
+        .btn-primary {
+            padding: 7px 18px; border-radius: 9px; border: none;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            color: #fff; font-size: 13px; font-weight: 600;
+            cursor: pointer; transition: opacity .2s, transform .15s;
+            font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 7px;
+        }
+        .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
+        .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+
+        #file-list { display: flex; flex-direction: column; gap: 10px; }
+        .file-item {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 14px 18px;
+            display: flex; align-items: center; gap: 14px;
+            animation: up .3s ease both;
+            transition: border-color .2s, background .3s;
+        }
+        .file-item.done  { border-color: rgba(34,197,94,.3); }
+        .file-item.error { border-color: rgba(239,68,68,.3); }
+        .file-thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
+        .file-thumb-placeholder {
+            width: 52px; height: 52px; border-radius: 8px;
+            background: var(--surface2); border: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; color: var(--muted); transition: background .3s, border-color .3s;
+        }
+        .file-info { flex: 1; min-width: 0; }
+        .file-name {
+            font-size: 13.5px; font-weight: 500; color: var(--text);
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+            margin-bottom: 3px; transition: color .3s;
+        }
+        .file-meta { font-size: 12px; color: var(--muted); transition: color .3s; }
+        .file-status { flex-shrink: 0; text-align: right; }
+        .status-tag {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600;
+        }
+        .status-waiting    { background: rgba(128,128,160,.1); color: var(--muted); }
+        .status-processing { background: rgba(249,115,22,.12); color: var(--accent2); }
+        .status-done  { background: rgba(34,197,94,.12);  color: var(--green); }
+        .status-error { background: rgba(239,68,68,.12);  color: #f87171; }
+        .download-link {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 12px; border-radius: 8px;
+            background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2);
+            color: var(--green); font-size: 12px; font-weight: 600;
+            text-decoration: none; margin-top: 6px; transition: background .18s;
+        }
+        .download-link:hover { background: rgba(34,197,94,.2); }
+        .remove-btn {
+            width: 28px; height: 28px; border-radius: 7px;
+            border: 1px solid var(--border); background: transparent;
+            color: var(--muted); cursor: pointer; flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            transition: all .18s;
+        }
+        .remove-btn:hover { border-color: #f87171; color: #f87171; }
+        .progress-wrap { height: 3px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
+        .progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg,#ea580c,#f97316); transition: width .3s; width: 0%; }
+
+        /* features */
+        .features {
+            display: grid; grid-template-columns: repeat(3,1fr);
+            gap: 14px; margin-top: 48px; animation: up .55s .2s ease both;
+        }
+        @media (max-width: 640px) { .features { grid-template-columns: 1fr; } }
+        .feat-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 20px; transition: background .3s, border-color .3s;
+        }
+        .feat-icon {
+            width: 36px; height: 36px; border-radius: 9px;
+            background: var(--accentlo); border: 1px solid rgba(249,115,22,.15);
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 12px; color: var(--accent);
+        }
+        .feat-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text); transition: color .3s; }
+        .feat-card p  { font-size: 13px; color: var(--muted); line-height: 1.65; transition: color .3s; }
+
+        /* footer */
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 26px 20px; transition: border-color .3s; }
+        .footer-inner {
+            max-width: 1040px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
+        }
+        .footer-copy { font-size: 13px; color: var(--muted); transition: color .3s; }
+        .footer-links { display: flex; gap: 4px; }
+        .footer-links a {
+            font-size: 13px; color: var(--muted); text-decoration: none;
+            padding: 4px 10px; border-radius: 6px; transition: color .2s, background .2s;
+        }
+        .footer-links a:hover { color: var(--text); background: var(--border); }
+
+        @keyframes up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spin { animation: spin .8s linear infinite; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <div class="nav-left">
+        <a href="/" class="logo">
+            <div class="logo-mark">P</div>
+            <span class="logo-name">PIX<span>CRUSH</span></span>
+        </a>
+        <a href="/" class="nav-home-link" style="font-size:13px;font-weight:600;color:var(--muted);text-decoration:none;">← <span data-i18n="back_home">返回首页</span></a>
+        </div>
+        <div class="nav-right">
+            <div class="lang-sw">
+                <button class="lang-btn" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ja">日本語</button>
+            </div>
+            <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <circle cx="12" cy="12" r="5"/>
+                    <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+                    <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+                </svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="hero">
+        <h1 data-i18n="hero_title">图片压缩<br>格式转换</h1>
+        <p data-i18n="hero_sub">批量处理，本地运行，不上传任何服务器，隐私安全。</p>
+        <div class="hero-pills">
+            <div class="pill"><span class="pill-dot"></span>JPG</div>
+            <div class="pill"><span class="pill-dot"></span>PNG</div>
+            <div class="pill"><span class="pill-dot"></span>WebP</div>
+            <div class="pill"><span class="pill-dot"></span>BMP</div>
+            <div class="pill"><span class="pill-dot"></span>GIF</div>
+        </div>
+    </div>
+
+    <div class="dropzone" id="dropzone">
+        <div class="drop-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
+                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+            </svg>
+        </div>
+        <h3 data-i18n="drop_title">拖放图片到这里</h3>
+        <p data-i18n="drop_sub">支持 JPG、PNG、WebP、BMP、GIF，可同时拖入多张</p>
+        <button class="browse-btn" onclick="document.getElementById('file-input').click()">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+            <span data-i18n="browse">选择文件</span>
+        </button>
+        <input type="file" id="file-input" multiple accept="image/*">
+    </div>
+
+    <div class="settings-row">
+        <div class="setting-card">
+            <div class="setting-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                <span data-i18n="label_format">输出格式</span>
+            </div>
+            <div class="format-grid">
+                <button class="fmt-btn active" data-fmt="jpeg">JPG</button>
+                <button class="fmt-btn" data-fmt="png">PNG</button>
+                <button class="fmt-btn" data-fmt="webp">WebP</button>
+                <button class="fmt-btn" data-fmt="original"><span data-i18n="fmt_original">原格式</span></button>
+            </div>
+        </div>
+        <div class="setting-card">
+            <div class="setting-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                <span data-i18n="label_quality">压缩质量</span>
+            </div>
+            <div class="quality-display" id="quality-val">80%</div>
+            <input type="range" id="quality" min="10" max="100" value="80" step="5">
+        </div>
+        <div class="setting-card">
+            <div class="setting-label">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+                <span data-i18n="label_maxw">最大尺寸</span>
+            </div>
+            <div class="maxw-grid">
+                <button class="maxw-btn active" data-w="0"><span data-i18n="maxw_orig">原尺寸</span></button>
+                <button class="maxw-btn" data-w="1920">1920</button>
+                <button class="maxw-btn" data-w="1280">1280</button>
+                <button class="maxw-btn" data-w="800">800</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="queue-section" style="display:none; animation: up .4s ease both;">
+        <div class="queue-header">
+            <span class="queue-title" data-i18n="queue_title">处理队列</span>
+            <div class="queue-actions">
+                <button class="btn-ghost" id="clear-btn">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+                    <span data-i18n="btn_clear">清空</span>
+                </button>
+                <button class="btn-primary" id="convert-btn">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                    <span data-i18n="btn_start">开始处理</span>
+                </button>
+                <button class="btn-primary" id="dl-all-btn" style="display:none; background:linear-gradient(135deg,#16a34a,#22c55e);">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                    <span data-i18n="btn_dl_all">全部下载</span>
+                </button>
+            </div>
+        </div>
+        <div id="file-list"></div>
+    </div>
+
+    <div class="features">
+        <div class="feat-card">
+            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h4 data-i18n="feat1_t">隐私安全</h4>
+            <p data-i18n="feat1_d">所有处理完全在浏览器本地完成，图片从不上传到任何服务器，数据零泄露。</p>
+        </div>
+        <div class="feat-card">
+            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
+            <h4 data-i18n="feat2_t">无需安装</h4>
+            <p data-i18n="feat2_d">打开网页即可使用，无需下载任何软件，支持 Chrome、Safari、Edge 等主流浏览器。</p>
+        </div>
+        <div class="feat-card">
+            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7"/></svg></div>
+            <h4 data-i18n="feat3_t">批量处理</h4>
+            <p data-i18n="feat3_d">一次拖入多张图片，统一设置格式和质量，批量转换下载，效率翻倍。</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© 2025 PixCrush</span>
+        <div class="footer-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+// ══ i18n ══════════════════════════════════════
+const I18N = {
+    zh:{
+        hero_title:'图片压缩<br>格式转换', hero_sub:'批量处理，本地运行，不上传任何服务器，隐私安全。',
+        drop_title:'拖放图片到这里', drop_sub:'支持 JPG、PNG、WebP、BMP、GIF，可同时拖入多张',
+        browse:'选择文件', label_format:'输出格式', label_quality:'压缩质量', label_maxw:'最大尺寸',
+        fmt_original:'原格式', maxw_orig:'原尺寸', queue_title:'处理队列',
+        btn_clear:'清空', btn_start:'开始处理', btn_processing:'处理中…', btn_dl_all:'全部下载',
+        s_waiting:'等待中', s_processing:'处理中', s_done:'完成', s_error:'失败',
+        dl_label:'下载', saving:'节省',
+        feat1_t:'隐私安全', feat1_d:'所有处理完全在浏览器本地完成，图片从不上传到任何服务器，数据零泄露。',
+        feat2_t:'无需安装', feat2_d:'打开网页即可使用，无需下载任何软件，支持 Chrome、Safari、Edge 等主流浏览器。',
+        feat3_t:'批量处理', feat3_d:'一次拖入多张图片，统一设置格式和质量，批量转换下载，效率翻倍。',
+        nav_home:'首页', nav_about:'关于', nav_privacy:'隐私政策',
+        page_title:'PixCrush · 图片压缩 & 格式转换',
+        back_home:'返回首页',
+    },
+    en:{
+        hero_title:'Compress<br>& Convert', hero_sub:'Batch process images locally — no uploads, fully private.',
+        drop_title:'Drop images here', drop_sub:'Supports JPG, PNG, WebP, BMP, GIF — multiple files at once',
+        browse:'Browse files', label_format:'Output format', label_quality:'Quality', label_maxw:'Max size',
+        fmt_original:'Original', maxw_orig:'Original', queue_title:'Queue',
+        btn_clear:'Clear', btn_start:'Process', btn_processing:'Processing…', btn_dl_all:'Download all',
+        s_waiting:'Waiting', s_processing:'Processing', s_done:'Done', s_error:'Error',
+        dl_label:'Download', saving:'saved',
+        feat1_t:'Private & Secure', feat1_d:"Everything runs in your browser. Your images never leave your device.",
+        feat2_t:'No Install Needed', feat2_d:'Works in any modern browser — Chrome, Safari, Edge. No plugins required.',
+        feat3_t:'Batch Processing', feat3_d:'Drop multiple images, set format & quality once, download all.',
+        nav_home:'Home', nav_about:'About', nav_privacy:'Privacy',
+        page_title:'PixCrush · Image Compressor & Converter',
+        back_home:'Home',
+    },
+    ja:{
+        hero_title:'画像圧縮<br>フォーマット変換', hero_sub:'ローカル処理で完結。サーバーへのアップロード不要、プライバシー安全。',
+        drop_title:'画像をここにドロップ', drop_sub:'JPG・PNG・WebP・BMP・GIF に対応、複数ファイル同時処理可能',
+        browse:'ファイルを選択', label_format:'出力形式', label_quality:'圧縮品質', label_maxw:'最大サイズ',
+        fmt_original:'元の形式', maxw_orig:'元サイズ', queue_title:'処理キュー',
+        btn_clear:'クリア', btn_start:'処理開始', btn_processing:'処理中…', btn_dl_all:'全てダウンロード',
+        s_waiting:'待機中', s_processing:'処理中', s_done:'完了', s_error:'エラー',
+        dl_label:'ダウンロード', saving:'削減',
+        feat1_t:'プライバシー保護', feat1_d:'全処理はブラウザ内で完結。画像はどのサーバーにもアップロードされません。',
+        feat2_t:'インストール不要', feat2_d:'Chrome・Safari・Edge などのブラウザで即利用可能。プラグイン不要。',
+        feat3_t:'一括処理', feat3_d:'複数画像を一度にドロップ、形式と品質をまとめて設定してダウンロード。',
+        nav_home:'ホーム', nav_about:'About', nav_privacy:'プライバシー',
+        page_title:'PixCrush · 画像圧縮・変換ツール',
+        back_home:'トップへ',
+    }
+};
+
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+
+function applyLang(l) {
+    lang = l;
+    localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.title = t.page_title;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.dataset.i18n;
+        if (t[k] != null) el.innerHTML = t[k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    renderList();
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+
+// ══ Theme ═════════════════════════════════════
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyTheme(t) {
+    theme = t;
+    localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
+});
+
+// ══ Core state ════════════════════════════════
+let files = [], outputFormat = 'jpeg', maxWidth = 0;
+
+document.querySelectorAll('.fmt-btn').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.fmt-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); outputFormat = b.dataset.fmt;
+}));
+document.querySelectorAll('.maxw-btn').forEach(b => b.addEventListener('click', () => {
+    document.querySelectorAll('.maxw-btn').forEach(x => x.classList.remove('active'));
+    b.classList.add('active'); maxWidth = parseInt(b.dataset.w);
+}));
+const qSlider = document.getElementById('quality');
+const qVal    = document.getElementById('quality-val');
+qSlider.addEventListener('input', () => { qVal.textContent = qSlider.value + '%'; });
+
+// ══ Drop / select ═════════════════════════════
+const dz = document.getElementById('dropzone');
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
+document.getElementById('file-input').addEventListener('change', e => addFiles(e.target.files));
+
+function addFiles(list) {
+    Array.from(list).forEach(f => {
+        if (!f.type.startsWith('image/')) return;
+        const id = Date.now() + Math.random();
+        const entry = { id, file: f, thumb: null, status: 'waiting', outputUrl: null, outputName: null, outputSize: null };
+        files.push(entry);
+        const r = new FileReader();
+        r.onload = e2 => { entry.thumb = e2.target.result; renderList(); };
+        r.readAsDataURL(f);
+    });
+    renderList();
+    document.getElementById('queue-section').style.display = 'block';
+}
+
+// ══ Render ════════════════════════════════════
+function renderList() {
+    const list = document.getElementById('file-list');
+    const t = I18N[lang];
+    if (!files.length) {
+        list.innerHTML = '';
+        document.getElementById('queue-section').style.display = 'none';
+        return;
+    }
+    list.innerHTML = files.map(f => {
+        const thumb = f.thumb
+            ? `<img class="file-thumb" src="${f.thumb}" alt="">`
+            : `<div class="file-thumb-placeholder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
+        let st = '', prog = '', dl = '';
+        if (f.status === 'waiting')
+            st = `<span class="status-tag status-waiting">${t.s_waiting}</span>`;
+        else if (f.status === 'processing') {
+            st = `<span class="status-tag status-processing"><svg class="spin" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> ${t.s_processing}</span>`;
+            prog = `<div class="progress-wrap"><div class="progress-bar" style="width:60%"></div></div>`;
+        } else if (f.status === 'done') {
+            const sv = Math.round((1 - f.outputSize / f.file.size) * 100);
+            const svText = sv > 0 ? `${t.saving} ${sv}%` : `+${Math.abs(sv)}%`;
+            st = `<span class="status-tag status-done">✓ ${t.s_done}</span>`;
+            dl = `<a class="download-link" href="${f.outputUrl}" download="${f.outputName}">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                ${t.dl_label} ${fmt(f.outputSize)} · ${svText}</a>`;
+        } else {
+            st = `<span class="status-tag status-error">✕ ${t.s_error}</span>`;
+        }
+        return `<div class="file-item ${f.status==='done'?'done':f.status==='error'?'error':''}" data-id="${f.id}">
+            ${thumb}
+            <div class="file-info">
+                <div class="file-name">${f.file.name}</div>
+                <div class="file-meta">${fmt(f.file.size)} · ${f.file.type.replace('image/','').toUpperCase()}</div>
+                ${prog}${dl}
+            </div>
+            <div class="file-status">${st}</div>
+            <button class="remove-btn" onclick="removeFile('${f.id}')">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>`;
+    }).join('');
+    const allDone = files.length > 0 && files.every(f => f.status === 'done');
+    document.getElementById('dl-all-btn').style.display = allDone ? 'flex' : 'none';
+}
+
+function removeFile(id) {
+    files = files.filter(f => String(f.id) !== String(id));
+    renderList();
+}
+
+document.getElementById('clear-btn').addEventListener('click', () => {
+    files = []; renderList(); document.getElementById('file-input').value = '';
+});
+
+document.getElementById('convert-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('convert-btn');
+    const t = I18N[lang];
+    btn.disabled = true;
+    btn.innerHTML = `<svg class="spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> ${t.btn_processing}`;
+    for (const f of files) {
+        if (f.status === 'done') continue;
+        f.status = 'processing'; renderList();
+        await processFile(f); renderList();
+    }
+    btn.disabled = false;
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ${I18N[lang].btn_start}`;
+});
+
+async function processFile(entry) {
+    return new Promise(resolve => {
+        const img = new Image();
+        const url = URL.createObjectURL(entry.file);
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let w = img.width, h = img.height;
+            if (maxWidth > 0 && w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
+            canvas.width = w; canvas.height = h;
+            const ctx = canvas.getContext('2d');
+            const f = outputFormat === 'original'
+                ? (entry.file.type === 'image/png' ? 'png' : entry.file.type === 'image/webp' ? 'webp' : 'jpeg')
+                : outputFormat;
+            if (f === 'jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
+            ctx.drawImage(img, 0, 0, w, h);
+            URL.revokeObjectURL(url);
+            const mime = f === 'png' ? 'image/png' : f === 'webp' ? 'image/webp' : 'image/jpeg';
+            canvas.toBlob(blob => {
+                if (!blob) { entry.status = 'error'; resolve(); return; }
+                const ext = f === 'png' ? 'png' : f === 'webp' ? 'webp' : 'jpg';
+                entry.outputUrl  = URL.createObjectURL(blob);
+                entry.outputName = `${entry.file.name.replace(/\.[^.]+$/, '')}_pixcrush.${ext}`;
+                entry.outputSize = blob.size;
+                entry.status = 'done';
+                resolve();
+            }, mime, parseInt(qSlider.value) / 100);
+        };
+        img.onerror = () => { entry.status = 'error'; resolve(); };
+        img.src = url;
+    });
+}
+
+document.getElementById('dl-all-btn').addEventListener('click', () => {
+    files.filter(f => f.status === 'done').forEach((f, i) => {
+        setTimeout(() => { const a = document.createElement('a'); a.href = f.outputUrl; a.download = f.outputName; a.click(); }, i * 300);
+    });
+});
+
+function fmt(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
+    return (b/1048576).toFixed(2) + ' MB';
+}
+
+// ══ Init ══════════════════════════════════════
+applyTheme(theme);
+applyLang(lang);
+</script>
+</body>
+</html>
