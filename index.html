@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>PixCrush · 图片压缩 & 格式转换</title>
+    <title>QuickToolLab · 综合在线工具站</title>
     <meta charset="UTF-8">
     <script>
         (function(){
@@ -12,23 +12,14 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PixCrush 免费在线图片压缩与格式转换工具，支持 JPG、PNG、WebP、BMP、GIF 批量处理，本地运行不上传服务器，隐私安全，无需安装，即开即用。">
-    <meta name="keywords" content="图片压缩,在线图片压缩,图片格式转换,WebP转换,PNG压缩,JPG压缩,免费图片工具,batch image compression">
+    <meta name="description" content="QuickToolLab 综合在线工具站：常用开发工具入口、技术文库、幻灯片精选、热门开源项目与软件推荐。内容来自 Dev.to、GitHub 等实时数据。">
+    <meta name="keywords" content="在线工具,开发者工具,技术文库,开源项目,软件推荐,QuickToolLab">
     <meta name="theme-color" content="#0a0a10">
     <link rel="canonical" href="https://quicktoolab.com/">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://quicktoolab.com/">
-    <meta property="og:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
-    <meta property="og:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器，隐私安全。">
-    <meta property="og:image" content="https://quicktoolab.com/og-image.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
-    <meta name="twitter:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器。">
-    <meta name="twitter:image" content="https://quicktoolab.com/og-image.png">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/><path d='M20 14 L27 14 M24 11 L27 14 L24 17' fill='none' stroke='%23fb923c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -36,6 +27,7 @@
             --accent2:  #fb923c;
             --accentlo: rgba(249,115,22,.12);
             --green:    #22c55e;
+            --teal:     #14b8a6;
         }
         [data-theme="dark"] {
             --bg:      #0a0a10;
@@ -77,37 +69,46 @@
             pointer-events: none; z-index: 0;
         }
 
-        /* ── NAV ── */
         header {
             position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid var(--border);
-            background: color-mix(in srgb, var(--bg) 88%, transparent);
+            background: color-mix(in srgb, var(--bg) 92%, transparent);
             backdrop-filter: blur(18px);
             transition: background .3s, border-color .3s;
         }
         .nav {
-            max-width: 1040px; margin: 0 auto;
-            padding: 0 20px; height: 58px;
-            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            max-width: 1160px; margin: 0 auto;
+            padding: 0 20px; min-height: 58px;
+            display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; padding-top: 10px; padding-bottom: 10px;
         }
         .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
         .logo-mark {
-            width: 34px; height: 34px; border-radius: 9px;
+            width: 36px; height: 36px; border-radius: 10px;
             background: linear-gradient(135deg, #ea580c, #f97316);
             display: flex; align-items: center; justify-content: center;
-            font-family: 'Bebas Neue', sans-serif; font-size: 18px; color: #fff;
+            font-family: 'Bebas Neue', sans-serif; font-size: 19px; color: #fff;
         }
-        .logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--text); transition: color .3s; }
+        .logo-name { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 1.5px; color: var(--text); transition: color .3s; }
         .logo-name span { color: var(--accent); }
+        .logo-sub { font-size: 11px; font-weight: 600; color: var(--muted); letter-spacing: .3px; margin-top: -2px; }
+
+        .nav-links {
+            display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px;
+            justify-content: center; flex: 1;
+        }
+        .nav-links a {
+            font-size: 12.5px; font-weight: 600; color: var(--muted);
+            text-decoration: none; padding: 6px 10px; border-radius: 8px;
+            transition: color .18s, background .18s;
+        }
+        .nav-links a:hover { color: var(--accent); background: var(--accentlo); }
 
         .nav-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
 
-        /* lang switcher */
         .lang-sw {
             display: flex; gap: 2px;
             background: var(--surface2); border: 1px solid var(--border);
             border-radius: 10px; padding: 3px;
-            transition: background .3s, border-color .3s;
         }
         .lang-btn {
             padding: 4px 9px; border-radius: 7px; border: none;
@@ -118,7 +119,6 @@
         .lang-btn.active { background: var(--accent); color: #fff; }
         .lang-btn:not(.active):hover { color: var(--text); }
 
-        /* theme btn */
         .theme-btn {
             width: 36px; height: 36px; border-radius: 10px;
             border: 1px solid var(--border); background: var(--surface2);
@@ -132,217 +132,172 @@
         [data-theme="light"] .icon-sun  { display: block; }
         [data-theme="light"] .icon-moon { display: none; }
 
-        /* ── MAIN ── */
-        main { position: relative; z-index: 1; max-width: 1040px; margin: 0 auto; padding: 52px 20px 100px; }
+        main { position: relative; z-index: 1; max-width: 1160px; margin: 0 auto; padding: 36px 20px 100px; }
 
-        /* hero */
-        .hero { text-align: center; margin-bottom: 48px; animation: up .55s ease both; }
+        .hero { text-align: center; margin-bottom: 40px; animation: up .55s ease both; }
         .hero h1 {
             font-family: 'Bebas Neue', sans-serif;
-            font-size: clamp(44px, 9vw, 88px); letter-spacing: 4px; line-height: 1;
-            background: linear-gradient(120deg, var(--text) 40%, var(--accent));
+            font-size: clamp(38px, 7vw, 72px); letter-spacing: 3px; line-height: 1.05;
+            background: linear-gradient(120deg, var(--text) 35%, var(--accent));
             -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
-        .hero p { color: var(--muted); font-size: 15px; max-width: 420px; margin: 0 auto; transition: color .3s; }
-        .hero-pills { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-top: 18px; }
-        .pill {
-            padding: 4px 12px; border-radius: 100px; border: 1px solid var(--border);
-            font-size: 12px; color: var(--muted); font-weight: 500;
-            display: flex; align-items: center; gap: 5px; transition: border-color .3s, color .3s;
-        }
-        .pill-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--green); }
+        .hero p { color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto; }
 
-        /* dropzone */
-        .dropzone {
-            border: 2px dashed var(--border); border-radius: 20px; padding: 52px 24px;
-            text-align: center; cursor: pointer;
-            transition: border-color .25s, background .25s;
-            background: var(--surface); margin-bottom: 28px;
-            animation: up .55s .08s ease both; position: relative; overflow: hidden;
+        .section-block { margin-bottom: 44px; animation: up .5s ease both; }
+        .section-block:nth-child(2) { animation-delay: .04s; }
+        .section-block:nth-child(3) { animation-delay: .08s; }
+        .section-head {
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            margin-bottom: 16px; flex-wrap: wrap;
         }
-        [data-theme="dark"] .dropzone::before {
-            content: ''; position: absolute; inset: 0;
-            background: radial-gradient(ellipse at 50% 0%, rgba(249,115,22,.07), transparent 60%);
-            pointer-events: none;
+        .section-title {
+            font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px;
+            color: var(--text); display: flex; align-items: center; gap: 10px;
         }
-        .dropzone:hover, .dropzone.drag-over { border-color: var(--accent); background: var(--surface2); }
-        .drop-icon {
-            width: 56px; height: 56px; border-radius: 14px;
+        .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 3px rgba(20,184,166,.2); }
+        .section-more {
+            font-size: 12px; font-weight: 600; color: var(--green);
+            text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+        }
+        .section-more:hover { text-decoration: underline; }
+
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .tool-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 16px 12px;
+            text-align: center; text-decoration: none; color: inherit;
+            transition: border-color .2s, transform .15s, background .2s;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+        }
+        .tool-card:hover { border-color: var(--accent); transform: translateY(-2px); background: var(--surface2); }
+        .tool-card .ic {
+            width: 40px; height: 40px; border-radius: 11px;
             background: var(--accentlo); border: 1px solid rgba(249,115,22,.2);
             display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 18px; color: var(--accent);
+            font-size: 18px;
         }
-        .dropzone h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; color: var(--text); transition: color .3s; }
-        .dropzone p { color: var(--muted); font-size: 13.5px; margin-bottom: 18px; transition: color .3s; }
-        .browse-btn {
-            display: inline-flex; align-items: center; gap: 7px;
-            padding: 9px 20px; border-radius: 10px;
-            background: var(--accentlo); border: 1px solid rgba(249,115,22,.3);
-            color: var(--accent2); font-size: 13px; font-weight: 600;
-            cursor: pointer; transition: background .2s, transform .15s; font-family: 'Outfit', sans-serif;
-        }
-        .browse-btn:hover { background: rgba(249,115,22,.2); transform: translateY(-1px); }
-        #file-input { display: none; }
+        .tool-card h3 { font-size: 13px; font-weight: 600; color: var(--text); line-height: 1.35; }
+        .tool-card span.tag { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
 
-        /* settings */
-        .settings-row {
-            display: grid; grid-template-columns: 1fr 1fr 1fr;
-            gap: 14px; margin-bottom: 28px; animation: up .55s .12s ease both;
+        .row-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
         }
-        @media (max-width: 640px) { .settings-row { grid-template-columns: 1fr; } }
-        .setting-card {
+        @media (max-width: 900px) { .row-2 { grid-template-columns: 1fr; } }
+
+        .list-card {
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: 14px; padding: 18px 20px;
-            transition: background .3s, border-color .3s;
+            border-radius: 14px; overflow: hidden;
         }
-        .setting-label {
-            font-size: 11px; font-weight: 600; color: var(--muted);
-            text-transform: uppercase; letter-spacing: .7px; margin-bottom: 10px;
-            display: flex; align-items: center; gap: 6px; transition: color .3s;
+        .list-item {
+            display: flex; gap: 12px; padding: 12px 14px;
+            border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
+            transition: background .15s;
         }
-        .setting-label svg { color: var(--accent); }
-        .format-grid, .maxw-grid { display: flex; gap: 6px; flex-wrap: wrap; }
-        .fmt-btn, .maxw-btn {
-            padding: 5px 12px; border-radius: 8px; border: 1px solid var(--border);
-            background: transparent; color: var(--muted);
-            font-size: 12px; font-weight: 600; cursor: pointer;
-            transition: all .18s; font-family: 'Outfit', sans-serif;
+        .list-item:last-child { border-bottom: none; }
+        .list-item:hover { background: var(--surface2); }
+        .list-item .thumb {
+            width: 56px; height: 56px; border-radius: 8px; object-fit: cover;
+            background: var(--surface2); flex-shrink: 0;
         }
-        .maxw-btn { padding: 5px 10px; }
-        .fmt-btn:hover, .maxw-btn:hover { border-color: var(--accent2); color: var(--accent2); }
-        .fmt-btn.active, .maxw-btn.active { background: var(--accentlo); border-color: var(--accent); color: var(--accent); }
-        .quality-display {
-            font-family: 'Bebas Neue', sans-serif; font-size: 28px;
-            color: var(--accent); letter-spacing: 2px; line-height: 1; margin-bottom: 8px;
-        }
-        input[type=range] {
-            -webkit-appearance: none; appearance: none; width: 100%; height: 4px;
-            border-radius: 2px; background: var(--border); outline: none; cursor: pointer;
-            transition: background .3s;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
-            background: var(--accent); cursor: pointer;
-            box-shadow: 0 0 0 3px rgba(249,115,22,.2); transition: box-shadow .2s;
-        }
-        input[type=range]::-webkit-slider-thumb:hover { box-shadow: 0 0 0 5px rgba(249,115,22,.3); }
+        .list-item .body { flex: 1; min-width: 0; }
+        .list-item .t { font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.4; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .list-item .meta { font-size: 11px; color: var(--muted); margin-top: 4px; }
 
-        /* queue */
-        .queue-header {
-            display: flex; align-items: center; justify-content: space-between;
-            margin-bottom: 14px; flex-wrap: wrap; gap: 10px;
+        .gh-item {
+            display: flex; gap: 12px; padding: 12px 14px;
+            border-bottom: 1px solid var(--border); text-decoration: none; color: inherit;
+            transition: background .15s;
         }
-        .queue-title {
-            font-family: 'Bebas Neue', sans-serif; font-size: 20px;
-            letter-spacing: 2px; color: var(--text); transition: color .3s;
-        }
-        .queue-actions { display: flex; gap: 8px; flex-wrap: wrap; }
-        .btn-ghost {
-            padding: 7px 14px; border-radius: 9px; border: 1px solid var(--border);
-            background: transparent; color: var(--muted); font-size: 12px; font-weight: 600;
-            cursor: pointer; transition: all .18s; font-family: 'Outfit', sans-serif;
-            display: flex; align-items: center; gap: 6px;
-        }
-        .btn-ghost:hover { border-color: var(--accent2); color: var(--accent2); }
-        .btn-primary {
-            padding: 7px 18px; border-radius: 9px; border: none;
-            background: linear-gradient(135deg, #ea580c, #f97316);
-            color: #fff; font-size: 13px; font-weight: 600;
-            cursor: pointer; transition: opacity .2s, transform .15s;
-            font-family: 'Outfit', sans-serif; display: flex; align-items: center; gap: 7px;
-        }
-        .btn-primary:hover { opacity: .88; transform: translateY(-1px); }
-        .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
+        .gh-item:last-child { border-bottom: none; }
+        .gh-item:hover { background: var(--surface2); }
+        .gh-avatar { width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0; background: var(--surface2); }
+        .gh-repo { font-size: 13px; font-weight: 600; color: var(--accent2); font-family: ui-monospace, monospace; word-break: break-all; }
+        .gh-desc { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .gh-foot { font-size: 11px; color: var(--muted); margin-top: 8px; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+        .lang-dot { width: 8px; height: 8px; border-radius: 50%; }
 
-        #file-list { display: flex; flex-direction: column; gap: 10px; }
-        .file-item {
+        .slides-scroll {
+            display: flex; gap: 14px; overflow-x: auto;
+            padding-bottom: 8px; scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        .slides-scroll::-webkit-scrollbar { height: 6px; }
+        .slides-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+        .slide-card {
+            flex: 0 0 220px; scroll-snap-align: start;
             background: var(--surface); border: 1px solid var(--border);
-            border-radius: 14px; padding: 14px 18px;
-            display: flex; align-items: center; gap: 14px;
-            animation: up .3s ease both;
-            transition: border-color .2s, background .3s;
+            border-radius: 14px; overflow: hidden; text-decoration: none; color: inherit;
+            transition: border-color .2s;
         }
-        .file-item.done  { border-color: rgba(34,197,94,.3); }
-        .file-item.error { border-color: rgba(239,68,68,.3); }
-        .file-thumb { width: 52px; height: 52px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
-        .file-thumb-placeholder {
-            width: 52px; height: 52px; border-radius: 8px;
+        .slide-card:hover { border-color: var(--accent); }
+        .slide-cover-wrap { position: relative; aspect-ratio: 16/10; background: var(--surface2); }
+        .slide-cover-wrap img { width: 100%; height: 100%; object-fit: cover; }
+        .slide-badge {
+            position: absolute; top: 8px; right: 8px;
+            background: rgba(0,0,0,.72); color: #fff; font-size: 11px; font-weight: 700;
+            padding: 3px 8px; border-radius: 6px;
+        }
+        .slide-card .cap { padding: 10px 12px; font-size: 12.5px; font-weight: 600; line-height: 1.4; color: var(--text); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+        .soft-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 12px;
+        }
+        .soft-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 16px; text-decoration: none; color: inherit;
+            transition: border-color .2s; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px;
+        }
+        .soft-card:hover { border-color: var(--green); }
+        .soft-card .ico {
+            width: 44px; height: 44px; border-radius: 12px;
             background: var(--surface2); border: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; color: var(--muted); transition: background .3s, border-color .3s;
+            object-fit: cover;
         }
-        .file-info { flex: 1; min-width: 0; }
-        .file-name {
-            font-size: 13.5px; font-weight: 500; color: var(--text);
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-            margin-bottom: 3px; transition: color .3s;
-        }
-        .file-meta { font-size: 12px; color: var(--muted); transition: color .3s; }
-        .file-status { flex-shrink: 0; text-align: right; }
-        .status-tag {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600;
-        }
-        .status-waiting    { background: rgba(128,128,160,.1); color: var(--muted); }
-        .status-processing { background: rgba(249,115,22,.12); color: var(--accent2); }
-        .status-done  { background: rgba(34,197,94,.12);  color: var(--green); }
-        .status-error { background: rgba(239,68,68,.12);  color: #f87171; }
-        .download-link {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 5px 12px; border-radius: 8px;
-            background: rgba(34,197,94,.1); border: 1px solid rgba(34,197,94,.2);
-            color: var(--green); font-size: 12px; font-weight: 600;
-            text-decoration: none; margin-top: 6px; transition: background .18s;
-        }
-        .download-link:hover { background: rgba(34,197,94,.2); }
-        .remove-btn {
-            width: 28px; height: 28px; border-radius: 7px;
-            border: 1px solid var(--border); background: transparent;
-            color: var(--muted); cursor: pointer; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center;
-            transition: all .18s;
-        }
-        .remove-btn:hover { border-color: #f87171; color: #f87171; }
-        .progress-wrap { height: 3px; background: var(--border); border-radius: 2px; margin-top: 6px; overflow: hidden; }
-        .progress-bar { height: 100%; border-radius: 2px; background: linear-gradient(90deg,#ea580c,#f97316); transition: width .3s; width: 0%; }
+        .soft-card h4 { font-size: 13px; font-weight: 600; color: var(--text); }
+        .soft-card p { font-size: 11.5px; color: var(--muted); line-height: 1.45; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        .soft-card .plat { font-size: 10px; font-weight: 700; color: var(--muted); letter-spacing: .5px; margin-top: auto; padding-top: 4px; }
 
-        /* features */
-        .features {
-            display: grid; grid-template-columns: repeat(3,1fr);
-            gap: 14px; margin-top: 48px; animation: up .55s .2s ease both;
+        .loading, .error-box {
+            padding: 28px; text-align: center; color: var(--muted); font-size: 13px;
         }
-        @media (max-width: 640px) { .features { grid-template-columns: 1fr; } }
-        .feat-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 14px; padding: 20px; transition: background .3s, border-color .3s;
+        .error-box { color: #f87171; }
+        .retry-btn {
+            margin-top: 10px; padding: 8px 16px; border-radius: 8px;
+            border: 1px solid var(--border); background: var(--surface2);
+            color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit;
         }
-        .feat-icon {
-            width: 36px; height: 36px; border-radius: 9px;
-            background: var(--accentlo); border: 1px solid rgba(249,115,22,.15);
-            display: flex; align-items: center; justify-content: center;
-            margin-bottom: 12px; color: var(--accent);
-        }
-        .feat-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text); transition: color .3s; }
-        .feat-card p  { font-size: 13px; color: var(--muted); line-height: 1.65; transition: color .3s; }
+        .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
 
-        /* footer */
-        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 26px 20px; transition: border-color .3s; }
+        .skeleton {
+            background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
+            background-size: 200% 100%; animation: sk 1.2s ease infinite;
+            border-radius: 8px;
+        }
+        @keyframes sk { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+        footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 26px 20px; }
         .footer-inner {
-            max-width: 1040px; margin: 0 auto;
+            max-width: 1160px; margin: 0 auto;
             display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
         }
-        .footer-copy { font-size: 13px; color: var(--muted); transition: color .3s; }
-        .footer-links { display: flex; gap: 4px; }
+        .footer-copy { font-size: 13px; color: var(--muted); }
+        .footer-links { display: flex; gap: 4px; flex-wrap: wrap; }
         .footer-links a {
             font-size: 13px; color: var(--muted); text-decoration: none;
             padding: 4px 10px; border-radius: 6px; transition: color .2s, background .2s;
         }
         .footer-links a:hover { color: var(--text); background: var(--border); }
 
-        @keyframes up { from { opacity:0; transform:translateY(16px); } to { opacity:1; transform:translateY(0); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .spin { animation: spin .8s linear infinite; }
+        @keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
     </style>
 </head>
 <body>
@@ -350,16 +305,26 @@
 <header>
     <div class="nav">
         <a href="/" class="logo">
-            <div class="logo-mark">P</div>
-            <span class="logo-name">PIX<span>CRUSH</span></span>
+            <div class="logo-mark">Q</div>
+            <div>
+                <div class="logo-name">QUICK<span>TOOL</span>LAB</div>
+                <div class="logo-sub" data-i18n="brand_sub">综合在线工具站</div>
+            </div>
         </a>
+        <nav class="nav-links" aria-label="Section">
+            <a href="#tools" data-i18n="nav_tools">工具</a>
+            <a href="#library" data-i18n="nav_lib">技术文库</a>
+            <a href="#slides" data-i18n="nav_slides">幻灯片</a>
+            <a href="#opensource" data-i18n="nav_oss">开源类库</a>
+            <a href="#software" data-i18n="nav_soft">软件推荐</a>
+        </nav>
         <div class="nav-right">
             <div class="lang-sw">
-                <button class="lang-btn" data-lang="zh">中文</button>
-                <button class="lang-btn" data-lang="en">EN</button>
-                <button class="lang-btn" data-lang="ja">日本語</button>
+                <button class="lang-btn" data-lang="zh" type="button">中文</button>
+                <button class="lang-btn" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" data-lang="ja" type="button">日本語</button>
             </div>
-            <button class="theme-btn" id="theme-btn" aria-label="Toggle theme">
+            <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle theme">
                 <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
                     <circle cx="12" cy="12" r="5"/>
                     <line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
@@ -377,113 +342,58 @@
 
 <main>
     <div class="hero">
-        <h1 data-i18n="hero_title">图片压缩<br>格式转换</h1>
-        <p data-i18n="hero_sub">批量处理，本地运行，不上传任何服务器，隐私安全。</p>
-        <div class="hero-pills">
-            <div class="pill"><span class="pill-dot"></span>JPG</div>
-            <div class="pill"><span class="pill-dot"></span>PNG</div>
-            <div class="pill"><span class="pill-dot"></span>WebP</div>
-            <div class="pill"><span class="pill-dot"></span>BMP</div>
-            <div class="pill"><span class="pill-dot"></span>GIF</div>
-        </div>
+        <h1 data-i18n="hero_title">一站式工具与内容精选</h1>
+        <p data-i18n="hero_sub">聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。</p>
     </div>
 
-    <div class="dropzone" id="dropzone">
-        <div class="drop-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/>
-                <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
-            </svg>
+    <section class="section-block" id="tools">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">在线工具</span></h2>
+            <a class="section-more" href="#library" data-i18n="hint_below">向下浏览内容精选 →</a>
         </div>
-        <h3 data-i18n="drop_title">拖放图片到这里</h3>
-        <p data-i18n="drop_sub">支持 JPG、PNG、WebP、BMP、GIF，可同时拖入多张</p>
-        <button class="browse-btn" onclick="document.getElementById('file-input').click()">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-            <span data-i18n="browse">选择文件</span>
-        </button>
-        <input type="file" id="file-input" multiple accept="image/*">
+        <div class="tools-grid" id="tools-grid"></div>
+    </section>
+
+    <section class="section-block" id="slides">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_slides">幻灯片 / 精选封面</span></h2>
+            <a class="section-more" href="https://dev.to" target="_blank" rel="noopener noreferrer" data-i18n="more_devto">Dev.to 更多 →</a>
+        </div>
+        <div id="slides-host"><div class="loading skeleton" style="height:120px;border-radius:14px;"></div></div>
+    </section>
+
+    <div class="row-2">
+        <section class="section-block" id="library" style="margin-bottom:0;">
+            <div class="section-head">
+                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_lib">技术文库</span></h2>
+                <a class="section-more" href="https://dev.to/top/week" target="_blank" rel="noopener noreferrer" data-i18n="more_trending">本周热门 →</a>
+            </div>
+            <div class="list-card" id="library-host"><div class="loading" data-i18n="loading">加载中…</div></div>
+        </section>
+        <section class="section-block" id="opensource" style="margin-bottom:0;">
+            <div class="section-head">
+                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_oss">开源类库</span></h2>
+                <a class="section-more" href="https://github.com/trending" target="_blank" rel="noopener noreferrer" data-i18n="more_github">GitHub Trending →</a>
+            </div>
+            <div class="list-card" id="oss-host"><div class="loading" data-i18n="loading">加载中…</div></div>
+        </section>
     </div>
 
-    <div class="settings-row">
-        <div class="setting-card">
-            <div class="setting-label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-                <span data-i18n="label_format">输出格式</span>
-            </div>
-            <div class="format-grid">
-                <button class="fmt-btn active" data-fmt="jpeg">JPG</button>
-                <button class="fmt-btn" data-fmt="png">PNG</button>
-                <button class="fmt-btn" data-fmt="webp">WebP</button>
-                <button class="fmt-btn" data-fmt="original"><span data-i18n="fmt_original">原格式</span></button>
-            </div>
+    <section class="section-block" id="software" style="margin-top:44px;">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_soft">软件推荐</span></h2>
+            <a class="section-more" href="https://github.com/search?q=topic%3Acli+stars%3A%3E100&type=repositories&s=stars&o=desc" target="_blank" rel="noopener noreferrer" data-i18n="more_cli">CLI 工具搜索 →</a>
         </div>
-        <div class="setting-card">
-            <div class="setting-label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-                <span data-i18n="label_quality">压缩质量</span>
-            </div>
-            <div class="quality-display" id="quality-val">80%</div>
-            <input type="range" id="quality" min="10" max="100" value="80" step="5">
-        </div>
-        <div class="setting-card">
-            <div class="setting-label">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
-                <span data-i18n="label_maxw">最大尺寸</span>
-            </div>
-            <div class="maxw-grid">
-                <button class="maxw-btn active" data-w="0"><span data-i18n="maxw_orig">原尺寸</span></button>
-                <button class="maxw-btn" data-w="1920">1920</button>
-                <button class="maxw-btn" data-w="1280">1280</button>
-                <button class="maxw-btn" data-w="800">800</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="queue-section" style="display:none; animation: up .4s ease both;">
-        <div class="queue-header">
-            <span class="queue-title" data-i18n="queue_title">处理队列</span>
-            <div class="queue-actions">
-                <button class="btn-ghost" id="clear-btn">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
-                    <span data-i18n="btn_clear">清空</span>
-                </button>
-                <button class="btn-primary" id="convert-btn">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                    <span data-i18n="btn_start">开始处理</span>
-                </button>
-                <button class="btn-primary" id="dl-all-btn" style="display:none; background:linear-gradient(135deg,#16a34a,#22c55e);">
-                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                    <span data-i18n="btn_dl_all">全部下载</span>
-                </button>
-            </div>
-        </div>
-        <div id="file-list"></div>
-    </div>
-
-    <div class="features">
-        <div class="feat-card">
-            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h4 data-i18n="feat1_t">隐私安全</h4>
-            <p data-i18n="feat1_d">所有处理完全在浏览器本地完成，图片从不上传到任何服务器，数据零泄露。</p>
-        </div>
-        <div class="feat-card">
-            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></div>
-            <h4 data-i18n="feat2_t">无需安装</h4>
-            <p data-i18n="feat2_d">打开网页即可使用，无需下载任何软件，支持 Chrome、Safari、Edge 等主流浏览器。</p>
-        </div>
-        <div class="feat-card">
-            <div class="feat-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M13 2v7h7"/></svg></div>
-            <h4 data-i18n="feat3_t">批量处理</h4>
-            <p data-i18n="feat3_d">一次拖入多张图片，统一设置格式和质量，批量转换下载，效率翻倍。</p>
-        </div>
-    </div>
+        <div class="soft-grid" id="soft-host"><div class="loading skeleton" style="height:100px;border-radius:14px;grid-column:1/-1;"></div></div>
+    </section>
 </main>
 
 <footer>
     <div class="footer-inner">
-        <span class="footer-copy">© 2025 PixCrush</span>
+        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/compress.html">PixCrush</a>
             <a href="/about.html" data-i18n="nav_about">关于</a>
             <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
         </div>
@@ -491,53 +401,105 @@
 </footer>
 
 <script>
-// ══ i18n ══════════════════════════════════════
+document.getElementById('y').textContent = new Date().getFullYear();
+
 const I18N = {
-    zh:{
-        hero_title:'图片压缩<br>格式转换', hero_sub:'批量处理，本地运行，不上传任何服务器，隐私安全。',
-        drop_title:'拖放图片到这里', drop_sub:'支持 JPG、PNG、WebP、BMP、GIF，可同时拖入多张',
-        browse:'选择文件', label_format:'输出格式', label_quality:'压缩质量', label_maxw:'最大尺寸',
-        fmt_original:'原格式', maxw_orig:'原尺寸', queue_title:'处理队列',
-        btn_clear:'清空', btn_start:'开始处理', btn_processing:'处理中…', btn_dl_all:'全部下载',
-        s_waiting:'等待中', s_processing:'处理中', s_done:'完成', s_error:'失败',
-        dl_label:'下载', saving:'节省',
-        feat1_t:'隐私安全', feat1_d:'所有处理完全在浏览器本地完成，图片从不上传到任何服务器，数据零泄露。',
-        feat2_t:'无需安装', feat2_d:'打开网页即可使用，无需下载任何软件，支持 Chrome、Safari、Edge 等主流浏览器。',
-        feat3_t:'批量处理', feat3_d:'一次拖入多张图片，统一设置格式和质量，批量转换下载，效率翻倍。',
-        nav_home:'首页', nav_about:'关于', nav_privacy:'隐私政策',
-        page_title:'PixCrush · 图片压缩 & 格式转换',
+    zh: {
+        brand_sub: '综合在线工具站',
+        hero_title: '一站式工具与内容精选',
+        hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
+        nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐',
+        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐',
+        hint_below: '向下浏览内容精选 →', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
+        loading: '加载中…', load_err: '加载失败，请检查网络或稍后重试。',
+        retry: '重试',
+        nav_home: '首页', nav_about: '关于', nav_privacy: '隐私政策',
+        page_title: 'QuickToolLab · 综合在线工具站',
     },
-    en:{
-        hero_title:'Compress<br>& Convert', hero_sub:'Batch process images locally — no uploads, fully private.',
-        drop_title:'Drop images here', drop_sub:'Supports JPG, PNG, WebP, BMP, GIF — multiple files at once',
-        browse:'Browse files', label_format:'Output format', label_quality:'Quality', label_maxw:'Max size',
-        fmt_original:'Original', maxw_orig:'Original', queue_title:'Queue',
-        btn_clear:'Clear', btn_start:'Process', btn_processing:'Processing…', btn_dl_all:'Download all',
-        s_waiting:'Waiting', s_processing:'Processing', s_done:'Done', s_error:'Error',
-        dl_label:'Download', saving:'saved',
-        feat1_t:'Private & Secure', feat1_d:"Everything runs in your browser. Your images never leave your device.",
-        feat2_t:'No Install Needed', feat2_d:'Works in any modern browser — Chrome, Safari, Edge. No plugins required.',
-        feat3_t:'Batch Processing', feat3_d:'Drop multiple images, set format & quality once, download all.',
-        nav_home:'Home', nav_about:'About', nav_privacy:'Privacy',
-        page_title:'PixCrush · Image Compressor & Converter',
+    en: {
+        brand_sub: 'All-in-one tool hub',
+        hero_title: 'Tools & curated tech content',
+        hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
+        nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software',
+        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks',
+        hint_below: 'Browse curated content ↓', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
+        loading: 'Loading…', load_err: 'Could not load data. Check your network and try again.',
+        retry: 'Retry',
+        nav_home: 'Home', nav_about: 'About', nav_privacy: 'Privacy',
+        page_title: 'QuickToolLab · Developer tool hub',
     },
-    ja:{
-        hero_title:'画像圧縮<br>フォーマット変換', hero_sub:'ローカル処理で完結。サーバーへのアップロード不要、プライバシー安全。',
-        drop_title:'画像をここにドロップ', drop_sub:'JPG・PNG・WebP・BMP・GIF に対応、複数ファイル同時処理可能',
-        browse:'ファイルを選択', label_format:'出力形式', label_quality:'圧縮品質', label_maxw:'最大サイズ',
-        fmt_original:'元の形式', maxw_orig:'元サイズ', queue_title:'処理キュー',
-        btn_clear:'クリア', btn_start:'処理開始', btn_processing:'処理中…', btn_dl_all:'全てダウンロード',
-        s_waiting:'待機中', s_processing:'処理中', s_done:'完了', s_error:'エラー',
-        dl_label:'ダウンロード', saving:'削減',
-        feat1_t:'プライバシー保護', feat1_d:'全処理はブラウザ内で完結。画像はどのサーバーにもアップロードされません。',
-        feat2_t:'インストール不要', feat2_d:'Chrome・Safari・Edge などのブラウザで即利用可能。プラグイン不要。',
-        feat3_t:'一括処理', feat3_d:'複数画像を一度にドロップ、形式と品質をまとめて設定してダウンロード。',
-        nav_home:'ホーム', nav_about:'About', nav_privacy:'プライバシー',
-        page_title:'PixCrush · 画像圧縮・変換ツール',
+    ja: {
+        brand_sub: '総合オンラインツール',
+        hero_title: 'ツールと厳選コンテンツ',
+        hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
+        nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト',
+        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介',
+        hint_below: 'コンテンツへ ↓', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
+        loading: '読み込み中…', load_err: '読み込みに失敗しました。ネットワークを確認してください。',
+        retry: '再試行',
+        nav_home: 'ホーム', nav_about: 'About', nav_privacy: 'プライバシー',
+        page_title: 'QuickToolLab · 総合ツールサイト',
     }
 };
 
-let lang = localStorage.getItem('pc_lang') || navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en';
+const TOOLS = {
+    zh: [
+        { href: '/compress.html', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
+        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON 格式化', tag: 'WEB' },
+        { href: 'https://www.diffchecker.com', icon: '⇄', title: '文本对比', tag: 'WEB' },
+        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw 白板', tag: 'WEB' },
+        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab 解释', tag: 'WEB' },
+        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID 生成', tag: 'WEB' },
+        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: '图片 Base64', tag: 'WEB' },
+        { href: 'https://svgomg.net', icon: '◇', title: 'SVG 压缩', tag: 'WEB' },
+        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite 查看', tag: 'WEB' },
+        { href: 'https://jwt.io', icon: '🔑', title: 'JWT 调试', tag: 'WEB' },
+        { href: 'https://nginxconfig.io', icon: 'N', title: 'Nginx 配置', tag: 'WEB' },
+        { href: 'https://transform.tools', icon: '⇄', title: 'CSS/HTML 转换', tag: 'WEB' },
+        { href: 'https://readme.so', icon: '📝', title: 'README 编辑器', tag: 'WEB' },
+    ],
+    en: [
+        { href: '/compress.html', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
+        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON formatter', tag: 'WEB' },
+        { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff checker', tag: 'WEB' },
+        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
+        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab guru', tag: 'WEB' },
+        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
+        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Image → Base64', tag: 'WEB' },
+        { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
+        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite viewer', tag: 'WEB' },
+        { href: 'https://jwt.io', icon: '🔑', title: 'JWT.io', tag: 'WEB' },
+        { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx config', tag: 'WEB' },
+        { href: 'https://transform.tools', icon: '⇄', title: 'Transform', tag: 'WEB' },
+        { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+    ],
+    ja: [
+        { href: '/compress.html', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
+        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON', tag: 'WEB' },
+        { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff', tag: 'WEB' },
+        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
+        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab', tag: 'WEB' },
+        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
+        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Base64', tag: 'WEB' },
+        { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
+        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite', tag: 'WEB' },
+        { href: 'https://jwt.io', icon: '🔑', title: 'JWT', tag: 'WEB' },
+        { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx', tag: 'WEB' },
+        { href: 'https://transform.tools', icon: '⇄', title: 'Transform', tag: 'WEB' },
+        { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+    ],
+};
+
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 
 function applyLang(l) {
     lang = l;
@@ -547,16 +509,15 @@ function applyLang(l) {
     document.title = t.page_title;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.dataset.i18n;
-        if (t[k] != null) el.innerHTML = t[k];
+        if (t[k] != null) el.textContent = t[k];
     });
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
-    renderList();
+    renderTools();
+    loadDynamicContent();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 
-// ══ Theme ═════════════════════════════════════
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-
 function applyTheme(t) {
     theme = t;
     localStorage.setItem('pc_theme', t);
@@ -567,156 +528,153 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
     if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
 });
 
-// ══ Core state ════════════════════════════════
-let files = [], outputFormat = 'jpeg', maxWidth = 0;
-
-document.querySelectorAll('.fmt-btn').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.fmt-btn').forEach(x => x.classList.remove('active'));
-    b.classList.add('active'); outputFormat = b.dataset.fmt;
-}));
-document.querySelectorAll('.maxw-btn').forEach(b => b.addEventListener('click', () => {
-    document.querySelectorAll('.maxw-btn').forEach(x => x.classList.remove('active'));
-    b.classList.add('active'); maxWidth = parseInt(b.dataset.w);
-}));
-const qSlider = document.getElementById('quality');
-const qVal    = document.getElementById('quality-val');
-qSlider.addEventListener('input', () => { qVal.textContent = qSlider.value + '%'; });
-
-// ══ Drop / select ═════════════════════════════
-const dz = document.getElementById('dropzone');
-dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
-document.getElementById('file-input').addEventListener('change', e => addFiles(e.target.files));
-
-function addFiles(list) {
-    Array.from(list).forEach(f => {
-        if (!f.type.startsWith('image/')) return;
-        const id = Date.now() + Math.random();
-        const entry = { id, file: f, thumb: null, status: 'waiting', outputUrl: null, outputName: null, outputSize: null };
-        files.push(entry);
-        const r = new FileReader();
-        r.onload = e2 => { entry.thumb = e2.target.result; renderList(); };
-        r.readAsDataURL(f);
-    });
-    renderList();
-    document.getElementById('queue-section').style.display = 'block';
+function renderTools() {
+    const grid = document.getElementById('tools-grid');
+    const list = TOOLS[lang] || TOOLS.en;
+    grid.innerHTML = list.map(x => `
+        <a class="tool-card" href="${x.href}" ${x.int ? '' : 'target="_blank" rel="noopener noreferrer"'}>
+            <div class="ic">${escapeHtml(x.icon)}</div>
+            <h3>${escapeHtml(x.title)}</h3>
+            <span class="tag">${escapeHtml(x.tag)}</span>
+        </a>
+    `).join('');
 }
 
-// ══ Render ════════════════════════════════════
-function renderList() {
-    const list = document.getElementById('file-list');
-    const t = I18N[lang];
-    if (!files.length) {
-        list.innerHTML = '';
-        document.getElementById('queue-section').style.display = 'none';
-        return;
+function escapeHtml(s) {
+    const d = document.createElement('div');
+    d.textContent = s;
+    return d.innerHTML;
+}
+
+const GH_HEADERS = { Accept: 'application/vnd.github+json' };
+
+function relDate(iso) {
+    if (!iso) return '';
+    const d = new Date(iso);
+    const ms = Date.now() - d.getTime();
+    const mins = Math.floor(ms / 60000);
+    const hours = Math.floor(ms / 3600000);
+    const days = Math.floor(ms / 86400000);
+    if (lang === 'zh') {
+        if (mins < 60) return Math.max(1, mins) + ' 分钟前';
+        if (hours < 24) return hours + ' 小时前';
+        if (days < 7) return days + ' 天前';
+    } else if (lang === 'ja') {
+        if (mins < 60) return Math.max(1, mins) + ' 分前';
+        if (hours < 24) return hours + ' 時間前';
+        if (days < 7) return days + ' 日前';
+    } else {
+        if (mins < 60) return Math.max(1, mins) + ' min ago';
+        if (hours < 24) return hours + ' hr ago';
+        if (days < 7) return days + ' days ago';
     }
-    list.innerHTML = files.map(f => {
-        const thumb = f.thumb
-            ? `<img class="file-thumb" src="${f.thumb}" alt="">`
-            : `<div class="file-thumb-placeholder"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>`;
-        let st = '', prog = '', dl = '';
-        if (f.status === 'waiting')
-            st = `<span class="status-tag status-waiting">${t.s_waiting}</span>`;
-        else if (f.status === 'processing') {
-            st = `<span class="status-tag status-processing"><svg class="spin" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> ${t.s_processing}</span>`;
-            prog = `<div class="progress-wrap"><div class="progress-bar" style="width:60%"></div></div>`;
-        } else if (f.status === 'done') {
-            const sv = Math.round((1 - f.outputSize / f.file.size) * 100);
-            const svText = sv > 0 ? `${t.saving} ${sv}%` : `+${Math.abs(sv)}%`;
-            st = `<span class="status-tag status-done">✓ ${t.s_done}</span>`;
-            dl = `<a class="download-link" href="${f.outputUrl}" download="${f.outputName}">
-                <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                ${t.dl_label} ${fmt(f.outputSize)} · ${svText}</a>`;
-        } else {
-            st = `<span class="status-tag status-error">✕ ${t.s_error}</span>`;
-        }
-        return `<div class="file-item ${f.status==='done'?'done':f.status==='error'?'error':''}" data-id="${f.id}">
-            ${thumb}
-            <div class="file-info">
-                <div class="file-name">${f.file.name}</div>
-                <div class="file-meta">${fmt(f.file.size)} · ${f.file.type.replace('image/','').toUpperCase()}</div>
-                ${prog}${dl}
-            </div>
-            <div class="file-status">${st}</div>
-            <button class="remove-btn" onclick="removeFile('${f.id}')">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-        </div>`;
-    }).join('');
-    const allDone = files.length > 0 && files.every(f => f.status === 'done');
-    document.getElementById('dl-all-btn').style.display = allDone ? 'flex' : 'none';
+    return d.toLocaleDateString(lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja-JP' : 'en-US');
 }
 
-function removeFile(id) {
-    files = files.filter(f => String(f.id) !== String(id));
-    renderList();
+async function fetchDevTo(path) {
+    const r = await fetch('https://dev.to/api/articles' + path, { credentials: 'omit' });
+    if (!r.ok) throw new Error('dev.to ' + r.status);
+    return r.json();
 }
 
-document.getElementById('clear-btn').addEventListener('click', () => {
-    files = []; renderList(); document.getElementById('file-input').value = '';
-});
+async function fetchGitHub(path) {
+    const r = await fetch('https://api.github.com' + path, { headers: GH_HEADERS, credentials: 'omit' });
+    if (!r.ok) throw new Error('github ' + r.status);
+    return r.json();
+}
 
-document.getElementById('convert-btn').addEventListener('click', async () => {
-    const btn = document.getElementById('convert-btn');
+function errBox(hostId, onRetry) {
     const t = I18N[lang];
-    btn.disabled = true;
-    btn.innerHTML = `<svg class="spin" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 12a9 9 0 1 1-6.219-8.56"/></svg> ${t.btn_processing}`;
-    for (const f of files) {
-        if (f.status === 'done') continue;
-        f.status = 'processing'; renderList();
-        await processFile(f); renderList();
+    const el = document.getElementById(hostId);
+    el.innerHTML = `<div class="error-box">${escapeHtml(t.load_err)}<br><button type="button" class="retry-btn">${escapeHtml(t.retry)}</button></div>`;
+    el.querySelector('.retry-btn').addEventListener('click', onRetry);
+}
+
+async function loadDynamicContent() {
+    const t = I18N[lang];
+    document.getElementById('library-host').innerHTML = `<div class="loading">${escapeHtml(t.loading)}</div>`;
+    document.getElementById('oss-host').innerHTML = `<div class="loading">${escapeHtml(t.loading)}</div>`;
+    document.getElementById('slides-host').innerHTML = `<div class="loading skeleton" style="height:120px;border-radius:14px;"></div>`;
+    document.getElementById('soft-host').innerHTML = `<div class="loading skeleton" style="height:100px;border-radius:14px;grid-column:1/-1;"></div>`;
+
+    try {
+        const articles = await fetchDevTo('?per_page=12&top=7');
+        const lib = articles.slice(0, 8);
+        document.getElementById('library-host').innerHTML = lib.map(a => `
+            <a class="list-item" href="${a.url}" target="_blank" rel="noopener noreferrer">
+                <img class="thumb" src="${a.cover_image || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect fill="%2318181f" width="56" height="56"/><text x="28" y="32" text-anchor="middle" fill="%235a5a72" font-size="10">DEV</text></svg>')}" alt="" width="56" height="56" loading="lazy" decoding="async">
+                <div class="body">
+                    <div class="t">${escapeHtml(a.title)}</div>
+                    <div class="meta">${escapeHtml(a.user.name)} · ${relDate(a.published_at)}</div>
+                </div>
+            </a>
+        `).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+
+        const withCover = articles.filter(a => a.cover_image).slice(0, 10);
+        const slides = withCover.length >= 4 ? withCover : articles.slice(0, 8);
+        document.getElementById('slides-host').innerHTML = `
+            <div class="slides-scroll">
+                ${slides.map(a => `
+                    <a class="slide-card" href="${a.url}" target="_blank" rel="noopener noreferrer">
+                        <div class="slide-cover-wrap">
+                            <img src="${a.cover_image || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="220" height="138"><rect fill="%2318181f" width="220" height="138"/></svg>')}" alt="" loading="lazy" decoding="async">
+                            <span class="slide-badge">${a.reading_time_minutes != null ? a.reading_time_minutes + (lang === 'zh' ? ' 分钟' : lang === 'ja' ? ' 分' : ' min') : (a.public_reactions_count != null ? '♥ ' + a.public_reactions_count : 'DEV')}</span>
+                        </div>
+                        <div class="cap">${escapeHtml(a.title)}</div>
+                    </a>
+                `).join('')}
+            </div>`;
+    } catch (e) {
+        errBox('library-host', loadDynamicContent);
+        errBox('slides-host', loadDynamicContent);
     }
-    btn.disabled = false;
-    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ${I18N[lang].btn_start}`;
-});
 
-async function processFile(entry) {
-    return new Promise(resolve => {
-        const img = new Image();
-        const url = URL.createObjectURL(entry.file);
-        img.onload = () => {
-            const canvas = document.createElement('canvas');
-            let w = img.width, h = img.height;
-            if (maxWidth > 0 && w > maxWidth) { h = Math.round(h * maxWidth / w); w = maxWidth; }
-            canvas.width = w; canvas.height = h;
-            const ctx = canvas.getContext('2d');
-            const f = outputFormat === 'original'
-                ? (entry.file.type === 'image/png' ? 'png' : entry.file.type === 'image/webp' ? 'webp' : 'jpeg')
-                : outputFormat;
-            if (f === 'jpeg') { ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, w, h); }
-            ctx.drawImage(img, 0, 0, w, h);
-            URL.revokeObjectURL(url);
-            const mime = f === 'png' ? 'image/png' : f === 'webp' ? 'image/webp' : 'image/jpeg';
-            canvas.toBlob(blob => {
-                if (!blob) { entry.status = 'error'; resolve(); return; }
-                const ext = f === 'png' ? 'png' : f === 'webp' ? 'webp' : 'jpg';
-                entry.outputUrl  = URL.createObjectURL(blob);
-                entry.outputName = `${entry.file.name.replace(/\.[^.]+$/, '')}_pixcrush.${ext}`;
-                entry.outputSize = blob.size;
-                entry.status = 'done';
-                resolve();
-            }, mime, parseInt(qSlider.value) / 100);
-        };
-        img.onerror = () => { entry.status = 'error'; resolve(); };
-        img.src = url;
-    });
+    try {
+        const data = await fetchGitHub('/search/repositories?q=stars:%3E3000&sort=stars&order=desc&per_page=8');
+        document.getElementById('oss-host').innerHTML = (data.items || []).map(r => {
+            const col = langColor(r.language);
+            return `
+            <a class="gh-item" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+                <img class="gh-avatar" src="${r.owner.avatar_url}" alt="" width="40" height="40" loading="lazy" decoding="async">
+                <div style="flex:1;min-width:0;">
+                    <div class="gh-repo">${escapeHtml(r.full_name)}</div>
+                    <div class="gh-desc">${escapeHtml(r.description || '')}</div>
+                    <div class="gh-foot">
+                        ${r.language ? `<span style="display:inline-flex;align-items:center;gap:6px;"><span class="lang-dot" style="background:${col}"></span>${escapeHtml(r.language)}</span>` : ''}
+                        <span>★ ${fmtStars(r.stargazers_count)}</span>
+                    </div>
+                </div>
+            </a>`;
+        }).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+    } catch (e) {
+        errBox('oss-host', loadDynamicContent);
+    }
+
+    try {
+        const soft = await fetchGitHub('/search/repositories?q=topic:cli+stars:%3E400&sort=stars&order=desc&per_page=9');
+        document.getElementById('soft-host').innerHTML = (soft.items || []).map(r => `
+            <a class="soft-card" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+                <img class="ico" src="${r.owner.avatar_url}" alt="" width="44" height="44" loading="lazy" decoding="async">
+                <h4>${escapeHtml(r.name)}</h4>
+                <p>${escapeHtml((r.description || '').slice(0, 120))}</p>
+                <span class="plat">${escapeHtml(r.language || 'OSS')}</span>
+            </a>
+        `).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+    } catch (e) {
+        errBox('soft-host', loadDynamicContent);
+    }
 }
 
-document.getElementById('dl-all-btn').addEventListener('click', () => {
-    files.filter(f => f.status === 'done').forEach((f, i) => {
-        setTimeout(() => { const a = document.createElement('a'); a.href = f.outputUrl; a.download = f.outputName; a.click(); }, i * 300);
-    });
-});
-
-function fmt(b) {
-    if (b < 1024) return b + ' B';
-    if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
-    return (b/1048576).toFixed(2) + ' MB';
+function fmtStars(n) {
+    if (n >= 1000) return (n / 1000).toFixed(1).replace(/\.0$/, '') + 'k';
+    return String(n);
 }
 
-// ══ Init ══════════════════════════════════════
+function langColor(name) {
+    const map = { JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5', Go: '#00ADD8', Rust: '#dea584', Ruby: '#701516', 'C++': '#f34b7d', C: '#555555', Swift: '#F05138', Kotlin: '#A97BFF', Java: '#b07219' };
+    return map[name] || '#8b949e';
+}
+
 applyTheme(theme);
 applyLang(lang);
 </script>
