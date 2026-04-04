@@ -1,11 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="dark">
+<html lang="zh">
 <head>
     <title>PixCrush · 图片压缩 & 格式转换</title>
     <meta charset="UTF-8">
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="PixCrush — 免费在线图片压缩与格式转换工具，支持 JPG、PNG、WebP，本地处理不上传服务器。">
+    <meta name="description" content="PixCrush 免费在线图片压缩与格式转换工具，支持 JPG、PNG、WebP、BMP、GIF 批量处理，本地运行不上传服务器，隐私安全，无需安装，即开即用。">
+    <meta name="keywords" content="图片压缩,在线图片压缩,图片格式转换,WebP转换,PNG压缩,JPG压缩,免费图片工具,batch image compression">
     <meta name="theme-color" content="#0a0a10">
+    <link rel="canonical" href="https://quicktoolab.com/">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolab.com/">
+    <meta property="og:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
+    <meta property="og:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器，隐私安全。">
+    <meta property="og:image" content="https://quicktoolab.com/og-image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
+    <meta name="twitter:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器。">
+    <meta name="twitter:image" content="https://quicktoolab.com/og-image.png">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/><path d='M20 14 L27 14 M24 11 L27 14 L24 17' fill='none' stroke='%23fb923c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -325,10 +344,6 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .spin { animation: spin .8s linear infinite; }
     </style>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
-     crossorigin="anonymous"></script>
-     
 </head>
 <body>
 
