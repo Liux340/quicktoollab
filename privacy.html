@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+    <title>隐私政策 · PixCrush</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="PixCrush 隐私政策 — 我们不收集任何个人数据，所有图片处理均在本地完成。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent:#f97316; --accent2:#fb923c; --accentlo:rgba(249,115,22,.12); --green:#22c55e; }
+        [data-theme="dark"]  { --bg:#0a0a10; --surface:#111118; --surface2:#18181f; --border:#222230; --text:#ededf5; --muted:#5a5a72; }
+        [data-theme="light"] { --bg:#f2f2f7; --surface:#ffffff; --surface2:#e8e8f0; --border:#d8d8e8; --text:#16161f; --muted:#7a7a96; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;transition:background .3s,color .3s;}
+        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+        [data-theme="dark"] body::after{content:'';position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(249,115,22,.06) 0%,transparent 65%);pointer-events:none;z-index:0;}
+
+        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);transition:background .3s,border-color .3s;}
+        .nav{max-width:1040px;margin:0 auto;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+        .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
+        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);transition:color .3s;}
+        .logo-name span{color:var(--accent);}
+        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+        .nav-links{display:flex;gap:2px;}
+        .nav-link{padding:5px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s,background .2s;}
+        .nav-link:hover{color:var(--text);background:var(--border);}
+        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;transition:background .3s,border-color .3s;}
+        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;}
+        .lang-btn.active{background:var(--accent);color:#fff;}
+        .lang-btn:not(.active):hover{color:var(--text);}
+        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
+        [data-theme="dark"] .icon-sun{display:none;}
+        [data-theme="dark"] .icon-moon{display:block;}
+        [data-theme="light"] .icon-sun{display:block;}
+        [data-theme="light"] .icon-moon{display:none;}
+
+        main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:60px 20px 100px;}
+
+        .page-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;border:1px solid rgba(249,115,22,.3);background:var(--accentlo);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:18px;}
+        .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,8vw,72px);letter-spacing:3px;line-height:1;background:linear-gradient(120deg,var(--text) 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+        .page-lead{font-size:15px;color:var(--muted);max-width:540px;line-height:1.75;margin-bottom:10px;transition:color .3s;}
+        .update-date{font-size:12px;color:var(--muted);margin-bottom:52px;transition:color .3s;opacity:.7;}
+
+        /* highlight banner */
+        .highlight-banner{background:rgba(34,197,94,.08);border:1px solid rgba(34,197,94,.2);border-radius:14px;padding:18px 22px;margin-bottom:40px;display:flex;gap:14px;align-items:flex-start;animation:up .4s ease both;}
+        .highlight-banner svg{color:var(--green);flex-shrink:0;margin-top:2px;}
+        .highlight-banner p{font-size:14px;color:var(--text);line-height:1.7;transition:color .3s;}
+        .highlight-banner strong{color:var(--green);}
+
+        .section{margin-bottom:36px;animation:up .5s ease both;}
+        .section:nth-child(3){animation-delay:.05s;}
+        .section:nth-child(4){animation-delay:.1s;}
+        .section:nth-child(5){animation-delay:.15s;}
+        .section:nth-child(6){animation-delay:.2s;}
+        .section:nth-child(7){animation-delay:.25s;}
+
+        .section-header{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+        .section-num{width:28px;height:28px;border-radius:8px;background:var(--accentlo);border:1px solid rgba(249,115,22,.2);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:14px;color:var(--accent);flex-shrink:0;}
+        .section h2{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1.5px;color:var(--text);transition:color .3s;}
+
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:22px 26px;transition:background .3s,border-color .3s;}
+        .card p{font-size:14px;color:var(--muted);line-height:1.85;margin-bottom:12px;transition:color .3s;}
+        .card p:last-child{margin-bottom:0;}
+        .card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:8px;}
+        .card ul li{font-size:14px;color:var(--muted);line-height:1.7;padding-left:18px;position:relative;transition:color .3s;}
+        .card ul li::before{content:'—';position:absolute;left:0;color:var(--accent);font-weight:700;}
+        .card a{color:var(--accent);text-decoration:none;}
+        .card a:hover{text-decoration:underline;}
+
+        .yes-no-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+        @media(max-width:500px){.yes-no-grid{grid-template-columns:1fr;}}
+        .yn-card{border-radius:12px;padding:16px 18px;}
+        .yn-card.no{background:rgba(34,197,94,.07);border:1px solid rgba(34,197,94,.2);}
+        .yn-card.warn{background:rgba(249,115,22,.07);border:1px solid rgba(249,115,22,.2);}
+        .yn-label{font-size:11px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px;}
+        .yn-card.no .yn-label{color:var(--green);}
+        .yn-card.warn .yn-label{color:var(--accent);}
+        .yn-card ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px;}
+        .yn-card ul li{font-size:13px;line-height:1.6;padding-left:16px;position:relative;}
+        .yn-card.no ul li{color:#86efac;}
+        .yn-card.warn ul li{color:var(--accent2);}
+        .yn-card ul li::before{position:absolute;left:0;}
+        .yn-card.no ul li::before{content:'✓';color:var(--green);}
+        .yn-card.warn ul li::before{content:'·';color:var(--accent);}
+        [data-theme="light"] .yn-card.no ul li{color:#166534;}
+        [data-theme="light"] .yn-card.warn ul li{color:#9a3412;}
+
+        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;transition:border-color .3s;}
+        .footer-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+        .footer-copy{font-size:13px;color:var(--muted);transition:color .3s;}
+        .footer-links{display:flex;gap:4px;}
+        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s;}
+        .footer-links a:hover{color:var(--text);background:var(--border);}
+
+        @keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <a href="/" class="logo">
+            <div class="logo-mark">P</div>
+            <span class="logo-name">PIX<span>CRUSH</span></span>
+        </a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/" class="nav-link" data-i18n="nav_home">首页</a>
+                <a href="/about.html" class="nav-link" data-i18n="nav_about">关于</a>
+            </div>
+            <div class="lang-sw">
+                <button class="lang-btn" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ja">日本語</button>
+            </div>
+            <button class="theme-btn" id="theme-btn">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div style="animation:up .45s ease both;">
+        <div class="page-eyebrow" data-i18n="eyebrow">隐私政策</div>
+        <h1 class="page-title" data-i18n="page_title">PRIVACY<br>POLICY</h1>
+        <p class="page-lead" data-i18n="page_lead">我们重视你的隐私。这份文件说明 PixCrush 如何处理（或者说：完全不处理）你的个人数据。</p>
+        <p class="update-date" data-i18n="update_date">最后更新：2025 年 1 月 1 日</p>
+    </div>
+
+    <!-- TL;DR banner -->
+    <div class="highlight-banner">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <p data-i18n="tldr"><strong>简而言之：</strong>PixCrush 不收集、不存储、不传输你的任何图片或个人信息。所有处理均在你的浏览器本地完成，关闭页面后数据即消失。</p>
+    </div>
+
+    <!-- 1 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">1</div><h2 data-i18n="s1_title">数据收集</h2></div>
+        <div class="card">
+            <div class="yes-no-grid">
+                <div class="yn-card no">
+                    <div class="yn-label" data-i18n="not_collected">我们不收集</div>
+                    <ul>
+                        <li data-i18n="nc1">你上传的任何图片</li>
+                        <li data-i18n="nc2">姓名、邮箱、账号信息</li>
+                        <li data-i18n="nc3">设备指纹或唯一标识符</li>
+                        <li data-i18n="nc4">精确位置信息</li>
+                        <li data-i18n="nc5">支付信息</li>
+                    </ul>
+                </div>
+                <div class="yn-card warn">
+                    <div class="yn-label" data-i18n="may_collect">可能涉及</div>
+                    <ul>
+                        <li data-i18n="mc1">Cloudflare 基础访问日志（IP、时间戳），由 Cloudflare 自动记录，我们无法访问</li>
+                        <li data-i18n="mc2">语言 / 主题偏好（仅存于本地 localStorage）</li>
+                        <li data-i18n="mc3">AdSense 广告（如已启用），遵循 Google 隐私政策</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">2</div><h2 data-i18n="s2_title">图片如何处理</h2></div>
+        <div class="card">
+            <p data-i18n="s2_p1">当你将图片拖入 PixCrush 时，浏览器会使用 HTML5 Canvas API 在本地完成解码、缩放和重新编码。整个过程不涉及任何网络请求，图片数据不会离开你的设备。</p>
+            <p data-i18n="s2_p2">处理完成后，下载链接通过 <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">URL.createObjectURL()</code> 生成，存储在浏览器内存中。关闭或刷新页面后，该对象会被自动释放，不留任何痕迹。</p>
+        </div>
+    </div>
+
+    <!-- 3 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">3</div><h2 data-i18n="s3_title">本地存储</h2></div>
+        <div class="card">
+            <p data-i18n="s3_p1">PixCrush 仅使用 <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">localStorage</code> 保存两项偏好设置：</p>
+            <ul>
+                <li data-i18n="ls1"><strong>pc_lang</strong> — 你选择的界面语言（zh / en / ja）</li>
+                <li data-i18n="ls2"><strong>pc_theme</strong> — 你选择的主题（dark / light）</li>
+            </ul>
+            <p style="margin-top:12px;" data-i18n="s3_p2">这两项数据仅存于你的本地浏览器，不会被读取或传输到任何服务器。你可以随时通过浏览器设置清除它们。</p>
+        </div>
+    </div>
+
+    <!-- 4 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">4</div><h2 data-i18n="s4_title">第三方服务</h2></div>
+        <div class="card">
+            <p data-i18n="s4_p1">PixCrush 使用以下第三方服务：</p>
+            <ul>
+                <li data-i18n="tp1"><strong>Google Fonts</strong> — 加载 Bebas Neue 和 Outfit 字体。Google 可能记录字体请求的 IP 地址，请参阅 <a href="https://policies.google.com/privacy" target="_blank">Google 隐私政策</a>。</li>
+                <li data-i18n="tp2"><strong>Cloudflare Pages</strong> — 网站托管和 CDN。Cloudflare 可能记录基础访问日志，请参阅 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare 隐私政策</a>。</li>
+                <li data-i18n="tp3"><strong>Google AdSense（如已启用）</strong> — 展示广告。Google 可能使用 Cookie 投放个性化广告，请参阅 <a href="https://policies.google.com/privacy" target="_blank">Google 隐私政策</a>。你可以通过 <a href="https://adssettings.google.com/" target="_blank">Google 广告设置</a> 管理偏好。</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- 5 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">5</div><h2 data-i18n="s5_title">Cookie</h2></div>
+        <div class="card">
+            <p data-i18n="s5_p1">PixCrush 本身不设置任何 Cookie。如果 Google AdSense 已启用，Google 可能会通过广告脚本设置 Cookie 用于广告投放和分析。你可以通过浏览器设置禁用第三方 Cookie。</p>
+        </div>
+    </div>
+
+    <!-- 6 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">6</div><h2 data-i18n="s6_title">未成年人</h2></div>
+        <div class="card">
+            <p data-i18n="s6_p1">PixCrush 是一个通用图片工具，不针对未成年人。我们不主动收集任何用户数据，因此不存在针对未成年人的数据处理风险。</p>
+        </div>
+    </div>
+
+    <!-- 7 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">7</div><h2 data-i18n="s7_title">政策变更</h2></div>
+        <div class="card">
+            <p data-i18n="s7_p1">如果本隐私政策发生重大变更，我们会更新页面顶部的"最后更新"日期。建议你定期查看本页面。继续使用 PixCrush 即表示你接受最新版本的隐私政策。</p>
+        </div>
+    </div>
+
+    <!-- 8 -->
+    <div class="section">
+        <div class="section-header"><div class="section-num">8</div><h2 data-i18n="s8_title">联系我们</h2></div>
+        <div class="card">
+            <p data-i18n="s8_p1">如果你对本隐私政策有任何疑问，请通过以下方式联系：</p>
+            <p>📧 <a href="/cdn-cgi/l/email-protection#deb6b79eaeb7a6bdacabadb6f0bfaeae"><span class="__cf_email__" data-cfemail="375f5e77475e4f544542445f19564747">[email&#160;protected]</span></a></p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© 2025 PixCrush</span>
+        <div class="footer-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const I18N = {
+    zh:{
+        nav_home:'首页', nav_about:'关于', nav_privacy:'隐私政策',
+        eyebrow:'隐私政策', page_title:'PRIVACY<br>POLICY',
+        page_lead:'我们重视你的隐私。这份文件说明 PixCrush 如何处理（或者说：完全不处理）你的个人数据。',
+        update_date:'最后更新：2025 年 1 月 1 日',
+        tldr:'<strong>简而言之：</strong>PixCrush 不收集、不存储、不传输你的任何图片或个人信息。所有处理均在你的浏览器本地完成，关闭页面后数据即消失。',
+        s1_title:'数据收集', not_collected:'我们不收集', may_collect:'可能涉及',
+        nc1:'你上传的任何图片', nc2:'姓名、邮箱、账号信息', nc3:'设备指纹或唯一标识符', nc4:'精确位置信息', nc5:'支付信息',
+        mc1:'Cloudflare 基础访问日志（IP、时间戳），由 Cloudflare 自动记录，我们无法访问',
+        mc2:'语言 / 主题偏好（仅存于本地 localStorage）',
+        mc3:'AdSense 广告（如已启用），遵循 Google 隐私政策',
+        s2_title:'图片如何处理',
+        s2_p1:'当你将图片拖入 PixCrush 时，浏览器会使用 HTML5 Canvas API 在本地完成解码、缩放和重新编码。整个过程不涉及任何网络请求，图片数据不会离开你的设备。',
+        s2_p2:'处理完成后，下载链接通过 <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">URL.createObjectURL()</code> 生成，存储在浏览器内存中。关闭或刷新页面后，该对象会被自动释放，不留任何痕迹。',
+        s3_title:'本地存储',
+        s3_p1:'PixCrush 仅使用 <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">localStorage</code> 保存两项偏好设置：',
+        ls1:'<strong>pc_lang</strong> — 你选择的界面语言（zh / en / ja）',
+        ls2:'<strong>pc_theme</strong> — 你选择的主题（dark / light）',
+        s3_p2:'这两项数据仅存于你的本地浏览器，不会被读取或传输到任何服务器。你可以随时通过浏览器设置清除它们。',
+        s4_title:'第三方服务',
+        s4_p1:'PixCrush 使用以下第三方服务：',
+        tp1:'<strong>Google Fonts</strong> — 加载 Bebas Neue 和 Outfit 字体。Google 可能记录字体请求的 IP 地址，请参阅 <a href="https://policies.google.com/privacy" target="_blank">Google 隐私政策</a>。',
+        tp2:'<strong>Cloudflare Pages</strong> — 网站托管和 CDN。Cloudflare 可能记录基础访问日志，请参阅 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare 隐私政策</a>。',
+        tp3:'<strong>Google AdSense（如已启用）</strong> — 展示广告。Google 可能使用 Cookie 投放个性化广告，请参阅 <a href="https://policies.google.com/privacy" target="_blank">Google 隐私政策</a>。你可以通过 <a href="https://adssettings.google.com/" target="_blank">Google 广告设置</a> 管理偏好。',
+        s5_title:'Cookie',
+        s5_p1:'PixCrush 本身不设置任何 Cookie。如果 Google AdSense 已启用，Google 可能会通过广告脚本设置 Cookie 用于广告投放和分析。你可以通过浏览器设置禁用第三方 Cookie。',
+        s6_title:'未成年人',
+        s6_p1:'PixCrush 是一个通用图片工具，不针对未成年人。我们不主动收集任何用户数据，因此不存在针对未成年人的数据处理风险。',
+        s7_title:'政策变更',
+        s7_p1:'如果本隐私政策发生重大变更，我们会更新页面顶部的"最后更新"日期。建议你定期查看本页面。继续使用 PixCrush 即表示你接受最新版本的隐私政策。',
+        s8_title:'联系我们',
+        s8_p1:'暂无联系方式。',
+        page_title_tag:'隐私政策 · PixCrush',
+    },
+    en:{
+        nav_home:'Home', nav_about:'About', nav_privacy:'Privacy',
+        eyebrow:'Privacy Policy', page_title:'PRIVACY<br>POLICY',
+        page_lead:"We take your privacy seriously. This document explains how PixCrush handles (or rather, doesn't handle) your personal data.",
+        update_date:'Last updated: January 1, 2025',
+        tldr:'<strong>TL;DR:</strong> PixCrush does not collect, store, or transmit any of your images or personal information. All processing happens locally in your browser and disappears when you close the page.',
+        s1_title:'Data Collection', not_collected:'We do NOT collect', may_collect:'May involve',
+        nc1:'Any images you process', nc2:'Name, email, or account info', nc3:'Device fingerprint or unique identifiers', nc4:'Precise location data', nc5:'Payment information',
+        mc1:'Basic Cloudflare access logs (IP, timestamp) — collected automatically by Cloudflare, not accessible to us',
+        mc2:'Language / theme preference (stored only in local localStorage)',
+        mc3:'AdSense ads (if enabled) — subject to Google\'s privacy policy',
+        s2_title:'How Images Are Processed',
+        s2_p1:"When you drop an image into PixCrush, the browser uses the HTML5 Canvas API to decode, resize, and re-encode it entirely on your device. No network requests are made. Your image data never leaves your browser.",
+        s2_p2:'Once processing is complete, the download link is generated via <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">URL.createObjectURL()</code> and exists only in browser memory. It is automatically released when you close or refresh the page.',
+        s3_title:'Local Storage',
+        s3_p1:'PixCrush only uses <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">localStorage</code> to save two preferences:',
+        ls1:'<strong>pc_lang</strong> — Your selected interface language (zh / en / ja)',
+        ls2:'<strong>pc_theme</strong> — Your selected theme (dark / light)',
+        s3_p2:'These values are stored only in your local browser and are never read or transmitted to any server. You can clear them at any time via your browser settings.',
+        s4_title:'Third-Party Services',
+        s4_p1:'PixCrush uses the following third-party services:',
+        tp1:'<strong>Google Fonts</strong> — Loads Bebas Neue and Outfit typefaces. Google may log IP addresses for font requests. See <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>.',
+        tp2:'<strong>Cloudflare Pages</strong> — Hosting and CDN. Cloudflare may record basic access logs. See <a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare Privacy Policy</a>.',
+        tp3:'<strong>Google AdSense (if enabled)</strong> — Serves ads. Google may use cookies for personalized advertising. See <a href="https://policies.google.com/privacy" target="_blank">Google Privacy Policy</a>. Manage preferences at <a href="https://adssettings.google.com/" target="_blank">Google Ad Settings</a>.',
+        s5_title:'Cookies',
+        s5_p1:"PixCrush itself sets no cookies. If Google AdSense is enabled, Google may set cookies via ad scripts for targeting and analytics. You can disable third-party cookies in your browser settings.",
+        s6_title:'Children',
+        s6_p1:"PixCrush is a general-purpose image tool and is not directed at children. We do not actively collect any user data, so there is no risk of inadvertent data collection from minors.",
+        s7_title:'Policy Changes',
+        s7_p1:'If we make significant changes to this policy, we will update the "Last updated" date at the top of the page. We recommend checking periodically. Continued use of PixCrush constitutes acceptance of the current policy.',
+        s8_title:'Contact',
+        s8_p1:'Contact information not available yet.',
+        page_title_tag:'Privacy Policy · PixCrush',
+    },
+    ja:{
+        nav_home:'ホーム', nav_about:'About', nav_privacy:'プライバシー',
+        eyebrow:'プライバシーポリシー', page_title:'PRIVACY<br>POLICY',
+        page_lead:'お客様のプライバシーを尊重します。このページでは、PixCrush が個人データをどのように扱うか（あるいは全く扱わないか）を説明します。',
+        update_date:'最終更新：2025年1月1日',
+        tldr:'<strong>要約：</strong>PixCrush は、お客様の画像や個人情報を一切収集・保存・送信しません。すべての処理はブラウザ内でローカルに完結し、ページを閉じるとデータは消去されます。',
+        s1_title:'データ収集', not_collected:'収集しないもの', may_collect:'関連する可能性があるもの',
+        nc1:'処理するすべての画像', nc2:'氏名・メール・アカウント情報', nc3:'デバイス識別子やフィンガープリント', nc4:'正確な位置情報', nc5:'支払い情報',
+        mc1:'Cloudflare の基本的なアクセスログ（IP・タイムスタンプ）— Cloudflare が自動記録、当方はアクセス不可',
+        mc2:'言語 / テーマ設定（ローカルの localStorage にのみ保存）',
+        mc3:'AdSense 広告（有効な場合）— Google のプライバシーポリシーに準拠',
+        s2_title:'画像の処理方法',
+        s2_p1:'画像を PixCrush にドロップすると、ブラウザは HTML5 Canvas API を使用してデバイス上でデコード・リサイズ・再エンコードを行います。ネットワーク通信は一切発生せず、画像データがデバイスの外に出ることはありません。',
+        s2_p2:'処理完了後、ダウンロードリンクは <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">URL.createObjectURL()</code> で生成され、ブラウザメモリにのみ存在します。ページを閉じるか更新すると自動的に解放されます。',
+        s3_title:'ローカルストレージ',
+        s3_p1:'PixCrush は <code style="background:var(--surface2);padding:1px 6px;border-radius:4px;font-size:13px;">localStorage</code> を使用して2つの設定を保存します：',
+        ls1:'<strong>pc_lang</strong> — 選択した言語（zh / en / ja）',
+        ls2:'<strong>pc_theme</strong> — 選択したテーマ（dark / light）',
+        s3_p2:'これらの値はお使いのブラウザにのみ保存され、サーバーへの送信は行われません。いつでもブラウザ設定から削除できます。',
+        s4_title:'サードパーティサービス',
+        s4_p1:'PixCrush は以下のサードパーティサービスを使用しています：',
+        tp1:'<strong>Google Fonts</strong> — Bebas Neue と Outfit フォントを読み込みます。Google はフォントリクエストの IP アドレスを記録する場合があります。<a href="https://policies.google.com/privacy" target="_blank">Google プライバシーポリシー</a>をご参照ください。',
+        tp2:'<strong>Cloudflare Pages</strong> — ホスティングと CDN。Cloudflare は基本的なアクセスログを記録する場合があります。<a href="https://www.cloudflare.com/privacypolicy/" target="_blank">Cloudflare プライバシーポリシー</a>をご参照ください。',
+        tp3:'<strong>Google AdSense（有効な場合）</strong> — 広告を配信します。Google はパーソナライズ広告のために Cookie を使用する場合があります。<a href="https://adssettings.google.com/" target="_blank">Google 広告設定</a>から管理できます。',
+        s5_title:'Cookie',
+        s5_p1:'PixCrush 自体は Cookie を設定しません。Google AdSense が有効な場合、Google が広告スクリプトを通じて Cookie を設定する場合があります。ブラウザ設定でサードパーティ Cookie を無効にできます。',
+        s6_title:'未成年者',
+        s6_p1:'PixCrush は汎用の画像ツールであり、未成年者を対象としていません。ユーザーデータを積極的に収集しないため、未成年者のデータが意図せず収集されるリスクはありません。',
+        s7_title:'ポリシーの変更',
+        s7_p1:'このポリシーに重大な変更がある場合、ページ上部の「最終更新」日付を更新します。定期的にご確認いただくことをお勧めします。PixCrush の継続的なご利用は、最新のプライバシーポリシーへの同意を意味します。',
+        s8_title:'お問い合わせ',
+        s8_p1:'現在、連絡先は準備中です。',
+        page_title_tag:'プライバシーポリシー · PixCrush',
+    }
+};
+
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyLang(l) {
+    lang = l; localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.title = t.page_title_tag;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.dataset.i18n; if (t[k] != null) el.innerHTML = t[k]; });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+}
+function applyTheme(t) {
+    theme = t; localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark')

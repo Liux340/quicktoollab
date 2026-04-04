@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="zh" data-theme="dark">
+<head>
+    <title>关于 · PixCrush</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="了解 PixCrush — 免费、本地运行的图片压缩与格式转换工具。">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root { --accent:#f97316; --accent2:#fb923c; --accentlo:rgba(249,115,22,.12); --green:#22c55e; }
+        [data-theme="dark"]  { --bg:#0a0a10; --surface:#111118; --surface2:#18181f; --border:#222230; --text:#ededf5; --muted:#5a5a72; }
+        [data-theme="light"] { --bg:#f2f2f7; --surface:#ffffff; --surface2:#e8e8f0; --border:#d8d8e8; --text:#16161f; --muted:#7a7a96; }
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;transition:background .3s,color .3s;}
+        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+        [data-theme="dark"] body::after{content:'';position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(249,115,22,.06) 0%,transparent 65%);pointer-events:none;z-index:0;}
+
+        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);transition:background .3s,border-color .3s;}
+        .nav{max-width:1040px;margin:0 auto;padding:0 20px;height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+        .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
+        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);transition:color .3s;}
+        .logo-name span{color:var(--accent);}
+        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+        .nav-links{display:flex;gap:2px;}
+        .nav-link{padding:5px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s,background .2s;}
+        .nav-link:hover{color:var(--text);background:var(--border);}
+        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;transition:background .3s,border-color .3s;}
+        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;}
+        .lang-btn.active{background:var(--accent);color:#fff;}
+        .lang-btn:not(.active):hover{color:var(--text);}
+        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
+        [data-theme="dark"] .icon-sun{display:none;}
+        [data-theme="dark"] .icon-moon{display:block;}
+        [data-theme="light"] .icon-sun{display:block;}
+        [data-theme="light"] .icon-moon{display:none;}
+
+        main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:60px 20px 100px;}
+
+        .page-eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;border:1px solid rgba(249,115,22,.3);background:var(--accentlo);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:18px;}
+        .page-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(42px,8vw,72px);letter-spacing:3px;line-height:1;background:linear-gradient(120deg,var(--text) 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px;}
+        .page-lead{font-size:16px;color:var(--muted);max-width:520px;line-height:1.75;margin-bottom:52px;transition:color .3s;}
+
+        .section{margin-bottom:40px;animation:up .5s ease both;}
+        .section:nth-child(2){animation-delay:.05s;}
+        .section:nth-child(3){animation-delay:.1s;}
+        .section:nth-child(4){animation-delay:.15s;}
+        .section:nth-child(5){animation-delay:.2s;}
+
+        .section-header{display:flex;align-items:center;gap:10px;margin-bottom:16px;}
+        .section-icon{width:36px;height:36px;border-radius:9px;background:var(--accentlo);border:1px solid rgba(249,115,22,.15);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--accent);}
+        .section h2{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:2px;color:var(--text);transition:color .3s;}
+
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:24px 28px;transition:background .3s,border-color .3s;}
+        .card p{font-size:14.5px;color:var(--muted);line-height:1.8;margin-bottom:14px;transition:color .3s;}
+        .card p:last-child{margin-bottom:0;}
+
+        .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+        @media(max-width:560px){.feat-grid{grid-template-columns:1fr;}}
+        .feat-item{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;display:flex;gap:12px;align-items:flex-start;transition:background .3s,border-color .3s;}
+        .feat-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:6px;}
+        .feat-item h4{font-size:13.5px;font-weight:600;color:var(--text);margin-bottom:4px;transition:color .3s;}
+        .feat-item p{font-size:13px;color:var(--muted);line-height:1.6;transition:color .3s;}
+
+        .stack-list{display:flex;flex-direction:column;gap:10px;}
+        .stack-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px 18px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s;}
+        .stack-name{font-size:14px;font-weight:600;color:var(--text);transition:color .3s;}
+        .stack-desc{font-size:12.5px;color:var(--muted);transition:color .3s;}
+        .stack-badge{padding:3px 10px;border-radius:100px;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.2);font-size:11px;font-weight:600;color:var(--green);flex-shrink:0;}
+
+        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;transition:border-color .3s;}
+        .footer-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+        .footer-copy{font-size:13px;color:var(--muted);transition:color .3s;}
+        .footer-links{display:flex;gap:4px;}
+        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s;}
+        .footer-links a:hover{color:var(--text);background:var(--border);}
+
+        @keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <a href="/" class="logo">
+            <div class="logo-mark">P</div>
+            <span class="logo-name">PIX<span>CRUSH</span></span>
+        </a>
+        <div class="nav-right">
+            <div class="nav-links">
+                <a href="/" class="nav-link" data-i18n="nav_home">首页</a>
+                <a href="/privacy.html" class="nav-link" data-i18n="nav_privacy">隐私政策</a>
+            </div>
+            <div class="lang-sw">
+                <button class="lang-btn" data-lang="zh">中文</button>
+                <button class="lang-btn" data-lang="en">EN</button>
+                <button class="lang-btn" data-lang="ja">日本語</button>
+            </div>
+            <button class="theme-btn" id="theme-btn">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div style="animation:up .45s ease both;">
+        <div class="page-eyebrow" data-i18n="eyebrow">关于我们</div>
+        <h1 class="page-title" data-i18n="page_title">ABOUT<br>PIXCRUSH</h1>
+        <p class="page-lead" data-i18n="page_lead">PixCrush 是一款完全在浏览器中运行的免费图片工具，无服务器、无注册、无广告追踪，专注做一件事：帮你快速压缩和转换图片。</p>
+    </div>
+
+    <!-- What is -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+            <h2 data-i18n="s1_title">这是什么</h2>
+        </div>
+        <div class="card">
+            <p data-i18n="s1_p1">PixCrush 是一个纯前端的在线图片处理工具。你可以拖入 JPG、PNG、WebP、BMP 或 GIF 图片，选择输出格式和压缩质量，点击处理后立即下载。整个过程不涉及任何网络请求，所有运算都在你自己的设备上完成。</p>
+            <p data-i18n="s1_p2">项目托管在 GitHub，通过 Cloudflare Pages 分发，全球 CDN 加速，访问速度快，且受 Cloudflare 的 DDoS 防护保障。</p>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg></div>
+            <h2 data-i18n="s2_title">功能特点</h2>
+        </div>
+        <div class="feat-grid">
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f1_t">本地处理</h4><p data-i18n="f1_d">图片不经过任何服务器，全部在浏览器内完成。</p></div></div>
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f2_t">批量转换</h4><p data-i18n="f2_d">一次拖入多张图片，统一处理，批量下载。</p></div></div>
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f3_t">多格式支持</h4><p data-i18n="f3_d">输出 JPG、PNG、WebP，自动计算压缩节省比例。</p></div></div>
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f4_t">尺寸限制</h4><p data-i18n="f4_d">可设置最大宽度，自动等比缩放，保持画质。</p></div></div>
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f5_t">三语界面</h4><p data-i18n="f5_d">支持中文、English、日本語，自动识别浏览器语言。</p></div></div>
+            <div class="feat-item"><div class="feat-dot"></div><div><h4 data-i18n="f6_t">深色 / 浅色主题</h4><p data-i18n="f6_d">跟随系统或手动切换，偏好本地持久化。</p></div></div>
+        </div>
+    </div>
+
+    <!-- Tech stack -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <h2 data-i18n="s3_title">技术栈</h2>
+        </div>
+        <div class="stack-list">
+            <div class="stack-item"><div><div class="stack-name">HTML5 Canvas API</div><div class="stack-desc" data-i18n="tech1_d">图片解码、缩放、重编码核心</div></div><span class="stack-badge">Core</span></div>
+            <div class="stack-item"><div><div class="stack-name">Vanilla JS</div><div class="stack-desc" data-i18n="tech2_d">零依赖，无框架，纯原生实现</div></div><span class="stack-badge">Core</span></div>
+            <div class="stack-item"><div><div class="stack-name">CSS Variables + Transitions</div><div class="stack-desc" data-i18n="tech3_d">主题切换动画与多主题令牌管理</div></div><span class="stack-badge">UI</span></div>
+            <div class="stack-item"><div><div class="stack-name">GitHub + Cloudflare Pages</div><div class="stack-desc" data-i18n="tech4_d">静态托管，全球 CDN，自动部署</div></div><span class="stack-badge">Deploy</span></div>
+        </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="section">
+        <div class="section-header">
+            <div class="section-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <h2 data-i18n="s4_title">联系我们</h2>
+        </div>
+        <div class="card">
+            <p data-i18n="s4_p1">暂无联系方式。</p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© 2025 PixCrush</span>
+        <div class="footer-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+        </div>
+    </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const I18N = {
+    zh:{
+        nav_home:'首页', nav_about:'关于', nav_privacy:'隐私政策',
+        eyebrow:'关于我们', page_title:'ABOUT<br>PIXCRUSH',
+        page_lead:'PixCrush 是一款完全在浏览器中运行的免费图片工具，无服务器、无注册、无广告追踪，专注做一件事：帮你快速压缩和转换图片。',
+        s1_title:'这是什么',
+        s1_p1:'PixCrush 是一个纯前端的在线图片处理工具。你可以拖入 JPG、PNG、WebP、BMP 或 GIF 图片，选择输出格式和压缩质量，点击处理后立即下载。整个过程不涉及任何网络请求，所有运算都在你自己的设备上完成。',
+        s1_p2:'项目托管在 GitHub，通过 Cloudflare Pages 分发，全球 CDN 加速，访问速度快，且受 Cloudflare 的 DDoS 防护保障。',
+        s2_title:'功能特点',
+        f1_t:'本地处理', f1_d:'图片不经过任何服务器，全部在浏览器内完成。',
+        f2_t:'批量转换', f2_d:'一次拖入多张图片，统一处理，批量下载。',
+        f3_t:'多格式支持', f3_d:'输出 JPG、PNG、WebP，自动计算压缩节省比例。',
+        f4_t:'尺寸限制', f4_d:'可设置最大宽度，自动等比缩放，保持画质。',
+        f5_t:'三语界面', f5_d:'支持中文、English、日本語，自动识别浏览器语言。',
+        f6_t:'深色 / 浅色主题', f6_d:'跟随系统或手动切换，偏好本地持久化。',
+        s3_title:'技术栈',
+        tech1_d:'图片解码、缩放、重编码核心',
+        tech2_d:'零依赖，无框架，纯原生实现',
+        tech3_d:'主题切换动画与多主题令牌管理',
+        tech4_d:'静态托管，全球 CDN，自动部署',
+        s4_title:'联系我们',
+        s4_p1:'暂无联系方式。',
+        page_title_tag:'关于 · PixCrush',
+    },
+    en:{
+        nav_home:'Home', nav_about:'About', nav_privacy:'Privacy',
+        eyebrow:'About us', page_title:'ABOUT<br>PIXCRUSH',
+        page_lead:'PixCrush is a free, browser-only image tool — no server, no sign-up, no ad tracking. It does one thing well: compress and convert your images instantly.',
+        s1_title:'What is this',
+        s1_p1:"PixCrush is a pure frontend image processing tool. Drag in JPG, PNG, WebP, BMP or GIF files, choose your output format and quality, and download the result in seconds. Everything runs locally — no network requests are made.",
+        s1_p2:'The project is hosted on GitHub and served via Cloudflare Pages — global CDN, fast load times, and DDoS protection included.',
+        s2_title:'Features',
+        f1_t:'Local processing', f1_d:'Images never leave your device. All computation happens in the browser.',
+        f2_t:'Batch conversion', f2_d:'Drop multiple images at once, process them all, download in bulk.',
+        f3_t:'Multi-format output', f3_d:'Export as JPG, PNG, or WebP. Shows savings percentage per file.',
+        f4_t:'Max dimension', f4_d:'Set a max width and images are proportionally resized automatically.',
+        f5_t:'3 languages', f5_d:'Chinese, English, Japanese — auto-detected from your browser.',
+        f6_t:'Dark / light theme', f6_d:'Follows system preference or toggle manually. Saved locally.',
+        s3_title:'Tech stack',
+        tech1_d:'Core image decode, resize, and re-encode engine',
+        tech2_d:'Zero dependencies, no framework, pure vanilla',
+        tech3_d:'Theme transitions and multi-theme token system',
+        tech4_d:'Static hosting, global CDN, auto-deploy on push',
+        s4_title:'Contact',
+        s4_p1:'Contact information not available yet.',
+        page_title_tag:'About · PixCrush',
+    },
+    ja:{
+        nav_home:'ホーム', nav_about:'About', nav_privacy:'プライバシー',
+        eyebrow:'About us', page_title:'ABOUT<br>PIXCRUSH',
+        page_lead:'PixCrush は完全にブラウザ内で動作する無料の画像ツールです。サーバー不要、登録不要、広告トラッキングなし。画像の圧縮と変換に特化しています。',
+        s1_title:'これは何？',
+        s1_p1:'PixCrush は純粋なフロントエンドの画像処理ツールです。JPG・PNG・WebP・BMP・GIF をドロップし、出力形式と品質を選択して、すぐにダウンロードできます。すべての処理はローカルで完結し、ネットワーク通信は一切行われません。',
+        s1_p2:'プロジェクトは GitHub でホストされ、Cloudflare Pages を通じて配信されています。グローバル CDN と DDoS 保護が含まれています。',
+        s2_title:'機能',
+        f1_t:'ローカル処理', f1_d:'画像はサーバーに送られません。ブラウザ内で完結します。',
+        f2_t:'一括変換', f2_d:'複数の画像を一度にドロップして処理・ダウンロードできます。',
+        f3_t:'複数フォーマット', f3_d:'JPG・PNG・WebP に対応。ファイルごとに削減率を表示。',
+        f4_t:'最大サイズ設定', f4_d:'最大幅を設定すると自動で等比縮小されます。',
+        f5_t:'3言語対応', f5_d:'中国語・英語・日本語に対応。ブラウザ言語を自動検出。',
+        f6_t:'ダーク / ライトモード', f6_d:'システム設定に追従、または手動で切り替え可能。設定は保存されます。',
+        s3_title:'技術スタック',
+        tech1_d:'画像デコード・リサイズ・再エンコードのコアエンジン',
+        tech2_d:'依存ゼロ、フレームワークなし、純粋なバニラ JS',
+        tech3_d:'テーマ切替アニメーションとトークン管理',
+        tech4_d:'静的ホスティング、グローバル CDN、自動デプロイ',
+        s4_title:'お問い合わせ',
+        s4_p1:'現在、連絡先は準備中です。',
+        page_title_tag:'About · PixCrush',
+    }
+};
+
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function applyLang(l) {
+    lang = l; localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.title = t.page_title_tag;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k = el.dataset.i18n; if (t[k] != null) el.innerHTML = t[k]; });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+}
+function applyTheme(t) {
+    theme = t; localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark')
