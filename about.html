@@ -1,10 +1,26 @@
 <!DOCTYPE html>
-<html lang="zh" data-theme="dark">
+<html lang="zh">
 <head>
     <title>关于 · PixCrush</title>
     <meta charset="UTF-8">
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="了解 PixCrush — 免费、本地运行的图片压缩与格式转换工具。">
+    <meta name="description" content="了解 PixCrush — 免费、本地运行的在线图片压缩与格式转换工具，无服务器、无注册、无广告追踪，支持 JPG、PNG、WebP 批量处理。">
+    <link rel="canonical" href="https://quicktoolab.com/about.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoolab.com/about.html">
+    <meta property="og:title" content="关于 · PixCrush">
+    <meta property="og:description" content="了解 PixCrush — 免费、本地运行的在线图片压缩与格式转换工具。">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="关于 · PixCrush">
+    <meta name="twitter:description" content="了解 PixCrush — 免费、本地运行的在线图片压缩与格式转换工具。">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
