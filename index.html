@@ -162,6 +162,11 @@
         }
         .section-more:hover { text-decoration: underline; }
 
+        .tools-host { display: flex; flex-direction: column; gap: 28px; }
+        .tools-cat-title {
+            font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .1em;
+            color: var(--muted); margin: 0 0 12px; padding-left: 2px;
+        }
         .tools-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -351,7 +356,7 @@
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">在线工具</span></h2>
             <a class="section-more" href="#library" data-i18n="hint_below">向下浏览内容精选 →</a>
         </div>
-        <div class="tools-grid" id="tools-grid"></div>
+        <div class="tools-host" id="tools-host"></div>
     </section>
 
     <section class="section-block" id="slides">
@@ -393,6 +398,7 @@
         <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/compress.html">PixCrush</a>
             <a href="/about.html" data-i18n="nav_about">关于</a>
             <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
         </div>
@@ -443,58 +449,202 @@ const I18N = {
 
 const TOOLS = {
     zh: [
-        { href: '/compress.html', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
-        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
-        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON 格式化', tag: 'WEB' },
-        { href: 'https://www.diffchecker.com', icon: '⇄', title: '文本对比', tag: 'WEB' },
-        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw 白板', tag: 'WEB' },
-        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
-        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab 解释', tag: 'WEB' },
-        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID 生成', tag: 'WEB' },
-        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: '图片 Base64', tag: 'WEB' },
-        { href: 'https://svgomg.net', icon: '◇', title: 'SVG 压缩', tag: 'WEB' },
-        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite 查看', tag: 'WEB' },
-        { href: 'https://jwt.io', icon: '🔑', title: 'JWT 调试', tag: 'WEB' },
-        { href: 'https://nginxconfig.io', icon: 'N', title: 'Nginx 配置', tag: 'WEB' },
-        { href: 'https://transform.tools', icon: '⇄', title: 'CSS/HTML 转换', tag: 'WEB' },
-        { href: 'https://readme.so', icon: '📝', title: 'README 编辑器', tag: 'WEB' },
+        {
+            title: '本站 · 本地',
+            items: [
+                { href: '/compress.html', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
+            ],
+        },
+        {
+            title: '文本与数据格式',
+            items: [
+                { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+                { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON 格式化', tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '⇄', title: '文本对比', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown 编辑', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
+                { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID 生成', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'Unix 时间戳', tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef 编解码', tag: 'WEB' },
+            ],
+        },
+        {
+            title: '前端、设计与可视化',
+            items: [
+                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw 白板', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '◇', title: 'SVG 压缩', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML 转换', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon 代码图', tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon 生成', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS 渐变', tag: 'WEB' },
+                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind 文档', tag: 'WEB' },
+            ],
+        },
+        {
+            title: '在线编码与沙盒',
+            items: [
+                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+            ],
+        },
+        {
+            title: '运维、网络与调试',
+            items: [
+                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab 解释', tag: 'WEB' },
+                { href: 'https://nginxconfig.io', icon: 'N', title: 'Nginx 配置', tag: 'WEB' },
+                { href: 'https://explainshell.com', icon: '$', title: 'Explain Shell', tag: 'WEB' },
+                { href: 'https://httpbin.org', icon: 'http', title: 'httpbin 请求测试', tag: 'WEB' },
+                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 传播检测', tag: 'WEB' },
+                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS 查询', tag: 'WEB' },
+            ],
+        },
+        {
+            title: '数据库、安全与文档',
+            items: [
+                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite 查看', tag: 'WEB' },
+                { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '🔑', title: 'JWT 调试', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: '图片 Base64', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '📝', title: 'README 编辑器', tag: 'WEB' },
+                { href: 'https://shields.io', icon: '▬', title: 'Shields 徽章', tag: 'WEB' },
+            ],
+        },
     ],
     en: [
-        { href: '/compress.html', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
-        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
-        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON formatter', tag: 'WEB' },
-        { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff checker', tag: 'WEB' },
-        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
-        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
-        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab guru', tag: 'WEB' },
-        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
-        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Image → Base64', tag: 'WEB' },
-        { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
-        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite viewer', tag: 'WEB' },
-        { href: 'https://jwt.io', icon: '🔑', title: 'JWT.io', tag: 'WEB' },
-        { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx config', tag: 'WEB' },
-        { href: 'https://transform.tools', icon: '⇄', title: 'Transform', tag: 'WEB' },
-        { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+        {
+            title: 'On-site · local',
+            items: [
+                { href: '/compress.html', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
+            ],
+        },
+        {
+            title: 'Text & data formats',
+            items: [
+                { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+                { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON formatter', tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff checker', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
+                { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'Unix timestamp', tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'Front-end, design & UI',
+            items: [
+                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML tools', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon screenshots', tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon generator', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS gradients', tag: 'WEB' },
+                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind docs', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'Online IDEs & sandboxes',
+            items: [
+                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'DevOps, network & debug',
+            items: [
+                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab guru', tag: 'WEB' },
+                { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx config', tag: 'WEB' },
+                { href: 'https://explainshell.com', icon: '$', title: 'Explain shell', tag: 'WEB' },
+                { href: 'https://httpbin.org', icon: 'http', title: 'httpbin', tag: 'WEB' },
+                { href: 'https://dnschecker.org', icon: '@', title: 'DNS propagation', tag: 'WEB' },
+                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS lookup', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'DB, security & docs',
+            items: [
+                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite viewer', tag: 'WEB' },
+                { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '🔑', title: 'JWT.io', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Image → Base64', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+                { href: 'https://shields.io', icon: '▬', title: 'Shields.io badges', tag: 'WEB' },
+            ],
+        },
     ],
     ja: [
-        { href: '/compress.html', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
-        { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
-        { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON', tag: 'WEB' },
-        { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff', tag: 'WEB' },
-        { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
-        { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
-        { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-        { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab', tag: 'WEB' },
-        { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
-        { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Base64', tag: 'WEB' },
-        { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
-        { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite', tag: 'WEB' },
-        { href: 'https://jwt.io', icon: '🔑', title: 'JWT', tag: 'WEB' },
-        { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx', tag: 'WEB' },
-        { href: 'https://transform.tools', icon: '⇄', title: 'Transform', tag: 'WEB' },
-        { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+        {
+            title: '当サイト · ローカル',
+            items: [
+                { href: '/compress.html', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
+            ],
+        },
+        {
+            title: 'テキスト・データ形式',
+            items: [
+                { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
+                { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON', tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
+                { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'UNIX 時刻', tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'フロント・デザイン',
+            items: [
+                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon', tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS グラデ', tag: 'WEB' },
+                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind ドキュメント', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'IDE・サンドボックス',
+            items: [
+                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+            ],
+        },
+        {
+            title: '運用・ネットワーク',
+            items: [
+                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab', tag: 'WEB' },
+                { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx', tag: 'WEB' },
+                { href: 'https://explainshell.com', icon: '$', title: 'Explain shell', tag: 'WEB' },
+                { href: 'https://httpbin.org', icon: 'http', title: 'httpbin', tag: 'WEB' },
+                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 確認', tag: 'WEB' },
+                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS ルックアップ', tag: 'WEB' },
+            ],
+        },
+        {
+            title: 'DB・セキュリティ・文書',
+            items: [
+                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite', tag: 'WEB' },
+                { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '🔑', title: 'JWT', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Base64 画像', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
+                { href: 'https://shields.io', icon: '▬', title: 'Shields バッジ', tag: 'WEB' },
+            ],
+        },
     ],
 };
 
@@ -528,14 +678,20 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
 });
 
 function renderTools() {
-    const grid = document.getElementById('tools-grid');
-    const list = TOOLS[lang] || TOOLS.en;
-    grid.innerHTML = list.map(x => `
+    const host = document.getElementById('tools-host');
+    const cats = TOOLS[lang] || TOOLS.en;
+    host.innerHTML = cats.map(cat => `
+        <div class="tools-category">
+            <h3 class="tools-cat-title">${escapeHtml(cat.title)}</h3>
+            <div class="tools-grid">
+                ${cat.items.map(x => `
         <a class="tool-card" href="${x.href}" ${x.int ? '' : 'target="_blank" rel="noopener noreferrer"'}>
             <div class="ic">${escapeHtml(x.icon)}</div>
             <h3>${escapeHtml(x.title)}</h3>
             <span class="tag">${escapeHtml(x.tag)}</span>
-        </a>
+        </a>`).join('')}
+            </div>
+        </div>
     `).join('');
 }
 
