@@ -69,7 +69,7 @@
             pointer-events: none; z-index: 0;
         }
 
-        er {
+        header {
             position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid var(--border);
             background: color-mix(in srgb, var(--bg) 92%, transparent);
@@ -147,7 +147,7 @@
         .section-block { margin-bottom: 44px; animation: up .5s ease both; }
         .section-block:nth-child(2) { animation-delay: .04s; }
         .section-block:nth-child(3) { animation-delay: .08s; }
-        .section- {
+        .section-head {
             display: flex; align-items: center; justify-content: space-between; gap: 12px;
             margin-bottom: 16px; flex-wrap: wrap;
         }
@@ -307,7 +307,7 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
      crossorigin="anonymous"></script>
-   
+
 </head>
 <body>
 
@@ -326,6 +326,7 @@
             <a href="#slides" data-i18n="nav_slides">幻灯片</a>
             <a href="#opensource" data-i18n="nav_oss">开源类库</a>
             <a href="#software" data-i18n="nav_soft">软件推荐</a>
+            <a href="#friends" data-i18n="nav_friends">友情链接</a>
         </nav>
         <div class="nav-right">
             <div class="lang-sw">
@@ -395,6 +396,19 @@
         </div>
         <div class="soft-grid" id="soft-host"><div class="loading skeleton" style="height:100px;border-radius:14px;grid-column:1/-1;"></div></div>
     </section>
+
+    <section class="section-block" id="friends">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_friends">友情链接</span></h2>
+        </div>
+        <div class="tools-grid" style="max-width: 520px;">
+            <a class="tool-card" href="https://bcmgd.cn/" target="_blank" rel="noopener noreferrer">
+                <div class="ic">怪</div>
+                <h3>怪盗的博客</h3>
+                <span class="tag">bcmgd.cn</span>
+            </a>
+        </div>
+    </section>
 </main>
 
 <footer>
@@ -417,8 +431,8 @@ const I18N = {
         brand_sub: '综合在线工具站',
         hero_title: '一站式工具与内容精选',
         hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
-        nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐',
-        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐',
+        nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接',
+        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接',
         hint_below: '向下浏览内容精选 →', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
         loading: '加载中…', load_err: '加载失败，请检查网络或稍后重试。',
         retry: '重试',
@@ -429,8 +443,8 @@ const I18N = {
         brand_sub: 'All-in-one tool hub',
         hero_title: 'Tools & curated tech content',
         hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
-        nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software',
-        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks',
+        nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends',
+        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links',
         hint_below: 'Browse curated content ↓', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
         loading: 'Loading…', load_err: 'Could not load data. Check your network and try again.',
         retry: 'Retry',
@@ -441,8 +455,8 @@ const I18N = {
         brand_sub: '総合オンラインツール',
         hero_title: 'ツールと厳選コンテンツ',
         hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
-        nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト',
-        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介',
+        nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク',
+        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク',
         hint_below: 'コンテンツへ ↓', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
         loading: '読み込み中…', load_err: '読み込みに失敗しました。ネットワークを確認してください。',
         retry: '再試行',
