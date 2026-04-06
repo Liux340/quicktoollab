@@ -238,12 +238,18 @@ function escapeHtml(s) {
     return d.innerHTML;
 }
 
+function localizeField(v) {
+    if (v == null) return '';
+    if (typeof v === 'string') return v;
+    return v[lang] || v.zh || v.en || v.ja || '';
+}
+
 function renderArticleList() {
     const host = document.getElementById('help-list');
     host.innerHTML = ARTICLES.map((a) => `
         <a class="help-item" href="/help-article.html?id=${encodeURIComponent(a.id)}">
-            ${escapeHtml(a.title)}
-            <small>${escapeHtml(a.cat)}</small>
+            ${escapeHtml(localizeField(a.title))}
+            <small>${escapeHtml(localizeField(a.cat))}</small>
         </a>
     `).join('');
 }
@@ -259,6 +265,7 @@ function applyLang(l) {
         if (t[k] != null) el.innerHTML = t[k];
     });
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    renderArticleList();
 }
 function applyTheme(t) {
     theme = t;
