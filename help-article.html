@@ -77,6 +77,11 @@ let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-col
 
 function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
 function getId(){ return new URLSearchParams(location.search).get('id') || ''; }
+function localizeField(v){
+    if (v == null) return '';
+    if (typeof v === 'string') return v;
+    return v[lang] || v.zh || v.en || v.ja || '';
+}
 
 function renderArticle(){
     const t = I18N[lang];
@@ -88,14 +93,14 @@ function renderArticle(){
         host.innerHTML = '<div class="empty">' + esc(t.notfound) + '</div>';
         return;
     }
-    document.title = a.title + ' · QuickToolLab';
+    document.title = localizeField(a.title) + ' · QuickToolLab';
     host.innerHTML = `
-        <div class="cat">${esc(a.cat)}</div>
-        <h1>${esc(a.title)}</h1>
+        <div class="cat">${esc(localizeField(a.cat))}</div>
+        <h1>${esc(localizeField(a.title))}</h1>
         <div class="card">
-            <p class="line"><b>${esc(t.intro)}</b>${esc(a.intro)}</p>
-            <p class="line"><b>${esc(t.howto)}</b>${esc(a.howto)}</p>
-            <p class="line"><b>${esc(t.science)}</b>${esc(a.science)}</p>
+            <p class="line"><b>${esc(t.intro)}</b>${esc(localizeField(a.intro))}</p>
+            <p class="line"><b>${esc(t.howto)}</b>${esc(localizeField(a.howto))}</p>
+            <p class="line"><b>${esc(t.science)}</b>${esc(localizeField(a.science))}</p>
         </div>`;
 }
 
