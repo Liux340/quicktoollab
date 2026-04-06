@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>帮助文章 · QuickToolLab</title>
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
+    <style>
+        :root { --accent:#f97316; --accent2:#fb923c; --accentlo:rgba(249,115,22,.12); --teal:#14b8a6; }
+        [data-theme="dark"]  { --bg:#0a0a10; --surface:#111118; --surface2:#18181f; --border:#222230; --text:#ededf5; --muted:#5a5a72; }
+        [data-theme="light"] { --bg:#f2f2f7; --surface:#ffffff; --surface2:#e8e8f0; --border:#d8d8e8; --text:#16161f; --muted:#7a7a96; }
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{background:var(--bg);color:var(--text);font-family:'Segoe UI',Arial,sans-serif;line-height:1.7;min-height:100vh}
+        header{position:sticky;top:0;z-index:99;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px)}
+        .nav{max-width:1040px;margin:0 auto;padding:10px 20px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+        .left{display:flex;gap:8px;align-items:center}
+        .logo{text-decoration:none;color:var(--text);font-weight:700}
+        .link{font-size:13px;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px}
+        .link:hover{background:var(--surface2);color:var(--text)}
+        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px}
+        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer}
+        .lang-btn.active{background:var(--accent);color:#fff}
+        .theme-btn{margin-left:6px;width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer}
+
+        main{max-width:860px;margin:0 auto;padding:34px 20px 90px}
+        .crumb{font-size:12px;color:var(--muted);margin-bottom:16px}
+        .crumb a{color:var(--muted);text-decoration:none}
+        .crumb a:hover{color:var(--text)}
+        .cat{display:inline-block;margin-bottom:10px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2)}
+        h1{font-size:32px;line-height:1.3;margin-bottom:20px}
+        .card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px}
+        .line{font-size:15px;color:var(--muted);margin-bottom:12px}
+        .line b{color:var(--accent2)}
+        .empty{padding:18px;border:1px solid var(--border);background:var(--surface);border-radius:12px;color:var(--muted)}
+    </style>
+</head>
+<body>
+<header>
+    <div class="nav">
+        <div class="left">
+            <a class="logo" href="/">QuickToolLab</a>
+            <a class="link" href="/help.html" data-i18n="back">返回帮助中心</a>
+        </div>
+        <div style="display:flex;align-items:center">
+            <div class="lang-sw">
+                <button type="button" class="lang-btn" data-lang="zh">中文</button>
+                <button type="button" class="lang-btn" data-lang="en">EN</button>
+                <button type="button" class="lang-btn" data-lang="ja">日本語</button>
+            </div>
+            <button type="button" class="theme-btn" id="theme-btn" aria-label="Theme">◐</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <div class="crumb"><a href="/">首页</a> / <a href="/help.html" data-i18n="help">帮助中心</a> / <span data-i18n="article">文章</span></div>
+    <div id="article-host"></div>
+</main>
+
+<script src="/help-articles.js"></script>
+<script>
+const I18N = {
+    zh:{ back:'返回帮助中心', help:'帮助中心', article:'文章', intro:'介绍：', howto:'用法：', science:'科普：', notfound:'没有找到该文章，请返回帮助中心重新选择。', page_title:'帮助文章 · QuickToolLab' },
+    en:{ back:'Back to Help', help:'Help', article:'Article', intro:'Intro: ', howto:'How to use: ', science:'Concept: ', notfound:'Article not found. Please go back to the help center.', page_title:'Help Article · QuickToolLab' },
+    ja:{ back:'ヘルプへ戻る', help:'ヘルプ', article:'記事', intro:'紹介：', howto:'使い方：', science:'豆知識：', notfound:'記事が見つかりません。ヘルプセンターから選び直してください。', page_title:'ヘルプ記事 · QuickToolLab' }
+};
+const ARTICLES = window.HELP_ARTICLES || [];
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+function esc(s){ const d=document.createElement('div'); d.textContent=s||''; return d.innerHTML; }
+function getId(){ return new URLSearchParams(location.search).get('id') || ''; }
+
+function renderArticle(){
+    const t = I18N[lang];
+    const id = getId();
+    const a = ARTICLES.find(x => x.id === id);
+    const host = document.getElementById('article-host');
+    document.title = t.page_title;
+    if (!a) {
+        host.innerHTML = '<div class="empty">' + esc(t.notfound) + '</div>';
+        return;
+    }
+    document.title = a.title + ' · QuickToolLab';
+    host.innerHTML = `
+        <div class="cat">${esc(a.cat)}</div>
+        <h1>${esc(a.title)}</h1>
+        <div class="card">
+            <p class="line"><b>${esc(t.intro)}</b>${esc(a.intro)}</p>
+            <p class="line"><b>${esc(t.howto)}</b>${esc(a.howto)}</p>
+            <p class="line"><b>${esc(t.science)}</b>${esc(a.science)}</p>
+        </div>`;
+}
+
+function applyLang(l){
+    lang = l;
+    localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.dataset.i18n;
+        if (t[k] != null) el.textContent = t[k];
+    });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    renderArticle();
+}
+function applyTheme(t){
+    theme = t;
+    localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+applyTheme(theme);
+applyLang(lang);
+</script>
+</body>
+</html>
