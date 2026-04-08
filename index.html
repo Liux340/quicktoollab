@@ -275,6 +275,30 @@
             padding: 28px; text-align: center; color: var(--muted); font-size: 13px;
         }
         .error-box { color: #f87171; }
+        .comment-wrap {
+            background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
+        }
+        .comment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .comment-input, .comment-text {
+            width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
+            border-radius: 10px; padding: 10px 12px; font: inherit;
+        }
+        .comment-text { min-height: 120px; resize: vertical; margin-top: 10px; }
+        .comment-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
+        .captcha-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+        .captcha-q { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
+        .comment-btn {
+            margin-top: 10px; border: none; background: var(--accent); color: #fff; font-weight: 700; border-radius: 10px;
+            padding: 10px 16px; cursor: pointer; font-family: inherit;
+        }
+        .comment-msg { font-size: 12px; min-height: 16px; margin-top: 6px; }
+        .comment-msg.ok { color: #22c55e; }
+        .comment-msg.err { color: #f87171; }
+        .comment-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
+        .comment-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+        .comment-meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+        .comment-meta a { color: var(--accent2); text-decoration: none; }
+        @media (max-width: 760px) { .comment-row { grid-template-columns: 1fr; } }
         .retry-btn {
             margin-top: 10px; padding: 8px 16px; border-radius: 8px;
             border: 1px solid var(--border); background: var(--surface2);
@@ -406,6 +430,31 @@
             <div class="loading" style="grid-column:1/-1;" data-i18n="friends_empty">暂未添加友情链接</div>
         </div>
     </section>
+
+    <section class="section-block" id="comments">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_comments">发表评论</span></h2>
+        </div>
+        <div class="comment-wrap">
+            <div class="comment-row">
+                <input id="hc-name" class="comment-input" data-i18n-placeholder="ph_name" placeholder="昵称（必填）">
+                <input id="hc-email" class="comment-input" data-i18n-placeholder="ph_email" placeholder="邮箱（选填）">
+            </div>
+            <div style="margin-top:10px;">
+                <input id="hc-site" class="comment-input" data-i18n-placeholder="ph_site" placeholder="网站（选填）">
+                <div class="comment-hint" data-i18n="site_hint">网站用于申请友情链接。</div>
+            </div>
+            <textarea id="hc-text" class="comment-text" data-i18n-placeholder="ph_text" placeholder="写下你的想法..."></textarea>
+            <div class="captcha-line">
+                <div class="captcha-q" id="hc-captcha-q"></div>
+                <input id="hc-captcha-a" class="comment-input" style="max-width:170px;" data-i18n-placeholder="ph_captcha" placeholder="输入结果">
+                <button id="hc-captcha-refresh" class="retry-btn" type="button" data-i18n="captcha_refresh">换一题</button>
+            </div>
+            <button id="hc-submit" class="comment-btn" type="button" data-i18n="submit_comment">发布评论</button>
+            <div id="hc-msg" class="comment-msg"></div>
+            <div id="hc-list" class="comment-list"></div>
+        </div>
+    </section>
 </main>
 
 <footer>
@@ -430,9 +479,12 @@ const I18N = {
         hero_title: '一站式工具与内容精选',
         hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
         nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接', nav_help: '帮助中心',
-        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接',
+        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接', sec_comments: '发表评论',
         hint_below: '向下浏览内容精选 →', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
         loading: '加载中…', load_err: '加载失败，请检查网络或稍后重试。', friends_empty: '暂未添加友情链接',
+        ph_name: '昵称（必填）', ph_email: '邮箱（选填）', ph_site: '网站（选填）', ph_text: '写下你的想法...', ph_captcha: '输入结果',
+        site_hint: '网站用于申请友情链接。', captcha_refresh: '换一题', submit_comment: '发布评论', comment_no_comments: '还没有评论，来发表第一条吧。',
+        req_name: '请填写昵称', req_text: '请填写评论内容', req_captcha: '人机验证未通过', comment_ok: '评论发布成功（本地保存）', captcha_q: '人机验证',
         retry: '重试',
         nav_home: '首页', nav_about: '关于', nav_privacy: '隐私政策',
         page_title: 'QuickToolLab · 综合在线工具站',
@@ -442,9 +494,12 @@ const I18N = {
         hero_title: 'Tools & curated tech content',
         hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
         nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends', nav_help: 'Help',
-        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links',
+        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links', sec_comments: 'Comments',
         hint_below: 'Browse curated content ↓', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
         loading: 'Loading…', load_err: 'Could not load data. Check your network and try again.', friends_empty: 'No friend links yet.',
+        ph_name: 'Nickname (required)', ph_email: 'Email (optional)', ph_site: 'Website (optional)', ph_text: 'Share your thoughts...', ph_captcha: 'Enter result',
+        site_hint: 'Website is used for friend-link application.', captcha_refresh: 'New challenge', submit_comment: 'Submit comment', comment_no_comments: 'No comments yet. Be the first one.',
+        req_name: 'Nickname is required', req_text: 'Comment content is required', req_captcha: 'Human verification failed', comment_ok: 'Comment submitted (saved locally)', captcha_q: 'Human check',
         retry: 'Retry',
         nav_home: 'Home', nav_about: 'About', nav_privacy: 'Privacy',
         page_title: 'QuickToolLab · Developer tool hub',
@@ -454,9 +509,12 @@ const I18N = {
         hero_title: 'ツールと厳選コンテンツ',
         hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
         nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク', nav_help: 'ヘルプ',
-        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク',
+        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク', sec_comments: 'コメント',
         hint_below: 'コンテンツへ ↓', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
         loading: '読み込み中…', load_err: '読み込みに失敗しました。ネットワークを確認してください。', friends_empty: '相互リンクはまだありません。',
+        ph_name: 'ニックネーム（必須）', ph_email: 'メール（任意）', ph_site: 'サイト（任意）', ph_text: 'コメントを入力してください...', ph_captcha: '答えを入力',
+        site_hint: 'サイト欄は相互リンク申請に利用できます。', captcha_refresh: '問題を更新', submit_comment: 'コメント投稿', comment_no_comments: 'まだコメントはありません。',
+        req_name: 'ニックネームを入力してください', req_text: 'コメント内容を入力してください', req_captcha: '人間認証に失敗しました', comment_ok: '投稿しました（ローカル保存）', captcha_q: '人間認証',
         retry: '再試行',
         nav_home: 'ホーム', nav_about: 'About', nav_privacy: 'プライバシー',
         page_title: 'QuickToolLab · 総合ツールサイト',
@@ -676,9 +734,15 @@ function applyLang(l) {
         const k = el.dataset.i18n;
         if (t[k] != null) el.textContent = t[k];
     });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+        const k = el.dataset.i18nPlaceholder;
+        if (t[k] != null) el.setAttribute('placeholder', t[k]);
+    });
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
     renderTools();
     loadDynamicContent();
+    buildHomeCaptcha();
+    renderHomeComments();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 
@@ -846,8 +910,76 @@ function langColor(name) {
     return map[name] || '#8b949e';
 }
 
+let homeCaptchaExpected = 0;
+function getHomeCommentsStore() {
+    try { return JSON.parse(localStorage.getItem('qtl_home_comments_v1') || '[]'); }
+    catch (_) { return []; }
+}
+function setHomeCommentsStore(v) { localStorage.setItem('qtl_home_comments_v1', JSON.stringify(v)); }
+function buildHomeCaptcha() {
+    const q = document.getElementById('hc-captcha-q');
+    if (!q) return;
+    const a = Math.floor(Math.random() * 9) + 1;
+    const b = Math.floor(Math.random() * 9) + 1;
+    homeCaptchaExpected = a + b;
+    q.textContent = (I18N[lang].captcha_q || 'Human check') + ': ' + a + ' + ' + b + ' = ?';
+    const ans = document.getElementById('hc-captcha-a');
+    if (ans) ans.value = '';
+}
+function setHomeCommentMsg(text, ok) {
+    const el = document.getElementById('hc-msg');
+    if (!el) return;
+    el.className = 'comment-msg ' + (ok ? 'ok' : 'err');
+    el.textContent = text || '';
+}
+function renderHomeComments() {
+    const host = document.getElementById('hc-list');
+    if (!host) return;
+    const t = I18N[lang];
+    const items = getHomeCommentsStore().slice().reverse();
+    if (!items.length) {
+        host.innerHTML = `<div class="loading" style="padding:12px;" data-i18n="comment_no_comments">${escapeHtml(t.comment_no_comments)}</div>`;
+        return;
+    }
+    host.innerHTML = items.map(x => {
+        const sub = [];
+        if (x.email) sub.push(escapeHtml(x.email));
+        if (x.site) sub.push(`<a href="${escapeHtml(x.site)}" target="_blank" rel="noopener noreferrer">${escapeHtml(x.site)}</a>`);
+        return `<div class="comment-item">
+            <div class="comment-meta">${escapeHtml(x.name)} · ${escapeHtml(x.time)}${sub.length ? ' · ' + sub.join(' · ') : ''}</div>
+            <div>${escapeHtml(x.text)}</div>
+        </div>`;
+    }).join('');
+}
+function submitHomeComment() {
+    const t = I18N[lang];
+    const name = (document.getElementById('hc-name') || {}).value?.trim() || '';
+    const email = (document.getElementById('hc-email') || {}).value?.trim() || '';
+    const site = (document.getElementById('hc-site') || {}).value?.trim() || '';
+    const text = (document.getElementById('hc-text') || {}).value?.trim() || '';
+    const ans = Number((document.getElementById('hc-captcha-a') || {}).value?.trim() || NaN);
+    if (!name) return setHomeCommentMsg(t.req_name, false);
+    if (!text) return setHomeCommentMsg(t.req_text, false);
+    if (ans !== homeCaptchaExpected) {
+        buildHomeCaptcha();
+        return setHomeCommentMsg(t.req_captcha, false);
+    }
+    const all = getHomeCommentsStore();
+    all.push({ name, email, site, text, time: new Date().toLocaleString() });
+    setHomeCommentsStore(all);
+    document.getElementById('hc-text').value = '';
+    document.getElementById('hc-captcha-a').value = '';
+    buildHomeCaptcha();
+    renderHomeComments();
+    setHomeCommentMsg(t.comment_ok, true);
+}
+
 applyTheme(theme);
 applyLang(lang);
+document.getElementById('hc-captcha-refresh')?.addEventListener('click', buildHomeCaptcha);
+document.getElementById('hc-submit')?.addEventListener('click', submitHomeComment);
+buildHomeCaptcha();
+renderHomeComments();
 </script>
 </body>
 </html>
