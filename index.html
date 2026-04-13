@@ -275,36 +275,7 @@
             padding: 28px; text-align: center; color: var(--muted); font-size: 13px;
         }
         .error-box { color: #f87171; }
-        .comment-wrap {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
-        }
-        .comment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .comment-input, .comment-text {
-            width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
-            border-radius: 10px; padding: 10px 12px; font: inherit;
-        }
-        .comment-text { min-height: 120px; resize: vertical; margin-top: 10px; }
-        .comment-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-        .captcha-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-        .captcha-q { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
-        .comment-btn {
-            margin-top: 10px; border: none; background: var(--accent); color: #fff; font-weight: 700; border-radius: 10px;
-            padding: 10px 16px; cursor: pointer; font-family: inherit;
-        }
-        .comment-msg { font-size: 12px; min-height: 16px; margin-top: 6px; }
-        .comment-msg.ok { color: #22c55e; }
-        .comment-msg.err { color: #f87171; }
-        .comment-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .comment-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
-        .comment-meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-        .comment-meta a { color: var(--accent2); text-decoration: none; }
-        @media (max-width: 760px) { .comment-row { grid-template-columns: 1fr; } }
-        .retry-btn {
-            margin-top: 10px; padding: 8px 16px; border-radius: 8px;
-            border: 1px solid var(--border); background: var(--surface2);
-            color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit;
-        }
-        .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
+        
 
         .skeleton {
             background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
@@ -331,10 +302,33 @@
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
      crossorigin="anonymous"></script>
-    
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
-     crossorigin="anonymous"></script>
-    
+
+    <!-- Waline 评论系统 -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+        window.__walineInit = function(locale) {
+            if (window.__walineInstance) { window.__walineInstance.destroy(); }
+            window.__walineInstance = init({
+                el: '#waline-comment',
+                serverURL: 'https://comment.quicktoollab.top',
+                lang: locale || document.documentElement.lang || 'zh-CN',
+                dark: 'auto',
+                comment: true,
+                pageview: true,
+                emoji: ['https://unpkg.com/@waline/emojis@1.2.0/weibo'],
+                locale: {
+                    placeholder: '欢迎留言，支持 Markdown 格式 ✦',
+                },
+            });
+        };
+        // 等 DOM 就绪后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => window.__walineInit());
+        } else {
+            window.__walineInit();
+        }
+    </script>
 </head>
 <body>
 
@@ -438,25 +432,7 @@
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_comments">发表评论</span></h2>
         </div>
-        <div class="comment-wrap">
-            <div class="comment-row">
-                <input id="hc-name" class="comment-input" data-i18n-placeholder="ph_name" placeholder="昵称（必填）">
-                <input id="hc-email" class="comment-input" data-i18n-placeholder="ph_email" placeholder="邮箱（选填）">
-            </div>
-            <div style="margin-top:10px;">
-                <input id="hc-site" class="comment-input" data-i18n-placeholder="ph_site" placeholder="网站（选填）">
-                <div class="comment-hint" data-i18n="site_hint">网站用于申请友情链接。</div>
-            </div>
-            <textarea id="hc-text" class="comment-text" data-i18n-placeholder="ph_text" placeholder="写下你的想法..."></textarea>
-            <div class="captcha-line">
-                <div class="captcha-q" id="hc-captcha-q"></div>
-                <input id="hc-captcha-a" class="comment-input" style="max-width:170px;" data-i18n-placeholder="ph_captcha" placeholder="输入结果">
-                <button id="hc-captcha-refresh" class="retry-btn" type="button" data-i18n="captcha_refresh">换一题</button>
-            </div>
-            <button id="hc-submit" class="comment-btn" type="button" data-i18n="submit_comment">发布评论</button>
-            <div id="hc-msg" class="comment-msg"></div>
-            <div id="hc-list" class="comment-list"></div>
-        </div>
+        <div id="waline-comment"></div>
     </section>
 </main>
 
@@ -744,8 +720,6 @@ function applyLang(l) {
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
     renderTools();
     loadDynamicContent();
-    buildHomeCaptcha();
-    renderHomeComments();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 
@@ -913,76 +887,12 @@ function langColor(name) {
     return map[name] || '#8b949e';
 }
 
-let homeCaptchaExpected = 0;
-function getHomeCommentsStore() {
-    try { return JSON.parse(localStorage.getItem('qtl_home_comments_v1') || '[]'); }
-    catch (_) { return []; }
-}
-function setHomeCommentsStore(v) { localStorage.setItem('qtl_home_comments_v1', JSON.stringify(v)); }
-function buildHomeCaptcha() {
-    const q = document.getElementById('hc-captcha-q');
-    if (!q) return;
-    const a = Math.floor(Math.random() * 9) + 1;
-    const b = Math.floor(Math.random() * 9) + 1;
-    homeCaptchaExpected = a + b;
-    q.textContent = (I18N[lang].captcha_q || 'Human check') + ': ' + a + ' + ' + b + ' = ?';
-    const ans = document.getElementById('hc-captcha-a');
-    if (ans) ans.value = '';
-}
-function setHomeCommentMsg(text, ok) {
-    const el = document.getElementById('hc-msg');
-    if (!el) return;
-    el.className = 'comment-msg ' + (ok ? 'ok' : 'err');
-    el.textContent = text || '';
-}
-function renderHomeComments() {
-    const host = document.getElementById('hc-list');
-    if (!host) return;
-    const t = I18N[lang];
-    const items = getHomeCommentsStore().slice().reverse();
-    if (!items.length) {
-        host.innerHTML = `<div class="loading" style="padding:12px;" data-i18n="comment_no_comments">${escapeHtml(t.comment_no_comments)}</div>`;
-        return;
-    }
-    host.innerHTML = items.map(x => {
-        const sub = [];
-        if (x.email) sub.push(escapeHtml(x.email));
-        if (x.site) sub.push(`<a href="${escapeHtml(x.site)}" target="_blank" rel="noopener noreferrer">${escapeHtml(x.site)}</a>`);
-        return `<div class="comment-item">
-            <div class="comment-meta">${escapeHtml(x.name)} · ${escapeHtml(x.time)}${sub.length ? ' · ' + sub.join(' · ') : ''}</div>
-            <div>${escapeHtml(x.text)}</div>
-        </div>`;
-    }).join('');
-}
-function submitHomeComment() {
-    const t = I18N[lang];
-    const name = (document.getElementById('hc-name') || {}).value?.trim() || '';
-    const email = (document.getElementById('hc-email') || {}).value?.trim() || '';
-    const site = (document.getElementById('hc-site') || {}).value?.trim() || '';
-    const text = (document.getElementById('hc-text') || {}).value?.trim() || '';
-    const ans = Number((document.getElementById('hc-captcha-a') || {}).value?.trim() || NaN);
-    if (!name) return setHomeCommentMsg(t.req_name, false);
-    if (!text) return setHomeCommentMsg(t.req_text, false);
-    if (ans !== homeCaptchaExpected) {
-        buildHomeCaptcha();
-        return setHomeCommentMsg(t.req_captcha, false);
-    }
-    const all = getHomeCommentsStore();
-    all.push({ name, email, site, text, time: new Date().toLocaleString() });
-    setHomeCommentsStore(all);
-    document.getElementById('hc-text').value = '';
-    document.getElementById('hc-captcha-a').value = '';
-    buildHomeCaptcha();
-    renderHomeComments();
     setHomeCommentMsg(t.comment_ok, true);
 }
 
 applyTheme(theme);
 applyLang(lang);
-document.getElementById('hc-captcha-refresh')?.addEventListener('click', buildHomeCaptcha);
-document.getElementById('hc-submit')?.addEventListener('click', submitHomeComment);
-buildHomeCaptcha();
-renderHomeComments();
+
 </script>
 </body>
 </html>
