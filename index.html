@@ -275,36 +275,7 @@
             padding: 28px; text-align: center; color: var(--muted); font-size: 13px;
         }
         .error-box { color: #f87171; }
-        .comment-wrap {
-            background: var(--surface); border: 1px solid var(--border); border-radius: 14px; padding: 16px;
-        }
-        .comment-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-        .comment-input, .comment-text {
-            width: 100%; background: var(--surface2); border: 1px solid var(--border); color: var(--text);
-            border-radius: 10px; padding: 10px 12px; font: inherit;
-        }
-        .comment-text { min-height: 120px; resize: vertical; margin-top: 10px; }
-        .comment-hint { font-size: 12px; color: var(--muted); margin-top: 6px; }
-        .captcha-line { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-        .captcha-q { background: var(--surface2); border: 1px solid var(--border); border-radius: 8px; padding: 8px 10px; font-size: 12px; color: var(--muted); }
-        .comment-btn {
-            margin-top: 10px; border: none; background: var(--accent); color: #fff; font-weight: 700; border-radius: 10px;
-            padding: 10px 16px; cursor: pointer; font-family: inherit;
-        }
-        .comment-msg { font-size: 12px; min-height: 16px; margin-top: 6px; }
-        .comment-msg.ok { color: #22c55e; }
-        .comment-msg.err { color: #f87171; }
-        .comment-list { margin-top: 12px; display: flex; flex-direction: column; gap: 8px; }
-        .comment-item { background: var(--surface2); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
-        .comment-meta { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
-        .comment-meta a { color: var(--accent2); text-decoration: none; }
-        @media (max-width: 760px) { .comment-row { grid-template-columns: 1fr; } }
-        .retry-btn {
-            margin-top: 10px; padding: 8px 16px; border-radius: 8px;
-            border: 1px solid var(--border); background: var(--surface2);
-            color: var(--text); font-size: 12px; font-weight: 600; cursor: pointer; font-family: inherit;
-        }
-        .retry-btn:hover { border-color: var(--accent); color: var(--accent); }
+        
 
         .skeleton {
             background: linear-gradient(90deg, var(--surface2) 25%, var(--border) 50%, var(--surface2) 75%);
@@ -332,30 +303,32 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
      crossorigin="anonymous"></script>
 
-    <!-- Waline -->
+    <!-- Waline 评论系统 -->
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
-    <style>
-        /* Waline 主题适配 */
-        #waline-comment { --waline-font-size:14px; --waline-border-radius:10px; }
-        [data-theme="dark"] #waline-comment {
-            --waline-color:var(--text);
-            --waline-bgcolor:var(--surface);
-            --waline-bgcolor-light:var(--surface2);
-            --waline-bgcolor-hover:var(--surface2);
-            --waline-border-color:var(--border);
-            --waline-disable-bgcolor:var(--bg);
-            --waline-code-bgcolor:var(--bg);
-            --waline-info-bgcolor:var(--surface2);
-            --waline-info-color:var(--muted);
+    <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+        window.__walineInit = function(locale) {
+            if (window.__walineInstance) { window.__walineInstance.destroy(); }
+            window.__walineInstance = init({
+                el: '#waline-comment',
+                serverURL: 'https://comment.quicktoollab.top',
+                lang: locale || document.documentElement.lang || 'zh-CN',
+                dark: 'auto',
+                comment: true,
+                pageview: true,
+                emoji: ['https://unpkg.com/@waline/emojis@1.2.0/weibo'],
+                locale: {
+                    placeholder: '欢迎留言，支持 Markdown 格式 ✦',
+                },
+            });
+        };
+        // 等 DOM 就绪后初始化
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => window.__walineInit());
+        } else {
+            window.__walineInit();
         }
-        [data-theme="light"] #waline-comment {
-            --waline-color:var(--text);
-            --waline-bgcolor:var(--surface);
-            --waline-bgcolor-light:var(--surface2);
-            --waline-bgcolor-hover:var(--surface2);
-            --waline-border-color:var(--border);
-        }
-    </style>
+    </script>
 </head>
 <body>
 
@@ -747,8 +720,6 @@ function applyLang(l) {
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
     renderTools();
     loadDynamicContent();
-    buildHomeCaptcha();
-    renderHomeComments();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 
@@ -916,25 +887,9 @@ function langColor(name) {
     return map[name] || '#8b949e';
 }
 
-// ── Waline 评论 ────────────────────────────────────────────────────────
-function initWaline(locale) {
-    if (window.__walineInstance) window.__walineInstance.destroy();
-    import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
-        window.__walineInstance = init({
-            el: '#waline-comment',
-            serverURL: 'https://comment.quicktoollab.top',
-            lang: locale || (lang === 'zh' ? 'zh-CN' : lang === 'ja' ? 'ja' : 'en'),
-            dark: 'auto',
-            comment: true,
-            pageview: true,
-            emoji: ['https://unpkg.com/@waline/emojis@1.2.0/weibo'],
-        });
-    });
-}
-
 applyTheme(theme);
 applyLang(lang);
-initWaline();
+
 </script>
 </body>
 </html>
