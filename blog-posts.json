@@ -1,0 +1,98 @@
+[
+  {
+    "id": "astro-blog-intro",
+    "slug": "astro-blog-intro",
+    "date": "2026-04-16",
+    "readTime": "6 min",
+    "cover": "linear-gradient(135deg, rgba(249,115,22,.24), rgba(20,184,166,.18))",
+    "category": {
+      "zh": "Blog Setup",
+      "en": "Blog Setup",
+      "ja": "Blog Setup"
+    },
+    "tags": {
+      "zh": ["Astro", "Static Blog", "SEO"],
+      "en": ["Astro", "Static Blog", "SEO"],
+      "ja": ["Astro", "Static Blog", "SEO"]
+    },
+    "title": {
+      "zh": "How the Astro template was adapted for QuickToolLab",
+      "en": "How the Astro template was adapted for QuickToolLab",
+      "ja": "How the Astro template was adapted for QuickToolLab"
+    },
+    "excerpt": {
+      "zh": "This article explains how the Astro-inspired layout was translated into the current static QuickToolLab site without rebuilding the whole project.",
+      "en": "This article explains how the Astro-inspired layout was translated into the current static QuickToolLab site without rebuilding the whole project.",
+      "ja": "This article explains how the Astro-inspired layout was translated into the current static QuickToolLab site without rebuilding the whole project."
+    },
+    "contentHtml": {
+      "zh": "<p>QuickToolLab keeps its existing static pages, but the blog now borrows the strongest ideas from the Astro template: a polished list page, article detail pages, and a reusable content layer.</p><h2>Why this approach works</h2><p>A full framework migration would change routing, deployment, assets, and SEO conventions at the same time. The lighter path is to move over the useful content structure and keep the stable parts of the site intact.</p><h2>What changed</h2><ul><li>A dedicated blog homepage with stronger visual hierarchy.</li><li>Article detail pages with per-post metadata and comments.</li><li>A data layer that can be edited as JSON or through a browser panel.</li></ul><blockquote>The goal is not to copy the Astro app one-to-one. The goal is to keep QuickToolLab simple while making the blog feel like a real publishing surface.</blockquote>",
+      "en": "<p>QuickToolLab keeps its existing static pages, but the blog now borrows the strongest ideas from the Astro template: a polished list page, article detail pages, and a reusable content layer.</p><h2>Why this approach works</h2><p>A full framework migration would change routing, deployment, assets, and SEO conventions at the same time. The lighter path is to move over the useful content structure and keep the stable parts of the site intact.</p><h2>What changed</h2><ul><li>A dedicated blog homepage with stronger visual hierarchy.</li><li>Article detail pages with per-post metadata and comments.</li><li>A data layer that can be edited as JSON or through a browser panel.</li></ul><blockquote>The goal is not to copy the Astro app one-to-one. The goal is to keep QuickToolLab simple while making the blog feel like a real publishing surface.</blockquote>",
+      "ja": "<p>QuickToolLab keeps its existing static pages, but the blog now borrows the strongest ideas from the Astro template: a polished list page, article detail pages, and a reusable content layer.</p><h2>Why this approach works</h2><p>A full framework migration would change routing, deployment, assets, and SEO conventions at the same time. The lighter path is to move over the useful content structure and keep the stable parts of the site intact.</p><h2>What changed</h2><ul><li>A dedicated blog homepage with stronger visual hierarchy.</li><li>Article detail pages with per-post metadata and comments.</li><li>A data layer that can be edited as JSON or through a browser panel.</li></ul><blockquote>The goal is not to copy the Astro app one-to-one. The goal is to keep QuickToolLab simple while making the blog feel like a real publishing surface.</blockquote>"
+    }
+  },
+  {
+    "id": "content-management-workflow",
+    "slug": "content-management-workflow",
+    "date": "2026-04-16",
+    "readTime": "5 min",
+    "cover": "linear-gradient(135deg, rgba(34,197,94,.18), rgba(59,130,246,.18))",
+    "category": {
+      "zh": "Content Workflow",
+      "en": "Content Workflow",
+      "ja": "Content Workflow"
+    },
+    "tags": {
+      "zh": ["JSON", "Admin Panel", "Workflow"],
+      "en": ["JSON", "Admin Panel", "Workflow"],
+      "ja": ["JSON", "Admin Panel", "Workflow"]
+    },
+    "title": {
+      "zh": "Using JSON plus a browser admin panel for post updates",
+      "en": "Using JSON plus a browser admin panel for post updates",
+      "ja": "Using JSON plus a browser admin panel for post updates"
+    },
+    "excerpt": {
+      "zh": "The blog now uses a JSON source of truth with a local browser editor for creating, editing, deleting, importing, and exporting posts.",
+      "en": "The blog now uses a JSON source of truth with a local browser editor for creating, editing, deleting, importing, and exporting posts.",
+      "ja": "The blog now uses a JSON source of truth with a local browser editor for creating, editing, deleting, importing, and exporting posts."
+    },
+    "contentHtml": {
+      "zh": "<p>The new workflow is friendly for static hosting. Default posts live in <code>blog-posts.json</code>, while the browser panel stores edits in <code>localStorage</code> for fast experimentation.</p><h2>What the panel can do</h2><ul><li>Create a new post with ID, slug, metadata, and article HTML.</li><li>Edit existing content and save it instantly in the browser.</li><li>Delete test posts without touching source files.</li><li>Export the current collection back to JSON when you are ready to publish.</li></ul><p>This gives you a low-friction editorial loop now, and it leaves room to connect a real API later if you want to go further.</p>",
+      "en": "<p>The new workflow is friendly for static hosting. Default posts live in <code>blog-posts.json</code>, while the browser panel stores edits in <code>localStorage</code> for fast experimentation.</p><h2>What the panel can do</h2><ul><li>Create a new post with ID, slug, metadata, and article HTML.</li><li>Edit existing content and save it instantly in the browser.</li><li>Delete test posts without touching source files.</li><li>Export the current collection back to JSON when you are ready to publish.</li></ul><p>This gives you a low-friction editorial loop now, and it leaves room to connect a real API later if you want to go further.</p>",
+      "ja": "<p>The new workflow is friendly for static hosting. Default posts live in <code>blog-posts.json</code>, while the browser panel stores edits in <code>localStorage</code> for fast experimentation.</p><h2>What the panel can do</h2><ul><li>Create a new post with ID, slug, metadata, and article HTML.</li><li>Edit existing content and save it instantly in the browser.</li><li>Delete test posts without touching source files.</li><li>Export the current collection back to JSON when you are ready to publish.</li></ul><p>This gives you a low-friction editorial loop now, and it leaves room to connect a real API later if you want to go further.</p>"
+    }
+  },
+  {
+    "id": "theme-mode-music-notes",
+    "slug": "theme-mode-music-notes",
+    "date": "2026-04-16",
+    "readTime": "4 min",
+    "cover": "linear-gradient(135deg, rgba(168,85,247,.18), rgba(249,115,22,.18))",
+    "category": {
+      "zh": "Experience",
+      "en": "Experience",
+      "ja": "Experience"
+    },
+    "tags": {
+      "zh": ["Theme", "Mode Switch", "Music"],
+      "en": ["Theme", "Mode Switch", "Music"],
+      "ja": ["Theme", "Mode Switch", "Music"]
+    },
+    "title": {
+      "zh": "Where theme switching, reading modes, and music fit best",
+      "en": "Where theme switching, reading modes, and music fit best",
+      "ja": "Where theme switching, reading modes, and music fit best"
+    },
+    "excerpt": {
+      "zh": "Interactive features can make the blog more memorable, but they work best when they support reading rather than interrupt it.",
+      "en": "Interactive features can make the blog more memorable, but they work best when they support reading rather than interrupt it.",
+      "ja": "Interactive features can make the blog more memorable, but they work best when they support reading rather than interrupt it."
+    },
+    "contentHtml": {
+      "zh": "<p>Theme switching belongs at the foundation of the reading experience. Layout or reading modes can come next. Music is the most optional feature and should stay lightweight and easy to dismiss.</p><h2>Suggested priority</h2><ol><li>Keep light and dark themes reliable.</li><li>Use layout or mode switches only when they improve focus.</li><li>Treat music as an accent instead of the main event.</li></ol><p>For a tools-first blog, readability and clarity should still outrank novelty.</p>",
+      "en": "<p>Theme switching belongs at the foundation of the reading experience. Layout or reading modes can come next. Music is the most optional feature and should stay lightweight and easy to dismiss.</p><h2>Suggested priority</h2><ol><li>Keep light and dark themes reliable.</li><li>Use layout or mode switches only when they improve focus.</li><li>Treat music as an accent instead of the main event.</li></ol><p>For a tools-first blog, readability and clarity should still outrank novelty.</p>",
+      "ja": "<p>Theme switching belongs at the foundation of the reading experience. Layout or reading modes can come next. Music is the most optional feature and should stay lightweight and easy to dismiss.</p><h2>Suggested priority</h2><ol><li>Keep light and dark themes reliable.</li><li>Use layout or mode switches only when they improve focus.</li><li>Treat music as an accent instead of the main event.</li></ol><p>For a tools-first blog, readability and clarity should still outrank novelty.</p>"
+    }
+  }
+]

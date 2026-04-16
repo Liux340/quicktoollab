@@ -1,7 +1,7 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="zh">
 <head>
-    <title>QuickToolLab · 综合在线工具站</title>
+    <title>QuickToolLab 路 缁煎悎鍦ㄧ嚎宸ュ叿绔?/title>
     <meta charset="UTF-8">
     <script>
         (function(){
@@ -12,8 +12,8 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QuickToolLab 综合在线工具站：常用开发工具入口、技术文库、幻灯片精选、热门开源项目与软件推荐。内容来自 Dev.to、GitHub 等实时数据。">
-    <meta name="keywords" content="在线工具,开发者工具,技术文库,开源项目,软件推荐,QuickToolLab">
+    <meta name="description" content="QuickToolLab 缁煎悎鍦ㄧ嚎宸ュ叿绔欙細甯哥敤寮€鍙戝伐鍏峰叆鍙ｃ€佹妧鏈枃搴撱€佸够鐏墖绮鹃€夈€佺儹闂ㄥ紑婧愰」鐩笌杞欢鎺ㄨ崘銆傚唴瀹规潵鑷?Dev.to銆丟itHub 绛夊疄鏃舵暟鎹€?>
+    <meta name="keywords" content="鍦ㄧ嚎宸ュ叿,寮€鍙戣€呭伐鍏?鎶€鏈枃搴?寮€婧愰」鐩?杞欢鎺ㄨ崘,QuickToolLab">
     <meta name="theme-color" content="#0a0a10">
     <link rel="canonical" href="https://quicktoollab.top/">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
@@ -143,6 +143,99 @@
             margin-bottom: 12px;
         }
         .hero p { color: var(--muted); font-size: 15px; max-width: 520px; margin: 0 auto; }
+
+        .blog-spotlight {
+            margin: 0 0 34px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 24px;
+            background:
+                linear-gradient(135deg, rgba(249,115,22,.14), transparent 42%),
+                linear-gradient(180deg, var(--surface), color-mix(in srgb, var(--surface2) 92%, transparent));
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 18px;
+        }
+        @media (max-width: 900px) { .blog-spotlight { grid-template-columns: 1fr; } }
+        .blog-spotlight h2 {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(30px, 5vw, 52px);
+            letter-spacing: 2px;
+            line-height: 1.02;
+            margin-bottom: 10px;
+        }
+        .blog-spotlight p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+            max-width: 620px;
+        }
+        .blog-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin: 16px 0 18px;
+        }
+        .blog-badges span {
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(249,115,22,.22);
+            background: var(--accentlo);
+            color: var(--accent);
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+        .blog-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .blog-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            transition: .18s;
+        }
+        .blog-btn.primary {
+            color: #fff;
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            box-shadow: 0 16px 30px rgba(249,115,22,.18);
+        }
+        .blog-btn.secondary {
+            color: var(--text);
+            background: var(--surface2);
+            border: 1px solid var(--border);
+        }
+        .blog-notes {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .blog-note {
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: color-mix(in srgb, var(--surface2) 92%, transparent);
+            padding: 14px 16px;
+        }
+        .blog-note strong {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 13px;
+            color: var(--text);
+        }
+        .blog-note span {
+            display: block;
+            font-size: 13px;
+            color: var(--muted);
+            line-height: 1.7;
+        }
 
         .section-block { margin-bottom: 44px; animation: up .5s ease both; }
         .section-block:nth-child(2) { animation-delay: .04s; }
@@ -299,7 +392,7 @@
 
         @keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
 
-        /* ── 置顶推荐区 ─────────────────────────────── */
+        /* 鈹€鈹€ 缃《鎺ㄨ崘鍖?鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
         .pinned-section {
             background: linear-gradient(135deg, rgba(249,115,22,.08), rgba(234,179,8,.06));
             border: 1px solid rgba(249,115,22,.25);
@@ -339,7 +432,7 @@
         .pinned-brand { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: .3px; }
         .pinned-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
 
-        /* ── 工具区 tab 切换 ─────────────────────────── */
+        /* 鈹€鈹€ 宸ュ叿鍖?tab 鍒囨崲 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
         .tools-tab-bar {
             display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
         }
@@ -352,7 +445,7 @@
         .tools-tab:hover { border-color: var(--accent2); color: var(--accent2); }
         .tools-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
 
-        /* ── AI 工具区 ──────────────────────────────── */
+        /* 鈹€鈹€ AI 宸ュ叿鍖?鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
         .ai-section { display: none; }
         .ai-section.visible { display: block; }
         .ai-tab-bar {
@@ -395,7 +488,7 @@
         .ai-card:hover .fav-btn { opacity: 1; }
         .ai-card .fav-btn.saved { opacity: 1; }
 
-        /* 普通工具卡也加收藏按钮 */
+        /* 鏅€氬伐鍏峰崱涔熷姞鏀惰棌鎸夐挳 */
         .tool-card { position: relative; }
         .tool-card .fav-btn {
             position: absolute; top: 7px; right: 7px;
@@ -407,7 +500,7 @@
         .tool-card:hover .fav-btn { opacity: 1; }
         .tool-card .fav-btn.saved { opacity: 1; }
 
-        /* ── 收藏 & 历史 侧边抽屉触发 ────────────────── */
+        /* 鈹€鈹€ 鏀惰棌 & 鍘嗗彶 渚ц竟鎶藉眽瑙﹀彂 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
         .fab-group {
             position: fixed; bottom: 28px; right: 22px;
             display: flex; flex-direction: column; gap: 10px; z-index: 200;
@@ -430,7 +523,7 @@
         }
         .fab .badge.show { display: flex; }
 
-        /* ── 抽屉 ───────────────────────────────────── */
+        /* 鈹€鈹€ 鎶藉眽 鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€鈹€ */
         .drawer-overlay {
             position: fixed; inset: 0; background: rgba(0,0,0,.45);
             z-index: 300; opacity: 0; pointer-events: none; transition: opacity .25s;
@@ -488,7 +581,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
      crossorigin="anonymous"></script>
 
-    <!-- Waline 评论系统 -->
+    <!-- Waline 璇勮绯荤粺 -->
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
     <script type="module">
         import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
@@ -503,11 +596,11 @@
                 pageview: true,
                 emoji: ['https://unpkg.com/@waline/emojis@1.2.0/weibo'],
                 locale: {
-                    placeholder: '欢迎留言，支持 Markdown 格式 ✦',
+                    placeholder: '娆㈣繋鐣欒█锛屾敮鎸?Markdown 鏍煎紡 鉁?,
                 },
             });
         };
-        // 等 DOM 就绪后初始化
+        // 绛?DOM 灏辩华鍚庡垵濮嬪寲
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', () => window.__walineInit());
         } else {
@@ -516,11 +609,11 @@
     </script>
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://quicktoollab.top/">
-    <meta property="og:title" content="QuickToolLab · 综合在线工具站">
-    <meta property="og:description" content="综合在线工具站：开发工具入口、技术文库、幻灯片精选、热门开源项目与软件推荐。">
+    <meta property="og:title" content="QuickToolLab 路 缁煎悎鍦ㄧ嚎宸ュ叿绔?>
+    <meta property="og:description" content="缁煎悎鍦ㄧ嚎宸ュ叿绔欙細寮€鍙戝伐鍏峰叆鍙ｃ€佹妧鏈枃搴撱€佸够鐏墖绮鹃€夈€佺儹闂ㄥ紑婧愰」鐩笌杞欢鎺ㄨ崘銆?>
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="QuickToolLab · 综合在线工具站">
-    <meta name="twitter:description" content="综合在线工具站：开发工具、技术文库、开源项目、软件推荐。">
+    <meta name="twitter:title" content="QuickToolLab 路 缁煎悎鍦ㄧ嚎宸ュ叿绔?>
+    <meta name="twitter:description" content="缁煎悎鍦ㄧ嚎宸ュ叿绔欙細寮€鍙戝伐鍏枫€佹妧鏈枃搴撱€佸紑婧愰」鐩€佽蒋浠舵帹鑽愩€?>
 </head>
 <body>
 
@@ -530,25 +623,25 @@
             <div class="logo-mark">Q</div>
             <div>
                 <div class="logo-name">QUICK<span>TOOL</span>LAB</div>
-                <div class="logo-sub" data-i18n="brand_sub">综合在线工具站</div>
+                <div class="logo-sub" data-i18n="brand_sub">缁煎悎鍦ㄧ嚎宸ュ叿绔?/div>
             </div>
         </a>
         <nav class="nav-links" aria-label="Section">
-            <a href="#ai-zone" data-i18n="nav_ai">AI 工具</a>
-            <a href="#tools" data-i18n="nav_tools">工具</a>
-            <a href="#library" data-i18n="nav_lib">技术文库</a>
-            <a href="#slides" data-i18n="nav_slides">幻灯片</a>
-            <a href="#opensource" data-i18n="nav_oss">开源类库</a>
-            <a href="#software" data-i18n="nav_soft">软件推荐</a>
-            <a href="#friends" data-i18n="nav_friends">友情链接</a>
-            <a href="/blog.html" data-i18n="nav_blog">博客</a>
-            <a href="/help.html" data-i18n="nav_help">帮助中心</a>
+            <a href="#ai-zone" data-i18n="nav_ai">AI 宸ュ叿</a>
+            <a href="#tools" data-i18n="nav_tools">宸ュ叿</a>
+            <a href="#library" data-i18n="nav_lib">鎶€鏈枃搴?/a>
+            <a href="#slides" data-i18n="nav_slides">骞荤伅鐗?/a>
+            <a href="#opensource" data-i18n="nav_oss">寮€婧愮被搴?/a>
+            <a href="#software" data-i18n="nav_soft">杞欢鎺ㄨ崘</a>
+            <a href="#friends" data-i18n="nav_friends">鍙嬫儏閾炬帴</a>
+            <a href="/blog.html" data-i18n="nav_blog">鍗氬</a>
+            <a href="/help.html" data-i18n="nav_help">甯姪涓績</a>
         </nav>
         <div class="nav-right">
             <div class="lang-sw">
-                <button class="lang-btn" data-lang="zh" type="button">中文</button>
+                <button class="lang-btn" data-lang="zh" type="button">涓枃</button>
                 <button class="lang-btn" data-lang="en" type="button">EN</button>
-                <button class="lang-btn" data-lang="ja" type="button">日本語</button>
+                <button class="lang-btn" data-lang="ja" type="button">鏃ユ湰瑾?/button>
             </div>
             <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle theme">
                 <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
@@ -566,86 +659,116 @@
     </div>
 </header>
 
-<!-- 收藏 & 历史 悬浮按钮 -->
+<!-- 鏀惰棌 & 鍘嗗彶 鎮诞鎸夐挳 -->
 <div class="fab-group">
-    <button class="fab" id="fav-fab" title="我的收藏">⭐<span class="badge" id="fav-badge"></span></button>
-    <button class="fab" id="hist-fab" title="使用记录">🕐<span class="badge" id="hist-badge"></span></button>
+    <button class="fab" id="fav-fab" title="鎴戠殑鏀惰棌">猸?span class="badge" id="fav-badge"></span></button>
+    <button class="fab" id="hist-fab" title="浣跨敤璁板綍">馃晲<span class="badge" id="hist-badge"></span></button>
 </div>
 
-<!-- 收藏抽屉 -->
+<!-- 鏀惰棌鎶藉眽 -->
 <div class="drawer-overlay" id="fav-overlay"></div>
 <div class="drawer" id="fav-drawer">
     <div class="drawer-head">
-        <span class="drawer-title" data-i18n="drawer_fav">我的收藏</span>
-        <button class="drawer-close" id="fav-close">✕</button>
+        <span class="drawer-title" data-i18n="drawer_fav">鎴戠殑鏀惰棌</span>
+        <button class="drawer-close" id="fav-close">鉁?/button>
     </div>
     <div class="drawer-body" id="fav-body"></div>
 </div>
 
-<!-- 历史抽屉 -->
+<!-- 鍘嗗彶鎶藉眽 -->
 <div class="drawer-overlay" id="hist-overlay"></div>
 <div class="drawer" id="hist-drawer">
     <div class="drawer-head">
-        <span class="drawer-title" data-i18n="drawer_hist">使用记录</span>
-        <button class="drawer-close" id="hist-close">✕</button>
+        <span class="drawer-title" data-i18n="drawer_hist">浣跨敤璁板綍</span>
+        <button class="drawer-close" id="hist-close">鉁?/button>
     </div>
     <div class="drawer-body" id="hist-body"></div>
 </div>
 
 <main>
     <div class="hero">
-        <h1 data-i18n="hero_title">一站式工具与内容精选</h1>
-        <p data-i18n="hero_sub">聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。</p>
+        <h1 data-i18n="hero_title">涓€绔欏紡宸ュ叿涓庡唴瀹圭簿閫?/h1>
+        <p data-i18n="hero_sub">鑱氬悎甯哥敤宸ュ叿鍏ュ彛锛涙妧鏈枃绔犮€佸够鐏墖灏侀潰銆佺儹闂ㄤ粨搴撲笌杞欢鍙戠幇鏉ヨ嚜寮€鏀?API 瀹炴椂鍔犺浇锛岄潪椤甸潰鍐欐鏁版嵁銆?/p>
     </div>
 
-    <!-- 置顶推荐区 -->
+    <!-- 缃《鎺ㄨ崘鍖?-->
+    <section class="blog-spotlight">
+        <div>
+            <h2 data-i18n="blog_spot_title">Blog Upgraded</h2>
+            <p data-i18n="blog_spot_desc">The blog now supports a JSON data source, a local admin panel, and per-article Waline comments, so it stands out as a real content area instead of a hidden extra page.</p>
+            <div class="blog-badges">
+                <span data-i18n="blog_badge_json">JSON Data</span>
+                <span data-i18n="blog_badge_admin">Admin Panel</span>
+                <span data-i18n="blog_badge_comment">Waline Comments</span>
+            </div>
+            <div class="blog-actions">
+                <a class="blog-btn primary" href="/blog.html" data-i18n="blog_cta_read">Open Blog</a>
+                <a class="blog-btn secondary" href="/blog-admin.html" data-i18n="blog_cta_manage">Manage Posts</a>
+            </div>
+        </div>
+        <div class="blog-notes">
+            <div class="blog-note">
+                <strong data-i18n="blog_note_1_t">Online CRUD</strong>
+                <span data-i18n="blog_note_1_d">Edit articles in the browser, then export JSON back into the site files.</span>
+            </div>
+            <div class="blog-note">
+                <strong data-i18n="blog_note_2_t">Per-post comments</strong>
+                <span data-i18n="blog_note_2_d">Each blog article now mounts its own Waline thread instead of sharing the home page comment area.</span>
+            </div>
+            <div class="blog-note">
+                <strong data-i18n="blog_note_3_t">Better SEO structure</strong>
+                <span data-i18n="blog_note_3_d">Blog list, article detail pages, and sitemap entries are already wired together for ongoing content growth.</span>
+            </div>
+        </div>
+    </section>
+
     <section class="section-block" id="pinned" style="margin-bottom:44px;">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_pinned">精选推荐</span></h2>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_pinned">绮鹃€夋帹鑽?/span></h2>
         </div>
         <div class="pinned-section">
-            <div class="pinned-badge">⭐ 编辑推荐</div>
+            <div class="pinned-badge">猸?缂栬緫鎺ㄨ崘</div>
             <div class="pinned-grid" id="pinned-grid"></div>
         </div>
     </section>
 
-    <!-- AI 工具专区 -->
+    <!-- AI 宸ュ叿涓撳尯 -->
     <section class="section-block" id="ai-zone">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot" style="background:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.2);"></span><span data-i18n="sec_ai">AI 工具专区</span></h2>
+            <h2 class="section-title"><span class="dot" style="background:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.2);"></span><span data-i18n="sec_ai">AI 宸ュ叿涓撳尯</span></h2>
         </div>
         <div class="ai-tab-bar" id="ai-tab-bar">
-            <button class="ai-tab active" data-aicat="all"    data-i18n="ai_all">全部</button>
-            <button class="ai-tab" data-aicat="write"  data-i18n="ai_write">AI 写作</button>
-            <button class="ai-tab" data-aicat="image"  data-i18n="ai_image">AI 绘图</button>
-            <button class="ai-tab" data-aicat="video"  data-i18n="ai_video">AI 视频</button>
-            <button class="ai-tab" data-aicat="code"   data-i18n="ai_code">AI 编程</button>
-            <button class="ai-tab" data-aicat="chat"   data-i18n="ai_chat">AI 对话</button>
-            <button class="ai-tab" data-aicat="audio"  data-i18n="ai_audio">AI 音频</button>
+            <button class="ai-tab active" data-aicat="all"    data-i18n="ai_all">鍏ㄩ儴</button>
+            <button class="ai-tab" data-aicat="write"  data-i18n="ai_write">AI 鍐欎綔</button>
+            <button class="ai-tab" data-aicat="image"  data-i18n="ai_image">AI 缁樺浘</button>
+            <button class="ai-tab" data-aicat="video"  data-i18n="ai_video">AI 瑙嗛</button>
+            <button class="ai-tab" data-aicat="code"   data-i18n="ai_code">AI 缂栫▼</button>
+            <button class="ai-tab" data-aicat="chat"   data-i18n="ai_chat">AI 瀵硅瘽</button>
+            <button class="ai-tab" data-aicat="audio"  data-i18n="ai_audio">AI 闊抽</button>
         </div>
         <div class="ai-grid" id="ai-grid"></div>
     </section>
 
     <section class="section-block" id="tools">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">在线工具</span></h2>
-            <a class="section-more" href="#library" data-i18n="hint_below">向下浏览内容精选 →</a>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">鍦ㄧ嚎宸ュ叿</span></h2>
+            <a class="section-more" href="#library" data-i18n="hint_below">鍚戜笅娴忚鍐呭绮鹃€?鈫?/a>
         </div>
         <div class="tools-tab-bar" id="tools-tab-bar">
-            <button class="tools-tab active" data-toolcat="all"     data-i18n="tcat_all">全部</button>
-            <button class="tools-tab" data-toolcat="text"    data-i18n="tcat_text">文本 & 数据</button>
-            <button class="tools-tab" data-toolcat="frontend" data-i18n="tcat_fe">前端 & 设计</button>
-            <button class="tools-tab" data-toolcat="sandbox"  data-i18n="tcat_sandbox">在线沙盒</button>
-            <button class="tools-tab" data-toolcat="devops"   data-i18n="tcat_devops">运维 & 网络</button>
-            <button class="tools-tab" data-toolcat="db"       data-i18n="tcat_db">数据库 & 安全</button>
+            <button class="tools-tab active" data-toolcat="all"     data-i18n="tcat_all">鍏ㄩ儴</button>
+            <button class="tools-tab" data-toolcat="text"    data-i18n="tcat_text">鏂囨湰 & 鏁版嵁</button>
+            <button class="tools-tab" data-toolcat="frontend" data-i18n="tcat_fe">鍓嶇 & 璁捐</button>
+            <button class="tools-tab" data-toolcat="sandbox"  data-i18n="tcat_sandbox">鍦ㄧ嚎娌欑洅</button>
+            <button class="tools-tab" data-toolcat="devops"   data-i18n="tcat_devops">杩愮淮 & 缃戠粶</button>
+            <button class="tools-tab" data-toolcat="db"       data-i18n="tcat_db">鏁版嵁搴?& 瀹夊叏</button>
         </div>
         <div class="tools-host" id="tools-host"></div>
     </section>
 
     <section class="section-block" id="slides">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_slides">幻灯片 / 精选封面</span></h2>
-            <a class="section-more" href="https://dev.to" target="_blank" rel="noopener noreferrer" data-i18n="more_devto">Dev.to 更多 →</a>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_slides">骞荤伅鐗?/ 绮鹃€夊皝闈?/span></h2>
+            <a class="section-more" href="https://dev.to" target="_blank" rel="noopener noreferrer" data-i18n="more_devto">Dev.to 鏇村 鈫?/a>
         </div>
         <div id="slides-host"><div class="loading skeleton" style="height:120px;border-radius:14px;"></div></div>
     </section>
@@ -653,40 +776,40 @@
     <div class="row-2">
         <section class="section-block" id="library" style="margin-bottom:0;">
             <div class="section-head">
-                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_lib">技术文库</span></h2>
-                <a class="section-more" href="https://dev.to/top/week" target="_blank" rel="noopener noreferrer" data-i18n="more_trending">本周热门 →</a>
+                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_lib">鎶€鏈枃搴?/span></h2>
+                <a class="section-more" href="https://dev.to/top/week" target="_blank" rel="noopener noreferrer" data-i18n="more_trending">鏈懆鐑棬 鈫?/a>
             </div>
-            <div class="list-card" id="library-host"><div class="loading" data-i18n="loading">加载中…</div></div>
+            <div class="list-card" id="library-host"><div class="loading" data-i18n="loading">鍔犺浇涓€?/div></div>
         </section>
         <section class="section-block" id="opensource" style="margin-bottom:0;">
             <div class="section-head">
-                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_oss">开源类库</span></h2>
-                <a class="section-more" href="https://github.com/trending" target="_blank" rel="noopener noreferrer" data-i18n="more_github">GitHub Trending →</a>
+                <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_oss">寮€婧愮被搴?/span></h2>
+                <a class="section-more" href="https://github.com/trending" target="_blank" rel="noopener noreferrer" data-i18n="more_github">GitHub Trending 鈫?/a>
             </div>
-            <div class="list-card" id="oss-host"><div class="loading" data-i18n="loading">加载中…</div></div>
+            <div class="list-card" id="oss-host"><div class="loading" data-i18n="loading">鍔犺浇涓€?/div></div>
         </section>
     </div>
 
     <section class="section-block" id="software" style="margin-top:44px;">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_soft">软件推荐</span></h2>
-            <a class="section-more" href="https://github.com/search?q=topic%3Acli+stars%3A%3E100&type=repositories&s=stars&o=desc" target="_blank" rel="noopener noreferrer" data-i18n="more_cli">CLI 工具搜索 →</a>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_soft">杞欢鎺ㄨ崘</span></h2>
+            <a class="section-more" href="https://github.com/search?q=topic%3Acli+stars%3A%3E100&type=repositories&s=stars&o=desc" target="_blank" rel="noopener noreferrer" data-i18n="more_cli">CLI 宸ュ叿鎼滅储 鈫?/a>
         </div>
         <div class="soft-grid" id="soft-host"><div class="loading skeleton" style="height:100px;border-radius:14px;grid-column:1/-1;"></div></div>
     </section>
 
     <section class="section-block" id="friends">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_friends">友情链接</span></h2>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_friends">鍙嬫儏閾炬帴</span></h2>
         </div>
         <div class="tools-grid" style="max-width: 520px;">
-            <div class="loading" style="grid-column:1/-1;" data-i18n="friends_empty">暂未添加友情链接</div>
+            <div class="loading" style="grid-column:1/-1;" data-i18n="friends_empty">鏆傛湭娣诲姞鍙嬫儏閾炬帴</div>
         </div>
     </section>
 
     <section class="section-block" id="comments">
         <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_comments">发表评论</span></h2>
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_comments">鍙戣〃璇勮</span></h2>
         </div>
         <div id="waline-comment"></div>
     </section>
@@ -694,14 +817,14 @@
 
 <footer>
     <div class="footer-inner">
-        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
+        <span class="footer-copy">漏 <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
-            <a href="/" data-i18n="nav_home">首页</a>
-            <a href="/blog.html" data-i18n="nav_blog">博客</a>
+            <a href="/" data-i18n="nav_home">棣栭〉</a>
+            <a href="/blog.html" data-i18n="nav_blog">鍗氬</a>
             <a href="/compress.html">PixCrush</a>
-            <a href="/help.html" data-i18n="nav_help">帮助中心</a>
-            <a href="/about.html" data-i18n="nav_about">关于</a>
-            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+            <a href="/help.html" data-i18n="nav_help">甯姪涓績</a>
+            <a href="/about.html" data-i18n="nav_about">鍏充簬</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">闅愮鏀跨瓥</a>
         </div>
     </div>
 </footer>
@@ -711,146 +834,146 @@ document.getElementById('y').textContent = new Date().getFullYear();
 
 const I18N = {
     zh: {
-        brand_sub: '综合在线工具站',
-        hero_title: '一站式工具与内容精选',
-        hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
-        nav_ai: 'AI 工具', nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接', nav_blog: '博客', nav_help: '帮助中心',
-        sec_pinned: '精选推荐', sec_ai: 'AI 工具专区', sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接', sec_comments: '发表评论',
-        hint_below: '向下浏览内容精选 →',
-        ai_all:'全部', ai_write:'AI 写作', ai_image:'AI 绘图', ai_video:'AI 视频', ai_code:'AI 编程', ai_chat:'AI 对话', ai_audio:'AI 音频',
-        tcat_all:'全部', tcat_text:'文本 & 数据', tcat_fe:'前端 & 设计', tcat_sandbox:'在线沙盒', tcat_devops:'运维 & 网络', tcat_db:'数据库 & 安全',
-        drawer_fav:'我的收藏', drawer_hist:'使用记录', drawer_empty_fav:'还没有收藏任何工具', drawer_empty_hist:'暂无使用记录', drawer_clear:'清空记录', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
-        loading: '加载中…', load_err: '加载失败，请检查网络或稍后重试。', friends_empty: '暂未添加友情链接',
-        ph_name: '昵称（必填）', ph_email: '邮箱（选填）', ph_site: '网站（选填）', ph_text: '写下你的想法...', ph_captcha: '输入结果',
-        site_hint: '网站用于申请友情链接。', captcha_refresh: '换一题', submit_comment: '发布评论', comment_no_comments: '还没有评论，来发表第一条吧。',
-        req_name: '请填写昵称', req_text: '请填写评论内容', req_captcha: '人机验证未通过', comment_ok: '评论发布成功（本地保存）', captcha_q: '人机验证',
-        retry: '重试',
-        nav_home: '首页', nav_about: '关于', nav_privacy: '隐私政策',
-        page_title: 'QuickToolLab · 综合在线工具站',
+        brand_sub: '缁煎悎鍦ㄧ嚎宸ュ叿绔?,
+        hero_title: '涓€绔欏紡宸ュ叿涓庡唴瀹圭簿閫?,
+        hero_sub: '鑱氬悎甯哥敤宸ュ叿鍏ュ彛锛涙妧鏈枃绔犮€佸够鐏墖灏侀潰銆佺儹闂ㄤ粨搴撲笌杞欢鍙戠幇鏉ヨ嚜寮€鏀?API 瀹炴椂鍔犺浇锛岄潪椤甸潰鍐欐鏁版嵁銆?,
+        nav_ai: 'AI 宸ュ叿', nav_tools: '宸ュ叿', nav_lib: '鎶€鏈枃搴?, nav_slides: '骞荤伅鐗?, nav_oss: '寮€婧愮被搴?, nav_soft: '杞欢鎺ㄨ崘', nav_friends: '鍙嬫儏閾炬帴', nav_blog: '鍗氬', nav_help: '甯姪涓績',
+        sec_pinned: '绮鹃€夋帹鑽?, sec_ai: 'AI 宸ュ叿涓撳尯', sec_tools: '鍦ㄧ嚎宸ュ叿', sec_lib: '鎶€鏈枃搴?, sec_slides: '骞荤伅鐗?/ 绮鹃€夊皝闈?, sec_oss: '寮€婧愮被搴?, sec_soft: '杞欢鎺ㄨ崘', sec_friends: '鍙嬫儏閾炬帴', sec_comments: '鍙戣〃璇勮',
+        hint_below: '鍚戜笅娴忚鍐呭绮鹃€?鈫?,
+        ai_all:'鍏ㄩ儴', ai_write:'AI 鍐欎綔', ai_image:'AI 缁樺浘', ai_video:'AI 瑙嗛', ai_code:'AI 缂栫▼', ai_chat:'AI 瀵硅瘽', ai_audio:'AI 闊抽',
+        tcat_all:'鍏ㄩ儴', tcat_text:'鏂囨湰 & 鏁版嵁', tcat_fe:'鍓嶇 & 璁捐', tcat_sandbox:'鍦ㄧ嚎娌欑洅', tcat_devops:'杩愮淮 & 缃戠粶', tcat_db:'鏁版嵁搴?& 瀹夊叏',
+        drawer_fav:'鎴戠殑鏀惰棌', drawer_hist:'浣跨敤璁板綍', drawer_empty_fav:'杩樻病鏈夋敹钘忎换浣曞伐鍏?, drawer_empty_hist:'鏆傛棤浣跨敤璁板綍', drawer_clear:'娓呯┖璁板綍', more_devto: 'Dev.to 鏇村 鈫?, more_trending: '鏈懆鐑棬 鈫?, more_github: 'GitHub Trending 鈫?, more_cli: 'CLI 宸ュ叿鎼滅储 鈫?,
+        loading: '鍔犺浇涓€?, load_err: '鍔犺浇澶辫触锛岃妫€鏌ョ綉缁滄垨绋嶅悗閲嶈瘯銆?, friends_empty: '鏆傛湭娣诲姞鍙嬫儏閾炬帴',
+        ph_name: '鏄电О锛堝繀濉級', ph_email: '閭锛堥€夊～锛?, ph_site: '缃戠珯锛堥€夊～锛?, ph_text: '鍐欎笅浣犵殑鎯虫硶...', ph_captcha: '杈撳叆缁撴灉',
+        site_hint: '缃戠珯鐢ㄤ簬鐢宠鍙嬫儏閾炬帴銆?, captcha_refresh: '鎹竴棰?, submit_comment: '鍙戝竷璇勮', comment_no_comments: '杩樻病鏈夎瘎璁猴紝鏉ュ彂琛ㄧ涓€鏉″惂銆?,
+        req_name: '璇峰～鍐欐樀绉?, req_text: '璇峰～鍐欒瘎璁哄唴瀹?, req_captcha: '浜烘満楠岃瘉鏈€氳繃', comment_ok: '璇勮鍙戝竷鎴愬姛锛堟湰鍦颁繚瀛橈級', captcha_q: '浜烘満楠岃瘉',
+        retry: '閲嶈瘯',
+        nav_home: '棣栭〉', nav_about: '鍏充簬', nav_privacy: '闅愮鏀跨瓥',
+        page_title: 'QuickToolLab 路 缁煎悎鍦ㄧ嚎宸ュ叿绔?,
     },
     en: {
         brand_sub: 'All-in-one tool hub',
         hero_title: 'Tools & curated tech content',
-        hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
+        hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs 鈥?not hardcoded HTML.',
         nav_ai: 'AI Tools', nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends', nav_blog: 'Blog', nav_help: 'Help',
         sec_pinned: 'Editor picks', sec_ai: 'AI Tool Zone', sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links', sec_comments: 'Comments',
-        hint_below: 'Browse curated content ↓',
+        hint_below: 'Browse curated content 鈫?,
         ai_all:'All', ai_write:'Writing', ai_image:'Image', ai_video:'Video', ai_code:'Coding', ai_chat:'Chat', ai_audio:'Audio',
         tcat_all:'All', tcat_text:'Text & data', tcat_fe:'Front-end', tcat_sandbox:'Sandbox', tcat_devops:'DevOps', tcat_db:'DB & security',
-        drawer_fav:'Favorites', drawer_hist:'History', drawer_empty_fav:'No favorites yet', drawer_empty_hist:'No history yet', drawer_clear:'Clear all', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
-        loading: 'Loading…', load_err: 'Could not load data. Check your network and try again.', friends_empty: 'No friend links yet.',
+        drawer_fav:'Favorites', drawer_hist:'History', drawer_empty_fav:'No favorites yet', drawer_empty_hist:'No history yet', drawer_clear:'Clear all', more_devto: 'More on Dev.to 鈫?, more_trending: 'Trending week 鈫?, more_github: 'GitHub Trending 鈫?, more_cli: 'Search CLI repos 鈫?,
+        loading: 'Loading鈥?, load_err: 'Could not load data. Check your network and try again.', friends_empty: 'No friend links yet.',
         ph_name: 'Nickname (required)', ph_email: 'Email (optional)', ph_site: 'Website (optional)', ph_text: 'Share your thoughts...', ph_captcha: 'Enter result',
         site_hint: 'Website is used for friend-link application.', captcha_refresh: 'New challenge', submit_comment: 'Submit comment', comment_no_comments: 'No comments yet. Be the first one.',
         req_name: 'Nickname is required', req_text: 'Comment content is required', req_captcha: 'Human verification failed', comment_ok: 'Comment submitted (saved locally)', captcha_q: 'Human check',
         retry: 'Retry',
         nav_home: 'Home', nav_about: 'About', nav_privacy: 'Privacy',
-        page_title: 'QuickToolLab · Developer tool hub',
+        page_title: 'QuickToolLab 路 Developer tool hub',
     },
     ja: {
-        brand_sub: '総合オンラインツール',
-        hero_title: 'ツールと厳選コンテンツ',
-        hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
-        nav_ai: 'AI ツール', nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク', nav_blog: 'ブログ', nav_help: 'ヘルプ',
-        sec_pinned: '編集おすすめ', sec_ai: 'AI ツールゾーン', sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク', sec_comments: 'コメント',
-        hint_below: 'コンテンツへ ↓',
-        ai_all:'全て', ai_write:'文章作成', ai_image:'画像生成', ai_video:'動画生成', ai_code:'コーディング', ai_chat:'チャット', ai_audio:'音声',
-        tcat_all:'全て', tcat_text:'テキスト', tcat_fe:'フロントエンド', tcat_sandbox:'サンドボックス', tcat_devops:'DevOps', tcat_db:'DB・セキュリティ',
-        drawer_fav:'お気に入り', drawer_hist:'履歴', drawer_empty_fav:'お気に入りはまだありません', drawer_empty_hist:'履歴はまだありません', drawer_clear:'全て削除', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
-        loading: '読み込み中…', load_err: '読み込みに失敗しました。ネットワークを確認してください。', friends_empty: '相互リンクはまだありません。',
-        ph_name: 'ニックネーム（必須）', ph_email: 'メール（任意）', ph_site: 'サイト（任意）', ph_text: 'コメントを入力してください...', ph_captcha: '答えを入力',
-        site_hint: 'サイト欄は相互リンク申請に利用できます。', captcha_refresh: '問題を更新', submit_comment: 'コメント投稿', comment_no_comments: 'まだコメントはありません。',
-        req_name: 'ニックネームを入力してください', req_text: 'コメント内容を入力してください', req_captcha: '人間認証に失敗しました', comment_ok: '投稿しました（ローカル保存）', captcha_q: '人間認証',
-        retry: '再試行',
-        nav_home: 'ホーム', nav_about: 'About', nav_privacy: 'プライバシー',
-        page_title: 'QuickToolLab · 総合ツールサイト',
+        brand_sub: '绶忓悎銈兂銉┿偆銉炽儎銉笺儷',
+        hero_title: '銉勩兗銉仺鍘抽伕銈炽兂銉嗐兂銉?,
+        hero_sub: '銈堛亸浣裤亞銉勩兗銉伕銇叆鍙ｃ倰闆嗙磩銆傝浜嬨兓銈广儵銈ゃ儔棰ㄣ偒銉笺儔銉讳汉姘椼儶銉濄偢銉堛儶銇叕闁?API 銇嬨倝鍙栧緱銇椼伨銇欙紙HTML 銇洿鏇搞亶銇椼伨銇涖倱锛夈€?,
+        nav_ai: 'AI 銉勩兗銉?, nav_tools: '銉勩兗銉?, nav_lib: '鎶€琛撴枃搴?, nav_slides: '銈广儵銈ゃ儔', nav_oss: 'OSS', nav_soft: '銈姐儠銉?, nav_friends: '鐩镐簰銉兂銈?, nav_blog: '銉栥儹銈?, nav_help: '銉樸儷銉?,
+        sec_pinned: '绶ㄩ泦銇娿仚銇欍倎', sec_ai: 'AI 銉勩兗銉偩銉笺兂', sec_tools: '銈兂銉┿偆銉炽儎銉笺儷', sec_lib: '鎶€琛撴枃搴?, sec_slides: '銈广儵銈ゃ儔 / 琛ㄧ礄', sec_oss: '銈兗銉椼兂銈姐兗銈?, sec_soft: '銈姐儠銉堢垂浠?, sec_friends: '鐩镐簰銉兂銈?, sec_comments: '銈炽儭銉炽儓',
+        hint_below: '銈炽兂銉嗐兂銉勩伕 鈫?,
+        ai_all:'鍏ㄣ仸', ai_write:'鏂囩珷浣滄垚', ai_image:'鐢诲儚鐢熸垚', ai_video:'鍕曠敾鐢熸垚', ai_code:'銈炽兗銉囥偅銉炽偘', ai_chat:'銉併儯銉冦儓', ai_audio:'闊冲０',
+        tcat_all:'鍏ㄣ仸', tcat_text:'銉嗐偔銈广儓', tcat_fe:'銉曘儹銉炽儓銈ㄣ兂銉?, tcat_sandbox:'銈点兂銉夈儨銉冦偗銈?, tcat_devops:'DevOps', tcat_db:'DB銉汇偦銈儱銉儐銈?,
+        drawer_fav:'銇婃皸銇叆銈?, drawer_hist:'灞ユ', drawer_empty_fav:'銇婃皸銇叆銈娿伅銇俱仩銇傘倞銇俱仜銈?, drawer_empty_hist:'灞ユ銇伨銇犮亗銈娿伨銇涖倱', drawer_clear:'鍏ㄣ仸鍓婇櫎', more_devto: 'Dev.to 銇х稓銇?鈫?, more_trending: '閫遍枔銉堛儸銉炽儔 鈫?, more_github: 'GitHub Trending 鈫?, more_cli: 'CLI 妞滅储 鈫?,
+        loading: '瑾伩杈笺伩涓€?, load_err: '瑾伩杈笺伩銇け鏁椼仐銇俱仐銇熴€傘儘銉冦儓銉兗銈倰纰鸿獚銇椼仸銇忋仩銇曘亜銆?, friends_empty: '鐩镐簰銉兂銈伅銇俱仩銇傘倞銇俱仜銈撱€?,
+        ph_name: '銉嬨儍銈儘銉笺儬锛堝繀闋堬級', ph_email: '銉°兗銉紙浠绘剰锛?, ph_site: '銈点偆銉堬紙浠绘剰锛?, ph_text: '銈炽儭銉炽儓銈掑叆鍔涖仐銇︺亸銇犮仌銇?..', ph_captcha: '绛斻亪銈掑叆鍔?,
+        site_hint: '銈点偆銉堟瑒銇浉浜掋儶銉炽偗鐢宠珛銇埄鐢ㄣ仹銇嶃伨銇欍€?, captcha_refresh: '鍟忛銈掓洿鏂?, submit_comment: '銈炽儭銉炽儓鎶曠', comment_no_comments: '銇俱仩銈炽儭銉炽儓銇亗銈娿伨銇涖倱銆?,
+        req_name: '銉嬨儍銈儘銉笺儬銈掑叆鍔涖仐銇︺亸銇犮仌銇?, req_text: '銈炽儭銉炽儓鍐呭銈掑叆鍔涖仐銇︺亸銇犮仌銇?, req_captcha: '浜洪枔瑾嶈銇け鏁椼仐銇俱仐銇?, comment_ok: '鎶曠銇椼伨銇椼仧锛堛儹銉笺偒銉繚瀛橈級', captcha_q: '浜洪枔瑾嶈',
+        retry: '鍐嶈│琛?,
+        nav_home: '銉涖兗銉?, nav_about: 'About', nav_privacy: '銉椼儵銈ゃ儛銈枫兗',
+        page_title: 'QuickToolLab 路 绶忓悎銉勩兗銉偟銈ゃ儓',
     }
 };
 
 const TOOLS = {
     zh: [
         {
-            title: '本站 · 本地',
+            title: '鏈珯 路 鏈湴',
             items: [
-                { href: '/compress.html', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
+                { href: '/compress.html', icon: '馃柤', title: 'PixCrush 鍥剧墖鍘嬬缉', tag: '鏈湴', int: true },
             ],
         },
         {
-            title: '文本与数据格式',
+            title: '鏂囨湰涓庢暟鎹牸寮?,
             items: [
                 { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
-                { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON 格式化', tag: 'WEB' },
-                { href: 'https://www.diffchecker.com', icon: '⇄', title: '文本对比', tag: 'WEB' },
-                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
-                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown 编辑', tag: 'WEB' },
-                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
-                { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID 生成', tag: 'WEB' },
-                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'Unix 时间戳', tag: 'WEB' },
-                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef 编解码', tag: 'WEB' },
-                { href: 'https://prettier.io/playground/', icon: 'P', title: 'Prettier 在线格式化', tag: 'WEB' },
-                { href: 'https://www.urlencoder.org/', icon: '%', title: 'URL 编解码', tag: 'WEB' },
-                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON ↔ CSV', tag: 'WEB' },
+                { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON 鏍煎紡鍖?, tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '鈬?, title: '鏂囨湰瀵规瘮', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '鈻?, title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M鈫?, title: 'Markdown 缂栬緫', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV 鈫?JSON', tag: 'WEB' },
+                { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID 鐢熸垚', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '鈴?, title: 'Unix 鏃堕棿鎴?, tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '鈱?, title: 'CyberChef 缂栬В鐮?, tag: 'WEB' },
+                { href: 'https://prettier.io/playground/', icon: 'P', title: 'Prettier 鍦ㄧ嚎鏍煎紡鍖?, tag: 'WEB' },
+                { href: 'https://www.urlencoder.org/', icon: '%', title: 'URL 缂栬В鐮?, tag: 'WEB' },
+                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON 鈫?CSV', tag: 'WEB' },
             ],
         },
         {
-            title: '前端、设计与可视化',
+            title: '鍓嶇銆佽璁′笌鍙鍖?,
             items: [
-                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw 白板', tag: 'WEB' },
-                { href: 'https://svgomg.net', icon: '◇', title: 'SVG 压缩', tag: 'WEB' },
-                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML 转换', tag: 'WEB' },
-                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon 代码图', tag: 'WEB' },
-                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon 生成', tag: 'WEB' },
-                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS 渐变', tag: 'WEB' },
-                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind 文档', tag: 'WEB' },
-                { href: 'https://cubic-bezier.com', icon: '∿', title: '贝塞尔曲线', tag: 'WEB' },
-                { href: 'https://svg-path-visualizer.netlify.app/', icon: 'SVG', title: 'SVG Path 可视化', tag: 'WEB' },
+                { href: 'https://caniuse.com', icon: '馃搳', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '鉁?, title: 'Excalidraw 鐧芥澘', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '鈼?, title: 'SVG 鍘嬬缉', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '鈬?, title: 'CSS / HTML 杞崲', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '鉂?, title: 'Carbon 浠ｇ爜鍥?, tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '鈽?, title: 'Favicon 鐢熸垚', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '鈼?, title: 'CSS 娓愬彉', tag: 'WEB' },
+                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind 鏂囨。', tag: 'WEB' },
+                { href: 'https://cubic-bezier.com', icon: '鈭?, title: '璐濆灏旀洸绾?, tag: 'WEB' },
+                { href: 'https://svg-path-visualizer.netlify.app/', icon: 'SVG', title: 'SVG Path 鍙鍖?, tag: 'WEB' },
                 { href: 'https://fonts.google.com', icon: 'F', title: 'Google Fonts', tag: 'WEB' },
             ],
         },
         {
-            title: '在线编码与沙盒',
+            title: '鍦ㄧ嚎缂栫爜涓庢矙鐩?,
             items: [
-                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codesandbox.io', icon: '鈻?, title: 'CodeSandbox', tag: 'WEB' },
                 { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
-                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
-                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '鈿?, title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '鈥?, title: 'Replit', tag: 'WEB' },
                 { href: 'https://jsfiddle.net', icon: 'Fid', title: 'JSFiddle', tag: 'WEB' },
                 { href: 'https://glitch.com', icon: 'G', title: 'Glitch', tag: 'WEB' },
             ],
         },
         {
-            title: '运维、网络与调试',
+            title: '杩愮淮銆佺綉缁滀笌璋冭瘯',
             items: [
-                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab 解释', tag: 'WEB' },
-                { href: 'https://nginxconfig.io', icon: 'N', title: 'Nginx 配置', tag: 'WEB' },
+                { href: 'https://crontab.guru', icon: '鈴?, title: 'Crontab 瑙ｉ噴', tag: 'WEB' },
+                { href: 'https://nginxconfig.io', icon: 'N', title: 'Nginx 閰嶇疆', tag: 'WEB' },
                 { href: 'https://explainshell.com', icon: '$', title: 'Explain Shell', tag: 'WEB' },
-                { href: 'https://httpbin.org', icon: 'http', title: 'httpbin 请求测试', tag: 'WEB' },
-                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 传播检测', tag: 'WEB' },
-                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS 查询', tag: 'WEB' },
-                { href: 'https://webhook.site', icon: '→', title: 'Webhook 调试', tag: 'WEB' },
-                { href: 'https://www.ssllabs.com/ssltest/', icon: 'TLS', title: 'SSL 服务器测试', tag: 'WEB' },
-                { href: 'https://fast.com', icon: '⚡', title: '网速测试', tag: 'WEB' },
+                { href: 'https://httpbin.org', icon: 'http', title: 'httpbin 璇锋眰娴嬭瘯', tag: 'WEB' },
+                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 浼犳挱妫€娴?, tag: 'WEB' },
+                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS 鏌ヨ', tag: 'WEB' },
+                { href: 'https://webhook.site', icon: '鈫?, title: 'Webhook 璋冭瘯', tag: 'WEB' },
+                { href: 'https://www.ssllabs.com/ssltest/', icon: 'TLS', title: 'SSL 鏈嶅姟鍣ㄦ祴璇?, tag: 'WEB' },
+                { href: 'https://fast.com', icon: '鈿?, title: '缃戦€熸祴璇?, tag: 'WEB' },
             ],
         },
         {
-            title: '数据库、安全与文档',
+            title: '鏁版嵁搴撱€佸畨鍏ㄤ笌鏂囨。',
             items: [
-                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite 查看', tag: 'WEB' },
+                { href: 'https://sqliteviewer.app', icon: '馃梻', title: 'SQLite 鏌ョ湅', tag: 'WEB' },
                 { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
-                { href: 'https://jwt.io', icon: '🔑', title: 'JWT 调试', tag: 'WEB' },
-                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: '图片 Base64', tag: 'WEB' },
-                { href: 'https://readme.so', icon: '📝', title: 'README 编辑器', tag: 'WEB' },
-                { href: 'https://shields.io', icon: '▬', title: 'Shields 徽章', tag: 'WEB' },
-                { href: 'https://editor.swagger.io/', icon: 'OAS', title: 'OpenAPI 编辑器', tag: 'WEB' },
-                { href: 'https://mermaid.live', icon: 'M', title: 'Mermaid 图表', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '馃攽', title: 'JWT 璋冭瘯', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: '鍥剧墖 Base64', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '馃摑', title: 'README 缂栬緫鍣?, tag: 'WEB' },
+                { href: 'https://shields.io', icon: '鈻?, title: 'Shields 寰界珷', tag: 'WEB' },
+                { href: 'https://editor.swagger.io/', icon: 'OAS', title: 'OpenAPI 缂栬緫鍣?, tag: 'WEB' },
+                { href: 'https://mermaid.live', icon: 'M', title: 'Mermaid 鍥捐〃', tag: 'WEB' },
             ],
         },
     ],
     en: [
         {
-            title: 'On-site · local',
+            title: 'On-site 路 local',
             items: [
-                { href: '/compress.html', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
+                { href: '/compress.html', icon: '馃柤', title: 'PixCrush images', tag: 'Local', int: true },
             ],
         },
         {
@@ -858,30 +981,30 @@ const TOOLS = {
             items: [
                 { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
                 { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON formatter', tag: 'WEB' },
-                { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff checker', tag: 'WEB' },
-                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
-                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown', tag: 'WEB' },
-                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '鈬?, title: 'Diff checker', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '鈻?, title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M鈫?, title: 'Markdown', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV 鈫?JSON', tag: 'WEB' },
                 { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
-                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'Unix timestamp', tag: 'WEB' },
-                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '鈴?, title: 'Unix timestamp', tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '鈱?, title: 'CyberChef', tag: 'WEB' },
                 { href: 'https://prettier.io/playground/', icon: 'P', title: 'Prettier playground', tag: 'WEB' },
                 { href: 'https://www.urlencoder.org/', icon: '%', title: 'URL encoder/decoder', tag: 'WEB' },
-                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON ↔ CSV', tag: 'WEB' },
+                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON 鈫?CSV', tag: 'WEB' },
             ],
         },
         {
             title: 'Front-end, design & UI',
             items: [
-                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
-                { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
-                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML tools', tag: 'WEB' },
-                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon screenshots', tag: 'WEB' },
-                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon generator', tag: 'WEB' },
-                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS gradients', tag: 'WEB' },
+                { href: 'https://caniuse.com', icon: '馃搳', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '鉁?, title: 'Excalidraw', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '鈼?, title: 'SVGOMG', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '鈬?, title: 'CSS / HTML tools', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '鉂?, title: 'Carbon screenshots', tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '鈽?, title: 'Favicon generator', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '鈼?, title: 'CSS gradients', tag: 'WEB' },
                 { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind docs', tag: 'WEB' },
-                { href: 'https://cubic-bezier.com', icon: '∿', title: 'Cubic-bezier', tag: 'WEB' },
+                { href: 'https://cubic-bezier.com', icon: '鈭?, title: 'Cubic-bezier', tag: 'WEB' },
                 { href: 'https://svg-path-visualizer.netlify.app/', icon: 'SVG', title: 'SVG path visualizer', tag: 'WEB' },
                 { href: 'https://fonts.google.com', icon: 'F', title: 'Google Fonts', tag: 'WEB' },
             ],
@@ -889,10 +1012,10 @@ const TOOLS = {
         {
             title: 'Online IDEs & sandboxes',
             items: [
-                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codesandbox.io', icon: '鈻?, title: 'CodeSandbox', tag: 'WEB' },
                 { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
-                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
-                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '鈿?, title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '鈥?, title: 'Replit', tag: 'WEB' },
                 { href: 'https://jsfiddle.net', icon: 'Fid', title: 'JSFiddle', tag: 'WEB' },
                 { href: 'https://glitch.com', icon: 'G', title: 'Glitch', tag: 'WEB' },
             ],
@@ -900,26 +1023,26 @@ const TOOLS = {
         {
             title: 'DevOps, network & debug',
             items: [
-                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab guru', tag: 'WEB' },
+                { href: 'https://crontab.guru', icon: '鈴?, title: 'Crontab guru', tag: 'WEB' },
                 { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx config', tag: 'WEB' },
                 { href: 'https://explainshell.com', icon: '$', title: 'Explain shell', tag: 'WEB' },
                 { href: 'https://httpbin.org', icon: 'http', title: 'httpbin', tag: 'WEB' },
                 { href: 'https://dnschecker.org', icon: '@', title: 'DNS propagation', tag: 'WEB' },
                 { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS lookup', tag: 'WEB' },
-                { href: 'https://webhook.site', icon: '→', title: 'Webhook tester', tag: 'WEB' },
+                { href: 'https://webhook.site', icon: '鈫?, title: 'Webhook tester', tag: 'WEB' },
                 { href: 'https://www.ssllabs.com/ssltest/', icon: 'TLS', title: 'SSL server test', tag: 'WEB' },
-                { href: 'https://fast.com', icon: '⚡', title: 'Speed test', tag: 'WEB' },
+                { href: 'https://fast.com', icon: '鈿?, title: 'Speed test', tag: 'WEB' },
             ],
         },
         {
             title: 'DB, security & docs',
             items: [
-                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite viewer', tag: 'WEB' },
+                { href: 'https://sqliteviewer.app', icon: '馃梻', title: 'SQLite viewer', tag: 'WEB' },
                 { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
-                { href: 'https://jwt.io', icon: '🔑', title: 'JWT.io', tag: 'WEB' },
-                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Image → Base64', tag: 'WEB' },
-                { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
-                { href: 'https://shields.io', icon: '▬', title: 'Shields.io badges', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '馃攽', title: 'JWT.io', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Image 鈫?Base64', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '馃摑', title: 'readme.so', tag: 'WEB' },
+                { href: 'https://shields.io', icon: '鈻?, title: 'Shields.io badges', tag: 'WEB' },
                 { href: 'https://editor.swagger.io/', icon: 'OAS', title: 'OpenAPI editor', tag: 'WEB' },
                 { href: 'https://mermaid.live', icon: 'M', title: 'Mermaid live', tag: 'WEB' },
             ],
@@ -927,84 +1050,132 @@ const TOOLS = {
     ],
     ja: [
         {
-            title: '当サイト · ローカル',
+            title: '褰撱偟銈ゃ儓 路 銉兗銈儷',
             items: [
-                { href: '/compress.html', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
+                { href: '/compress.html', icon: '馃柤', title: 'PixCrush 鐢诲儚', tag: '銉兗銈儷', int: true },
             ],
         },
         {
-            title: 'テキスト・データ形式',
+            title: '銉嗐偔銈广儓銉汇儑銉笺偪褰㈠紡',
             items: [
                 { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
                 { href: 'https://jsonformatter.org', icon: '{}', title: 'JSON', tag: 'WEB' },
-                { href: 'https://www.diffchecker.com', icon: '⇄', title: 'Diff', tag: 'WEB' },
-                { href: 'https://jsonformatter.org/yaml-to-json', icon: '▤', title: 'YAML / JSON', tag: 'WEB' },
-                { href: 'https://dillinger.io', icon: 'M↓', title: 'Markdown', tag: 'WEB' },
-                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV ↔ JSON', tag: 'WEB' },
+                { href: 'https://www.diffchecker.com', icon: '鈬?, title: 'Diff', tag: 'WEB' },
+                { href: 'https://jsonformatter.org/yaml-to-json', icon: '鈻?, title: 'YAML / JSON', tag: 'WEB' },
+                { href: 'https://dillinger.io', icon: 'M鈫?, title: 'Markdown', tag: 'WEB' },
+                { href: 'https://csvjson.com/csv2json', icon: 'csv', title: 'CSV 鈫?JSON', tag: 'WEB' },
                 { href: 'https://www.uuidgenerator.net', icon: '#', title: 'UUID', tag: 'WEB' },
-                { href: 'https://www.epochconverter.com', icon: '⏲', title: 'UNIX 時刻', tag: 'WEB' },
-                { href: 'https://gchq.github.io/CyberChef/', icon: '⌗', title: 'CyberChef', tag: 'WEB' },
-                { href: 'https://prettier.io/playground/', icon: 'P', title: 'Prettier プレイグラウンド', tag: 'WEB' },
-                { href: 'https://www.urlencoder.org/', icon: '%', title: 'URL エンコード/デコード', tag: 'WEB' },
-                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON ↔ CSV', tag: 'WEB' },
+                { href: 'https://www.epochconverter.com', icon: '鈴?, title: 'UNIX 鏅傚埢', tag: 'WEB' },
+                { href: 'https://gchq.github.io/CyberChef/', icon: '鈱?, title: 'CyberChef', tag: 'WEB' },
+                { href: 'https://prettier.io/playground/', icon: 'P', title: 'Prettier 銉椼儸銈ゃ偘銉┿偊銉炽儔', tag: 'WEB' },
+                { href: 'https://www.urlencoder.org/', icon: '%', title: 'URL 銈ㄣ兂銈炽兗銉?銉囥偝銉笺儔', tag: 'WEB' },
+                { href: 'https://csvjson.com/json2csv', icon: 'csv', title: 'JSON 鈫?CSV', tag: 'WEB' },
             ],
         },
         {
-            title: 'フロント・デザイン',
+            title: '銉曘儹銉炽儓銉汇儑銈躲偆銉?,
             items: [
-                { href: 'https://caniuse.com', icon: '📊', title: 'Can I use', tag: 'WEB' },
-                { href: 'https://excalidraw.com', icon: '✎', title: 'Excalidraw', tag: 'WEB' },
-                { href: 'https://svgomg.net', icon: '◇', title: 'SVGOMG', tag: 'WEB' },
-                { href: 'https://transform.tools', icon: '⇄', title: 'CSS / HTML', tag: 'WEB' },
-                { href: 'https://carbon.now.sh', icon: '❯', title: 'Carbon', tag: 'WEB' },
-                { href: 'https://realfavicongenerator.net', icon: '★', title: 'Favicon', tag: 'WEB' },
-                { href: 'https://cssgradient.io', icon: '◐', title: 'CSS グラデ', tag: 'WEB' },
-                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind ドキュメント', tag: 'WEB' },
-                { href: 'https://cubic-bezier.com', icon: '∿', title: 'ベジェ曲線', tag: 'WEB' },
-                { href: 'https://svg-path-visualizer.netlify.app/', icon: 'SVG', title: 'SVG パス可視化', tag: 'WEB' },
+                { href: 'https://caniuse.com', icon: '馃搳', title: 'Can I use', tag: 'WEB' },
+                { href: 'https://excalidraw.com', icon: '鉁?, title: 'Excalidraw', tag: 'WEB' },
+                { href: 'https://svgomg.net', icon: '鈼?, title: 'SVGOMG', tag: 'WEB' },
+                { href: 'https://transform.tools', icon: '鈬?, title: 'CSS / HTML', tag: 'WEB' },
+                { href: 'https://carbon.now.sh', icon: '鉂?, title: 'Carbon', tag: 'WEB' },
+                { href: 'https://realfavicongenerator.net', icon: '鈽?, title: 'Favicon', tag: 'WEB' },
+                { href: 'https://cssgradient.io', icon: '鈼?, title: 'CSS 銈般儵銉?, tag: 'WEB' },
+                { href: 'https://tailwindcss.com/docs/installation', icon: 'TW', title: 'Tailwind 銉夈偔銉ャ儭銉炽儓', tag: 'WEB' },
+                { href: 'https://cubic-bezier.com', icon: '鈭?, title: '銉欍偢銈ф洸绶?, tag: 'WEB' },
+                { href: 'https://svg-path-visualizer.netlify.app/', icon: 'SVG', title: 'SVG 銉戙偣鍙鍖?, tag: 'WEB' },
                 { href: 'https://fonts.google.com', icon: 'F', title: 'Google Fonts', tag: 'WEB' },
             ],
         },
         {
-            title: 'IDE・サンドボックス',
+            title: 'IDE銉汇偟銉炽儔銉溿儍銈偣',
             items: [
-                { href: 'https://codesandbox.io', icon: '▣', title: 'CodeSandbox', tag: 'WEB' },
+                { href: 'https://codesandbox.io', icon: '鈻?, title: 'CodeSandbox', tag: 'WEB' },
                 { href: 'https://codepen.io', icon: 'cp', title: 'CodePen', tag: 'WEB' },
-                { href: 'https://stackblitz.com', icon: '⚡', title: 'StackBlitz', tag: 'WEB' },
-                { href: 'https://replit.com', icon: '›', title: 'Replit', tag: 'WEB' },
+                { href: 'https://stackblitz.com', icon: '鈿?, title: 'StackBlitz', tag: 'WEB' },
+                { href: 'https://replit.com', icon: '鈥?, title: 'Replit', tag: 'WEB' },
                 { href: 'https://jsfiddle.net', icon: 'Fid', title: 'JSFiddle', tag: 'WEB' },
                 { href: 'https://glitch.com', icon: 'G', title: 'Glitch', tag: 'WEB' },
             ],
         },
         {
-            title: '運用・ネットワーク',
+            title: '閬嬬敤銉汇儘銉冦儓銉兗銈?,
             items: [
-                { href: 'https://crontab.guru', icon: '⏱', title: 'Crontab', tag: 'WEB' },
+                { href: 'https://crontab.guru', icon: '鈴?, title: 'Crontab', tag: 'WEB' },
                 { href: 'https://nginxconfig.io', icon: 'N', title: 'nginx', tag: 'WEB' },
                 { href: 'https://explainshell.com', icon: '$', title: 'Explain shell', tag: 'WEB' },
                 { href: 'https://httpbin.org', icon: 'http', title: 'httpbin', tag: 'WEB' },
-                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 確認', tag: 'WEB' },
-                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS ルックアップ', tag: 'WEB' },
-                { href: 'https://webhook.site', icon: '→', title: 'Webhook テスター', tag: 'WEB' },
-                { href: 'https://www.ssllabs.com/ssltest/', icon: 'TLS', title: 'SSL サーバーテスト', tag: 'WEB' },
-                { href: 'https://fast.com', icon: '⚡', title: 'スピードテスト', tag: 'WEB' },
+                { href: 'https://dnschecker.org', icon: '@', title: 'DNS 纰鸿獚', tag: 'WEB' },
+                { href: 'https://www.whatsmydns.net', icon: 'DNS', title: 'DNS 銉儍銈偄銉冦儣', tag: 'WEB' },
+                { href: 'https://webhook.site', icon: '鈫?, title: 'Webhook 銉嗐偣銈裤兗', tag: 'WEB' },
+                { href: 'https://www.ssllabs.com/ssltest/', icon: 'TLS', title: 'SSL 銈点兗銉愩兗銉嗐偣銉?, tag: 'WEB' },
+                { href: 'https://fast.com', icon: '鈿?, title: '銈广償銉笺儔銉嗐偣銉?, tag: 'WEB' },
             ],
         },
         {
-            title: 'DB・セキュリティ・文書',
+            title: 'DB銉汇偦銈儱銉儐銈ｃ兓鏂囨浉',
             items: [
-                { href: 'https://sqliteviewer.app', icon: '🗂', title: 'SQLite', tag: 'WEB' },
+                { href: 'https://sqliteviewer.app', icon: '馃梻', title: 'SQLite', tag: 'WEB' },
                 { href: 'https://www.db-fiddle.com', icon: 'SQL', title: 'DB Fiddle', tag: 'WEB' },
-                { href: 'https://jwt.io', icon: '🔑', title: 'JWT', tag: 'WEB' },
-                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Base64 画像', tag: 'WEB' },
-                { href: 'https://readme.so', icon: '📝', title: 'readme.so', tag: 'WEB' },
-                { href: 'https://shields.io', icon: '▬', title: 'Shields バッジ', tag: 'WEB' },
-                { href: 'https://editor.swagger.io/', icon: 'OAS', title: 'OpenAPI エディタ', tag: 'WEB' },
-                { href: 'https://mermaid.live', icon: 'M', title: 'Mermaid ライブ', tag: 'WEB' },
+                { href: 'https://jwt.io', icon: '馃攽', title: 'JWT', tag: 'WEB' },
+                { href: 'https://base64.guru/converter/encode/image', icon: '64', title: 'Base64 鐢诲儚', tag: 'WEB' },
+                { href: 'https://readme.so', icon: '馃摑', title: 'readme.so', tag: 'WEB' },
+                { href: 'https://shields.io', icon: '鈻?, title: 'Shields 銉愩儍銈?, tag: 'WEB' },
+                { href: 'https://editor.swagger.io/', icon: 'OAS', title: 'OpenAPI 銈ㄣ儑銈ｃ偪', tag: 'WEB' },
+                { href: 'https://mermaid.live', icon: 'M', title: 'Mermaid 銉┿偆銉?, tag: 'WEB' },
             ],
         },
     ],
 };
+
+Object.assign(I18N.zh, {
+    blog_spot_title: 'Blog upgraded',
+    blog_spot_desc: 'The blog now supports JSON data, a browser admin panel, and per-post Waline comments, so it feels like a proper content section instead of a hidden utility page.',
+    blog_badge_json: 'JSON Data',
+    blog_badge_admin: 'Admin Panel',
+    blog_badge_comment: 'Waline Comments',
+    blog_cta_read: 'Open Blog',
+    blog_cta_manage: 'Manage Posts',
+    blog_note_1_t: 'Online CRUD',
+    blog_note_1_d: 'Edit articles in the browser, then export JSON back into the site files.',
+    blog_note_2_t: 'Per-post comments',
+    blog_note_2_d: 'Each blog article now mounts its own Waline thread instead of sharing the home page comment area.',
+    blog_note_3_t: 'Better SEO structure',
+    blog_note_3_d: 'Blog list, article detail pages, and sitemap entries are already wired together for ongoing content growth.'
+});
+
+Object.assign(I18N.en, {
+    blog_spot_title: 'The Blog Is Upgraded',
+    blog_spot_desc: 'The blog now supports a JSON data source, a local admin panel, and per-article Waline comments, so it stands out as a real content area instead of a hidden extra page.',
+    blog_badge_json: 'JSON Data',
+    blog_badge_admin: 'Admin Panel',
+    blog_badge_comment: 'Waline Comments',
+    blog_cta_read: 'Open Blog',
+    blog_cta_manage: 'Manage Posts',
+    blog_note_1_t: 'Online CRUD',
+    blog_note_1_d: 'Edit articles in the browser, then export JSON back into the site files.',
+    blog_note_2_t: 'Per-post comments',
+    blog_note_2_d: 'Each blog article now mounts its own Waline thread instead of sharing the home page comment area.',
+    blog_note_3_t: 'Better SEO structure',
+    blog_note_3_d: 'Blog list, article detail pages, and sitemap entries are already wired together for ongoing content growth.'
+});
+
+Object.assign(I18N.ja, {
+    blog_spot_title: 'Blog upgraded',
+    blog_spot_desc: 'The blog now supports JSON data, a browser admin panel, and per-post Waline comments, so it feels like a proper content section instead of a hidden utility page.',
+    blog_badge_json: 'JSON Data',
+    blog_badge_admin: 'Admin Panel',
+    blog_badge_comment: 'Waline Comments',
+    blog_cta_read: 'Open Blog',
+    blog_cta_manage: 'Manage Posts',
+    blog_note_1_t: 'Online CRUD',
+    blog_note_1_d: 'Edit articles in the browser, then export JSON back into the site files.',
+    blog_note_2_t: 'Per-post comments',
+    blog_note_2_d: 'Each blog article now mounts its own Waline thread instead of sharing the home page comment area.',
+    blog_note_3_t: 'Better SEO structure',
+    blog_note_3_d: 'Blog list, article detail pages, and sitemap entries are already wired together for ongoing content growth.'
+});
 
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 
@@ -1044,73 +1215,72 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
 });
 
 
-// ══ 精选推荐数据 ════════════════════════════════════════════════════
+// 鈺愨晲 绮鹃€夋帹鑽愭暟鎹?鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
 const PINNED = [
-    { icon:'🔍', name:'JSON Crack',      brand:'jsoncrack.com',       desc:{zh:'JSON 结构可视化，将嵌套数据转为树状图，一眼看清层级',en:'Visualize JSON as an interactive graph',ja:'JSONをグラフで可視化'}, href:'https://jsoncrack.com', cat:'dev' },
-    { icon:'⚡', name:'Transform.tools', brand:'transform.tools',      desc:{zh:'数十种格式互转：JSON→TS、SQL→Go 等，开发必备',en:'Convert between dozens of formats: JSON to TS, SQL to Go…',ja:'JSON→TSなど多種フォーマット変換'}, href:'https://transform.tools', cat:'dev' },
-    { icon:'🔑', name:'JWT Debugger',    brand:'jwt.io',               desc:{zh:'快速解码 JWT Token，查看 payload、过期时间和签名信息',en:'Decode & verify JWT tokens instantly',ja:'JWTトークンを即座に解析'}, href:'https://jwt.io', cat:'dev' },
-    { icon:'◇',  name:'SVG to Component',brand:'react-svgr.com',      desc:{zh:'矢量图标一键转为 React、Vue 或 Tailwind 组件代码',en:'Convert SVG icons to React / Vue / Tailwind components',ja:'SVGをReact/Vueコンポーネントに変換'}, href:'https://react-svgr.com/playground/', cat:'dev' },
-    { icon:'🐳', name:'Docker Gen',      brand:'composerize.com',      desc:{zh:'通过可视化选项生成 Docker Compose 配置文件',en:'Generate Docker Compose configs visually',ja:'Docker Compose設定を自動生成'}, href:'https://www.composerize.com', cat:'dev' },
-    { icon:'🪄', name:'Object Remover',  brand:'objectremover.com',    desc:{zh:'AI 智能擦除：涂抹即可无痕去除照片中的路人或杂物',en:'AI-powered object removal — just brush to erase',ja:'AIで写真の不要物を消去'}, href:'https://objectremover.com', cat:'image' },
-    { icon:'💬', name:'Image to Prompt', brand:'imagetoprompt.com',   desc:{zh:'上传 AI 图反推提示词（Prompt），还原创作思路',en:'Reverse-engineer AI image prompts from any picture',ja:'AI画像からプロンプトを逆算'}, href:'https://imagetoprompt.com', cat:'ai' },
-    { icon:'🔍', name:'AI Upscaler',     brand:'upscayl.org',          desc:{zh:'AI 无损放大图片 4 倍，自动补全细节，开源免费',en:'Upscale images 4× with AI detail enhancement',ja:'AIで画像を4倍高解像度化'}, href:'https://www.upscayl.org', cat:'image' },
-    { icon:'📄', name:'Chat with PDF',   brand:'chatpdf.com',          desc:{zh:'向长篇 PDF 直接提问，AI 自动总结重点和关键条款',en:'Ask any question to a PDF — AI summarizes key points',ja:'PDFに質問してAIが要約'}, href:'https://www.chatpdf.com', cat:'ai' },
-    { icon:'✂️', name:'Remove.bg',       brand:'remove.bg',            desc:{zh:'发丝级精细扣图，一键去除背景，支持批量处理',en:'Remove image backgrounds at pixel-perfect quality',ja:'高精度な背景除去ツール'}, href:'https://www.remove.bg', cat:'image' },
-    { icon:'📸', name:'Shots.so',        brand:'shots.so',             desc:{zh:'给普通截图套上 Mac / iPhone 外壳与高级背景',en:'Wrap screenshots in beautiful device mockups',ja:'スクリーンショットをデバイス枠で美化'}, href:'https://shots.so', cat:'design' },
-    { icon:'🌊', name:'Haikei',          brand:'haikei.app',           desc:{zh:'随机生成丝滑 SVG 波浪、渐变形状，一键用于网页',en:'Generate smooth SVG waves and blobs for your site',ja:'SVGウェーブ・形状をランダム生成'}, href:'https://app.haikei.app', cat:'design' },
-    { icon:'🌐', name:'OpenGraph.xyz',   brand:'opengraph.xyz',        desc:{zh:'输入网址预览分享到微信 / X 时的样式，排查 OG 问题',en:'Preview how your URL looks when shared on social media',ja:'SNSシェア時のプレビューを確認'}, href:'https://www.opengraph.xyz', cat:'seo' },
-    { icon:'🎨', name:'Coolors',         brand:'coolors.co',           desc:{zh:'从照片提取配色或随机生成高级配色方案',en:'Extract palettes from photos or generate color schemes',ja:'写真から配色を抽出・生成'}, href:'https://coolors.co', cat:'design' },
-    { icon:'🔄', name:'CloudConvert',    brand:'cloudconvert.com',     desc:{zh:'支持几乎所有格式的文件互转：PDF、视频、文档均可',en:'Convert almost any file format — PDF, video, docs',ja:'ほぼ全形式のファイル変換'}, href:'https://cloudconvert.com', cat:'convert' },
-    { icon:'🔗', name:'Dub.co',          brand:'dub.co',               desc:{zh:'短链接 + 实时统计点击来源、地理位置和设备信息',en:'Short links with real-time click analytics',ja:'短縮URLとリアルタイム分析'}, href:'https://dub.co', cat:'seo' },
-    { icon:'🚀', name:'PageSpeed',       brand:'pagespeed.web.dev',    desc:{zh:'一键诊断网站加载速度，提供具体优化建议',en:'Diagnose site speed and get actionable suggestions',ja:'サイト速度診断と改善提案'}, href:'https://pagespeed.web.dev', cat:'seo' },
-    { icon:'🕷️', name:'Broken Link Check',brand:'brokenlinkcheck.com',desc:{zh:'全站扫描死链，找出所有 404 错误链接',en:'Scan your entire site for broken 404 links',ja:'サイト全体の壊れたリンクを検出'}, href:'https://www.brokenlinkcheck.com', cat:'seo' },
+    { icon:'馃攳', name:'JSON Crack',      brand:'jsoncrack.com',       desc:{zh:'JSON 缁撴瀯鍙鍖栵紝灏嗗祵濂楁暟鎹浆涓烘爲鐘跺浘锛屼竴鐪肩湅娓呭眰绾?,en:'Visualize JSON as an interactive graph',ja:'JSON銈掋偘銉┿儠銇у彲瑕栧寲'}, href:'https://jsoncrack.com', cat:'dev' },
+    { icon:'鈿?, name:'Transform.tools', brand:'transform.tools',      desc:{zh:'鏁板崄绉嶆牸寮忎簰杞細JSON鈫扵S銆丼QL鈫扜o 绛夛紝寮€鍙戝繀澶?,en:'Convert between dozens of formats: JSON to TS, SQL to Go鈥?,ja:'JSON鈫扵S銇仼澶氱ó銉曘偐銉笺優銉冦儓澶夋彌'}, href:'https://transform.tools', cat:'dev' },
+    { icon:'馃攽', name:'JWT Debugger',    brand:'jwt.io',               desc:{zh:'蹇€熻В鐮?JWT Token锛屾煡鐪?payload銆佽繃鏈熸椂闂村拰绛惧悕淇℃伅',en:'Decode & verify JWT tokens instantly',ja:'JWT銉堛兗銈兂銈掑嵆搴с伀瑙ｆ瀽'}, href:'https://jwt.io', cat:'dev' },
+    { icon:'鈼?,  name:'SVG to Component',brand:'react-svgr.com',      desc:{zh:'鐭㈤噺鍥炬爣涓€閿浆涓?React銆乂ue 鎴?Tailwind 缁勪欢浠ｇ爜',en:'Convert SVG icons to React / Vue / Tailwind components',ja:'SVG銈扲eact/Vue銈炽兂銉濄兗銉嶃兂銉堛伀澶夋彌'}, href:'https://react-svgr.com/playground/', cat:'dev' },
+    { icon:'馃惓', name:'Docker Gen',      brand:'composerize.com',      desc:{zh:'閫氳繃鍙鍖栭€夐」鐢熸垚 Docker Compose 閰嶇疆鏂囦欢',en:'Generate Docker Compose configs visually',ja:'Docker Compose瑷畾銈掕嚜鍕曠敓鎴?}, href:'https://www.composerize.com', cat:'dev' },
+    { icon:'馃獎', name:'Object Remover',  brand:'objectremover.com',    desc:{zh:'AI 鏅鸿兘鎿﹂櫎锛氭秱鎶瑰嵆鍙棤鐥曞幓闄ょ収鐗囦腑鐨勮矾浜烘垨鏉傜墿',en:'AI-powered object removal 鈥?just brush to erase',ja:'AI銇у啓鐪熴伄涓嶈鐗┿倰娑堝幓'}, href:'https://objectremover.com', cat:'image' },
+    { icon:'馃挰', name:'Image to Prompt', brand:'imagetoprompt.com',   desc:{zh:'涓婁紶 AI 鍥惧弽鎺ㄦ彁绀鸿瘝锛圥rompt锛夛紝杩樺師鍒涗綔鎬濊矾',en:'Reverse-engineer AI image prompts from any picture',ja:'AI鐢诲儚銇嬨倝銉椼儹銉炽儣銉堛倰閫嗙畻'}, href:'https://imagetoprompt.com', cat:'ai' },
+    { icon:'馃攳', name:'AI Upscaler',     brand:'upscayl.org',          desc:{zh:'AI 鏃犳崯鏀惧ぇ鍥剧墖 4 鍊嶏紝鑷姩琛ュ叏缁嗚妭锛屽紑婧愬厤璐?,en:'Upscale images 4脳 with AI detail enhancement',ja:'AI銇х敾鍍忋倰4鍊嶉珮瑙ｅ儚搴﹀寲'}, href:'https://www.upscayl.org', cat:'image' },
+    { icon:'馃搫', name:'Chat with PDF',   brand:'chatpdf.com',          desc:{zh:'鍚戦暱绡?PDF 鐩存帴鎻愰棶锛孉I 鑷姩鎬荤粨閲嶇偣鍜屽叧閿潯娆?,en:'Ask any question to a PDF 鈥?AI summarizes key points',ja:'PDF銇唱鍟忋仐銇I銇岃绱?}, href:'https://www.chatpdf.com', cat:'ai' },
+    { icon:'鉁傦笍', name:'Remove.bg',       brand:'remove.bg',            desc:{zh:'鍙戜笣绾х簿缁嗘墸鍥撅紝涓€閿幓闄よ儗鏅紝鏀寔鎵归噺澶勭悊',en:'Remove image backgrounds at pixel-perfect quality',ja:'楂樼簿搴︺仾鑳屾櫙闄ゅ幓銉勩兗銉?}, href:'https://www.remove.bg', cat:'image' },
+    { icon:'馃摳', name:'Shots.so',        brand:'shots.so',             desc:{zh:'缁欐櫘閫氭埅鍥惧涓?Mac / iPhone 澶栧３涓庨珮绾ц儗鏅?,en:'Wrap screenshots in beautiful device mockups',ja:'銈广偗銉兗銉炽偡銉с儍銉堛倰銉囥儛銈ゃ偣鏋犮仹缇庡寲'}, href:'https://shots.so', cat:'design' },
+    { icon:'馃寠', name:'Haikei',          brand:'haikei.app',           desc:{zh:'闅忔満鐢熸垚涓濇粦 SVG 娉㈡氮銆佹笎鍙樺舰鐘讹紝涓€閿敤浜庣綉椤?,en:'Generate smooth SVG waves and blobs for your site',ja:'SVG銈︺偋銉笺儢銉诲舰鐘躲倰銉┿兂銉€銉犵敓鎴?}, href:'https://app.haikei.app', cat:'design' },
+    { icon:'馃寪', name:'OpenGraph.xyz',   brand:'opengraph.xyz',        desc:{zh:'杈撳叆缃戝潃棰勮鍒嗕韩鍒板井淇?/ X 鏃剁殑鏍峰紡锛屾帓鏌?OG 闂',en:'Preview how your URL looks when shared on social media',ja:'SNS銈枫偋銈㈡檪銇儣銉儞銉ャ兗銈掔⒑瑾?}, href:'https://www.opengraph.xyz', cat:'seo' },
+    { icon:'馃帹', name:'Coolors',         brand:'coolors.co',           desc:{zh:'浠庣収鐗囨彁鍙栭厤鑹叉垨闅忔満鐢熸垚楂樼骇閰嶈壊鏂规',en:'Extract palettes from photos or generate color schemes',ja:'鍐欑湡銇嬨倝閰嶈壊銈掓娊鍑恒兓鐢熸垚'}, href:'https://coolors.co', cat:'design' },
+    { icon:'馃攧', name:'CloudConvert',    brand:'cloudconvert.com',     desc:{zh:'鏀寔鍑犱箮鎵€鏈夋牸寮忕殑鏂囦欢浜掕浆锛歅DF銆佽棰戙€佹枃妗ｅ潎鍙?,en:'Convert almost any file format 鈥?PDF, video, docs',ja:'銇汇伡鍏ㄥ舰寮忋伄銉曘偂銈ゃ儷澶夋彌'}, href:'https://cloudconvert.com', cat:'convert' },
+    { icon:'馃敆', name:'Dub.co',          brand:'dub.co',               desc:{zh:'鐭摼鎺?+ 瀹炴椂缁熻鐐瑰嚮鏉ユ簮銆佸湴鐞嗕綅缃拰璁惧淇℃伅',en:'Short links with real-time click analytics',ja:'鐭府URL銇ㄣ儶銈儷銈裤偆銉犲垎鏋?}, href:'https://dub.co', cat:'seo' },
+    { icon:'馃殌', name:'PageSpeed',       brand:'pagespeed.web.dev',    desc:{zh:'涓€閿瘖鏂綉绔欏姞杞介€熷害锛屾彁渚涘叿浣撲紭鍖栧缓璁?,en:'Diagnose site speed and get actionable suggestions',ja:'銈点偆銉堥€熷害瑷烘柇銇ㄦ敼鍠勬彁妗?}, href:'https://pagespeed.web.dev', cat:'seo' },
+    { icon:'馃暦锔?, name:'Broken Link Check',brand:'brokenlinkcheck.com',desc:{zh:'鍏ㄧ珯鎵弿姝婚摼锛屾壘鍑烘墍鏈?404 閿欒閾炬帴',en:'Scan your entire site for broken 404 links',ja:'銈点偆銉堝叏浣撱伄澹娿倢銇熴儶銉炽偗銈掓鍑?}, href:'https://www.brokenlinkcheck.com', cat:'seo' },
 ];
 
-// ══ AI 工具数据 ═════════════════════════════════════════════════════
-const AI_TOOLS = [
-    // 写作
-    { cat:'write', icon:'✍️', name:'ChatGPT',        tag:'OpenAI',    href:'https://chat.openai.com' },
-    { cat:'write', icon:'✨', name:'Claude',          tag:'Anthropic', href:'https://claude.ai' },
-    { cat:'write', icon:'🤖', name:'Gemini',          tag:'Google',    href:'https://gemini.google.com' },
-    { cat:'write', icon:'📝', name:'Notion AI',       tag:'Writing',   href:'https://www.notion.so/product/ai' },
-    { cat:'write', icon:'💼', name:'Copy.ai',         tag:'Marketing', href:'https://www.copy.ai' },
-    { cat:'write', icon:'📧', name:'Jasper',          tag:'Content',   href:'https://www.jasper.ai' },
-    // 绘图
-    { cat:'image', icon:'🎨', name:'Midjourney',      tag:'Image',     href:'https://www.midjourney.com' },
-    { cat:'image', icon:'🖼️', name:'DALL·E 3',        tag:'OpenAI',    href:'https://labs.openai.com' },
-    { cat:'image', icon:'⚡', name:'Stable Diffusion',tag:'Image',     href:'https://stability.ai' },
-    { cat:'image', icon:'🎭', name:'Adobe Firefly',   tag:'Adobe',     href:'https://firefly.adobe.com' },
-    { cat:'image', icon:'🌈', name:'Leonardo.ai',     tag:'Image',     href:'https://leonardo.ai' },
-    { cat:'image', icon:'✂️', name:'Remove.bg',       tag:'BG Remove', href:'https://www.remove.bg' },
-    // 视频
-    { cat:'video', icon:'🎬', name:'Sora',            tag:'OpenAI',    href:'https://sora.com' },
-    { cat:'video', icon:'🎥', name:'Runway',          tag:'Video',     href:'https://runwayml.com' },
-    { cat:'video', icon:'🎞️', name:'Pika',            tag:'Video',     href:'https://pika.art' },
-    { cat:'video', icon:'📹', name:'HeyGen',          tag:'Avatar',    href:'https://www.heygen.com' },
-    { cat:'video', icon:'🌊', name:'Kling AI',        tag:'Video',     href:'https://klingai.com' },
-    { cat:'video', icon:'✂️', name:'CapCut AI',       tag:'Edit',      href:'https://www.capcut.com' },
-    // 编程
-    { cat:'code',  icon:'💻', name:'GitHub Copilot',  tag:'Code',      href:'https://github.com/features/copilot' },
-    { cat:'code',  icon:'⚡', name:'Cursor',          tag:'IDE',       href:'https://cursor.sh' },
-    { cat:'code',  icon:'🔧', name:'Claude Code',     tag:'Terminal',  href:'https://claude.ai/code' },
-    { cat:'code',  icon:'🤖', name:'v0.dev',          tag:'UI Gen',    href:'https://v0.dev' },
-    { cat:'code',  icon:'🛠️', name:'Bolt.new',        tag:'Fullstack', href:'https://bolt.new' },
-    { cat:'code',  icon:'🔍', name:'Tabnine',         tag:'Code',      href:'https://www.tabnine.com' },
-    // 对话
-    { cat:'chat',  icon:'🔍', name:'Perplexity',      tag:'Search',    href:'https://www.perplexity.ai' },
-    { cat:'chat',  icon:'🌙', name:'DeepSeek',        tag:'Chat',      href:'https://chat.deepseek.com' },
-    { cat:'chat',  icon:'🦙', name:'Meta AI',         tag:'Meta',      href:'https://www.meta.ai' },
-    { cat:'chat',  icon:'🔥', name:'Grok',            tag:'xAI',       href:'https://grok.com' },
-    { cat:'chat',  icon:'🌐', name:'Kimi',            tag:'月之暗面',  href:'https://kimi.moonshot.cn' },
-    { cat:'chat',  icon:'🐋', name:'文心一言',        tag:'百度',      href:'https://yiyan.baidu.com' },
-    // 音频
-    { cat:'audio', icon:'🎵', name:'Suno',            tag:'Music',     href:'https://suno.ai' },
-    { cat:'audio', icon:'🎤', name:'ElevenLabs',      tag:'Voice',     href:'https://elevenlabs.io' },
-    { cat:'audio', icon:'🎙️', name:'Whisper',         tag:'STT',       href:'https://openai.com/research/whisper' },
-    { cat:'audio', icon:'🔊', name:'Mubert',          tag:'Music',     href:'https://mubert.com' },
+// 鈺愨晲 AI 宸ュ叿鏁版嵁 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?const AI_TOOLS = [
+    // 鍐欎綔
+    { cat:'write', icon:'鉁嶏笍', name:'ChatGPT',        tag:'OpenAI',    href:'https://chat.openai.com' },
+    { cat:'write', icon:'鉁?, name:'Claude',          tag:'Anthropic', href:'https://claude.ai' },
+    { cat:'write', icon:'馃', name:'Gemini',          tag:'Google',    href:'https://gemini.google.com' },
+    { cat:'write', icon:'馃摑', name:'Notion AI',       tag:'Writing',   href:'https://www.notion.so/product/ai' },
+    { cat:'write', icon:'馃捈', name:'Copy.ai',         tag:'Marketing', href:'https://www.copy.ai' },
+    { cat:'write', icon:'馃摟', name:'Jasper',          tag:'Content',   href:'https://www.jasper.ai' },
+    // 缁樺浘
+    { cat:'image', icon:'馃帹', name:'Midjourney',      tag:'Image',     href:'https://www.midjourney.com' },
+    { cat:'image', icon:'馃柤锔?, name:'DALL路E 3',        tag:'OpenAI',    href:'https://labs.openai.com' },
+    { cat:'image', icon:'鈿?, name:'Stable Diffusion',tag:'Image',     href:'https://stability.ai' },
+    { cat:'image', icon:'馃幁', name:'Adobe Firefly',   tag:'Adobe',     href:'https://firefly.adobe.com' },
+    { cat:'image', icon:'馃寛', name:'Leonardo.ai',     tag:'Image',     href:'https://leonardo.ai' },
+    { cat:'image', icon:'鉁傦笍', name:'Remove.bg',       tag:'BG Remove', href:'https://www.remove.bg' },
+    // 瑙嗛
+    { cat:'video', icon:'馃幀', name:'Sora',            tag:'OpenAI',    href:'https://sora.com' },
+    { cat:'video', icon:'馃帴', name:'Runway',          tag:'Video',     href:'https://runwayml.com' },
+    { cat:'video', icon:'馃帪锔?, name:'Pika',            tag:'Video',     href:'https://pika.art' },
+    { cat:'video', icon:'馃摴', name:'HeyGen',          tag:'Avatar',    href:'https://www.heygen.com' },
+    { cat:'video', icon:'馃寠', name:'Kling AI',        tag:'Video',     href:'https://klingai.com' },
+    { cat:'video', icon:'鉁傦笍', name:'CapCut AI',       tag:'Edit',      href:'https://www.capcut.com' },
+    // 缂栫▼
+    { cat:'code',  icon:'馃捇', name:'GitHub Copilot',  tag:'Code',      href:'https://github.com/features/copilot' },
+    { cat:'code',  icon:'鈿?, name:'Cursor',          tag:'IDE',       href:'https://cursor.sh' },
+    { cat:'code',  icon:'馃敡', name:'Claude Code',     tag:'Terminal',  href:'https://claude.ai/code' },
+    { cat:'code',  icon:'馃', name:'v0.dev',          tag:'UI Gen',    href:'https://v0.dev' },
+    { cat:'code',  icon:'馃洜锔?, name:'Bolt.new',        tag:'Fullstack', href:'https://bolt.new' },
+    { cat:'code',  icon:'馃攳', name:'Tabnine',         tag:'Code',      href:'https://www.tabnine.com' },
+    // 瀵硅瘽
+    { cat:'chat',  icon:'馃攳', name:'Perplexity',      tag:'Search',    href:'https://www.perplexity.ai' },
+    { cat:'chat',  icon:'馃寵', name:'DeepSeek',        tag:'Chat',      href:'https://chat.deepseek.com' },
+    { cat:'chat',  icon:'馃', name:'Meta AI',         tag:'Meta',      href:'https://www.meta.ai' },
+    { cat:'chat',  icon:'馃敟', name:'Grok',            tag:'xAI',       href:'https://grok.com' },
+    { cat:'chat',  icon:'馃寪', name:'Kimi',            tag:'鏈堜箣鏆楅潰',  href:'https://kimi.moonshot.cn' },
+    { cat:'chat',  icon:'馃悑', name:'鏂囧績涓€瑷€',        tag:'鐧惧害',      href:'https://yiyan.baidu.com' },
+    // 闊抽
+    { cat:'audio', icon:'馃幍', name:'Suno',            tag:'Music',     href:'https://suno.ai' },
+    { cat:'audio', icon:'馃帳', name:'ElevenLabs',      tag:'Voice',     href:'https://elevenlabs.io' },
+    { cat:'audio', icon:'馃帣锔?, name:'Whisper',         tag:'STT',       href:'https://openai.com/research/whisper' },
+    { cat:'audio', icon:'馃攰', name:'Mubert',          tag:'Music',     href:'https://mubert.com' },
 ];
 
-// ══ 收藏 & 历史 ════════════════════════════════════════════════════
+// 鈺愨晲 鏀惰棌 & 鍘嗗彶 鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
 function getFavs()  { try { return JSON.parse(localStorage.getItem('qtl_favs_v1')  || '[]'); } catch(_){ return []; } }
 function getHist()  { try { return JSON.parse(localStorage.getItem('qtl_hist_v1')  || '[]'); } catch(_){ return []; } }
 function setFavs(v) { localStorage.setItem('qtl_favs_v1',  JSON.stringify(v)); }
@@ -1126,9 +1296,8 @@ function toggleFav(href, name, icon) {
     setFavs(favs);
     updateBadges();
     renderFavDrawer();
-    // 更新所有对应按钮状态
-    document.querySelectorAll(`.fav-btn[data-href="${CSS.escape(href)}"]`).forEach(btn => {
-        btn.textContent = isFav(href) ? '⭐' : '☆';
+    // 鏇存柊鎵€鏈夊搴旀寜閽姸鎬?    document.querySelectorAll(`.fav-btn[data-href="${CSS.escape(href)}"]`).forEach(btn => {
+        btn.textContent = isFav(href) ? '猸? : '鈽?;
         btn.classList.toggle('saved', isFav(href));
     });
 }
@@ -1154,7 +1323,7 @@ function renderFavDrawer() {
     const body = document.getElementById('fav-body');
     const t    = I18N[lang];
     const favs = getFavs();
-    if (!favs.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_fav || '还没有收藏任何工具')}</div>`; return; }
+    if (!favs.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_fav || '杩樻病鏈夋敹钘忎换浣曞伐鍏?)}</div>`; return; }
     body.innerHTML = favs.map(x => `
         <a class="drawer-item" href="${x.href}" target="_blank" rel="noopener noreferrer"
            onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
@@ -1162,21 +1331,21 @@ function renderFavDrawer() {
             <div class="drawer-item-info">
                 <div class="drawer-item-name">${escapeHtml(x.name)}</div>
             </div>
-            <button class="drawer-item-del" onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">✕</button>
+            <button class="drawer-item-del" onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">鉁?/button>
         </a>
-    `).join('') + `<button class="drawer-clear" onclick="setFavs([]);renderFavDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '清空收藏')}</button>`;
+    `).join('') + `<button class="drawer-clear" onclick="setFavs([]);renderFavDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '娓呯┖鏀惰棌')}</button>`;
 }
 
 function renderHistDrawer() {
     const body = document.getElementById('hist-body');
     const t    = I18N[lang];
     const hist = getHist();
-    if (!hist.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_hist || '暂无使用记录')}</div>`; return; }
+    if (!hist.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_hist || '鏆傛棤浣跨敤璁板綍')}</div>`; return; }
     body.innerHTML = hist.map(x => {
         const ago = Math.round((Date.now() - x.time) / 60000);
-        const agoStr = ago < 60 ? ago + (lang === 'zh' ? ' 分钟前' : lang === 'ja' ? ' 分前' : ' min ago')
-                     : ago < 1440 ? Math.floor(ago/60) + (lang === 'zh' ? ' 小时前' : lang === 'ja' ? ' 時間前' : ' hr ago')
-                     : Math.floor(ago/1440) + (lang === 'zh' ? ' 天前' : lang === 'ja' ? ' 日前' : ' days ago');
+        const agoStr = ago < 60 ? ago + (lang === 'zh' ? ' 鍒嗛挓鍓? : lang === 'ja' ? ' 鍒嗗墠' : ' min ago')
+                     : ago < 1440 ? Math.floor(ago/60) + (lang === 'zh' ? ' 灏忔椂鍓? : lang === 'ja' ? ' 鏅傞枔鍓? : ' hr ago')
+                     : Math.floor(ago/1440) + (lang === 'zh' ? ' 澶╁墠' : lang === 'ja' ? ' 鏃ュ墠' : ' days ago');
         return `
         <a class="drawer-item" href="${x.href}" target="_blank" rel="noopener noreferrer"
            onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
@@ -1186,7 +1355,7 @@ function renderHistDrawer() {
                 <div class="drawer-item-sub">${agoStr}</div>
             </div>
         </a>`;
-    }).join('') + `<button class="drawer-clear" onclick="setHist([]);renderHistDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '清空记录')}</button>`;
+    }).join('') + `<button class="drawer-clear" onclick="setHist([]);renderHistDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '娓呯┖璁板綍')}</button>`;
 }
 
 function openDrawer(drawerId, overlayId) {
@@ -1200,8 +1369,7 @@ function closeDrawer(drawerId, overlayId) {
     document.body.style.overflow = '';
 }
 
-// ══ 渲染推荐区 ═════════════════════════════════════════════════════
-function renderPinned() {
+// 鈺愨晲 娓叉煋鎺ㄨ崘鍖?鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺?function renderPinned() {
     const grid = document.getElementById('pinned-grid');
     if (!grid) return;
     grid.innerHTML = PINNED.map(p => `
@@ -1219,7 +1387,7 @@ function renderPinned() {
     `).join('');
 }
 
-// ══ 渲染 AI 工具区 ══════════════════════════════════════════════════
+// 鈺愨晲 娓叉煋 AI 宸ュ叿鍖?鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲鈺愨晲
 let currentAiCat = 'all';
 function renderAiTools(cat) {
     currentAiCat = cat;
@@ -1233,18 +1401,18 @@ function renderAiTools(cat) {
             <span class="tag">${escapeHtml(x.tag)}</span>
             <button class="fav-btn ${isFav(x.href)?'saved':''}" data-href="${x.href}"
                 onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')"
-                title="${isFav(x.href)?'取消收藏':'收藏'}">${isFav(x.href)?'⭐':'☆'}</button>
+                title="${isFav(x.href)?'鍙栨秷鏀惰棌':'鏀惰棌'}">${isFav(x.href)?'猸?:'鈽?}</button>
         </a>
     `).join('');
 }
 
 let currentToolCat = 'all';
 const TOOL_CAT_MAP = {
-    text:     ['本站 · 本地','文本与数据格式','Text & data formats','テキスト・データ形式','On-site · local'],
-    frontend: ['前端、设计与可视化','Front-end, design & UI','フロント・デザイン'],
-    sandbox:  ['在线编码与沙盒','Online IDEs & sandboxes','IDE・サンドボックス'],
-    devops:   ['运维、网络与调试','DevOps, network & debug','運用・ネットワーク'],
-    db:       ['数据库、安全与文档','DB, security & docs','DB・セキュリティ・文書'],
+    text:     ['鏈珯 路 鏈湴','鏂囨湰涓庢暟鎹牸寮?,'Text & data formats','銉嗐偔銈广儓銉汇儑銉笺偪褰㈠紡','On-site 路 local'],
+    frontend: ['鍓嶇銆佽璁′笌鍙鍖?,'Front-end, design & UI','銉曘儹銉炽儓銉汇儑銈躲偆銉?],
+    sandbox:  ['鍦ㄧ嚎缂栫爜涓庢矙鐩?,'Online IDEs & sandboxes','IDE銉汇偟銉炽儔銉溿儍銈偣'],
+    devops:   ['杩愮淮銆佺綉缁滀笌璋冭瘯','DevOps, network & debug','閬嬬敤銉汇儘銉冦儓銉兗銈?],
+    db:       ['鏁版嵁搴撱€佸畨鍏ㄤ笌鏂囨。','DB, security & docs','DB銉汇偦銈儱銉儐銈ｃ兓鏂囨浉'],
 };
 
 function renderTools(toolCat) {
@@ -1256,7 +1424,7 @@ function renderTools(toolCat) {
         return matchers.some(m => cat.title.includes(m) || m.includes(cat.title));
     });
     if (!filtered.length) {
-        host.innerHTML = `<div class="loading" style="padding:32px;text-align:center;">无匹配分类</div>`;
+        host.innerHTML = `<div class="loading" style="padding:32px;text-align:center;">鏃犲尮閰嶅垎绫?/div>`;
         return;
     }
     host.innerHTML = filtered.map(cat => `
@@ -1271,7 +1439,7 @@ function renderTools(toolCat) {
             <span class="tag">${escapeHtml(x.tag)}</span>
             <button class="fav-btn ${isFav(x.href)?'saved':''}" data-href="${x.href}"
                 onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.title)}','${escapeHtml(x.icon)}')"
-                title="${isFav(x.href)?'取消收藏':'收藏'}">${isFav(x.href)?'⭐':'☆'}</button>
+                title="${isFav(x.href)?'鍙栨秷鏀惰棌':'鏀惰棌'}">${isFav(x.href)?'猸?:'鈽?}</button>
         </a>`).join('')}
             </div>
         </div>
@@ -1294,13 +1462,13 @@ function relDate(iso) {
     const hours = Math.floor(ms / 3600000);
     const days = Math.floor(ms / 86400000);
     if (lang === 'zh') {
-        if (mins < 60) return Math.max(1, mins) + ' 分钟前';
-        if (hours < 24) return hours + ' 小时前';
-        if (days < 7) return days + ' 天前';
+        if (mins < 60) return Math.max(1, mins) + ' 鍒嗛挓鍓?;
+        if (hours < 24) return hours + ' 灏忔椂鍓?;
+        if (days < 7) return days + ' 澶╁墠';
     } else if (lang === 'ja') {
-        if (mins < 60) return Math.max(1, mins) + ' 分前';
-        if (hours < 24) return hours + ' 時間前';
-        if (days < 7) return days + ' 日前';
+        if (mins < 60) return Math.max(1, mins) + ' 鍒嗗墠';
+        if (hours < 24) return hours + ' 鏅傞枔鍓?;
+        if (days < 7) return days + ' 鏃ュ墠';
     } else {
         if (mins < 60) return Math.max(1, mins) + ' min ago';
         if (hours < 24) return hours + ' hr ago';
@@ -1343,7 +1511,7 @@ async function loadDynamicContent() {
                 <img class="thumb" src="${a.cover_image || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="56" height="56"><rect fill="%2318181f" width="56" height="56"/><text x="28" y="32" text-anchor="middle" fill="%235a5a72" font-size="10">DEV</text></svg>')}" alt="" width="56" height="56" loading="lazy" decoding="async">
                 <div class="body">
                     <div class="t">${escapeHtml(a.title)}</div>
-                    <div class="meta">${escapeHtml(a.user.name)} · ${relDate(a.published_at)}</div>
+                    <div class="meta">${escapeHtml(a.user.name)} 路 ${relDate(a.published_at)}</div>
                 </div>
             </a>
         `).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
@@ -1356,7 +1524,7 @@ async function loadDynamicContent() {
                     <a class="slide-card" href="${a.url}" target="_blank" rel="noopener noreferrer">
                         <div class="slide-cover-wrap">
                             <img src="${a.cover_image || 'data:image/svg+xml,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="220" height="138"><rect fill="%2318181f" width="220" height="138"/></svg>')}" alt="" loading="lazy" decoding="async">
-                            <span class="slide-badge">${a.reading_time_minutes != null ? a.reading_time_minutes + (lang === 'zh' ? ' 分钟' : lang === 'ja' ? ' 分' : ' min') : (a.public_reactions_count != null ? '♥ ' + a.public_reactions_count : 'DEV')}</span>
+                            <span class="slide-badge">${a.reading_time_minutes != null ? a.reading_time_minutes + (lang === 'zh' ? ' 鍒嗛挓' : lang === 'ja' ? ' 鍒? : ' min') : (a.public_reactions_count != null ? '鈾?' + a.public_reactions_count : 'DEV')}</span>
                         </div>
                         <div class="cap">${escapeHtml(a.title)}</div>
                     </a>
@@ -1379,7 +1547,7 @@ async function loadDynamicContent() {
                     <div class="gh-desc">${escapeHtml(r.description || '')}</div>
                     <div class="gh-foot">
                         ${r.language ? `<span style="display:inline-flex;align-items:center;gap:6px;"><span class="lang-dot" style="background:${col}"></span>${escapeHtml(r.language)}</span>` : ''}
-                        <span>★ ${fmtStars(r.stargazers_count)}</span>
+                        <span>鈽?${fmtStars(r.stargazers_count)}</span>
                     </div>
                 </div>
             </a>`;
@@ -1416,7 +1584,7 @@ function langColor(name) {
 applyTheme(theme);
 applyLang(lang);
 
-// AI tab 切换
+// AI tab 鍒囨崲
 document.getElementById('ai-tab-bar').addEventListener('click', e => {
     const btn = e.target.closest('.ai-tab');
     if (!btn) return;
@@ -1425,7 +1593,7 @@ document.getElementById('ai-tab-bar').addEventListener('click', e => {
     renderAiTools(btn.dataset.aicat);
 });
 
-// 工具 tab 切换
+// 宸ュ叿 tab 鍒囨崲
 document.getElementById('tools-tab-bar').addEventListener('click', e => {
     const btn = e.target.closest('.tools-tab');
     if (!btn) return;
@@ -1434,8 +1602,7 @@ document.getElementById('tools-tab-bar').addEventListener('click', e => {
     renderTools(btn.dataset.toolcat);
 });
 
-// 抽屉开关
-document.getElementById('fav-fab').addEventListener('click',  () => { renderFavDrawer();  openDrawer('fav-drawer','fav-overlay'); });
+// 鎶藉眽寮€鍏?document.getElementById('fav-fab').addEventListener('click',  () => { renderFavDrawer();  openDrawer('fav-drawer','fav-overlay'); });
 document.getElementById('hist-fab').addEventListener('click', () => { renderHistDrawer(); openDrawer('hist-drawer','hist-overlay'); });
 document.getElementById('fav-close').addEventListener('click',  () => closeDrawer('fav-drawer','fav-overlay'));
 document.getElementById('hist-close').addEventListener('click', () => closeDrawer('hist-drawer','hist-overlay'));
