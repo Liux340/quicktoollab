@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QuickToolLab help article with concise guidance on tools, workflows, and practical troubleshooting steps.">
+    <meta name="theme-color" content="#0a0a10">
+    <meta name="robots" content="noindex,follow" id="meta-robots">
     <title>帮助文章 · QuickToolLab</title>
     <script>
         (function(){
@@ -40,9 +43,9 @@
         .line b{color:var(--accent2)}
         .empty{padding:18px;border:1px solid var(--border);background:var(--surface);border-radius:12px;color:var(--muted)}
     </style>
-    <link rel="canonical" href="https://quicktoollab.top/help-article.html">
+    <link rel="canonical" href="https://quicktoollab.top/help.html" id="canonical-link">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://quicktoollab.top/help-article.html">
+    <meta property="og:url" content="https://quicktoollab.top/help.html" id="meta-og-url">
     <meta property="og:title" content="帮助文章 · QuickToolLab">
     <meta property="og:description" content="QuickToolLab 帮助文章">
     <meta name="twitter:card" content="summary">
@@ -80,6 +83,7 @@ const I18N = {
     ja:{ back:'ヘルプへ戻る', help:'ヘルプ', article:'記事', intro:'紹介：', howto:'使い方：', science:'豆知識：', notfound:'記事が見つかりません。ヘルプセンターから選び直してください。', page_title:'ヘルプ記事 · QuickToolLab' }
 };
 const ARTICLES = window.HELP_ARTICLES || [];
+const BASE_URL = 'https://quicktoollab.top';
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
@@ -90,18 +94,46 @@ function localizeField(v){
     if (typeof v === 'string') return v;
     return v[lang] || v.zh || v.en || v.ja || '';
 }
+function truncate(text, max){
+    const s = (text || '').replace(/\s+/g, ' ').trim();
+    return s.length > max ? s.slice(0, max - 3).trimEnd() + '...' : s;
+}
+function setMeta(selector, value){
+    const el = document.querySelector(selector);
+    if (el) el.setAttribute('content', value);
+}
+function updateSeo(article, t){
+    const canonical = article
+        ? `${BASE_URL}/help-article.html?id=${encodeURIComponent(article.id)}`
+        : `${BASE_URL}/help.html`;
+    const description = article
+        ? truncate(`${localizeField(article.intro)} ${localizeField(article.howto)}`, 160)
+        : 'QuickToolLab help article with concise guidance on tools, workflows, and practical troubleshooting steps.';
+    const title = article
+        ? `${localizeField(article.title)} · QuickToolLab`
+        : t.page_title;
+    document.title = title;
+    setMeta('meta[name="description"]', description);
+    document.getElementById('canonical-link').setAttribute('href', canonical);
+    document.getElementById('meta-robots').setAttribute('content', article ? 'index,follow' : 'noindex,follow');
+    document.getElementById('meta-og-url').setAttribute('content', canonical);
+    setMeta('meta[property="og:title"]', title);
+    setMeta('meta[property="og:description"]', description);
+    setMeta('meta[name="twitter:title"]', title);
+    setMeta('meta[name="twitter:description"]', description);
+}
 
 function renderArticle(){
     const t = I18N[lang];
     const id = getId();
     const a = ARTICLES.find(x => x.id === id);
     const host = document.getElementById('article-host');
-    document.title = t.page_title;
+    updateSeo(null, t);
     if (!a) {
         host.innerHTML = '<div class="empty">' + esc(t.notfound) + '</div>';
         return;
     }
-    document.title = localizeField(a.title) + ' · QuickToolLab';
+    updateSeo(a, t);
     host.innerHTML = `
         <div class="cat">${esc(localizeField(a.cat))}</div>
         <h1>${esc(localizeField(a.title))}</h1>
