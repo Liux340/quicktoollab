@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>博客文章 · QuickToolLab</title>
+    <meta charset="UTF-8">
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" id="meta-desc" content="QuickToolLab 博客文章">
+    <link rel="canonical" id="canonical" href="https://quicktoollab.top/blog-post.html">
+    <meta property="og:type" content="article">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Waline CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+
+    <style>
+        :root{--accent:#f97316;--accent2:#fb923c;--accentlo:rgba(249,115,22,.12);--green:#22c55e;--teal:#14b8a6;--purple:#8b5cf6;}
+        [data-theme="dark"]{--bg:#0a0a10;--surface:#111118;--surface2:#18181f;--border:#222230;--text:#ededf5;--text2:#9090b0;--muted:#5a5a72;--code-bg:#161620;}
+        [data-theme="light"]{--bg:#f2f2f7;--surface:#ffffff;--surface2:#f0f0f8;--border:#d8d8e8;--text:#16161f;--text2:#4a4a6a;--muted:#7a7a96;--code-bg:#f6f8fa;}
+
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
+        a{text-decoration:none;color:inherit;}
+
+        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+
+        /* ── Header ── */
+        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);transition:background .3s,border-color .3s;}
+        .nav{max-width:1160px;margin:0 auto;padding:0 20px;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+        .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:19px;color:#fff;}
+        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1.5px;color:var(--text);transition:color .3s;}
+        .logo-name span{color:var(--accent);}
+        .nav-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;justify-content:center;flex:1;}
+        .nav-links a{font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .18s,background .18s;}
+        .nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accentlo);}
+        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
+        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;}
+        .lang-btn.active{background:var(--accent);color:#fff;}
+        .lang-btn:not(.active):hover{color:var(--text);}
+        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
+        [data-theme="dark"] .icon-sun{display:none;}[data-theme="dark"] .icon-moon{display:block;}
+        [data-theme="light"] .icon-sun{display:block;}[data-theme="light"] .icon-moon{display:none;}
+
+        /* ── Article Hero ── */
+        .article-hero{
+            position:relative;overflow:hidden;
+            min-height:400px;display:flex;align-items:flex-end;
+        }
+        .article-hero-bg{
+            position:absolute;inset:0;
+            background:var(--surface2);
+        }
+        .article-hero-bg img{width:100%;height:100%;object-fit:cover;display:block;}
+        .article-hero-overlay{
+            position:absolute;inset:0;
+            background:linear-gradient(to top, rgba(0,0,0,.85) 0%, rgba(0,0,0,.3) 50%, transparent 100%);
+        }
+        .article-hero-content{
+            position:relative;z-index:1;
+            max-width:900px;margin:0 auto;width:100%;
+            padding:40px 20px 36px;
+        }
+        .article-breadcrumb{
+            display:flex;align-items:center;gap:8px;
+            font-size:12.5px;margin-bottom:20px;opacity:.8;
+        }
+        .article-breadcrumb a{color:#fff;opacity:.7;transition:opacity .2s;}
+        .article-breadcrumb a:hover{opacity:1;}
+        .article-breadcrumb span{color:rgba(255,255,255,.5);}
+
+        .article-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            padding:3px 12px;border-radius:100px;
+            font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+            margin-bottom:14px;
+        }
+        .badge-tech{background:rgba(14,165,233,.25);color:#7dd3fc;border:1px solid rgba(14,165,233,.3);}
+        .badge-tool{background:rgba(249,115,22,.25);color:#fdba74;border:1px solid rgba(249,115,22,.3);}
+        .badge-dev{background:rgba(139,92,246,.25);color:#c4b5fd;border:1px solid rgba(139,92,246,.3);}
+        .badge-life{background:rgba(34,197,94,.25);color:#86efac;border:1px solid rgba(34,197,94,.3);}
+
+        .article-title{
+            font-family:'Noto Serif SC',serif;
+            font-size:clamp(24px,4vw,42px);
+            font-weight:700;color:#fff;line-height:1.3;
+            margin-bottom:18px;
+            text-shadow:0 2px 8px rgba(0,0,0,.5);
+        }
+        .article-meta-bar{
+            display:flex;align-items:center;gap:16px;flex-wrap:wrap;
+            font-size:13px;color:rgba(255,255,255,.7);
+        }
+        .article-meta-item{display:flex;align-items:center;gap:5px;}
+
+        /* ── Layout ── */
+        .article-layout{
+            max-width:1160px;margin:0 auto;
+            padding:40px 20px 80px;
+            display:grid;grid-template-columns:1fr 260px;gap:32px;
+        }
+        @media(max-width:900px){.article-layout{grid-template-columns:1fr;}}
+
+        /* ── Article body ── */
+        .article-body{min-width:0;}
+
+        .article-tags{
+            display:flex;gap:8px;flex-wrap:wrap;
+            padding:16px 20px;margin-bottom:32px;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:14px;
+        }
+        .article-tag{
+            padding:3px 11px;border-radius:8px;
+            font-size:12px;font-weight:600;
+            background:var(--surface2);border:1px solid var(--border);color:var(--text2);
+            cursor:pointer;transition:all .15s;
+        }
+        .article-tag:hover{border-color:var(--accent);color:var(--accent);}
+
+        /* ── Prose ── */
+        .prose{
+            font-size:16px;line-height:1.85;color:var(--text);
+        }
+        .prose h2{
+            font-family:'Noto Serif SC',serif;font-size:24px;font-weight:700;
+            color:var(--text);margin:2.2em 0 .8em;
+            padding-bottom:.5em;border-bottom:2px solid var(--border);
+        }
+        .prose h3{
+            font-family:'Noto Serif SC',serif;font-size:19px;font-weight:700;
+            color:var(--text);margin:1.8em 0 .6em;
+        }
+        .prose h4{font-size:16px;font-weight:700;color:var(--text);margin:1.4em 0 .5em;}
+        .prose p{margin:0 0 1.4em;color:var(--text2);}
+        .prose a{color:var(--accent);text-decoration:underline;text-underline-offset:3px;}
+        .prose a:hover{color:var(--accent2);}
+        .prose strong{color:var(--text);font-weight:700;}
+        .prose em{color:var(--text2);}
+        .prose ul,.prose ol{margin:0 0 1.4em 1.5em;color:var(--text2);}
+        .prose li{margin-bottom:.4em;}
+        .prose blockquote{
+            border-left:4px solid var(--accent);
+            padding:.8em 1.2em;margin:1.5em 0;
+            background:var(--accentlo);border-radius:0 10px 10px 0;
+            font-style:italic;color:var(--text2);
+        }
+        .prose code{
+            font-family:'JetBrains Mono',ui-monospace,monospace;
+            font-size:.85em;padding:.15em .45em;border-radius:5px;
+            background:var(--code-bg);color:var(--accent2);
+            border:1px solid var(--border);
+        }
+        .prose pre{
+            background:var(--code-bg);border:1px solid var(--border);
+            border-radius:12px;padding:1.2em 1.4em;
+            overflow-x:auto;margin:1.5em 0;
+        }
+        .prose pre code{
+            background:none;border:none;padding:0;
+            font-size:.9em;color:var(--text);
+        }
+        .prose img{
+            max-width:100%;border-radius:12px;
+            border:1px solid var(--border);margin:1.5em 0;display:block;
+        }
+        .prose hr{border:none;border-top:1px solid var(--border);margin:2em 0;}
+        .prose table{width:100%;border-collapse:collapse;margin:1.5em 0;font-size:14px;}
+        .prose th{background:var(--surface2);padding:.6em 1em;border:1px solid var(--border);font-weight:600;}
+        .prose td{padding:.6em 1em;border:1px solid var(--border);color:var(--text2);}
+
+        /* ── License ── */
+        .license-block{
+            margin-top:48px;padding:20px 22px;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:14px;font-size:13px;color:var(--muted);
+            display:flex;gap:14px;align-items:flex-start;
+        }
+        .license-icon{font-size:24px;flex-shrink:0;}
+        .license-text a{color:var(--accent);text-decoration:underline;text-underline-offset:2px;}
+
+        /* ── Post navigation ── */
+        .post-nav{
+            display:grid;grid-template-columns:1fr 1fr;gap:14px;
+            margin-top:32px;
+        }
+        @media(max-width:540px){.post-nav{grid-template-columns:1fr;}}
+        .post-nav-card{
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:14px;padding:16px 18px;
+            display:flex;align-items:center;gap:12px;
+            cursor:pointer;transition:border-color .2s,background .15s;
+            text-decoration:none;color:inherit;
+        }
+        .post-nav-card:hover{border-color:var(--accent);background:var(--surface2);}
+        .post-nav-arrow{font-size:20px;color:var(--muted);flex-shrink:0;}
+        .post-nav-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+        .post-nav-title{font-size:13.5px;font-weight:600;color:var(--text);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+        /* ── Comments ── */
+        .comments-section{
+            margin-top:48px;
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:18px;padding:28px 28px 24px;
+        }
+        .comments-title{
+            font-family:'Bebas Neue',sans-serif;
+            font-size:22px;letter-spacing:2px;
+            color:var(--text);margin-bottom:6px;
+            display:flex;align-items:center;gap:10px;
+        }
+        .comments-title-dot{width:8px;height:8px;border-radius:50%;background:var(--teal);box-shadow:0 0 0 3px rgba(20,184,166,.2);}
+        .comments-sub{font-size:13px;color:var(--muted);margin-bottom:20px;}
+
+        /* Waline theme adaptation */
+        #waline-container{--waline-font-size:14px;--waline-border-radius:10px;}
+        [data-theme="dark"] #waline-container{
+            --waline-color:var(--text);--waline-bgcolor:var(--surface);
+            --waline-bgcolor-light:var(--surface2);--waline-bgcolor-hover:var(--surface2);
+            --waline-border-color:var(--border);--waline-disable-bgcolor:var(--bg);
+            --waline-code-bgcolor:var(--code-bg);--waline-info-bgcolor:var(--surface2);
+            --waline-info-color:var(--muted);
+        }
+        [data-theme="light"] #waline-container{
+            --waline-color:var(--text);--waline-bgcolor:var(--surface);
+            --waline-bgcolor-light:var(--surface2);--waline-bgcolor-hover:var(--surface2);
+            --waline-border-color:var(--border);
+        }
+
+        /* ── TOC Sidebar ── */
+        .sidebar{position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;}
+        .sidebar::-webkit-scrollbar{width:4px;}
+        .sidebar::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+
+        .toc-card{
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:14px;padding:18px 16px;margin-bottom:16px;
+        }
+        .toc-title{
+            font-size:11px;font-weight:700;color:var(--muted);
+            text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;
+            display:flex;align-items:center;gap:6px;
+        }
+        .toc-list{list-style:none;display:flex;flex-direction:column;gap:2px;}
+        .toc-item a{
+            display:block;font-size:13px;color:var(--muted);padding:4px 8px;
+            border-radius:7px;transition:all .15s;border-left:2px solid transparent;
+        }
+        .toc-item a:hover,.toc-item a.active{color:var(--accent);background:var(--accentlo);border-left-color:var(--accent);}
+        .toc-item.h3 a{padding-left:20px;font-size:12px;}
+
+        .share-card{
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:14px;padding:18px 16px;
+        }
+        .share-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.8px;margin-bottom:12px;}
+        .share-btns{display:flex;flex-direction:column;gap:8px;}
+        .share-btn{
+            display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:10px;
+            border:1px solid var(--border);background:transparent;color:var(--text2);
+            font-size:12.5px;font-weight:600;cursor:pointer;transition:all .18s;
+            font-family:'Outfit',sans-serif;text-align:left;
+        }
+        .share-btn:hover{border-color:var(--accent);color:var(--accent);background:var(--accentlo);}
+
+        /* ── Scroll to top ── */
+        .scroll-top{
+            position:fixed;bottom:28px;right:22px;z-index:200;
+            width:42px;height:42px;border-radius:12px;
+            border:1px solid var(--border);background:var(--surface);
+            box-shadow:0 4px 18px rgba(0,0,0,.18);
+            cursor:pointer;display:flex;align-items:center;justify-content:center;
+            font-size:18px;color:var(--muted);
+            transition:all .2s;opacity:0;transform:translateY(10px);pointer-events:none;
+        }
+        .scroll-top.visible{opacity:1;transform:translateY(0);pointer-events:auto;}
+        .scroll-top:hover{color:var(--accent);border-color:var(--accent);}
+
+        /* ── Reading progress ── */
+        .reading-progress{
+            position:fixed;top:0;left:0;right:0;height:3px;
+            background:linear-gradient(90deg,var(--accent),var(--accent2));
+            transform-origin:left;transform:scaleX(0);
+            z-index:200;transition:transform .1s;
+        }
+
+        /* ── Footer ── */
+        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;transition:border-color .3s;}
+        .footer-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+        .footer-copy{font-size:13px;color:var(--muted);}
+        .footer-links{display:flex;gap:4px;flex-wrap:wrap;}
+        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s;}
+        .footer-links a:hover{color:var(--text);background:var(--border);}
+
+        @keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+        .fade-in{animation:up .45s ease both;}
+
+        /* 404 state */
+        .not-found{text-align:center;padding:100px 20px;color:var(--muted);}
+        .not-found h2{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--text);margin-bottom:12px;}
+    </style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- Reading progress bar -->
+<div class="reading-progress" id="reading-progress"></div>
+
+<header>
+    <div class="nav">
+        <a href="/" class="logo">
+            <div class="logo-mark">Q</div>
+            <div>
+                <div class="logo-name">QUICK<span>TOOL</span>LAB</div>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/compress.html">PixCrush</a>
+            <a href="/blog.html" class="active" data-i18n="nav_blog">博客</a>
+            <a href="/help.html" data-i18n="nav_help">帮助</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+        </nav>
+        <div class="nav-right">
+            <div class="lang-sw">
+                <button class="lang-btn" data-lang="zh" type="button">中文</button>
+                <button class="lang-btn" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" data-lang="ja" type="button">日本語</button>
+            </div>
+            <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle theme">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Article Hero -->
+<div class="article-hero" id="article-hero">
+    <div class="article-hero-bg" id="hero-bg"></div>
+    <div class="article-hero-overlay"></div>
+    <div class="article-hero-content fade-in">
+        <div class="article-breadcrumb">
+            <a href="/">首页</a>
+            <span>›</span>
+            <a href="/blog.html" data-i18n="nav_blog">博客</a>
+            <span>›</span>
+            <span id="breadcrumb-title">文章</span>
+        </div>
+        <div id="article-badge" class="article-badge badge-tech">tech</div>
+        <h1 class="article-title" id="article-title">加载中…</h1>
+        <div class="article-meta-bar">
+            <div class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                <span id="article-date">—</span>
+            </div>
+            <div class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                <span id="article-readtime">—</span>
+            </div>
+            <div class="article-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span id="article-views">— 浏览</span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="article-layout">
+    <!-- Main content -->
+    <div class="article-body">
+        <div class="article-tags" id="article-tags"></div>
+        <div class="prose" id="article-prose"></div>
+        <div class="license-block">
+            <div class="license-icon">©</div>
+            <div class="license-text">
+                本文遵循 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 协议。
+                转载请注明出处：<a href="https://quicktoollab.top" target="_blank">quicktoollab.top</a>
+            </div>
+        </div>
+        <div class="post-nav" id="post-nav"></div>
+
+        <!-- Comments -->
+        <div class="comments-section">
+            <div class="comments-title">
+                <span class="comments-title-dot"></span>
+                <span data-i18n="comments_title">发表评论</span>
+            </div>
+            <p class="comments-sub" data-i18n="comments_sub">欢迎留下你的想法，支持 Markdown 格式 ✦</p>
+            <div id="waline-container"></div>
+        </div>
+    </div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <!-- TOC -->
+        <div class="toc-card">
+            <div class="toc-title">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="15" y2="18"/></svg>
+                <span data-i18n="toc_title">目录</span>
+            </div>
+            <ul class="toc-list" id="toc-list"></ul>
+        </div>
+        <!-- Share -->
+        <div class="share-card">
+            <div class="share-title" data-i18n="share_title">分享文章</div>
+            <div class="share-btns">
+                <button class="share-btn" onclick="copyLink()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                    <span data-i18n="share_copy">复制链接</span>
+                </button>
+                <button class="share-btn" onclick="shareTwitter()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                    <span>Twitter / X</span>
+                </button>
+            </div>
+        </div>
+    </aside>
+</div>
+
+<!-- Scroll to top -->
+<button class="scroll-top" id="scroll-top" aria-label="回到顶部" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
+        <div class="footer-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/blog.html" data-i18n="nav_blog">博客</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+
+// ══ i18n ══════════════════════════════════════════════════════════════
+const I18N = {
+    zh:{ nav_home:'首页', nav_blog:'博客', nav_help:'帮助', nav_about:'关于', nav_privacy:'隐私政策',
+         comments_title:'发表评论', comments_sub:'欢迎留下你的想法，支持 Markdown 格式 ✦',
+         toc_title:'目录', share_title:'分享文章', share_copy:'复制链接',
+         min_read:'分钟阅读', views:'浏览', copied:'链接已复制 ✓',
+         prev_post:'上一篇', next_post:'下一篇', not_found:'文章未找到',
+    },
+    en:{ nav_home:'Home', nav_blog:'Blog', nav_help:'Help', nav_about:'About', nav_privacy:'Privacy',
+         comments_title:'Leave a Comment', comments_sub:'Share your thoughts. Markdown supported ✦',
+         toc_title:'Contents', share_title:'Share', share_copy:'Copy link',
+         min_read:'min read', views:'views', copied:'Link copied ✓',
+         prev_post:'Previous', next_post:'Next', not_found:'Article not found',
+    },
+    ja:{ nav_home:'ホーム', nav_blog:'ブログ', nav_help:'ヘルプ', nav_about:'About', nav_privacy:'プライバシー',
+         comments_title:'コメントを書く', comments_sub:'Markdownに対応しています ✦',
+         toc_title:'目次', share_title:'シェア', share_copy:'リンクをコピー',
+         min_read:'分で読める', views:'閲覧', copied:'コピーしました ✓',
+         prev_post:'前の記事', next_post:'次の記事', not_found:'記事が見つかりません',
+    },
+};
+
+// ══ Posts data (same as blog.html) ════════════════════════════════════
+const POSTS = [
+    {
+        id:'canonical-seo', cat:'tech', date:'2025-04-15', readTime:5,
+        title:{ zh:'Canonical 标签写错一个字母，导致 6 个页面全部不被收录', en:'One typo in canonical URL blocked all 6 pages from indexing', ja:'canonical URLの誤字でページが未収録に' },
+        desc:{ zh:'记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。', en:'A real-world case: one missing "l" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.', ja:'ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。' },
+        tags:['SEO','canonical','Google Search Console'],
+        image:'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop',
+        badge:'tech',
+        content:{
+            zh:`<h2>问题发现</h2>
+<p>某天检查 Google Search Console，发现提交的 6 个页面状态全部是 <strong>「已被抓取 — 未收录」</strong>，理由都是 <strong>「已选择替代页面（包含正确的 canonical 标签）」</strong>。</p>
+<p>这意味着 Google 认为这些页面是"重复内容"，并且认为真正的"原始"页面在别处。</p>
+
+<h2>排查过程</h2>
+<p>仔细检查才发现问题：所有页面的 canonical 标签写的是 <code>https://quicktoolab.com/</code>，而我的真实域名是 <code>https://quicktoollab.top/</code>。</p>
+<blockquote>注意：<code>quicktoolab</code>（少一个 l）vs <code>quicktoollab</code>（正确）</blockquote>
+<p>Google 的逻辑是：canonical 标签相当于你在告诉 Google "这个页面的权威版本在 <code>quicktoolab.com</code>"，所以 Google 说"好的，那我去收录 <code>quicktoolab.com</code>"，然后你的 <code>quicktoollab.top</code> 就被当成副本丢弃了。</p>
+
+<h2>修复步骤</h2>
+<p>修复很简单，把所有页面的 canonical 链接从：</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoolab.com/"&gt;</code></pre>
+<p>改为：</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoollab.top/"&gt;</code></pre>
+<p>同时一并修复了 <code>og:url</code>、<code>og:image</code> 里的同类错误。</p>
+
+<h2>经验教训</h2>
+<p>Canonical 标签是 SEO 中最容易被忽视却影响最大的标签之一。几个关键点：</p>
+<ul>
+<li>canonical 指向的域名必须和你实际使用的域名 <strong>完全一致</strong>，包括 www 和非 www、http 和 https</li>
+<li>sitemap 里的 URL 和 canonical 指向的 URL 必须一致，否则 Google 会困惑</li>
+<li>每次新建页面后，第一件事就是检查 canonical 是否正确</li>
+</ul>
+<p>提交修复后，通过 Google Search Console 的「URL 检查」工具逐一请求重新收录，大约 2-4 周后应该会正常被索引。</p>`,
+            en:`<h2>Problem Discovery</h2>
+<p>While checking Google Search Console, all 6 submitted pages showed <strong>"Crawled — currently not indexed"</strong> with reason <strong>"Duplicate, submitted URL not selected as canonical"</strong>.</p>
+<p>This means Google considered these pages as duplicates, believing the real "original" version exists elsewhere.</p>
+
+<h2>Root Cause</h2>
+<p>On closer inspection: all canonical tags pointed to <code>https://quicktoolab.com/</code> while the actual domain is <code>https://quicktoollab.top/</code>.</p>
+<blockquote>Notice: <code>quicktoolab</code> (missing one "l") vs <code>quicktoollab</code> (correct)</blockquote>
+<p>Google's logic: canonical tells Google "the authoritative version is at quicktoolab.com". So Google indexed quicktoolab.com and treated quicktoollab.top as a duplicate.</p>
+
+<h2>Fix</h2>
+<p>Simple fix — update all canonical links from:</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoolab.com/"&gt;</code></pre>
+<p>To:</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoollab.top/"&gt;</code></pre>
+<p>Also fixed the same typo in <code>og:url</code> and <code>og:image</code> tags.</p>
+
+<h2>Lessons Learned</h2>
+<ul>
+<li>The canonical URL must <strong>exactly match</strong> your actual domain — including www vs non-www, http vs https</li>
+<li>Sitemap URLs and canonical URLs must match, or Google gets confused</li>
+<li>Always verify canonical tags are correct when creating new pages</li>
+</ul>`,
+            ja:`<h2>問題の発見</h2>
+<p>Google Search Consoleを確認したところ、提出した6ページすべてが<strong>「クロール済み — インデックス未登録」</strong>で、理由は<strong>「重複：ユーザーが指定したURLが正規URLとして選択されていない」</strong>でした。</p>
+
+<h2>原因の特定</h2>
+<p>よく確認すると、すべてのcanonicalタグが <code>https://quicktoolab.com/</code> を指していましたが、実際のドメインは <code>https://quicktoollab.top/</code> です。</p>
+<blockquote><code>quicktoolab</code>（lが一つ足りない）vs <code>quicktoollab</code>（正しい）</blockquote>
+
+<h2>修正方法</h2>
+<p>全ページのcanonicalを正しいドメインに修正し、og:urlとog:imageも同様に修正しました。</p>
+
+<h2>教訓</h2>
+<ul>
+<li>canonicalのURLは実際のドメインと完全に一致させること</li>
+<li>sitemapのURLとcanonicalのURLは一致させること</li>
+<li>新ページ作成時は必ずcanonicalを確認すること</li>
+</ul>`,
+        },
+    },
+    {
+        id:'waline-comment-system', cat:'tool', date:'2025-04-10', readTime:8,
+        title:{ zh:'把 localStorage 自制评论系统替换成 Waline 的全过程', en:'Replacing a DIY localStorage comment system with Waline', ja:'自作コメントシステムをWalineに置き換える' },
+        desc:{ zh:'自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。', en:'A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.', ja:'自作コメントシステムから Waline への移行過程を完全記録。' },
+        tags:['Waline','评论系统','JavaScript'],
+        image:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop',
+        badge:'tool',
+        content:{
+            zh:`<h2>问题根源</h2>
+<p>原来的评论系统用 <code>localStorage</code> 存储评论数据，这是浏览器的本地存储，每台设备、每个浏览器都是完全隔离的。所以你在自己电脑上发的评论，其他访客根本看不到。</p>
+
+<h2>为什么选 Waline</h2>
+<p>Waline 是一个开源的评论系统，主要优势：</p>
+<ul>
+<li>评论存在服务端数据库，所有访客都能看到</li>
+<li>免费部署在 Vercel，配合 Cloudflare Pages 很合适</li>
+<li>支持 Markdown、表情包、邮件通知</li>
+<li>主题适配方便，通过 CSS 变量控制样式</li>
+</ul>
+
+<h2>迁移步骤</h2>
+<p>替换只涉及三处改动：</p>
+<ul>
+<li><strong>HTML</strong>：将原来的输入框、验证码等替换为一个 <code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code></li>
+<li><strong>CSS</strong>：删除旧评论样式，加入 Waline CSS 主题变量适配</li>
+<li><strong>JS</strong>：删除所有旧评论函数，加入 Waline 初始化代码</li>
+</ul>
+
+<h2>关键代码</h2>
+<pre><code>import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+function initWaline(locale) {
+    if (window.__walineInstance) window.__walineInstance.destroy();
+    window.__walineInstance = init({
+        el: '#waline-container',
+        serverURL: 'https://comment.quicktoollab.top',
+        lang: locale || 'zh-CN',
+        dark: 'auto',
+    });
+}</code></pre>
+
+<h2>踩坑记录</h2>
+<p>最大的坑：替换时 <code>submitHomeComment</code> 函数末尾的闭合括号没有被一起删除，导致一个孤立的语句出现在全局作用域，造成 JS 语法错误，整个脚本崩溃，所有动态内容都加载不出来。</p>
+<p>教训：替换评论 JS 块时，一定要检查块的开头和结尾有没有残留代码。</p>`,
+            en:`<h2>The Root Problem</h2>
+<p>The original system stored comments in <code>localStorage</code> — browser-local storage that's completely isolated per device and browser. Comments you post are invisible to other visitors.</p>
+
+<h2>Why Waline</h2>
+<p>Waline stores comments in a server-side database so all visitors can see them. It deploys free on Vercel, supports Markdown and emoji, and adapts to themes via CSS variables.</p>
+
+<h2>Migration Steps</h2>
+<p>Only three changes needed:</p>
+<ul>
+<li><strong>HTML</strong>: Replace all inputs and captcha with <code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code></li>
+<li><strong>CSS</strong>: Remove old comment styles, add Waline CSS variable theme adaptation</li>
+<li><strong>JS</strong>: Delete all old comment functions, add Waline init code</li>
+</ul>
+
+<h2>Pitfall</h2>
+<p>The biggest gotcha: a dangling closing brace from the old <code>submitHomeComment</code> function caused a JS syntax error, crashing the entire script and breaking all dynamic content loading.</p>`,
+            ja:`<h2>問題の根本原因</h2>
+<p>元のシステムは<code>localStorage</code>にコメントを保存していました。これはブラウザのローカルストレージで、デバイスやブラウザごとに完全に分離されています。</p>
+
+<h2>Walineを選んだ理由</h2>
+<p>Walineはサーバーサイドにコメントを保存するため、全訪問者がコメントを見ることができます。Vercelで無料デプロイ可能で、Markdownや絵文字にも対応しています。</p>
+
+<h2>移行手順</h2>
+<ul>
+<li>HTMLの入力フォームを<code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code>に置換</li>
+<li>古いCSSを削除し、WalineのCSSテーマ変数を追加</li>
+<li>古いJS関数を削除し、Waline初期化コードを追加</li>
+</ul>`,
+        },
+    },
+    {
+        id:'cloudflare-pages-deploy', cat:'dev', date:'2025-04-05', readTime:6,
+        title:{ zh:'GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠', en:'Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection', ja:'GitHub + Cloudflare Pages でゼロコストサイト構築' },
+        desc:{ zh:'只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。', en:'One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.', ja:'ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。' },
+        tags:['Cloudflare','GitHub Pages','部署'],
+        image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop',
+        badge:'dev',
+        content:{
+            zh:`<h2>方案概述</h2>
+<p>这套方案的核心逻辑：GitHub 存代码 → Cloudflare Pages 自动部署 → Cloudflare CDN 分发 → 用户访问。</p>
+<p>费用：只需一个域名，其余全部免费。</p>
+
+<h2>部署步骤</h2>
+<ul>
+<li>1. 把网站文件推送到 GitHub 仓库</li>
+<li>2. 登录 Cloudflare Pages，新建项目，连接 GitHub 仓库</li>
+<li>3. 构建命令留空（纯静态站），输出目录填 <code>/</code></li>
+<li>4. 绑定自定义域名，在域名商处添加 CNAME 记录</li>
+</ul>
+
+<h2>免费功能清单</h2>
+<ul>
+<li>✅ 全球 CDN 加速（200+ 节点）</li>
+<li>✅ 自动 HTTPS / TLS</li>
+<li>✅ DDoS L3/L4 防护</li>
+<li>✅ CI/CD 自动部署（push 后自动更新）</li>
+<li>✅ Web Analytics 基础统计</li>
+<li>✅ 每月 500 次构建、无限带宽</li>
+</ul>
+
+<h2>注意事项</h2>
+<p>纯静态站没有后端，不能运行 Node.js / PHP 等服务端代码。如果需要 API，可以配合 Cloudflare Workers（每天 10 万次免费请求）。</p>`,
+            en:`<h2>Architecture</h2>
+<p>GitHub stores code → Cloudflare Pages auto-deploys → Cloudflare CDN distributes → users access.</p>
+<p>Cost: one domain name fee. Everything else is free.</p>
+
+<h2>Deployment Steps</h2>
+<ul>
+<li>1. Push site files to a GitHub repository</li>
+<li>2. Log in to Cloudflare Pages, create a project, connect GitHub repo</li>
+<li>3. Leave build command empty (static site), output directory: /</li>
+<li>4. Bind custom domain, add CNAME record at your registrar</li>
+</ul>
+
+<h2>What You Get for Free</h2>
+<ul>
+<li>✅ Global CDN (200+ nodes)</li>
+<li>✅ Automatic HTTPS/TLS</li>
+<li>✅ DDoS L3/L4 protection</li>
+<li>✅ CI/CD auto-deploy on push</li>
+<li>✅ 500 monthly builds, unlimited bandwidth</li>
+</ul>`,
+            ja:`<h2>アーキテクチャ</h2>
+<p>GitHub→Cloudflare Pages自動デプロイ→Cloudflare CDN配信→ユーザーアクセス。コストはドメイン代のみ。</p>
+
+<h2>デプロイ手順</h2>
+<ul>
+<li>1. サイトファイルをGitHubにプッシュ</li>
+<li>2. Cloudflare PagesでGitHubリポジトリを接続</li>
+<li>3. ビルドコマンドは空欄、出力ディレクトリは /</li>
+<li>4. カスタムドメインを設定</li>
+</ul>`,
+        },
+    },
+];
+
+// ══ Load article by URL param ══════════════════════════════════════════
+const params = new URLSearchParams(location.search);
+const postId = params.get('id');
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+let walineInstance = null;
+
+function getPost(id) { return POSTS.find(p => p.id === id); }
+
+function badgeClass(b) {
+    return {tech:'badge-tech',tool:'badge-tool',dev:'badge-dev',life:'badge-life'}[b]||'badge-tech';
+}
+
+function renderArticle() {
+    const t = I18N[lang];
+    const post = getPost(postId);
+    if (!post) {
+        document.getElementById('article-title').textContent = t.not_found;
+        document.getElementById('article-prose').innerHTML = `<div class="not-found"><h2>404</h2><p>${t.not_found}</p><a href="/blog.html" style="color:var(--accent)">← ${t.nav_blog}</a></div>`;
+        return;
+    }
+
+    const title = post.title[lang] || post.title.zh;
+    const content = (post.content && (post.content[lang] || post.content.zh)) || `<p>${post.desc[lang]||post.desc.zh}</p>`;
+
+    // Update meta
+    document.title = `${title} · QuickToolLab`;
+    document.getElementById('meta-desc').content = post.desc[lang]||post.desc.zh;
+    document.getElementById('canonical').href = `https://quicktoollab.top/blog-post.html?id=${post.id}`;
+
+    // Hero
+    const heroBg = document.getElementById('hero-bg');
+    if (post.image) heroBg.innerHTML = `<img src="${post.image}" alt="${escHtml(title)}">`;
+    else heroBg.style.background = 'linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%)';
+
+    const badge = document.getElementById('article-badge');
+    badge.textContent = post.badge;
+    badge.className = `article-badge ${badgeClass(post.badge)}`;
+    document.getElementById('article-title').textContent = title;
+    document.getElementById('breadcrumb-title').textContent = title.length > 20 ? title.slice(0,20)+'…' : title;
+    document.getElementById('article-date').textContent = post.date;
+    document.getElementById('article-readtime').textContent = `${post.readTime} ${t.min_read}`;
+    document.getElementById('article-views').textContent = `${Math.floor(Math.random()*800+200)} ${t.views}`;
+
+    // Tags
+    document.getElementById('article-tags').innerHTML = post.tags.map(tag =>
+        `<span class="article-tag">#${escHtml(tag)}</span>`
+    ).join('');
+
+    // Content
+    document.getElementById('article-prose').innerHTML = content;
+
+    // TOC — auto-generate from headings
+    const headings = document.getElementById('article-prose').querySelectorAll('h2,h3');
+    const tocList  = document.getElementById('toc-list');
+    if (headings.length) {
+        tocList.innerHTML = [...headings].map((h, i) => {
+            const id = `heading-${i}`;
+            h.id = id;
+            const isH3 = h.tagName === 'H3';
+            return `<li class="toc-item ${isH3?'h3':''}"><a href="#${id}">${escHtml(h.textContent)}</a></li>`;
+        }).join('');
+    } else {
+        document.querySelector('.toc-card').style.display = 'none';
+    }
+
+    // Post navigation
+    const idx = POSTS.findIndex(p => p.id === postId);
+    const prev = POSTS[idx + 1];
+    const next = POSTS[idx - 1];
+    const navHtml = [
+        prev ? `<a class="post-nav-card" href="blog-post.html?id=${prev.id}"><div class="post-nav-arrow">‹</div><div><div class="post-nav-label">${t.prev_post}</div><div class="post-nav-title">${escHtml(prev.title[lang]||prev.title.zh)}</div></div></a>` : '<div></div>',
+        next ? `<a class="post-nav-card" href="blog-post.html?id=${next.id}" style="text-align:right;flex-direction:row-reverse"><div class="post-nav-arrow">›</div><div><div class="post-nav-label">${t.next_post}</div><div class="post-nav-title">${escHtml(next.title[lang]||next.title.zh)}</div></div></a>` : '<div></div>',
+    ];
+    document.getElementById('post-nav').innerHTML = navHtml.join('');
+}
+
+// ══ Waline init ════════════════════════════════════════════════════════
+function initWaline(locale) {
+    if (walineInstance) walineInstance.destroy();
+    import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
+        walineInstance = init({
+            el: '#waline-container',
+            serverURL: 'https://comment.quicktoollab.top',
+            path: location.pathname + location.search,
+            lang: locale || (lang==='zh'?'zh-CN':lang==='ja'?'ja':'en'),
+            dark: '[data-theme="dark"]',
+            comment: true,
+            pageview: true,
+            emoji: [
+                'https://unpkg.com/@waline/emojis@1.2.0/weibo',
+                'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
+            ],
+            locale: { placeholder: I18N[lang].comments_sub },
+        });
+    });
+}
+
+// ══ TOC active state ══════════════════════════════════════════════════
+function updateTocActive() {
+    const headings = [...document.querySelectorAll('#article-prose h2,#article-prose h3')];
+    const scrollY  = window.scrollY + 100;
+    let current = headings[0];
+    for (const h of headings) {
+        if (h.offsetTop <= scrollY) current = h;
+    }
+    document.querySelectorAll('.toc-item a').forEach(a => {
+        a.classList.toggle('active', current && a.getAttribute('href') === `#${current.id}`);
+    });
+}
+
+// ══ Reading progress ══════════════════════════════════════════════════
+function updateProgress() {
+    const docH = document.documentElement.scrollHeight - window.innerHeight;
+    const prog = docH > 0 ? window.scrollY / docH : 0;
+    document.getElementById('reading-progress').style.transform = `scaleX(${prog})`;
+    // scroll-to-top button
+    const stb = document.getElementById('scroll-top');
+    stb.classList.toggle('visible', window.scrollY > 300);
+}
+
+window.addEventListener('scroll', () => { updateProgress(); updateTocActive(); }, { passive:true });
+
+// ══ Share functions ════════════════════════════════════════════════════
+function copyLink() {
+    navigator.clipboard.writeText(location.href).then(() => {
+        const t = I18N[lang];
+        const btn = document.querySelector('.share-btn');
+        const orig = btn.querySelector('[data-i18n="share_copy"]');
+        if (orig) { const o=orig.textContent; orig.textContent=t.copied; setTimeout(()=>orig.textContent=o,2000); }
+    });
+}
+function shareTwitter() {
+    const post = getPost(postId);
+    const title = post ? (post.title[lang]||post.title.zh) : '';
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(location.href)}`, '_blank');
+}
+
+// ══ i18n + theme ══════════════════════════════════════════════════════
+function applyLang(l) {
+    lang = l; localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l));
+    renderArticle();
+    initWaline(l==='zh'?'zh-CN':l==='ja'?'ja':'en');
+}
+function applyTheme(t) {
+    theme = t; localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme==='dark'?'light':'dark'));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if(!localStorage.getItem('pc_theme')) applyTheme(e.matches?'dark':'light'); });
+
+function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+applyTheme(theme);
+applyLang(lang);
+updateProgress();
+</script>
+</body>
+</html>

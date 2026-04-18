@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <title>博客 · QuickToolLab</title>
+    <meta charset="UTF-8">
+    <script>
+        (function(){
+            var t=localStorage.getItem('pc_theme')||(window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
+            var l=localStorage.getItem('pc_lang')||(navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
+            document.documentElement.setAttribute('data-theme',t);
+            document.documentElement.lang=l;
+        })();
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="QuickToolLab 博客 — 分享技术心得、工具使用指南与开发者经验，记录每一次探索与思考。">
+    <meta name="keywords" content="技术博客,开发者,工具教程,QuickToolLab">
+    <link rel="canonical" href="https://quicktoollab.top/blog.html">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://quicktoollab.top/blog.html">
+    <meta property="og:title" content="博客 · QuickToolLab">
+    <meta property="og:description" content="分享技术心得、工具使用指南与开发者经验。">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root{--accent:#f97316;--accent2:#fb923c;--accentlo:rgba(249,115,22,.12);--green:#22c55e;--teal:#14b8a6;--purple:#8b5cf6;}
+        [data-theme="dark"]{--bg:#0a0a10;--surface:#111118;--surface2:#18181f;--border:#222230;--text:#ededf5;--text2:#9090b0;--muted:#5a5a72;}
+        [data-theme="light"]{--bg:#f2f2f7;--surface:#ffffff;--surface2:#f0f0f8;--border:#d8d8e8;--text:#16161f;--text2:#4a4a6a;--muted:#7a7a96;}
+
+        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+        html{scroll-behavior:smooth;}
+        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
+        a{text-decoration:none;color:inherit;}
+
+        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
+
+        /* ── Header ── */
+        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);transition:background .3s,border-color .3s;}
+        .nav{max-width:1160px;margin:0 auto;padding:0 20px;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;}
+        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+        .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:19px;color:#fff;}
+        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1.5px;color:var(--text);transition:color .3s;}
+        .logo-name span{color:var(--accent);}
+        .nav-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;justify-content:center;flex:1;}
+        .nav-links a{font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .18s,background .18s;}
+        .nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accentlo);}
+        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
+        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;}
+        .lang-btn.active{background:var(--accent);color:#fff;}
+        .lang-btn:not(.active):hover{color:var(--text);}
+        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
+        [data-theme="dark"] .icon-sun{display:none;}[data-theme="dark"] .icon-moon{display:block;}
+        [data-theme="light"] .icon-sun{display:block;}[data-theme="light"] .icon-moon{display:none;}
+
+        /* ── Hero Banner ── */
+        .blog-hero{
+            position:relative;overflow:hidden;
+            background:linear-gradient(135deg,var(--surface) 0%,var(--surface2) 100%);
+            border-bottom:1px solid var(--border);
+            padding:60px 20px 50px;
+            text-align:center;
+        }
+        .blog-hero::before{
+            content:'';position:absolute;inset:0;
+            background:radial-gradient(ellipse at 50% 0%,rgba(249,115,22,.12),transparent 65%);
+            pointer-events:none;
+        }
+        .blog-hero::after{
+            content:'BLOG';position:absolute;
+            font-family:'Bebas Neue',sans-serif;font-size:220px;font-weight:700;
+            color:var(--text);opacity:.025;letter-spacing:8px;
+            top:50%;left:50%;transform:translate(-50%,-50%);
+            pointer-events:none;white-space:nowrap;
+        }
+        .blog-hero-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;}
+        .blog-hero-badge{
+            display:inline-flex;align-items:center;gap:6px;
+            padding:4px 14px;border-radius:100px;
+            background:var(--accentlo);border:1px solid rgba(249,115,22,.3);
+            font-size:12px;font-weight:700;color:var(--accent);
+            letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;
+        }
+        .blog-hero h1{
+            font-family:'Bebas Neue',sans-serif;
+            font-size:clamp(52px,9vw,88px);letter-spacing:4px;line-height:1;
+            background:linear-gradient(120deg,var(--text) 35%,var(--accent));
+            -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+            margin-bottom:14px;
+        }
+        .blog-hero p{color:var(--muted);font-size:15px;max-width:420px;margin:0 auto 28px;}
+        .blog-hero-stats{display:flex;justify-content:center;gap:32px;flex-wrap:wrap;}
+        .hero-stat{text-align:center;}
+        .hero-stat-num{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:1px;color:var(--accent);}
+        .hero-stat-label{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.5px;}
+
+        /* ── Main layout ── */
+        main{position:relative;z-index:1;max-width:1160px;margin:0 auto;padding:40px 20px 100px;}
+
+        /* ── Filter & Search ── */
+        .filter-bar{
+            display:flex;align-items:center;justify-content:space-between;
+            gap:12px;flex-wrap:wrap;margin-bottom:28px;
+        }
+        .filter-tags{display:flex;gap:8px;flex-wrap:wrap;flex:1;}
+        .filter-tag{
+            padding:5px 14px;border-radius:100px;
+            border:1px solid var(--border);background:transparent;
+            color:var(--muted);font-size:12.5px;font-weight:600;
+            cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;
+        }
+        .filter-tag:hover{border-color:var(--accent2);color:var(--accent2);}
+        .filter-tag.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+        .search-wrap{position:relative;flex-shrink:0;}
+        .search-wrap input{
+            width:220px;height:36px;padding:0 36px 0 12px;
+            border-radius:10px;border:1px solid var(--border);
+            background:var(--surface);color:var(--text);
+            font-size:13px;font-family:'Outfit',sans-serif;
+            outline:none;transition:border-color .2s,box-shadow .2s;
+        }
+        .search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(249,115,22,.12);}
+        .search-wrap input::placeholder{color:var(--muted);}
+        .search-icon{position:absolute;right:10px;top:50%;transform:translateY(-50%);color:var(--muted);pointer-events:none;}
+
+        /* ── Post Card ── */
+        .posts-grid{display:flex;flex-direction:column;gap:20px;}
+
+        .post-card{
+            background:var(--surface);border:1px solid var(--border);
+            border-radius:18px;overflow:hidden;
+            display:grid;grid-template-columns:1fr 280px;
+            transition:border-color .2s,box-shadow .2s,transform .2s;
+            cursor:pointer;
+        }
+        .post-card:hover{border-color:var(--accent);box-shadow:0 8px 32px rgba(249,115,22,.12);transform:translateY(-2px);}
+        @media(max-width:700px){.post-card{grid-template-columns:1fr;}}
+
+        .post-card-body{padding:24px 26px;display:flex;flex-direction:column;gap:12px;order:1;}
+
+        .post-card-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+        .post-badge{
+            padding:2px 10px;border-radius:100px;
+            font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;
+        }
+        .badge-tech{background:rgba(14,165,233,.12);color:#0ea5e9;border:1px solid rgba(14,165,233,.25);}
+        .badge-tool{background:var(--accentlo);color:var(--accent);border:1px solid rgba(249,115,22,.25);}
+        .badge-life{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.25);}
+        .badge-dev{background:rgba(139,92,246,.12);color:#8b5cf6;border:1px solid rgba(139,92,246,.25);}
+        .badge-default{background:var(--surface2);color:var(--muted);border:1px solid var(--border);}
+        .post-date{font-size:12px;color:var(--muted);}
+        .post-read-time{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:4px;}
+
+        .post-card-title{
+            font-family:'Noto Serif SC',serif;
+            font-size:20px;font-weight:700;color:var(--text);
+            line-height:1.4;transition:color .2s;
+        }
+        .post-card:hover .post-card-title{color:var(--accent);}
+
+        .post-card-desc{font-size:14px;color:var(--text2);line-height:1.7;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
+
+        .post-card-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:8px;}
+        .post-tag{
+            padding:2px 9px;border-radius:6px;
+            font-size:11px;font-weight:600;color:var(--muted);
+            background:var(--surface2);border:1px solid var(--border);
+            transition:all .15s;
+        }
+        .post-card:hover .post-tag{border-color:rgba(249,115,22,.2);color:var(--accent2);}
+
+        .post-card-img{
+            position:relative;overflow:hidden;
+            background:var(--surface2);order:2;min-height:180px;
+        }
+        @media(max-width:700px){.post-card-img{min-height:180px;aspect-ratio:16/9;}}
+        .post-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+        .post-card:hover .post-card-img img{transform:scale(1.06);}
+        .post-card-img-overlay{
+            position:absolute;inset:0;
+            background:linear-gradient(to right,var(--surface) 0%,transparent 30%);
+            pointer-events:none;
+        }
+        @media(max-width:700px){.post-card-img-overlay{background:linear-gradient(to top,var(--surface) 0%,transparent 40%);}}
+        .post-card-no-img{
+            display:flex;align-items:center;justify-content:center;
+            font-size:48px;opacity:.3;
+        }
+
+        /* ── Pagination ── */
+        .pagination{display:flex;justify-content:center;gap:8px;margin-top:40px;flex-wrap:wrap;}
+        .page-btn{
+            width:38px;height:38px;border-radius:10px;
+            border:1px solid var(--border);background:var(--surface);
+            color:var(--muted);font-size:13px;font-weight:600;
+            cursor:pointer;display:flex;align-items:center;justify-content:center;
+            transition:all .18s;font-family:'Outfit',sans-serif;
+        }
+        .page-btn:hover{border-color:var(--accent);color:var(--accent);}
+        .page-btn.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+        .page-btn:disabled{opacity:.35;cursor:not-allowed;}
+
+        /* ── Empty state ── */
+        .empty-state{text-align:center;padding:80px 20px;color:var(--muted);}
+        .empty-state svg{opacity:.2;margin-bottom:16px;}
+        .empty-state p{font-size:15px;}
+
+        /* ── Footer ── */
+        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;transition:border-color .3s;}
+        .footer-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+        .footer-copy{font-size:13px;color:var(--muted);}
+        .footer-links{display:flex;gap:4px;flex-wrap:wrap;}
+        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s;}
+        .footer-links a:hover{color:var(--text);background:var(--border);}
+
+        @keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+        .fade-in{animation:up .45s ease both;}
+    </style>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<header>
+    <div class="nav">
+        <a href="/" class="logo">
+            <div class="logo-mark">Q</div>
+            <div>
+                <div class="logo-name">QUICK<span>TOOL</span>LAB</div>
+            </div>
+        </a>
+        <nav class="nav-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/compress.html">PixCrush</a>
+            <a href="/blog.html" class="active" data-i18n="nav_blog">博客</a>
+            <a href="/help.html" data-i18n="nav_help">帮助</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+        </nav>
+        <div class="nav-right">
+            <div class="lang-sw">
+                <button class="lang-btn" data-lang="zh" type="button">中文</button>
+                <button class="lang-btn" data-lang="en" type="button">EN</button>
+                <button class="lang-btn" data-lang="ja" type="button">日本語</button>
+            </div>
+            <button class="theme-btn" id="theme-btn" type="button" aria-label="Toggle theme">
+                <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<!-- Hero Banner -->
+<div class="blog-hero">
+    <div class="blog-hero-inner fade-in">
+        <div class="blog-hero-badge">✦ QuickToolLab</div>
+        <h1 data-i18n="blog_title">BLOG</h1>
+        <p data-i18n="blog_sub">记录技术探索，分享工具心得，留存每一次思考的痕迹。</p>
+        <div class="blog-hero-stats">
+            <div class="hero-stat">
+                <div class="hero-stat-num" id="stat-total">—</div>
+                <div class="hero-stat-label" data-i18n="stat_posts">篇文章</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num" id="stat-cats">—</div>
+                <div class="hero-stat-label" data-i18n="stat_cats">个分类</div>
+            </div>
+            <div class="hero-stat">
+                <div class="hero-stat-num" id="stat-tags">—</div>
+                <div class="hero-stat-label" data-i18n="stat_tags">个标签</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<main>
+    <!-- Filter bar -->
+    <div class="filter-bar fade-in">
+        <div class="filter-tags" id="filter-tags">
+            <button class="filter-tag active" data-cat="all" data-i18n="cat_all">全部</button>
+            <button class="filter-tag" data-cat="tech" data-i18n="cat_tech">技术</button>
+            <button class="filter-tag" data-cat="tool" data-i18n="cat_tool">工具</button>
+            <button class="filter-tag" data-cat="dev" data-i18n="cat_dev">开发</button>
+            <button class="filter-tag" data-cat="life" data-i18n="cat_life">生活</button>
+        </div>
+        <div class="search-wrap">
+            <input type="text" id="search-input" placeholder="搜索文章…" data-i18n-placeholder="search_ph">
+            <svg class="search-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+    </div>
+
+    <!-- Posts list -->
+    <div class="posts-grid" id="posts-grid"></div>
+    <div class="pagination" id="pagination"></div>
+</main>
+
+<footer>
+    <div class="footer-inner">
+        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
+        <div class="footer-links">
+            <a href="/" data-i18n="nav_home">首页</a>
+            <a href="/blog.html" data-i18n="nav_blog">博客</a>
+            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+        </div>
+    </div>
+</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+
+// ══ i18n ══════════════════════════════════════════════════════════════
+const I18N = {
+    zh:{ nav_home:'首页', nav_blog:'博客', nav_help:'帮助', nav_about:'关于', nav_privacy:'隐私政策',
+         blog_title:'BLOG', blog_sub:'记录技术探索，分享工具心得，留存每一次思考的痕迹。',
+         stat_posts:'篇文章', stat_cats:'个分类', stat_tags:'个标签',
+         cat_all:'全部', cat_tech:'技术', cat_tool:'工具', cat_dev:'开发', cat_life:'生活',
+         search_ph:'搜索文章…', read_more:'阅读全文', min_read:'分钟阅读',
+         no_result:'没有找到相关文章', page_title:'博客 · QuickToolLab',
+    },
+    en:{ nav_home:'Home', nav_blog:'Blog', nav_help:'Help', nav_about:'About', nav_privacy:'Privacy',
+         blog_title:'BLOG', blog_sub:'Tech explorations, tool guides, and developer thoughts.',
+         stat_posts:'Articles', stat_cats:'Categories', stat_tags:'Tags',
+         cat_all:'All', cat_tech:'Tech', cat_tool:'Tools', cat_dev:'Dev', cat_life:'Life',
+         search_ph:'Search articles…', read_more:'Read more', min_read:'min read',
+         no_result:'No articles found', page_title:'Blog · QuickToolLab',
+    },
+    ja:{ nav_home:'ホーム', nav_blog:'ブログ', nav_help:'ヘルプ', nav_about:'About', nav_privacy:'プライバシー',
+         blog_title:'BLOG', blog_sub:'技術探求、ツールガイド、開発者の思考を記録します。',
+         stat_posts:'記事', stat_cats:'カテゴリ', stat_tags:'タグ',
+         cat_all:'全て', cat_tech:'技術', cat_tool:'ツール', cat_dev:'開発', cat_life:'ライフ',
+         search_ph:'記事を検索…', read_more:'続きを読む', min_read:'分で読める',
+         no_result:'記事が見つかりません', page_title:'ブログ · QuickToolLab',
+    },
+};
+
+// ══ Blog posts data ════════════════════════════════════════════════════
+const POSTS = [
+    {
+        id:'canonical-seo', cat:'tech',
+        date:'2025-04-15', readTime:5,
+        title:{ zh:'Canonical 标签写错一个字母，导致 6 个页面全部不被收录', en:'One typo in canonical URL blocked all 6 pages from indexing', ja:'canonical URLの誤字でページが未収録に' },
+        desc:{ zh:'记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。', en:'A real-world case: one missing "l" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.', ja:'ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。' },
+        tags:['SEO','canonical','Google Search Console'],
+        image:'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=600&h=340&fit=crop',
+        badge:'tech',
+    },
+    {
+        id:'waline-comment-system', cat:'tool',
+        date:'2025-04-10', readTime:8,
+        title:{ zh:'把 localStorage 自制评论系统替换成 Waline 的全过程', en:'Replacing a DIY localStorage comment system with Waline', ja:'自作コメントシステムをWalineに置き換える' },
+        desc:{ zh:'自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。', en:'A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.', ja:'自作コメントシステムから Waline への移行過程を完全記録。' },
+        tags:['Waline','评论系统','JavaScript'],
+        image:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=340&fit=crop',
+        badge:'tool',
+    },
+    {
+        id:'cloudflare-pages-deploy', cat:'dev',
+        date:'2025-04-05', readTime:6,
+        title:{ zh:'GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠', en:'Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection', ja:'GitHub + Cloudflare Pages でゼロコストサイト構築' },
+        desc:{ zh:'只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。本文从零开始详解每一步操作。', en:'One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD. A step-by-step guide from zero.', ja:'ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを全て手に入れる方法。' },
+        tags:['Cloudflare','GitHub Pages','部署'],
+        image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop',
+        badge:'dev',
+    },
+    {
+        id:'image-compression-guide', cat:'tool',
+        date:'2025-03-28', readTime:4,
+        title:{ zh:'PixCrush 图片压缩工具：为什么选择 Canvas API 而不是 WebAssembly', en:'PixCrush: Why Canvas API over WebAssembly for image compression', ja:'PixCrush：画像圧縮にCanvas APIを選んだ理由' },
+        desc:{ zh:'浏览器端图片压缩方案对比：Canvas API 简单但质量有限，WebAssembly（squoosh）质量高但包体大。PixCrush 选择 Canvas 的权衡与决策过程。', en:'Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.', ja:'Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。' },
+        tags:['Canvas API','图片压缩','WebAssembly'],
+        image:'https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop',
+        badge:'tool',
+    },
+    {
+        id:'css-variables-theming', cat:'dev',
+        date:'2025-03-20', readTime:7,
+        title:{ zh:'CSS 变量实现深色/浅色主题切换：零闪烁的关键是这一个内联脚本', en:'Flicker-free dark/light theme switching: one inline script makes all the difference', ja:'CSS変数でフリッカーなしのテーマ切替を実現する方法' },
+        desc:{ zh:'页面跳转时主题闪烁的根本原因是 JS 比 CSS 渲染晚。解决方案是在 <head> 最顶部放一段内联脚本，在浏览器渲染第一帧前就设好主题。', en:'Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.', ja:'テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。' },
+        tags:['CSS','Dark Mode','主题切换'],
+        image:'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop',
+        badge:'dev',
+    },
+    {
+        id:'seo-tool-sites', cat:'tech',
+        date:'2025-03-12', readTime:9,
+        title:{ zh:'单页工具网站 SEO 优化实战：从零到 Google 收录的完整路径', en:'SEO for single-page tool sites: the complete path from zero to Google indexing', ja:'ツールサイトSEO：ゼロからGoogle収録までの完全ガイド' },
+        desc:{ zh:'静态工具站的 SEO 和博客不同：没有新内容产生，全靠技术 SEO 和外链。本文详解 canonical、sitemap、robots、OG 标签的最佳配置。', en:'SEO for static tool sites differs from blogs — no new content, just technical SEO and backlinks. Full guide to canonical, sitemap, robots and OG tags.', ja:'静的ツールサイトのSEOはブログとは異なる。技術SEOと外部リンクが鍵。' },
+        tags:['SEO','Static Site','技术SEO'],
+        image:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop',
+        badge:'tech',
+    },
+    {
+        id:'ai-tools-2025', cat:'tech',
+        date:'2025-03-05', readTime:10,
+        title:{ zh:'2025 年 AI 工具全景：从写作到编程，哪些真正提升了效率', en:'AI tools landscape 2025: which ones actually boost productivity', ja:'2025年AIツール全景：本当に生産性を上げるツールは' },
+        desc:{ zh:'亲测了 30+ 款 AI 工具后的真实感受：Claude 写代码最稳，Midjourney 出图质量最高，Cursor 是目前编程体验最好的 IDE，Perplexity 已经能替代 Google 部分场景。', en:'After testing 30+ AI tools: Claude for stable code generation, Midjourney for image quality, Cursor for best coding IDE experience, Perplexity replacing Google in many cases.', ja:'30以上のAIツールを実際に使った結論。各カテゴリのベストツールを解説。' },
+        tags:['AI','效率工具','Claude','Midjourney'],
+        image:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=340&fit=crop',
+        badge:'tech',
+    },
+    {
+        id:'quicktoollab-build', cat:'life',
+        date:'2025-02-20', readTime:6,
+        title:{ zh:'QuickToolLab 从零到上线：一个纯静态工具站的搭建全记录', en:'QuickToolLab from zero to launch: building a pure static tool site', ja:'QuickToolLabゼロから公開：純静的ツールサイト構築の全記録' },
+        desc:{ zh:'记录从想法到上线的完整过程：域名选择、设计风格确定、功能规划、Cloudflare 部署、AdSense 申请。包含所有坑点和解决方案。', en:'Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.', ja:'アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。' },
+        tags:['建站','Cloudflare','个人项目'],
+        image:'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop',
+        badge:'life',
+    },
+];
+
+const PAGE_SIZE = 5;
+let currentCat = 'all';
+let currentPage = 1;
+let searchQuery = '';
+let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
+let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+// ══ Filter & render ════════════════════════════════════════════════════
+function getFiltered() {
+    return POSTS.filter(p => {
+        const matchCat = currentCat === 'all' || p.cat === currentCat;
+        const q = searchQuery.toLowerCase();
+        const matchSearch = !q ||
+            (p.title[lang] || p.title.zh).toLowerCase().includes(q) ||
+            (p.desc[lang]  || p.desc.zh ).toLowerCase().includes(q)  ||
+            p.tags.some(t => t.toLowerCase().includes(q));
+        return matchCat && matchSearch;
+    });
+}
+
+function badgeClass(badge) {
+    return {tech:'badge-tech',tool:'badge-tool',dev:'badge-dev',life:'badge-life'}[badge] || 'badge-default';
+}
+
+function renderPosts() {
+    const t = I18N[lang];
+    const filtered = getFiltered();
+    const total    = filtered.length;
+    const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = 1;
+    const slice = filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
+    const grid  = document.getElementById('posts-grid');
+
+    if (!slice.length) {
+        grid.innerHTML = `<div class="empty-state"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" display="block" style="margin:0 auto"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>${t.no_result}</p></div>`;
+        document.getElementById('pagination').innerHTML = '';
+        return;
+    }
+
+    grid.innerHTML = slice.map((p, i) => {
+        const title = p.title[lang] || p.title.zh;
+        const desc  = p.desc[lang]  || p.desc.zh;
+        const delay = i * 0.06;
+        return `
+        <article class="post-card" style="animation:up .5s ${delay}s ease both;opacity:0;" onclick="window.location.href='blog-post.html?id=${p.id}'">
+            <div class="post-card-body">
+                <div class="post-card-meta">
+                    <span class="post-badge ${badgeClass(p.badge)}">${p.badge}</span>
+                    <span class="post-date">📅 ${p.date}</span>
+                    <span class="post-read-time">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                        ${p.readTime} ${t.min_read}
+                    </span>
+                </div>
+                <h2 class="post-card-title">${escHtml(title)}</h2>
+                <p class="post-card-desc">${escHtml(desc)}</p>
+                <div class="post-card-tags">
+                    ${p.tags.map(tag => `<span class="post-tag">#${escHtml(tag)}</span>`).join('')}
+                </div>
+            </div>
+            ${p.image
+                ? `<div class="post-card-img"><img src="${p.image}" alt="${escHtml(title)}" loading="lazy"><div class="post-card-img-overlay"></div></div>`
+                : `<div class="post-card-img post-card-no-img">📝</div>`
+            }
+        </article>`;
+    }).join('');
+
+    renderPagination(totalPages);
+
+    // update stats
+    const allCats = [...new Set(POSTS.map(p=>p.cat))];
+    const allTags = [...new Set(POSTS.flatMap(p=>p.tags))];
+    document.getElementById('stat-total').textContent = POSTS.length;
+    document.getElementById('stat-cats').textContent  = allCats.length;
+    document.getElementById('stat-tags').textContent  = allTags.length;
+}
+
+function renderPagination(totalPages) {
+    const pg = document.getElementById('pagination');
+    if (totalPages <= 1) { pg.innerHTML = ''; return; }
+    let html = `<button class="page-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+    for (let i=1; i<=totalPages; i++) {
+        html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</button>`;
+    }
+    html += `<button class="page-btn" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`;
+    pg.innerHTML = html;
+}
+
+function changePage(p) {
+    currentPage = p;
+    renderPosts();
+    window.scrollTo({top:0,behavior:'smooth'});
+}
+
+// ══ Filter tabs ════════════════════════════════════════════════════════
+document.getElementById('filter-tags').addEventListener('click', e => {
+    const btn = e.target.closest('.filter-tag');
+    if (!btn) return;
+    document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentCat = btn.dataset.cat;
+    currentPage = 1;
+    renderPosts();
+});
+
+// ══ Search ══════════════════════════════════════════════════════════════
+document.getElementById('search-input').addEventListener('input', e => {
+    searchQuery = e.target.value.trim();
+    currentPage = 1;
+    renderPosts();
+});
+
+// ══ i18n ══════════════════════════════════════════════════════════════
+function applyLang(l) {
+    lang = l; localStorage.setItem('pc_lang', l);
+    document.documentElement.lang = l;
+    const t = I18N[l];
+    document.title = t.page_title;
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+    const si = document.getElementById('search-input'); if(si) si.placeholder = t.search_ph;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l));
+    renderPosts();
+}
+function applyTheme(t) {
+    theme = t; localStorage.setItem('pc_theme', t);
+    document.documentElement.setAttribute('data-theme', t);
+}
+
+document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme==='dark'?'light':'dark'));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if(!localStorage.getItem('pc_theme')) applyTheme(e.matches?'dark':'light'); });
+
+function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
+
+applyTheme(theme);
+applyLang(lang);
+</script>
+</body>
+</html>

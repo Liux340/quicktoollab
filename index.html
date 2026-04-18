@@ -298,191 +298,6 @@
         .footer-links a:hover { color: var(--text); background: var(--border); }
 
         @keyframes up { from { opacity:0; transform:translateY(14px); } to { opacity:1; transform:translateY(0); } }
-
-        /* ── 置顶推荐区 ─────────────────────────────── */
-        .pinned-section {
-            background: linear-gradient(135deg, rgba(249,115,22,.08), rgba(234,179,8,.06));
-            border: 1px solid rgba(249,115,22,.25);
-            border-radius: 18px; padding: 22px 20px 18px;
-            margin-bottom: 44px; position: relative; overflow: hidden;
-        }
-        .pinned-section::before {
-            content: ''; position: absolute; top: -60px; right: -60px;
-            width: 200px; height: 200px; border-radius: 50%;
-            background: radial-gradient(circle, rgba(249,115,22,.08), transparent 70%);
-            pointer-events: none;
-        }
-        .pinned-badge {
-            display: inline-flex; align-items: center; gap: 5px;
-            background: var(--accent); color: #fff;
-            font-size: 10px; font-weight: 700; letter-spacing: .6px; text-transform: uppercase;
-            padding: 3px 9px; border-radius: 100px; margin-bottom: 14px;
-        }
-        .pinned-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px;
-        }
-        .pinned-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 12px; padding: 14px 14px 12px;
-            text-decoration: none; color: inherit;
-            transition: border-color .2s, transform .15s;
-            display: flex; flex-direction: column; gap: 6px;
-        }
-        .pinned-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-        .pinned-card-top { display: flex; align-items: center; gap: 8px; }
-        .pinned-icon {
-            width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0;
-            display: flex; align-items: center; justify-content: center; font-size: 17px;
-            background: var(--accentlo); border: 1px solid rgba(249,115,22,.2);
-        }
-        .pinned-name { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
-        .pinned-brand { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: .3px; }
-        .pinned-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
-
-        /* ── 工具区 tab 切换 ─────────────────────────── */
-        .tools-tab-bar {
-            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 20px;
-        }
-        .tools-tab {
-            padding: 6px 14px; border-radius: 100px;
-            border: 1px solid var(--border); background: transparent;
-            color: var(--muted); font-size: 12.5px; font-weight: 600;
-            cursor: pointer; transition: all .18s; font-family: 'Outfit', sans-serif;
-        }
-        .tools-tab:hover { border-color: var(--accent2); color: var(--accent2); }
-        .tools-tab.active { background: var(--accent); border-color: var(--accent); color: #fff; }
-
-        /* ── AI 工具区 ──────────────────────────────── */
-        .ai-section { display: none; }
-        .ai-section.visible { display: block; }
-        .ai-tab-bar {
-            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px;
-        }
-        .ai-tab {
-            padding: 5px 13px; border-radius: 100px;
-            border: 1px solid var(--border); background: transparent;
-            color: var(--muted); font-size: 12px; font-weight: 600;
-            cursor: pointer; transition: all .18s; font-family: 'Outfit', sans-serif;
-        }
-        .ai-tab:hover { border-color: #a855f7; color: #a855f7; }
-        .ai-tab.active { background: #7c3aed; border-color: #7c3aed; color: #fff; }
-        .ai-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;
-        }
-        .ai-card {
-            background: var(--surface); border: 1px solid var(--border);
-            border-radius: 14px; padding: 16px 12px;
-            text-align: center; text-decoration: none; color: inherit;
-            transition: border-color .2s, transform .15s, background .2s;
-            display: flex; flex-direction: column; align-items: center; gap: 8px;
-            position: relative;
-        }
-        .ai-card:hover { border-color: #a855f7; transform: translateY(-2px); background: var(--surface2); }
-        .ai-card .ic {
-            width: 40px; height: 40px; border-radius: 11px;
-            background: rgba(124,58,237,.12); border: 1px solid rgba(124,58,237,.2);
-            display: flex; align-items: center; justify-content: center; font-size: 18px;
-        }
-        .ai-card h3 { font-size: 12.5px; font-weight: 600; color: var(--text); line-height: 1.3; }
-        .ai-card .tag { font-size: 10px; font-weight: 600; color: var(--muted); text-transform: uppercase; }
-        .ai-card .fav-btn {
-            position: absolute; top: 8px; right: 8px;
-            width: 22px; height: 22px; border-radius: 6px;
-            border: none; background: transparent; cursor: pointer;
-            font-size: 13px; display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity .18s;
-        }
-        .ai-card:hover .fav-btn { opacity: 1; }
-        .ai-card .fav-btn.saved { opacity: 1; }
-
-        /* 普通工具卡也加收藏按钮 */
-        .tool-card { position: relative; }
-        .tool-card .fav-btn {
-            position: absolute; top: 7px; right: 7px;
-            width: 20px; height: 20px; border-radius: 5px;
-            border: none; background: transparent; cursor: pointer;
-            font-size: 12px; display: flex; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity .18s;
-        }
-        .tool-card:hover .fav-btn { opacity: 1; }
-        .tool-card .fav-btn.saved { opacity: 1; }
-
-        /* ── 收藏 & 历史 侧边抽屉触发 ────────────────── */
-        .fab-group {
-            position: fixed; bottom: 28px; right: 22px;
-            display: flex; flex-direction: column; gap: 10px; z-index: 200;
-        }
-        .fab {
-            width: 46px; height: 46px; border-radius: 14px;
-            border: 1px solid var(--border); background: var(--surface);
-            box-shadow: 0 4px 18px rgba(0,0,0,.18);
-            cursor: pointer; display: flex; align-items: center; justify-content: center;
-            font-size: 20px; transition: transform .15s, box-shadow .15s;
-            position: relative;
-        }
-        .fab:hover { transform: scale(1.08); box-shadow: 0 6px 24px rgba(0,0,0,.25); }
-        .fab .badge {
-            position: absolute; top: -5px; right: -5px;
-            min-width: 17px; height: 17px; border-radius: 100px;
-            background: var(--accent); color: #fff;
-            font-size: 10px; font-weight: 700; display: flex; align-items: center; justify-content: center;
-            padding: 0 4px; display: none;
-        }
-        .fab .badge.show { display: flex; }
-
-        /* ── 抽屉 ───────────────────────────────────── */
-        .drawer-overlay {
-            position: fixed; inset: 0; background: rgba(0,0,0,.45);
-            z-index: 300; opacity: 0; pointer-events: none; transition: opacity .25s;
-        }
-        .drawer-overlay.open { opacity: 1; pointer-events: auto; }
-        .drawer {
-            position: fixed; top: 0; right: -360px; bottom: 0; width: 340px;
-            background: var(--surface); border-left: 1px solid var(--border);
-            z-index: 301; transition: right .28s cubic-bezier(.4,0,.2,1);
-            display: flex; flex-direction: column; overflow: hidden;
-        }
-        .drawer.open { right: 0; }
-        .drawer-head {
-            padding: 18px 18px 14px; border-bottom: 1px solid var(--border);
-            display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
-        }
-        .drawer-title { font-family: 'Bebas Neue', sans-serif; font-size: 18px; letter-spacing: 1.5px; }
-        .drawer-close {
-            width: 30px; height: 30px; border-radius: 8px; border: 1px solid var(--border);
-            background: transparent; cursor: pointer; font-size: 16px;
-            display: flex; align-items: center; justify-content: center; color: var(--muted);
-            transition: all .15s;
-        }
-        .drawer-close:hover { color: var(--text); border-color: var(--text); }
-        .drawer-body { flex: 1; overflow-y: auto; padding: 14px; }
-        .drawer-empty { padding: 40px 20px; text-align: center; color: var(--muted); font-size: 13px; }
-        .drawer-item {
-            display: flex; align-items: center; gap: 10px;
-            padding: 10px 12px; border-radius: 10px; margin-bottom: 6px;
-            background: var(--surface2); cursor: pointer;
-            text-decoration: none; color: inherit; transition: background .15s;
-        }
-        .drawer-item:hover { background: var(--border); }
-        .drawer-item-icon { font-size: 18px; flex-shrink: 0; }
-        .drawer-item-info { flex: 1; min-width: 0; }
-        .drawer-item-name { font-size: 13px; font-weight: 600; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .drawer-item-sub { font-size: 11px; color: var(--muted); }
-        .drawer-item-del {
-            flex-shrink: 0; width: 24px; height: 24px; border-radius: 6px;
-            border: none; background: transparent; cursor: pointer;
-            font-size: 14px; color: var(--muted); display: flex; align-items: center; justify-content: center;
-            transition: color .15s;
-        }
-        .drawer-item-del:hover { color: #f87171; }
-        .drawer-clear {
-            width: 100%; padding: 8px; border-radius: 8px; margin-top: 10px;
-            border: 1px solid var(--border); background: transparent;
-            color: var(--muted); font-size: 12px; font-weight: 600; cursor: pointer;
-            font-family: 'Outfit', sans-serif; transition: all .15s;
-        }
-        .drawer-clear:hover { border-color: #f87171; color: #f87171; }
-
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
@@ -534,7 +349,6 @@
             </div>
         </a>
         <nav class="nav-links" aria-label="Section">
-            <a href="#ai-zone" data-i18n="nav_ai">AI 工具</a>
             <a href="#tools" data-i18n="nav_tools">工具</a>
             <a href="#library" data-i18n="nav_lib">技术文库</a>
             <a href="#slides" data-i18n="nav_slides">幻灯片</a>
@@ -565,78 +379,16 @@
     </div>
 </header>
 
-<!-- 收藏 & 历史 悬浮按钮 -->
-<div class="fab-group">
-    <button class="fab" id="fav-fab" title="我的收藏">⭐<span class="badge" id="fav-badge"></span></button>
-    <button class="fab" id="hist-fab" title="使用记录">🕐<span class="badge" id="hist-badge"></span></button>
-</div>
-
-<!-- 收藏抽屉 -->
-<div class="drawer-overlay" id="fav-overlay"></div>
-<div class="drawer" id="fav-drawer">
-    <div class="drawer-head">
-        <span class="drawer-title" data-i18n="drawer_fav">我的收藏</span>
-        <button class="drawer-close" id="fav-close">✕</button>
-    </div>
-    <div class="drawer-body" id="fav-body"></div>
-</div>
-
-<!-- 历史抽屉 -->
-<div class="drawer-overlay" id="hist-overlay"></div>
-<div class="drawer" id="hist-drawer">
-    <div class="drawer-head">
-        <span class="drawer-title" data-i18n="drawer_hist">使用记录</span>
-        <button class="drawer-close" id="hist-close">✕</button>
-    </div>
-    <div class="drawer-body" id="hist-body"></div>
-</div>
-
 <main>
     <div class="hero">
         <h1 data-i18n="hero_title">一站式工具与内容精选</h1>
         <p data-i18n="hero_sub">聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。</p>
     </div>
 
-    <!-- 置顶推荐区 -->
-    <section class="section-block" id="pinned" style="margin-bottom:44px;">
-        <div class="section-head">
-            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_pinned">精选推荐</span></h2>
-        </div>
-        <div class="pinned-section">
-            <div class="pinned-badge">⭐ 编辑推荐</div>
-            <div class="pinned-grid" id="pinned-grid"></div>
-        </div>
-    </section>
-
-    <!-- AI 工具专区 -->
-    <section class="section-block" id="ai-zone">
-        <div class="section-head">
-            <h2 class="section-title"><span class="dot" style="background:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.2);"></span><span data-i18n="sec_ai">AI 工具专区</span></h2>
-        </div>
-        <div class="ai-tab-bar" id="ai-tab-bar">
-            <button class="ai-tab active" data-aicat="all"    data-i18n="ai_all">全部</button>
-            <button class="ai-tab" data-aicat="write"  data-i18n="ai_write">AI 写作</button>
-            <button class="ai-tab" data-aicat="image"  data-i18n="ai_image">AI 绘图</button>
-            <button class="ai-tab" data-aicat="video"  data-i18n="ai_video">AI 视频</button>
-            <button class="ai-tab" data-aicat="code"   data-i18n="ai_code">AI 编程</button>
-            <button class="ai-tab" data-aicat="chat"   data-i18n="ai_chat">AI 对话</button>
-            <button class="ai-tab" data-aicat="audio"  data-i18n="ai_audio">AI 音频</button>
-        </div>
-        <div class="ai-grid" id="ai-grid"></div>
-    </section>
-
     <section class="section-block" id="tools">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">在线工具</span></h2>
             <a class="section-more" href="#library" data-i18n="hint_below">向下浏览内容精选 →</a>
-        </div>
-        <div class="tools-tab-bar" id="tools-tab-bar">
-            <button class="tools-tab active" data-toolcat="all"     data-i18n="tcat_all">全部</button>
-            <button class="tools-tab" data-toolcat="text"    data-i18n="tcat_text">文本 & 数据</button>
-            <button class="tools-tab" data-toolcat="frontend" data-i18n="tcat_fe">前端 & 设计</button>
-            <button class="tools-tab" data-toolcat="sandbox"  data-i18n="tcat_sandbox">在线沙盒</button>
-            <button class="tools-tab" data-toolcat="devops"   data-i18n="tcat_devops">运维 & 网络</button>
-            <button class="tools-tab" data-toolcat="db"       data-i18n="tcat_db">数据库 & 安全</button>
         </div>
         <div class="tools-host" id="tools-host"></div>
     </section>
@@ -697,6 +449,7 @@
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
             <a href="/compress.html">PixCrush</a>
+            <a href="/blog.html" data-i18n="nav_blog">博客</a>
             <a href="/help.html" data-i18n="nav_help">帮助中心</a>
             <a href="/about.html" data-i18n="nav_about">关于</a>
             <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
@@ -712,12 +465,9 @@ const I18N = {
         brand_sub: '综合在线工具站',
         hero_title: '一站式工具与内容精选',
         hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
-        nav_ai: 'AI 工具', nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接', nav_help: '帮助中心',
-        sec_pinned: '精选推荐', sec_ai: 'AI 工具专区', sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接', sec_comments: '发表评论',
-        hint_below: '向下浏览内容精选 →',
-        ai_all:'全部', ai_write:'AI 写作', ai_image:'AI 绘图', ai_video:'AI 视频', ai_code:'AI 编程', ai_chat:'AI 对话', ai_audio:'AI 音频',
-        tcat_all:'全部', tcat_text:'文本 & 数据', tcat_fe:'前端 & 设计', tcat_sandbox:'在线沙盒', tcat_devops:'运维 & 网络', tcat_db:'数据库 & 安全',
-        drawer_fav:'我的收藏', drawer_hist:'使用记录', drawer_empty_fav:'还没有收藏任何工具', drawer_empty_hist:'暂无使用记录', drawer_clear:'清空记录', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
+        nav_blog: '博客', nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接', nav_help: '帮助中心',
+        sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接', sec_comments: '发表评论',
+        hint_below: '向下浏览内容精选 →', more_devto: 'Dev.to 更多 →', more_trending: '本周热门 →', more_github: 'GitHub Trending →', more_cli: 'CLI 工具搜索 →',
         loading: '加载中…', load_err: '加载失败，请检查网络或稍后重试。', friends_empty: '暂未添加友情链接',
         ph_name: '昵称（必填）', ph_email: '邮箱（选填）', ph_site: '网站（选填）', ph_text: '写下你的想法...', ph_captcha: '输入结果',
         site_hint: '网站用于申请友情链接。', captcha_refresh: '换一题', submit_comment: '发布评论', comment_no_comments: '还没有评论，来发表第一条吧。',
@@ -730,12 +480,9 @@ const I18N = {
         brand_sub: 'All-in-one tool hub',
         hero_title: 'Tools & curated tech content',
         hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
-        nav_ai: 'AI Tools', nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends', nav_help: 'Help',
-        sec_pinned: 'Editor picks', sec_ai: 'AI Tool Zone', sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links', sec_comments: 'Comments',
-        hint_below: 'Browse curated content ↓',
-        ai_all:'All', ai_write:'Writing', ai_image:'Image', ai_video:'Video', ai_code:'Coding', ai_chat:'Chat', ai_audio:'Audio',
-        tcat_all:'All', tcat_text:'Text & data', tcat_fe:'Front-end', tcat_sandbox:'Sandbox', tcat_devops:'DevOps', tcat_db:'DB & security',
-        drawer_fav:'Favorites', drawer_hist:'History', drawer_empty_fav:'No favorites yet', drawer_empty_hist:'No history yet', drawer_clear:'Clear all', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
+        nav_blog: 'Blog', nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends', nav_help: 'Help',
+        sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links', sec_comments: 'Comments',
+        hint_below: 'Browse curated content ↓', more_devto: 'More on Dev.to →', more_trending: 'Trending week →', more_github: 'GitHub Trending →', more_cli: 'Search CLI repos →',
         loading: 'Loading…', load_err: 'Could not load data. Check your network and try again.', friends_empty: 'No friend links yet.',
         ph_name: 'Nickname (required)', ph_email: 'Email (optional)', ph_site: 'Website (optional)', ph_text: 'Share your thoughts...', ph_captcha: 'Enter result',
         site_hint: 'Website is used for friend-link application.', captcha_refresh: 'New challenge', submit_comment: 'Submit comment', comment_no_comments: 'No comments yet. Be the first one.',
@@ -748,12 +495,9 @@ const I18N = {
         brand_sub: '総合オンラインツール',
         hero_title: 'ツールと厳選コンテンツ',
         hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
-        nav_ai: 'AI ツール', nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク', nav_help: 'ヘルプ',
-        sec_pinned: '編集おすすめ', sec_ai: 'AI ツールゾーン', sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク', sec_comments: 'コメント',
-        hint_below: 'コンテンツへ ↓',
-        ai_all:'全て', ai_write:'文章作成', ai_image:'画像生成', ai_video:'動画生成', ai_code:'コーディング', ai_chat:'チャット', ai_audio:'音声',
-        tcat_all:'全て', tcat_text:'テキスト', tcat_fe:'フロントエンド', tcat_sandbox:'サンドボックス', tcat_devops:'DevOps', tcat_db:'DB・セキュリティ',
-        drawer_fav:'お気に入り', drawer_hist:'履歴', drawer_empty_fav:'お気に入りはまだありません', drawer_empty_hist:'履歴はまだありません', drawer_clear:'全て削除', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
+        nav_blog: 'ブログ', nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク', nav_help: 'ヘルプ',
+        sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク', sec_comments: 'コメント',
+        hint_below: 'コンテンツへ ↓', more_devto: 'Dev.to で続き →', more_trending: '週間トレンド →', more_github: 'GitHub Trending →', more_cli: 'CLI 検索 →',
         loading: '読み込み中…', load_err: '読み込みに失敗しました。ネットワークを確認してください。', friends_empty: '相互リンクはまだありません。',
         ph_name: 'ニックネーム（必須）', ph_email: 'メール（任意）', ph_site: 'サイト（任意）', ph_text: 'コメントを入力してください...', ph_captcha: '答えを入力',
         site_hint: 'サイト欄は相互リンク申請に利用できます。', captcha_refresh: '問題を更新', submit_comment: 'コメント投稿', comment_no_comments: 'まだコメントはありません。',
@@ -1021,11 +765,7 @@ function applyLang(l) {
         if (t[k] != null) el.setAttribute('placeholder', t[k]);
     });
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
-    renderPinned();
-    renderAiTools(currentAiCat);
     renderTools();
-    renderFavDrawer();
-    renderHistDrawer();
     loadDynamicContent();
 }
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
@@ -1041,235 +781,18 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
     if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
 });
 
-
-// ══ 精选推荐数据 ════════════════════════════════════════════════════
-const PINNED = [
-    { icon:'🔍', name:'JSON Crack',      brand:'jsoncrack.com',       desc:{zh:'JSON 结构可视化，将嵌套数据转为树状图，一眼看清层级',en:'Visualize JSON as an interactive graph',ja:'JSONをグラフで可視化'}, href:'https://jsoncrack.com', cat:'dev' },
-    { icon:'⚡', name:'Transform.tools', brand:'transform.tools',      desc:{zh:'数十种格式互转：JSON→TS、SQL→Go 等，开发必备',en:'Convert between dozens of formats: JSON to TS, SQL to Go…',ja:'JSON→TSなど多種フォーマット変換'}, href:'https://transform.tools', cat:'dev' },
-    { icon:'🔑', name:'JWT Debugger',    brand:'jwt.io',               desc:{zh:'快速解码 JWT Token，查看 payload、过期时间和签名信息',en:'Decode & verify JWT tokens instantly',ja:'JWTトークンを即座に解析'}, href:'https://jwt.io', cat:'dev' },
-    { icon:'◇',  name:'SVG to Component',brand:'react-svgr.com',      desc:{zh:'矢量图标一键转为 React、Vue 或 Tailwind 组件代码',en:'Convert SVG icons to React / Vue / Tailwind components',ja:'SVGをReact/Vueコンポーネントに変換'}, href:'https://react-svgr.com/playground/', cat:'dev' },
-    { icon:'🐳', name:'Docker Gen',      brand:'composerize.com',      desc:{zh:'通过可视化选项生成 Docker Compose 配置文件',en:'Generate Docker Compose configs visually',ja:'Docker Compose設定を自動生成'}, href:'https://www.composerize.com', cat:'dev' },
-    { icon:'🪄', name:'Object Remover',  brand:'objectremover.com',    desc:{zh:'AI 智能擦除：涂抹即可无痕去除照片中的路人或杂物',en:'AI-powered object removal — just brush to erase',ja:'AIで写真の不要物を消去'}, href:'https://objectremover.com', cat:'image' },
-    { icon:'💬', name:'Image to Prompt', brand:'imagetoprompt.com',   desc:{zh:'上传 AI 图反推提示词（Prompt），还原创作思路',en:'Reverse-engineer AI image prompts from any picture',ja:'AI画像からプロンプトを逆算'}, href:'https://imagetoprompt.com', cat:'ai' },
-    { icon:'🔍', name:'AI Upscaler',     brand:'upscayl.org',          desc:{zh:'AI 无损放大图片 4 倍，自动补全细节，开源免费',en:'Upscale images 4× with AI detail enhancement',ja:'AIで画像を4倍高解像度化'}, href:'https://www.upscayl.org', cat:'image' },
-    { icon:'📄', name:'Chat with PDF',   brand:'chatpdf.com',          desc:{zh:'向长篇 PDF 直接提问，AI 自动总结重点和关键条款',en:'Ask any question to a PDF — AI summarizes key points',ja:'PDFに質問してAIが要約'}, href:'https://www.chatpdf.com', cat:'ai' },
-    { icon:'✂️', name:'Remove.bg',       brand:'remove.bg',            desc:{zh:'发丝级精细扣图，一键去除背景，支持批量处理',en:'Remove image backgrounds at pixel-perfect quality',ja:'高精度な背景除去ツール'}, href:'https://www.remove.bg', cat:'image' },
-    { icon:'📸', name:'Shots.so',        brand:'shots.so',             desc:{zh:'给普通截图套上 Mac / iPhone 外壳与高级背景',en:'Wrap screenshots in beautiful device mockups',ja:'スクリーンショットをデバイス枠で美化'}, href:'https://shots.so', cat:'design' },
-    { icon:'🌊', name:'Haikei',          brand:'haikei.app',           desc:{zh:'随机生成丝滑 SVG 波浪、渐变形状，一键用于网页',en:'Generate smooth SVG waves and blobs for your site',ja:'SVGウェーブ・形状をランダム生成'}, href:'https://app.haikei.app', cat:'design' },
-    { icon:'🌐', name:'OpenGraph.xyz',   brand:'opengraph.xyz',        desc:{zh:'输入网址预览分享到微信 / X 时的样式，排查 OG 问题',en:'Preview how your URL looks when shared on social media',ja:'SNSシェア時のプレビューを確認'}, href:'https://www.opengraph.xyz', cat:'seo' },
-    { icon:'🎨', name:'Coolors',         brand:'coolors.co',           desc:{zh:'从照片提取配色或随机生成高级配色方案',en:'Extract palettes from photos or generate color schemes',ja:'写真から配色を抽出・生成'}, href:'https://coolors.co', cat:'design' },
-    { icon:'🔄', name:'CloudConvert',    brand:'cloudconvert.com',     desc:{zh:'支持几乎所有格式的文件互转：PDF、视频、文档均可',en:'Convert almost any file format — PDF, video, docs',ja:'ほぼ全形式のファイル変換'}, href:'https://cloudconvert.com', cat:'convert' },
-    { icon:'🔗', name:'Dub.co',          brand:'dub.co',               desc:{zh:'短链接 + 实时统计点击来源、地理位置和设备信息',en:'Short links with real-time click analytics',ja:'短縮URLとリアルタイム分析'}, href:'https://dub.co', cat:'seo' },
-    { icon:'🚀', name:'PageSpeed',       brand:'pagespeed.web.dev',    desc:{zh:'一键诊断网站加载速度，提供具体优化建议',en:'Diagnose site speed and get actionable suggestions',ja:'サイト速度診断と改善提案'}, href:'https://pagespeed.web.dev', cat:'seo' },
-    { icon:'🕷️', name:'Broken Link Check',brand:'brokenlinkcheck.com',desc:{zh:'全站扫描死链，找出所有 404 错误链接',en:'Scan your entire site for broken 404 links',ja:'サイト全体の壊れたリンクを検出'}, href:'https://www.brokenlinkcheck.com', cat:'seo' },
-];
-
-// ══ AI 工具数据 ═════════════════════════════════════════════════════
-const AI_TOOLS = [
-    // 写作
-    { cat:'write', icon:'✍️', name:'ChatGPT',        tag:'OpenAI',    href:'https://chat.openai.com' },
-    { cat:'write', icon:'✨', name:'Claude',          tag:'Anthropic', href:'https://claude.ai' },
-    { cat:'write', icon:'🤖', name:'Gemini',          tag:'Google',    href:'https://gemini.google.com' },
-    { cat:'write', icon:'📝', name:'Notion AI',       tag:'Writing',   href:'https://www.notion.so/product/ai' },
-    { cat:'write', icon:'💼', name:'Copy.ai',         tag:'Marketing', href:'https://www.copy.ai' },
-    { cat:'write', icon:'📧', name:'Jasper',          tag:'Content',   href:'https://www.jasper.ai' },
-    // 绘图
-    { cat:'image', icon:'🎨', name:'Midjourney',      tag:'Image',     href:'https://www.midjourney.com' },
-    { cat:'image', icon:'🖼️', name:'DALL·E 3',        tag:'OpenAI',    href:'https://labs.openai.com' },
-    { cat:'image', icon:'⚡', name:'Stable Diffusion',tag:'Image',     href:'https://stability.ai' },
-    { cat:'image', icon:'🎭', name:'Adobe Firefly',   tag:'Adobe',     href:'https://firefly.adobe.com' },
-    { cat:'image', icon:'🌈', name:'Leonardo.ai',     tag:'Image',     href:'https://leonardo.ai' },
-    { cat:'image', icon:'✂️', name:'Remove.bg',       tag:'BG Remove', href:'https://www.remove.bg' },
-    // 视频
-    { cat:'video', icon:'🎬', name:'Sora',            tag:'OpenAI',    href:'https://sora.com' },
-    { cat:'video', icon:'🎥', name:'Runway',          tag:'Video',     href:'https://runwayml.com' },
-    { cat:'video', icon:'🎞️', name:'Pika',            tag:'Video',     href:'https://pika.art' },
-    { cat:'video', icon:'📹', name:'HeyGen',          tag:'Avatar',    href:'https://www.heygen.com' },
-    { cat:'video', icon:'🌊', name:'Kling AI',        tag:'Video',     href:'https://klingai.com' },
-    { cat:'video', icon:'✂️', name:'CapCut AI',       tag:'Edit',      href:'https://www.capcut.com' },
-    // 编程
-    { cat:'code',  icon:'💻', name:'GitHub Copilot',  tag:'Code',      href:'https://github.com/features/copilot' },
-    { cat:'code',  icon:'⚡', name:'Cursor',          tag:'IDE',       href:'https://cursor.sh' },
-    { cat:'code',  icon:'🔧', name:'Claude Code',     tag:'Terminal',  href:'https://claude.ai/code' },
-    { cat:'code',  icon:'🤖', name:'v0.dev',          tag:'UI Gen',    href:'https://v0.dev' },
-    { cat:'code',  icon:'🛠️', name:'Bolt.new',        tag:'Fullstack', href:'https://bolt.new' },
-    { cat:'code',  icon:'🔍', name:'Tabnine',         tag:'Code',      href:'https://www.tabnine.com' },
-    // 对话
-    { cat:'chat',  icon:'🔍', name:'Perplexity',      tag:'Search',    href:'https://www.perplexity.ai' },
-    { cat:'chat',  icon:'🌙', name:'DeepSeek',        tag:'Chat',      href:'https://chat.deepseek.com' },
-    { cat:'chat',  icon:'🦙', name:'Meta AI',         tag:'Meta',      href:'https://www.meta.ai' },
-    { cat:'chat',  icon:'🔥', name:'Grok',            tag:'xAI',       href:'https://grok.com' },
-    { cat:'chat',  icon:'🌐', name:'Kimi',            tag:'月之暗面',  href:'https://kimi.moonshot.cn' },
-    { cat:'chat',  icon:'🐋', name:'文心一言',        tag:'百度',      href:'https://yiyan.baidu.com' },
-    // 音频
-    { cat:'audio', icon:'🎵', name:'Suno',            tag:'Music',     href:'https://suno.ai' },
-    { cat:'audio', icon:'🎤', name:'ElevenLabs',      tag:'Voice',     href:'https://elevenlabs.io' },
-    { cat:'audio', icon:'🎙️', name:'Whisper',         tag:'STT',       href:'https://openai.com/research/whisper' },
-    { cat:'audio', icon:'🔊', name:'Mubert',          tag:'Music',     href:'https://mubert.com' },
-];
-
-// ══ 收藏 & 历史 ════════════════════════════════════════════════════
-function getFavs()  { try { return JSON.parse(localStorage.getItem('qtl_favs_v1')  || '[]'); } catch(_){ return []; } }
-function getHist()  { try { return JSON.parse(localStorage.getItem('qtl_hist_v1')  || '[]'); } catch(_){ return []; } }
-function setFavs(v) { localStorage.setItem('qtl_favs_v1',  JSON.stringify(v)); }
-function setHist(v) { localStorage.setItem('qtl_hist_v1',  JSON.stringify(v)); }
-
-function isFav(href) { return getFavs().some(x => x.href === href); }
-
-function toggleFav(href, name, icon) {
-    const favs = getFavs();
-    const idx  = favs.findIndex(x => x.href === href);
-    if (idx >= 0) favs.splice(idx, 1);
-    else favs.unshift({ href, name, icon, time: Date.now() });
-    setFavs(favs);
-    updateBadges();
-    renderFavDrawer();
-    // 更新所有对应按钮状态
-    document.querySelectorAll(`.fav-btn[data-href="${CSS.escape(href)}"]`).forEach(btn => {
-        btn.textContent = isFav(href) ? '⭐' : '☆';
-        btn.classList.toggle('saved', isFav(href));
-    });
-}
-
-function addHist(href, name, icon) {
-    const hist = getHist().filter(x => x.href !== href);
-    hist.unshift({ href, name, icon, time: Date.now() });
-    setHist(hist.slice(0, 30));
-    updateBadges();
-    renderHistDrawer();
-}
-
-function updateBadges() {
-    const fc = getFavs().length;
-    const hc = getHist().length;
-    const fb = document.getElementById('fav-badge');
-    const hb = document.getElementById('hist-badge');
-    if (fb) { fb.textContent = fc; fb.classList.toggle('show', fc > 0); }
-    if (hb) { hb.textContent = hc; hb.classList.toggle('show', hc > 0); }
-}
-
-function renderFavDrawer() {
-    const body = document.getElementById('fav-body');
-    const t    = I18N[lang];
-    const favs = getFavs();
-    if (!favs.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_fav || '还没有收藏任何工具')}</div>`; return; }
-    body.innerHTML = favs.map(x => `
-        <a class="drawer-item" href="${x.href}" target="_blank" rel="noopener noreferrer"
-           onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
-            <span class="drawer-item-icon">${escapeHtml(x.icon)}</span>
-            <div class="drawer-item-info">
-                <div class="drawer-item-name">${escapeHtml(x.name)}</div>
-            </div>
-            <button class="drawer-item-del" onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">✕</button>
-        </a>
-    `).join('') + `<button class="drawer-clear" onclick="setFavs([]);renderFavDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '清空收藏')}</button>`;
-}
-
-function renderHistDrawer() {
-    const body = document.getElementById('hist-body');
-    const t    = I18N[lang];
-    const hist = getHist();
-    if (!hist.length) { body.innerHTML = `<div class="drawer-empty">${escapeHtml(t.drawer_empty_hist || '暂无使用记录')}</div>`; return; }
-    body.innerHTML = hist.map(x => {
-        const ago = Math.round((Date.now() - x.time) / 60000);
-        const agoStr = ago < 60 ? ago + (lang === 'zh' ? ' 分钟前' : lang === 'ja' ? ' 分前' : ' min ago')
-                     : ago < 1440 ? Math.floor(ago/60) + (lang === 'zh' ? ' 小时前' : lang === 'ja' ? ' 時間前' : ' hr ago')
-                     : Math.floor(ago/1440) + (lang === 'zh' ? ' 天前' : lang === 'ja' ? ' 日前' : ' days ago');
-        return `
-        <a class="drawer-item" href="${x.href}" target="_blank" rel="noopener noreferrer"
-           onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
-            <span class="drawer-item-icon">${escapeHtml(x.icon)}</span>
-            <div class="drawer-item-info">
-                <div class="drawer-item-name">${escapeHtml(x.name)}</div>
-                <div class="drawer-item-sub">${agoStr}</div>
-            </div>
-        </a>`;
-    }).join('') + `<button class="drawer-clear" onclick="setHist([]);renderHistDrawer();updateBadges();">${escapeHtml(t.drawer_clear || '清空记录')}</button>`;
-}
-
-function openDrawer(drawerId, overlayId) {
-    document.getElementById(drawerId).classList.add('open');
-    document.getElementById(overlayId).classList.add('open');
-    document.body.style.overflow = 'hidden';
-}
-function closeDrawer(drawerId, overlayId) {
-    document.getElementById(drawerId).classList.remove('open');
-    document.getElementById(overlayId).classList.remove('open');
-    document.body.style.overflow = '';
-}
-
-// ══ 渲染推荐区 ═════════════════════════════════════════════════════
-function renderPinned() {
-    const grid = document.getElementById('pinned-grid');
-    if (!grid) return;
-    grid.innerHTML = PINNED.map(p => `
-        <a class="pinned-card" href="${p.href}" target="_blank" rel="noopener noreferrer"
-           onclick="addHist('${p.href}','${escapeHtml(p.name)}','${escapeHtml(p.icon)}')">
-            <div class="pinned-card-top">
-                <div class="pinned-icon">${escapeHtml(p.icon)}</div>
-                <div>
-                    <div class="pinned-name">${escapeHtml(p.name)}</div>
-                    <div class="pinned-brand">${escapeHtml(p.brand)}</div>
-                </div>
-            </div>
-            <div class="pinned-desc">${escapeHtml(p.desc[lang] || p.desc.zh)}</div>
-        </a>
-    `).join('');
-}
-
-// ══ 渲染 AI 工具区 ══════════════════════════════════════════════════
-let currentAiCat = 'all';
-function renderAiTools(cat) {
-    currentAiCat = cat;
-    const grid  = document.getElementById('ai-grid');
-    const items = cat === 'all' ? AI_TOOLS : AI_TOOLS.filter(x => x.cat === cat);
-    grid.innerHTML = items.map(x => `
-        <a class="ai-card" href="${x.href}" target="_blank" rel="noopener noreferrer"
-           onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
-            <div class="ic">${escapeHtml(x.icon)}</div>
-            <h3>${escapeHtml(x.name)}</h3>
-            <span class="tag">${escapeHtml(x.tag)}</span>
-            <button class="fav-btn ${isFav(x.href)?'saved':''}" data-href="${x.href}"
-                onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')"
-                title="${isFav(x.href)?'取消收藏':'收藏'}">${isFav(x.href)?'⭐':'☆'}</button>
-        </a>
-    `).join('');
-}
-
-let currentToolCat = 'all';
-const TOOL_CAT_MAP = {
-    text:     ['本站 · 本地','文本与数据格式','Text & data formats','テキスト・データ形式','On-site · local'],
-    frontend: ['前端、设计与可视化','Front-end, design & UI','フロント・デザイン'],
-    sandbox:  ['在线编码与沙盒','Online IDEs & sandboxes','IDE・サンドボックス'],
-    devops:   ['运维、网络与调试','DevOps, network & debug','運用・ネットワーク'],
-    db:       ['数据库、安全与文档','DB, security & docs','DB・セキュリティ・文書'],
-};
-
-function renderTools(toolCat) {
-    if (toolCat !== undefined) currentToolCat = toolCat;
+function renderTools() {
     const host = document.getElementById('tools-host');
     const cats = TOOLS[lang] || TOOLS.en;
-    const filtered = currentToolCat === 'all' ? cats : cats.filter(cat => {
-        const matchers = TOOL_CAT_MAP[currentToolCat] || [];
-        return matchers.some(m => cat.title.includes(m) || m.includes(cat.title));
-    });
-    if (!filtered.length) {
-        host.innerHTML = `<div class="loading" style="padding:32px;text-align:center;">无匹配分类</div>`;
-        return;
-    }
-    host.innerHTML = filtered.map(cat => `
+    host.innerHTML = cats.map(cat => `
         <div class="tools-category">
             <h3 class="tools-cat-title">${escapeHtml(cat.title)}</h3>
             <div class="tools-grid">
                 ${cat.items.map(x => `
-        <a class="tool-card" href="${x.href}" ${x.int ? '' : 'target="_blank" rel="noopener noreferrer"'}
-           onclick="addHist('${x.href}','${escapeHtml(x.title)}','${escapeHtml(x.icon)}')">
+        <a class="tool-card" href="${x.href}" ${x.int ? '' : 'target="_blank" rel="noopener noreferrer"'}>
             <div class="ic">${escapeHtml(x.icon)}</div>
             <h3>${escapeHtml(x.title)}</h3>
             <span class="tag">${escapeHtml(x.tag)}</span>
-            <button class="fav-btn ${isFav(x.href)?'saved':''}" data-href="${x.href}"
-                onclick="event.preventDefault();event.stopPropagation();toggleFav('${x.href}','${escapeHtml(x.title)}','${escapeHtml(x.icon)}')"
-                title="${isFav(x.href)?'取消收藏':'收藏'}">${isFav(x.href)?'⭐':'☆'}</button>
         </a>`).join('')}
             </div>
         </div>
@@ -1413,34 +936,6 @@ function langColor(name) {
 
 applyTheme(theme);
 applyLang(lang);
-
-// AI tab 切换
-document.getElementById('ai-tab-bar').addEventListener('click', e => {
-    const btn = e.target.closest('.ai-tab');
-    if (!btn) return;
-    document.querySelectorAll('.ai-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderAiTools(btn.dataset.aicat);
-});
-
-// 工具 tab 切换
-document.getElementById('tools-tab-bar').addEventListener('click', e => {
-    const btn = e.target.closest('.tools-tab');
-    if (!btn) return;
-    document.querySelectorAll('.tools-tab').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    renderTools(btn.dataset.toolcat);
-});
-
-// 抽屉开关
-document.getElementById('fav-fab').addEventListener('click',  () => { renderFavDrawer();  openDrawer('fav-drawer','fav-overlay'); });
-document.getElementById('hist-fab').addEventListener('click', () => { renderHistDrawer(); openDrawer('hist-drawer','hist-overlay'); });
-document.getElementById('fav-close').addEventListener('click',  () => closeDrawer('fav-drawer','fav-overlay'));
-document.getElementById('hist-close').addEventListener('click', () => closeDrawer('hist-drawer','hist-overlay'));
-document.getElementById('fav-overlay').addEventListener('click',  () => closeDrawer('fav-drawer','fav-overlay'));
-document.getElementById('hist-overlay').addEventListener('click', () => closeDrawer('hist-drawer','hist-overlay'));
-
-updateBadges();
 
 </script>
 </body>
