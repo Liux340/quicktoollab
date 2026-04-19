@@ -222,6 +222,7 @@
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+    <script src="/blog-posts.js"></script>
 </head>
 <body>
 
@@ -339,80 +340,7 @@ const I18N = {
 };
 
 // ══ Blog posts data ════════════════════════════════════════════════════
-const POSTS = [
-    {
-        id:'canonical-seo', cat:'tech',
-        date:'2025-04-15', readTime:5,
-        title:{ zh:'Canonical 标签写错一个字母，导致 6 个页面全部不被收录', en:'One typo in canonical URL blocked all 6 pages from indexing', ja:'canonical URLの誤字でページが未収録に' },
-        desc:{ zh:'记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。', en:'A real-world case: one missing "l" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.', ja:'ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。' },
-        tags:['SEO','canonical','Google Search Console'],
-        image:'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=600&h=340&fit=crop',
-        badge:'tech',
-    },
-    {
-        id:'waline-comment-system', cat:'tool',
-        date:'2025-04-10', readTime:8,
-        title:{ zh:'把 localStorage 自制评论系统替换成 Waline 的全过程', en:'Replacing a DIY localStorage comment system with Waline', ja:'自作コメントシステムをWalineに置き換える' },
-        desc:{ zh:'自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。', en:'A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.', ja:'自作コメントシステムから Waline への移行過程を完全記録。' },
-        tags:['Waline','评论系统','JavaScript'],
-        image:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=340&fit=crop',
-        badge:'tool',
-    },
-    {
-        id:'cloudflare-pages-deploy', cat:'dev',
-        date:'2025-04-05', readTime:6,
-        title:{ zh:'GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠', en:'Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection', ja:'GitHub + Cloudflare Pages でゼロコストサイト構築' },
-        desc:{ zh:'只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。本文从零开始详解每一步操作。', en:'One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD. A step-by-step guide from zero.', ja:'ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを全て手に入れる方法。' },
-        tags:['Cloudflare','GitHub Pages','部署'],
-        image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=340&fit=crop',
-        badge:'dev',
-    },
-    {
-        id:'image-compression-guide', cat:'tool',
-        date:'2025-03-28', readTime:4,
-        title:{ zh:'PixCrush 图片压缩工具：为什么选择 Canvas API 而不是 WebAssembly', en:'PixCrush: Why Canvas API over WebAssembly for image compression', ja:'PixCrush：画像圧縮にCanvas APIを選んだ理由' },
-        desc:{ zh:'浏览器端图片压缩方案对比：Canvas API 简单但质量有限，WebAssembly（squoosh）质量高但包体大。PixCrush 选择 Canvas 的权衡与决策过程。', en:'Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.', ja:'Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。' },
-        tags:['Canvas API','图片压缩','WebAssembly'],
-        image:'https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop',
-        badge:'tool',
-    },
-    {
-        id:'css-variables-theming', cat:'dev',
-        date:'2025-03-20', readTime:7,
-        title:{ zh:'CSS 变量实现深色/浅色主题切换：零闪烁的关键是这一个内联脚本', en:'Flicker-free dark/light theme switching: one inline script makes all the difference', ja:'CSS変数でフリッカーなしのテーマ切替を実現する方法' },
-        desc:{ zh:'页面跳转时主题闪烁的根本原因是 JS 比 CSS 渲染晚。解决方案是在 <head> 最顶部放一段内联脚本，在浏览器渲染第一帧前就设好主题。', en:'Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.', ja:'テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。' },
-        tags:['CSS','Dark Mode','主题切换'],
-        image:'https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop',
-        badge:'dev',
-    },
-    {
-        id:'seo-tool-sites', cat:'tech',
-        date:'2025-03-12', readTime:9,
-        title:{ zh:'单页工具网站 SEO 优化实战：从零到 Google 收录的完整路径', en:'SEO for single-page tool sites: the complete path from zero to Google indexing', ja:'ツールサイトSEO：ゼロからGoogle収録までの完全ガイド' },
-        desc:{ zh:'静态工具站的 SEO 和博客不同：没有新内容产生，全靠技术 SEO 和外链。本文详解 canonical、sitemap、robots、OG 标签的最佳配置。', en:'SEO for static tool sites differs from blogs — no new content, just technical SEO and backlinks. Full guide to canonical, sitemap, robots and OG tags.', ja:'静的ツールサイトのSEOはブログとは異なる。技術SEOと外部リンクが鍵。' },
-        tags:['SEO','Static Site','技术SEO'],
-        image:'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop',
-        badge:'tech',
-    },
-    {
-        id:'ai-tools-2025', cat:'tech',
-        date:'2025-03-05', readTime:10,
-        title:{ zh:'2025 年 AI 工具全景：从写作到编程，哪些真正提升了效率', en:'AI tools landscape 2025: which ones actually boost productivity', ja:'2025年AIツール全景：本当に生産性を上げるツールは' },
-        desc:{ zh:'亲测了 30+ 款 AI 工具后的真实感受：Claude 写代码最稳，Midjourney 出图质量最高，Cursor 是目前编程体验最好的 IDE，Perplexity 已经能替代 Google 部分场景。', en:'After testing 30+ AI tools: Claude for stable code generation, Midjourney for image quality, Cursor for best coding IDE experience, Perplexity replacing Google in many cases.', ja:'30以上のAIツールを実際に使った結論。各カテゴリのベストツールを解説。' },
-        tags:['AI','效率工具','Claude','Midjourney'],
-        image:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=340&fit=crop',
-        badge:'tech',
-    },
-    {
-        id:'quicktoollab-build', cat:'life',
-        date:'2025-02-20', readTime:6,
-        title:{ zh:'QuickToolLab 从零到上线：一个纯静态工具站的搭建全记录', en:'QuickToolLab from zero to launch: building a pure static tool site', ja:'QuickToolLabゼロから公開：純静的ツールサイト構築の全記録' },
-        desc:{ zh:'记录从想法到上线的完整过程：域名选择、设计风格确定、功能规划、Cloudflare 部署、AdSense 申请。包含所有坑点和解决方案。', en:'Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.', ja:'アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。' },
-        tags:['建站','Cloudflare','个人项目'],
-        image:'https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop',
-        badge:'life',
-    },
-];
+const POSTS = window.BLOG_POSTS || [];
 
 const PAGE_SIZE = 5;
 let currentCat = 'all';

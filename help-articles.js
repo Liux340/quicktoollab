@@ -1,3 +1,4 @@
+// This file is managed by Decap CMS — do not edit manually
 window.HELP_ARTICLES = [
     {
         id: 'pixcrush-compress-guide',

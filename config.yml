@@ -1,0 +1,157 @@
+backend:
+  name: github
+  repo: Liux340/QuickToolLab   # ← 只需改这一行
+  branch: main
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+media_folder: "images/uploads"
+public_folder: "/images/uploads"
+
+locale: zh
+
+collections:
+
+  # ── 博客文章 ──────────────────────────────────────────────
+  - name: "blog"
+    label: "📝 博客文章"
+    files:
+      - name: "blog_posts"
+        label: "所有博客文章"
+        file: "blog-posts.js"
+        fields:
+          - label: "文章列表"
+            name: "root"
+            widget: "list"
+            add_button_label: "+ 新增博客文章"
+            fields:
+              - label: "文章ID（英文小写+连字符，唯一）"
+                name: "id"
+                widget: "string"
+                hint: "例：my-new-post"
+
+              - label: "分类"
+                name: "cat"
+                widget: "select"
+                options:
+                  - { label: "技术 tech", value: "tech" }
+                  - { label: "工具 tool", value: "tool" }
+                  - { label: "开发 dev",  value: "dev"  }
+                  - { label: "生活 life", value: "life" }
+
+              - label: "发布日期"
+                name: "date"
+                widget: "datetime"
+                format: "YYYY-MM-DD"
+                date_format: "YYYY-MM-DD"
+                time_format: false
+
+              - label: "预计阅读时间（分钟）"
+                name: "readTime"
+                widget: "number"
+                default: 5
+                min: 1
+                max: 60
+
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "string" }
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "日本語", name: "ja", widget: "string" }
+
+              - label: "摘要（列表卡片显示）"
+                name: "desc"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "text" }
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "日本語", name: "ja", widget: "text" }
+
+              - label: "正文（支持 Markdown）"
+                name: "body"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "中文正文", name: "zh", widget: "markdown", required: false }
+                  - { label: "English body", name: "en", widget: "markdown", required: false }
+                  - { label: "日本語本文", name: "ja", widget: "markdown", required: false }
+
+              - label: "封面图片 URL"
+                name: "image"
+                widget: "string"
+                required: false
+                hint: "推荐 Unsplash：https://images.unsplash.com/photo-xxx?w=600&h=340&fit=crop"
+
+              - label: "标签"
+                name: "tags"
+                widget: "list"
+                default: []
+
+              - label: "徽章颜色"
+                name: "badge"
+                widget: "select"
+                options:
+                  - { label: "蓝色 tech",  value: "tech" }
+                  - { label: "橙色 tool",  value: "tool" }
+                  - { label: "紫色 dev",   value: "dev"  }
+                  - { label: "绿色 life",  value: "life" }
+
+  # ── 帮助中心 ──────────────────────────────────────────────
+  - name: "help"
+    label: "🛟 帮助中心文章"
+    files:
+      - name: "help_articles"
+        label: "所有帮助文章"
+        file: "help-articles.js"
+        fields:
+          - label: "文章列表"
+            name: "root"
+            widget: "list"
+            add_button_label: "+ 新增帮助文章"
+            fields:
+              - label: "文章ID（英文小写+连字符，唯一）"
+                name: "id"
+                widget: "string"
+                hint: "例：compress-guide"
+
+              - label: "分类名称"
+                name: "cat"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "string" }
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "日本語", name: "ja", widget: "string" }
+
+              - label: "标题"
+                name: "title"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "string" }
+                  - { label: "English", name: "en", widget: "string" }
+                  - { label: "日本語", name: "ja", widget: "string" }
+
+              - label: "介绍（这个工具是干什么的）"
+                name: "intro"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "text" }
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "日本語", name: "ja", widget: "text" }
+
+              - label: "用法（怎么用最有效）"
+                name: "howto"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "text" }
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "日本語", name: "ja", widget: "text" }
+
+              - label: "科普（背后的原理）"
+                name: "science"
+                widget: "object"
+                fields:
+                  - { label: "中文", name: "zh", widget: "text" }
+                  - { label: "English", name: "en", widget: "text" }
+                  - { label: "日本語", name: "ja", widget: "text" }
