@@ -1,9 +1,10 @@
 backend:
   name: github
-  repo: Liux340/QuickToolLab   # ← 只需改这一行
+  repo: Liux340/QuickToolLab
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
+  site_id: https://cute-lamington-cc6899.netlify.app/
 
 media_folder: "images/uploads"
 public_folder: "/images/uploads"
