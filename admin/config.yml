@@ -1,5 +1,6 @@
 backend:
-  name: git-gateway
+  name: github
+  repo: Liux340/quicktoollab
   branch: main
 
 media_folder: "images/uploads"
