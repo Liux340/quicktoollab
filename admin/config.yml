@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: Liux340/QuickToolLab
+  repo: Liux340/quicktoollab
   branch: main
   base_url: https://api.netlify.com
   auth_endpoint: auth
