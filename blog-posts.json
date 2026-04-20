@@ -1,0 +1,169 @@
+[
+  {
+    "id": "canonical-seo",
+    "cat": "tech",
+    "date": "2025-04-15",
+    "readTime": 5,
+    "title": {
+      "zh": "Canonical 标签写错一个字母，导致 6 个页面全部不被收录",
+      "en": "One typo in canonical URL blocked all 6 pages from indexing",
+      "ja": "canonical URLの誤字でページが未収録に"
+    },
+    "desc": {
+      "zh": "记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。",
+      "en": "A real-world case: one missing \"l\" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.",
+      "ja": "ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。"
+    },
+    "tags": ["SEO", "canonical", "Google Search Console"],
+    "image": "https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop",
+    "badge": "tech",
+    "content": {
+      "zh": "<h2>问题发现</h2>\n<p>某天检查 Google Search Console，发现提交的 6 个页面状态全部是 <strong>「已被抓取 — 未收录」</strong>，理由都是 <strong>「已选择替代页面（包含正确的 canonical 标签）」</strong>。</p>\n<p>这意味着 Google 认为这些页面是\"重复内容\"，并且认为真正的\"原始\"页面在别处。</p>\n\n<h2>排查过程</h2>\n<p>仔细检查才发现问题：所有页面的 canonical 标签写的是 <code>https://quicktoolab.com/</code>，而我的真实域名是 <code>https://quicktoollab.top/</code>。</p>\n<blockquote>注意：<code>quicktoolab</code>（少一个 l）vs <code>quicktoollab</code>（正确）</blockquote>\n<p>Google 的逻辑是：canonical 标签相当于你在告诉 Google \"这个页面的权威版本在 <code>quicktoolab.com</code>\"，所以 Google 说\"好的，那我去收录 <code>quicktoolab.com</code>\"，然后你的 <code>quicktoollab.top</code> 就被当成副本丢弃了。</p>\n\n<h2>修复步骤</h2>\n<p>修复很简单，把所有页面的 canonical 链接从：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>改为：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>同时一并修复了 <code>og:url</code>、<code>og:image</code> 里的同类错误。</p>\n\n<h2>经验教训</h2>\n<p>Canonical 标签是 SEO 中最容易被忽视却影响最大的标签之一。几个关键点：</p>\n<ul>\n<li>canonical 指向的域名必须和你实际使用的域名 <strong>完全一致</strong>，包括 www 和非 www、http 和 https</li>\n<li>sitemap 里的 URL 和 canonical 指向的 URL 必须一致，否则 Google 会困惑</li>\n<li>每次新建页面后，第一件事就是检查 canonical 是否正确</li>\n</ul>\n<p>提交修复后，通过 Google Search Console 的「URL 检查」工具逐一请求重新收录，大约 2-4 周后应该会正常被索引。</p>",
+      "en": "<h2>Problem Discovery</h2>\n<p>While checking Google Search Console, all 6 submitted pages showed <strong>\"Crawled — currently not indexed\"</strong> with reason <strong>\"Duplicate, submitted URL not selected as canonical\"</strong>.</p>\n<p>This means Google considered these pages as duplicates, believing the real \"original\" version exists elsewhere.</p>\n\n<h2>Root Cause</h2>\n<p>On closer inspection: all canonical tags pointed to <code>https://quicktoolab.com/</code> while the actual domain is <code>https://quicktoollab.top/</code>.</p>\n<blockquote>Notice: <code>quicktoolab</code> (missing one \"l\") vs <code>quicktoollab</code> (correct)</blockquote>\n<p>Google's logic: canonical tells Google \"the authoritative version is at quicktoolab.com\". So Google indexed quicktoolab.com and treated quicktoollab.top as a duplicate.</p>\n\n<h2>Fix</h2>\n<p>Simple fix — update all canonical links from:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>To:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>Also fixed the same typo in <code>og:url</code> and <code>og:image</code> tags.</p>\n\n<h2>Lessons Learned</h2>\n<ul>\n<li>The canonical URL must <strong>exactly match</strong> your actual domain — including www vs non-www, http vs https</li>\n<li>Sitemap URLs and canonical URLs must match, or Google gets confused</li>\n<li>Always verify canonical tags are correct when creating new pages</li>\n</ul>",
+      "ja": "<h2>問題の発見</h2>\n<p>Google Search Consoleを確認したところ、提出した6ページすべてが<strong>「クロール済み — インデックス未登録」</strong>で、理由は<strong>「重複：ユーザーが指定したURLが正規URLとして選択されていない」</strong>でした。</p>\n\n<h2>原因の特定</h2>\n<p>よく確認すると、すべてのcanonicalタグが <code>https://quicktoolab.com/</code> を指していましたが、実際のドメインは <code>https://quicktoollab.top/</code> です。</p>\n<blockquote><code>quicktoolab</code>（lが一つ足りない）vs <code>quicktoollab</code>（正しい）</blockquote>\n\n<h2>修正方法</h2>\n<p>全ページのcanonicalを正しいドメインに修正し、og:urlとog:imageも同様に修正しました。</p>\n\n<h2>教訓</h2>\n<ul>\n<li>canonicalのURLは実際のドメインと完全に一致させること</li>\n<li>sitemapのURLとcanonicalのURLは一致させること</li>\n<li>新ページ作成時は必ずcanonicalを確認すること</li>\n</ul>"
+    }
+  },
+  {
+    "id": "waline-comment-system",
+    "cat": "tool",
+    "date": "2025-04-10",
+    "readTime": 8,
+    "title": {
+      "zh": "把 localStorage 自制评论系统替换成 Waline 的全过程",
+      "en": "Replacing a DIY localStorage comment system with Waline",
+      "ja": "自作コメントシステムをWalineに置き換える"
+    },
+    "desc": {
+      "zh": "自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。",
+      "en": "A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.",
+      "ja": "自作コメントシステムから Waline への移行過程を完全記録。"
+    },
+    "tags": ["Waline", "评论系统", "JavaScript"],
+    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop",
+    "badge": "tool",
+    "content": {
+      "zh": "<h2>问题根源</h2>\n<p>原来的评论系统用 <code>localStorage</code> 存储评论数据，这是浏览器的本地存储，每台设备、每个浏览器都是完全隔离的。所以你在自己电脑上发的评论，其他访客根本看不到。</p>\n\n<h2>为什么选 Waline</h2>\n<p>Waline 是一个开源的评论系统，主要优势：</p>\n<ul>\n<li>评论存在服务端数据库，所有访客都能看到</li>\n<li>免费部署在 Vercel，配合 Cloudflare Pages 很合适</li>\n<li>支持 Markdown、表情包、邮件通知</li>\n<li>主题适配方便，通过 CSS 变量控制样式</li>\n</ul>\n\n<h2>迁移步骤</h2>\n<p>替换只涉及三处改动：</p>\n<ul>\n<li><strong>HTML</strong>：将原来的输入框、验证码等替换为一个 <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>：删除旧评论样式，加入 Waline CSS 主题变量适配</li>\n<li><strong>JS</strong>：删除所有旧评论函数，加入 Waline 初始化代码</li>\n</ul>\n\n<h2>关键代码</h2>\n<pre><code>import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';\n\nfunction initWaline(locale) {\n    if (window.__walineInstance) window.__walineInstance.destroy();\n    window.__walineInstance = init({\n        el: '#waline-container',\n        serverURL: 'https://comment.quicktoollab.top',\n        lang: locale || 'zh-CN',\n        dark: 'auto',\n    });\n}</code></pre>\n\n<h2>踩坑记录</h2>\n<p>最大的坑：替换时 <code>submitHomeComment</code> 函数末尾的闭合括号没有被一起删除，导致一个孤立的语句出现在全局作用域，造成 JS 语法错误，整个脚本崩溃，所有动态内容都加载不出来。</p>\n<p>教训：替换评论 JS 块时，一定要检查块的开头和结尾有没有残留代码。</p>",
+      "en": "<h2>The Root Problem</h2>\n<p>The original system stored comments in <code>localStorage</code> — browser-local storage that's completely isolated per device and browser. Comments you post are invisible to other visitors.</p>\n\n<h2>Why Waline</h2>\n<p>Waline stores comments in a server-side database so all visitors can see them. It deploys free on Vercel, supports Markdown and emoji, and adapts to themes via CSS variables.</p>\n\n<h2>Migration Steps</h2>\n<p>Only three changes needed:</p>\n<ul>\n<li><strong>HTML</strong>: Replace all inputs and captcha with <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>: Remove old comment styles, add Waline CSS variable theme adaptation</li>\n<li><strong>JS</strong>: Delete all old comment functions, add Waline init code</li>\n</ul>\n\n<h2>Pitfall</h2>\n<p>The biggest gotcha: a dangling closing brace from the old <code>submitHomeComment</code> function caused a JS syntax error, crashing the entire script and breaking all dynamic content loading.</p>",
+      "ja": "<h2>問題の根本原因</h2>\n<p>元のシステムは<code>localStorage</code>にコメントを保存していました。これはブラウザのローカルストレージで、デバイスやブラウザごとに完全に分離されています。</p>\n\n<h2>Walineを選んだ理由</h2>\n<p>Walineはサーバーサイドにコメントを保存するため、全訪問者がコメントを見ることができます。Vercelで無料デプロイ可能で、Markdownや絵文字にも対応しています。</p>\n\n<h2>移行手順</h2>\n<ul>\n<li>HTMLの入力フォームを<code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code>に置換</li>\n<li>古いCSSを削除し、WalineのCSSテーマ変数を追加</li>\n<li>古いJS関数を削除し、Waline初期化コードを追加</li>\n</ul>"
+    }
+  },
+  {
+    "id": "cloudflare-pages-deploy",
+    "cat": "dev",
+    "date": "2025-04-05",
+    "readTime": 6,
+    "title": {
+      "zh": "GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠",
+      "en": "Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection",
+      "ja": "GitHub + Cloudflare Pages でゼロコストサイト構築"
+    },
+    "desc": {
+      "zh": "只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。",
+      "en": "One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.",
+      "ja": "ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。"
+    },
+    "tags": ["Cloudflare", "GitHub Pages", "部署"],
+    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
+    "badge": "dev",
+    "content": {
+      "zh": "<h2>方案概述</h2>\n<p>这套方案的核心逻辑：GitHub 存代码 → Cloudflare Pages 自动部署 → Cloudflare CDN 分发 → 用户访问。</p>\n<p>费用：只需一个域名，其余全部免费。</p>\n\n<h2>部署步骤</h2>\n<ul>\n<li>1. 把网站文件推送到 GitHub 仓库</li>\n<li>2. 登录 Cloudflare Pages，新建项目，连接 GitHub 仓库</li>\n<li>3. 构建命令留空（纯静态站），输出目录填 <code>/</code></li>\n<li>4. 绑定自定义域名，在域名商处添加 CNAME 记录</li>\n</ul>\n\n<h2>免费功能清单</h2>\n<ul>\n<li>✅ 全球 CDN 加速（200+ 节点）</li>\n<li>✅ 自动 HTTPS / TLS</li>\n<li>✅ DDoS L3/L4 防护</li>\n<li>✅ CI/CD 自动部署（push 后自动更新）</li>\n<li>✅ Web Analytics 基础统计</li>\n<li>✅ 每月 500 次构建、无限带宽</li>\n</ul>\n\n<h2>注意事项</h2>\n<p>纯静态站没有后端，不能运行 Node.js / PHP 等服务端代码。如果需要 API，可以配合 Cloudflare Workers（每天 10 万次免费请求）。</p>",
+      "en": "<h2>Architecture</h2>\n<p>GitHub stores code → Cloudflare Pages auto-deploys → Cloudflare CDN distributes → users access.</p>\n<p>Cost: one domain name fee. Everything else is free.</p>\n\n<h2>Deployment Steps</h2>\n<ul>\n<li>1. Push site files to a GitHub repository</li>\n<li>2. Log in to Cloudflare Pages, create a project, connect GitHub repo</li>\n<li>3. Leave build command empty (static site), output directory: /</li>\n<li>4. Bind custom domain, add CNAME record at your registrar</li>\n</ul>\n\n<h2>What You Get for Free</h2>\n<ul>\n<li>✅ Global CDN (200+ nodes)</li>\n<li>✅ Automatic HTTPS/TLS</li>\n<li>✅ DDoS L3/L4 protection</li>\n<li>✅ CI/CD auto-deploy on push</li>\n<li>✅ 500 monthly builds, unlimited bandwidth</li>\n</ul>",
+      "ja": "<h2>アーキテクチャ</h2>\n<p>GitHub→Cloudflare Pages自動デプロイ→Cloudflare CDN配信→ユーザーアクセス。コストはドメイン代のみ。</p>\n\n<h2>デプロイ手順</h2>\n<ul>\n<li>1. サイトファイルをGitHubにプッシュ</li>\n<li>2. Cloudflare PagesでGitHubリポジトリを接続</li>\n<li>3. ビルドコマンドは空欄、出力ディレクトリは /</li>\n<li>4. カスタムドメインを設定</li>\n</ul>"
+    }
+  },
+  {
+    "id": "image-compression-guide",
+    "cat": "tool",
+    "date": "2025-03-28",
+    "readTime": 4,
+    "title": {
+      "zh": "PixCrush 图片压缩工具：为什么选择 Canvas API 而不是 WebAssembly",
+      "en": "PixCrush: Why Canvas API over WebAssembly for image compression",
+      "ja": "PixCrush：画像圧縮にCanvas APIを選んだ理由"
+    },
+    "desc": {
+      "zh": "浏览器端图片压缩方案对比：Canvas API 简单但质量有限，WebAssembly（squoosh）质量高但包体大。PixCrush 选择 Canvas 的权衡与决策过程。",
+      "en": "Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.",
+      "ja": "Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。"
+    },
+    "tags": ["Canvas API", "图片压缩", "WebAssembly"],
+    "image": "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop",
+    "badge": "tool"
+  },
+  {
+    "id": "css-variables-theming",
+    "cat": "dev",
+    "date": "2025-03-20",
+    "readTime": 7,
+    "title": {
+      "zh": "CSS 变量实现深色/浅色主题切换：零闪烁的关键是这一个内联脚本",
+      "en": "Flicker-free dark/light theme switching: one inline script makes all the difference",
+      "ja": "CSS変数でフリッカーなしのテーマ切替を実現する方法"
+    },
+    "desc": {
+      "zh": "页面跳转时主题闪烁的根本原因是 JS 比 CSS 渲染晚。解决方案是在 <head> 最顶部放一段内联脚本，在浏览器渲染第一帧前就设好主题。",
+      "en": "Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.",
+      "ja": "テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。"
+    },
+    "tags": ["CSS", "Dark Mode", "主题切换"],
+    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop",
+    "badge": "dev"
+  },
+  {
+    "id": "seo-tool-sites",
+    "cat": "tech",
+    "date": "2025-03-12",
+    "readTime": 9,
+    "title": {
+      "zh": "单页工具网站 SEO 优化实战：从零到 Google 收录的完整路径",
+      "en": "SEO for single-page tool sites: the complete path from zero to Google indexing",
+      "ja": "ツールサイトSEO：ゼロからGoogle収録までの完全ガイド"
+    },
+    "desc": {
+      "zh": "静态工具站的 SEO 和博客不同：没有新内容产生，全靠技术 SEO 和外链。本文详解 canonical、sitemap、robots、OG 标签的最佳配置。",
+      "en": "SEO for static tool sites differs from blogs — no new content, just technical SEO and backlinks. Full guide to canonical, sitemap, robots and OG tags.",
+      "ja": "静的ツールサイトのSEOはブログとは異なる。技術SEOと外部リンクが鍵。"
+    },
+    "tags": ["SEO", "Static Site", "技术SEO"],
+    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop",
+    "badge": "tech"
+  },
+  {
+    "id": "ai-tools-2025",
+    "cat": "tech",
+    "date": "2025-03-05",
+    "readTime": 10,
+    "title": {
+      "zh": "2025 年 AI 工具全景：从写作到编程，哪些真正提升了效率",
+      "en": "AI tools landscape 2025: which ones actually boost productivity",
+      "ja": "2025年AIツール全景：本当に生産性を上げるツールは"
+    },
+    "desc": {
+      "zh": "亲测了 30+ 款 AI 工具后的真实感受：Claude 写代码最稳，Midjourney 出图质量最高，Cursor 是目前编程体验最好的 IDE，Perplexity 已经能替代 Google 部分场景。",
+      "en": "After testing 30+ AI tools: Claude for stable code generation, Midjourney for image quality, Cursor for best coding IDE experience, Perplexity replacing Google in many cases.",
+      "ja": "30以上のAIツールを実際に使った結論。各カテゴリのベストツールを解説。"
+    },
+    "tags": ["AI", "效率工具", "Claude", "Midjourney"],
+    "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=340&fit=crop",
+    "badge": "tech"
+  },
+  {
+    "id": "quicktoollab-build",
+    "cat": "life",
+    "date": "2025-02-20",
+    "readTime": 6,
+    "title": {
+      "zh": "QuickToolLab 从零到上线：一个纯静态工具站的搭建全记录",
+      "en": "QuickToolLab from zero to launch: building a pure static tool site",
+      "ja": "QuickToolLabゼロから公開：純静的ツールサイト構築の全記録"
+    },
+    "desc": {
+      "zh": "记录从想法到上线的完整过程：域名选择、设计风格确定、功能规划、Cloudflare 部署、AdSense 申请。包含所有坑点和解决方案。",
+      "en": "Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.",
+      "ja": "アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。"
+    },
+    "tags": ["建站", "Cloudflare", "个人项目"],
+    "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop",
+    "badge": "life"
+  }
+]
