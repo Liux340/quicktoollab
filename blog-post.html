@@ -473,14 +473,227 @@ const I18N = {
 };
 
 // ══ Posts data (same as blog.html) ════════════════════════════════════
-let POSTS = [];
+const POSTS = [
+    {
+        id:'canonical-seo', cat:'tech', date:'2025-04-15', readTime:5,
+        title:{ zh:'Canonical 标签写错一个字母，导致 6 个页面全部不被收录', en:'One typo in canonical URL blocked all 6 pages from indexing', ja:'canonical URLの誤字でページが未収録に' },
+        desc:{ zh:'记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。', en:'A real-world case: one missing "l" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.', ja:'ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。' },
+        tags:['SEO','canonical','Google Search Console'],
+        image:'https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop',
+        badge:'tech',
+        content:{
+            zh:`<h2>问题发现</h2>
+<p>某天检查 Google Search Console，发现提交的 6 个页面状态全部是 <strong>「已被抓取 — 未收录」</strong>，理由都是 <strong>「已选择替代页面（包含正确的 canonical 标签）」</strong>。</p>
+<p>这意味着 Google 认为这些页面是"重复内容"，并且认为真正的"原始"页面在别处。</p>
+
+<h2>排查过程</h2>
+<p>仔细检查才发现问题：所有页面的 canonical 标签写的是 <code>https://quicktoolab.com/</code>，而我的真实域名是 <code>https://quicktoollab.top/</code>。</p>
+<blockquote>注意：<code>quicktoolab</code>（少一个 l）vs <code>quicktoollab</code>（正确）</blockquote>
+<p>Google 的逻辑是：canonical 标签相当于你在告诉 Google "这个页面的权威版本在 <code>quicktoolab.com</code>"，所以 Google 说"好的，那我去收录 <code>quicktoolab.com</code>"，然后你的 <code>quicktoollab.top</code> 就被当成副本丢弃了。</p>
+
+<h2>修复步骤</h2>
+<p>修复很简单，把所有页面的 canonical 链接从：</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoolab.com/"&gt;</code></pre>
+<p>改为：</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoollab.top/"&gt;</code></pre>
+<p>同时一并修复了 <code>og:url</code>、<code>og:image</code> 里的同类错误。</p>
+
+<h2>经验教训</h2>
+<p>Canonical 标签是 SEO 中最容易被忽视却影响最大的标签之一。几个关键点：</p>
+<ul>
+<li>canonical 指向的域名必须和你实际使用的域名 <strong>完全一致</strong>，包括 www 和非 www、http 和 https</li>
+<li>sitemap 里的 URL 和 canonical 指向的 URL 必须一致，否则 Google 会困惑</li>
+<li>每次新建页面后，第一件事就是检查 canonical 是否正确</li>
+</ul>
+<p>提交修复后，通过 Google Search Console 的「URL 检查」工具逐一请求重新收录，大约 2-4 周后应该会正常被索引。</p>`,
+            en:`<h2>Problem Discovery</h2>
+<p>While checking Google Search Console, all 6 submitted pages showed <strong>"Crawled — currently not indexed"</strong> with reason <strong>"Duplicate, submitted URL not selected as canonical"</strong>.</p>
+<p>This means Google considered these pages as duplicates, believing the real "original" version exists elsewhere.</p>
+
+<h2>Root Cause</h2>
+<p>On closer inspection: all canonical tags pointed to <code>https://quicktoolab.com/</code> while the actual domain is <code>https://quicktoollab.top/</code>.</p>
+<blockquote>Notice: <code>quicktoolab</code> (missing one "l") vs <code>quicktoollab</code> (correct)</blockquote>
+<p>Google's logic: canonical tells Google "the authoritative version is at quicktoolab.com". So Google indexed quicktoolab.com and treated quicktoollab.top as a duplicate.</p>
+
+<h2>Fix</h2>
+<p>Simple fix — update all canonical links from:</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoolab.com/"&gt;</code></pre>
+<p>To:</p>
+<pre><code>&lt;link rel="canonical" href="https://quicktoollab.top/"&gt;</code></pre>
+<p>Also fixed the same typo in <code>og:url</code> and <code>og:image</code> tags.</p>
+
+<h2>Lessons Learned</h2>
+<ul>
+<li>The canonical URL must <strong>exactly match</strong> your actual domain — including www vs non-www, http vs https</li>
+<li>Sitemap URLs and canonical URLs must match, or Google gets confused</li>
+<li>Always verify canonical tags are correct when creating new pages</li>
+</ul>`,
+            ja:`<h2>問題の発見</h2>
+<p>Google Search Consoleを確認したところ、提出した6ページすべてが<strong>「クロール済み — インデックス未登録」</strong>で、理由は<strong>「重複：ユーザーが指定したURLが正規URLとして選択されていない」</strong>でした。</p>
+
+<h2>原因の特定</h2>
+<p>よく確認すると、すべてのcanonicalタグが <code>https://quicktoolab.com/</code> を指していましたが、実際のドメインは <code>https://quicktoollab.top/</code> です。</p>
+<blockquote><code>quicktoolab</code>（lが一つ足りない）vs <code>quicktoollab</code>（正しい）</blockquote>
+
+<h2>修正方法</h2>
+<p>全ページのcanonicalを正しいドメインに修正し、og:urlとog:imageも同様に修正しました。</p>
+
+<h2>教訓</h2>
+<ul>
+<li>canonicalのURLは実際のドメインと完全に一致させること</li>
+<li>sitemapのURLとcanonicalのURLは一致させること</li>
+<li>新ページ作成時は必ずcanonicalを確認すること</li>
+</ul>`,
+        },
+    },
+    {
+        id:'waline-comment-system', cat:'tool', date:'2025-04-10', readTime:8,
+        title:{ zh:'把 localStorage 自制评论系统替换成 Waline 的全过程', en:'Replacing a DIY localStorage comment system with Waline', ja:'自作コメントシステムをWalineに置き換える' },
+        desc:{ zh:'自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。', en:'A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.', ja:'自作コメントシステムから Waline への移行過程を完全記録。' },
+        tags:['Waline','评论系统','JavaScript'],
+        image:'https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop',
+        badge:'tool',
+        content:{
+            zh:`<h2>问题根源</h2>
+<p>原来的评论系统用 <code>localStorage</code> 存储评论数据，这是浏览器的本地存储，每台设备、每个浏览器都是完全隔离的。所以你在自己电脑上发的评论，其他访客根本看不到。</p>
+
+<h2>为什么选 Waline</h2>
+<p>Waline 是一个开源的评论系统，主要优势：</p>
+<ul>
+<li>评论存在服务端数据库，所有访客都能看到</li>
+<li>免费部署在 Vercel，配合 Cloudflare Pages 很合适</li>
+<li>支持 Markdown、表情包、邮件通知</li>
+<li>主题适配方便，通过 CSS 变量控制样式</li>
+</ul>
+
+<h2>迁移步骤</h2>
+<p>替换只涉及三处改动：</p>
+<ul>
+<li><strong>HTML</strong>：将原来的输入框、验证码等替换为一个 <code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code></li>
+<li><strong>CSS</strong>：删除旧评论样式，加入 Waline CSS 主题变量适配</li>
+<li><strong>JS</strong>：删除所有旧评论函数，加入 Waline 初始化代码</li>
+</ul>
+
+<h2>关键代码</h2>
+<pre><code>import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+function initWaline(locale) {
+    if (window.__walineInstance) window.__walineInstance.destroy();
+    window.__walineInstance = init({
+        el: '#waline-container',
+        serverURL: 'https://comment.quicktoollab.top',
+        lang: locale || 'zh-CN',
+        dark: 'auto',
+    });
+}</code></pre>
+
+<h2>踩坑记录</h2>
+<p>最大的坑：替换时 <code>submitHomeComment</code> 函数末尾的闭合括号没有被一起删除，导致一个孤立的语句出现在全局作用域，造成 JS 语法错误，整个脚本崩溃，所有动态内容都加载不出来。</p>
+<p>教训：替换评论 JS 块时，一定要检查块的开头和结尾有没有残留代码。</p>`,
+            en:`<h2>The Root Problem</h2>
+<p>The original system stored comments in <code>localStorage</code> — browser-local storage that's completely isolated per device and browser. Comments you post are invisible to other visitors.</p>
+
+<h2>Why Waline</h2>
+<p>Waline stores comments in a server-side database so all visitors can see them. It deploys free on Vercel, supports Markdown and emoji, and adapts to themes via CSS variables.</p>
+
+<h2>Migration Steps</h2>
+<p>Only three changes needed:</p>
+<ul>
+<li><strong>HTML</strong>: Replace all inputs and captcha with <code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code></li>
+<li><strong>CSS</strong>: Remove old comment styles, add Waline CSS variable theme adaptation</li>
+<li><strong>JS</strong>: Delete all old comment functions, add Waline init code</li>
+</ul>
+
+<h2>Pitfall</h2>
+<p>The biggest gotcha: a dangling closing brace from the old <code>submitHomeComment</code> function caused a JS syntax error, crashing the entire script and breaking all dynamic content loading.</p>`,
+            ja:`<h2>問題の根本原因</h2>
+<p>元のシステムは<code>localStorage</code>にコメントを保存していました。これはブラウザのローカルストレージで、デバイスやブラウザごとに完全に分離されています。</p>
+
+<h2>Walineを選んだ理由</h2>
+<p>Walineはサーバーサイドにコメントを保存するため、全訪問者がコメントを見ることができます。Vercelで無料デプロイ可能で、Markdownや絵文字にも対応しています。</p>
+
+<h2>移行手順</h2>
+<ul>
+<li>HTMLの入力フォームを<code>&lt;div id="waline-container"&gt;&lt;/div&gt;</code>に置換</li>
+<li>古いCSSを削除し、WalineのCSSテーマ変数を追加</li>
+<li>古いJS関数を削除し、Waline初期化コードを追加</li>
+</ul>`,
+        },
+    },
+    {
+        id:'cloudflare-pages-deploy', cat:'dev', date:'2025-04-05', readTime:6,
+        title:{ zh:'GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠', en:'Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection', ja:'GitHub + Cloudflare Pages でゼロコストサイト構築' },
+        desc:{ zh:'只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。', en:'One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.', ja:'ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。' },
+        tags:['Cloudflare','GitHub Pages','部署'],
+        image:'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop',
+        badge:'dev',
+        content:{
+            zh:`<h2>方案概述</h2>
+<p>这套方案的核心逻辑：GitHub 存代码 → Cloudflare Pages 自动部署 → Cloudflare CDN 分发 → 用户访问。</p>
+<p>费用：只需一个域名，其余全部免费。</p>
+
+<h2>部署步骤</h2>
+<ul>
+<li>1. 把网站文件推送到 GitHub 仓库</li>
+<li>2. 登录 Cloudflare Pages，新建项目，连接 GitHub 仓库</li>
+<li>3. 构建命令留空（纯静态站），输出目录填 <code>/</code></li>
+<li>4. 绑定自定义域名，在域名商处添加 CNAME 记录</li>
+</ul>
+
+<h2>免费功能清单</h2>
+<ul>
+<li>✅ 全球 CDN 加速（200+ 节点）</li>
+<li>✅ 自动 HTTPS / TLS</li>
+<li>✅ DDoS L3/L4 防护</li>
+<li>✅ CI/CD 自动部署（push 后自动更新）</li>
+<li>✅ Web Analytics 基础统计</li>
+<li>✅ 每月 500 次构建、无限带宽</li>
+</ul>
+
+<h2>注意事项</h2>
+<p>纯静态站没有后端，不能运行 Node.js / PHP 等服务端代码。如果需要 API，可以配合 Cloudflare Workers（每天 10 万次免费请求）。</p>`,
+            en:`<h2>Architecture</h2>
+<p>GitHub stores code → Cloudflare Pages auto-deploys → Cloudflare CDN distributes → users access.</p>
+<p>Cost: one domain name fee. Everything else is free.</p>
+
+<h2>Deployment Steps</h2>
+<ul>
+<li>1. Push site files to a GitHub repository</li>
+<li>2. Log in to Cloudflare Pages, create a project, connect GitHub repo</li>
+<li>3. Leave build command empty (static site), output directory: /</li>
+<li>4. Bind custom domain, add CNAME record at your registrar</li>
+</ul>
+
+<h2>What You Get for Free</h2>
+<ul>
+<li>✅ Global CDN (200+ nodes)</li>
+<li>✅ Automatic HTTPS/TLS</li>
+<li>✅ DDoS L3/L4 protection</li>
+<li>✅ CI/CD auto-deploy on push</li>
+<li>✅ 500 monthly builds, unlimited bandwidth</li>
+</ul>`,
+            ja:`<h2>アーキテクチャ</h2>
+<p>GitHub→Cloudflare Pages自動デプロイ→Cloudflare CDN配信→ユーザーアクセス。コストはドメイン代のみ。</p>
+
+<h2>デプロイ手順</h2>
+<ul>
+<li>1. サイトファイルをGitHubにプッシュ</li>
+<li>2. Cloudflare PagesでGitHubリポジトリを接続</li>
+<li>3. ビルドコマンドは空欄、出力ディレクトリは /</li>
+<li>4. カスタムドメインを設定</li>
+</ul>`,
+        },
+    },
+];
+
+// ══ Load article by URL param ══════════════════════════════════════════
 const params = new URLSearchParams(location.search);
 const postId = params.get('id');
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 let walineInstance = null;
 
-function getPost(id) { return POSTS.find(p => p && p.id === id); }
+function getPost(id) { return POSTS.find(p => p.id === id); }
 
 function badgeClass(b) {
     return {tech:'badge-tech',tool:'badge-tool',dev:'badge-dev',life:'badge-life'}[b]||'badge-tech';

@@ -222,6 +222,7 @@
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+    <script src="/blog-posts.js"></script>
 </head>
 <body>
 
@@ -339,7 +340,7 @@ const I18N = {
 };
 
 // ══ Blog posts data ════════════════════════════════════════════════════
-let POSTS = [];
+const POSTS = window.BLOG_POSTS || [];
 
 const PAGE_SIZE = 5;
 let currentCat = 'all';
@@ -351,17 +352,12 @@ let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-col
 // ══ Filter & render ════════════════════════════════════════════════════
 function getFiltered() {
     return POSTS.filter(p => {
-        const titleMap = p.title || {};
-        const descMap = p.desc || {};
-        const tags = Array.isArray(p.tags) ? p.tags : [];
         const matchCat = currentCat === 'all' || p.cat === currentCat;
         const q = searchQuery.toLowerCase();
-        const title = String(titleMap[lang] || titleMap.zh || '');
-        const desc = String(descMap[lang] || descMap.zh || '');
         const matchSearch = !q ||
-            title.toLowerCase().includes(q) ||
-            desc.toLowerCase().includes(q) ||
-            tags.some(t => String(t).toLowerCase().includes(q));
+            (p.title[lang] || p.title.zh).toLowerCase().includes(q) ||
+            (p.desc[lang]  || p.desc.zh ).toLowerCase().includes(q)  ||
+            p.tags.some(t => t.toLowerCase().includes(q));
         return matchCat && matchSearch;
     });
 }
@@ -373,11 +369,11 @@ function badgeClass(badge) {
 function renderPosts() {
     const t = I18N[lang];
     const filtered = getFiltered();
-    const total = filtered.length;
+    const total    = filtered.length;
     const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
     if (currentPage > totalPages) currentPage = 1;
-    const slice = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
-    const grid = document.getElementById('posts-grid');
+    const slice = filtered.slice((currentPage-1)*PAGE_SIZE, currentPage*PAGE_SIZE);
+    const grid  = document.getElementById('posts-grid');
 
     if (!slice.length) {
         grid.innerHTML = `<div class="empty-state"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" display="block" style="margin:0 auto"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>${t.no_result}</p></div>`;
@@ -386,27 +382,24 @@ function renderPosts() {
     }
 
     grid.innerHTML = slice.map((p, i) => {
-        const titleMap = p.title || {};
-        const descMap = p.desc || {};
-        const tags = Array.isArray(p.tags) ? p.tags : [];
-        const title = titleMap[lang] || titleMap.zh || '';
-        const desc = descMap[lang] || descMap.zh || '';
+        const title = p.title[lang] || p.title.zh;
+        const desc  = p.desc[lang]  || p.desc.zh;
         const delay = i * 0.06;
         return `
-        <article class="post-card" style="animation:up .5s ${delay}s ease both;opacity:0;" onclick="window.location.href='blog-post.html?id=${encodeURIComponent(p.id || '')}'">
+        <article class="post-card" style="animation:up .5s ${delay}s ease both;opacity:0;" onclick="window.location.href='blog-post.html?id=${p.id}'">
             <div class="post-card-body">
                 <div class="post-card-meta">
-                    <span class="post-badge ${badgeClass(p.badge)}">${escHtml(p.badge || p.cat || '')}</span>
-                    <span class="post-date">📅 ${escHtml(p.date || '')}</span>
+                    <span class="post-badge ${badgeClass(p.badge)}">${p.badge}</span>
+                    <span class="post-date">📅 ${p.date}</span>
                     <span class="post-read-time">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-                        ${Number(p.readTime) || 0} ${t.min_read}
+                        ${p.readTime} ${t.min_read}
                     </span>
                 </div>
                 <h2 class="post-card-title">${escHtml(title)}</h2>
                 <p class="post-card-desc">${escHtml(desc)}</p>
                 <div class="post-card-tags">
-                    ${tags.map(tag => `<span class="post-tag">#${escHtml(String(tag))}</span>`).join('')}
+                    ${p.tags.map(tag => `<span class="post-tag">#${escHtml(tag)}</span>`).join('')}
                 </div>
             </div>
             ${p.image
@@ -418,28 +411,29 @@ function renderPosts() {
 
     renderPagination(totalPages);
 
-    const allCats = [...new Set(POSTS.map(p => p.cat).filter(Boolean))];
-    const allTags = [...new Set(POSTS.flatMap(p => Array.isArray(p.tags) ? p.tags : []))];
+    // update stats
+    const allCats = [...new Set(POSTS.map(p=>p.cat))];
+    const allTags = [...new Set(POSTS.flatMap(p=>p.tags))];
     document.getElementById('stat-total').textContent = POSTS.length;
-    document.getElementById('stat-cats').textContent = allCats.length;
-    document.getElementById('stat-tags').textContent = allTags.length;
+    document.getElementById('stat-cats').textContent  = allCats.length;
+    document.getElementById('stat-tags').textContent  = allTags.length;
 }
 
 function renderPagination(totalPages) {
     const pg = document.getElementById('pagination');
     if (totalPages <= 1) { pg.innerHTML = ''; return; }
-    let html = `<button class="page-btn" onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`;
-    for (let i = 1; i <= totalPages; i++) {
-        html += `<button class="page-btn ${i === currentPage ? 'active' : ''}" onclick="changePage(${i})">${i}</button>`;
+    let html = `<button class="page-btn" onclick="changePage(${currentPage-1})" ${currentPage===1?'disabled':''}>‹</button>`;
+    for (let i=1; i<=totalPages; i++) {
+        html += `<button class="page-btn ${i===currentPage?'active':''}" onclick="changePage(${i})">${i}</button>`;
     }
-    html += `<button class="page-btn" onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`;
+    html += `<button class="page-btn" onclick="changePage(${currentPage+1})" ${currentPage===totalPages?'disabled':''}>›</button>`;
     pg.innerHTML = html;
 }
 
 function changePage(p) {
     currentPage = p;
     renderPosts();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 
 // ══ Filter tabs ════════════════════════════════════════════════════════
@@ -462,50 +456,28 @@ document.getElementById('search-input').addEventListener('input', e => {
 
 // ══ i18n ══════════════════════════════════════════════════════════════
 function applyLang(l) {
-    lang = l;
-    localStorage.setItem('pc_lang', l);
+    lang = l; localStorage.setItem('pc_lang', l);
     document.documentElement.lang = l;
     const t = I18N[l];
     document.title = t.page_title;
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-        const k = el.dataset.i18n;
-        if (t[k]) el.textContent = t[k];
-    });
-    const si = document.getElementById('search-input');
-    if (si) si.placeholder = t.search_ph;
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+    document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
+    const si = document.getElementById('search-input'); if(si) si.placeholder = t.search_ph;
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l));
     renderPosts();
 }
 function applyTheme(t) {
-    theme = t;
-    localStorage.setItem('pc_theme', t);
+    theme = t; localStorage.setItem('pc_theme', t);
     document.documentElement.setAttribute('data-theme', t);
 }
 
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light'); });
+document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme==='dark'?'light':'dark'));
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if(!localStorage.getItem('pc_theme')) applyTheme(e.matches?'dark':'light'); });
 
-function escHtml(s) { const d = document.createElement('div'); d.textContent = s == null ? '' : String(s); return d.innerHTML; }
+function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-function initPage() {
-    applyTheme(theme);
-    applyLang(lang);
-}
-
-fetch('/blog-posts.json')
-    .then(res => {
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        return res.json();
-    })
-    .then(data => {
-        POSTS = Array.isArray(data) ? data : [];
-        initPage();
-    })
-    .catch(() => {
-        POSTS = [];
-        initPage();
-    });
+applyTheme(theme);
+applyLang(lang);
 </script>
 </body>
 </html>
