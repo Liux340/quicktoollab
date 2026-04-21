@@ -194,7 +194,6 @@
     </div>
 </footer>
 
-<script src="/help-articles.js"></script>
 <script>
 document.getElementById('cy').textContent = new Date().getFullYear();
 
@@ -228,13 +227,13 @@ const I18N = {
     }
 };
 
+let ARTICLES = [];
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-const ARTICLES = window.HELP_ARTICLES || [];
 
 function escapeHtml(s) {
     const d = document.createElement('div');
-    d.textContent = s;
+    d.textContent = s || '';
     return d.innerHTML;
 }
 
@@ -244,9 +243,21 @@ function localizeField(v) {
     return v[lang] || v.zh || v.en || v.ja || '';
 }
 
+async function loadData() {
+    try {
+        const res = await fetch('/data/help.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        ARTICLES = Array.isArray(data) ? data : [];
+    } catch (err) {
+        ARTICLES = [];
+        console.error('Failed to load help data:', err);
+    }
+}
+
 function renderArticleList() {
     const host = document.getElementById('help-list');
-    host.innerHTML = ARTICLES.map((a) => `
+    host.innerHTML = ARTICLES.map(a => `
         <a class="help-item" href="/help-article.html?id=${encodeURIComponent(a.id)}">
             ${escapeHtml(localizeField(a.title))}
             <small>${escapeHtml(localizeField(a.cat))}</small>
@@ -267,19 +278,25 @@ function applyLang(l) {
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
     renderArticleList();
 }
+
 function applyTheme(t) {
     theme = t;
     localStorage.setItem('pc_theme', t);
     document.documentElement.setAttribute('data-theme', t);
 }
+
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
     if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
 });
-applyTheme(theme);
-applyLang(lang);
-renderArticleList();
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(theme);
+    loadData().then(() => {
+        applyLang(lang);
+    });
+});
 </script>
 </body>
 </html>

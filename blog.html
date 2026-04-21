@@ -222,7 +222,6 @@
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
-    <script src="/blog-posts.js"></script>
 </head>
 <body>
 
@@ -340,7 +339,7 @@ const I18N = {
 };
 
 // ══ Blog posts data ════════════════════════════════════════════════════
-const POSTS = window.BLOG_POSTS || [];
+let POSTS = [];
 
 const PAGE_SIZE = 5;
 let currentCat = 'all';
@@ -348,6 +347,18 @@ let currentPage = 1;
 let searchQuery = '';
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+async function loadData() {
+    try {
+        const res = await fetch('/data/posts.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        POSTS = Array.isArray(data) ? data : [];
+    } catch (err) {
+        POSTS = [];
+        console.error('Failed to load blog posts data:', err);
+    }
+}
 
 // ══ Filter & render ════════════════════════════════════════════════════
 function getFiltered() {
@@ -378,6 +389,9 @@ function renderPosts() {
     if (!slice.length) {
         grid.innerHTML = `<div class="empty-state"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" display="block" style="margin:0 auto"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><p>${t.no_result}</p></div>`;
         document.getElementById('pagination').innerHTML = '';
+        document.getElementById('stat-total').textContent = POSTS.length;
+        document.getElementById('stat-cats').textContent = [...new Set(POSTS.map(p => p.cat))].length;
+        document.getElementById('stat-tags').textContent = [...new Set(POSTS.flatMap(p => p.tags || []))].length;
         return;
     }
 
@@ -386,7 +400,7 @@ function renderPosts() {
         const desc  = p.desc[lang]  || p.desc.zh;
         const delay = i * 0.06;
         return `
-        <article class="post-card" style="animation:up .5s ${delay}s ease both;opacity:0;" onclick="window.location.href='blog-post.html?id=${p.id}'">
+        <article class="post-card" style="animation:up .5s ${delay}s ease both;opacity:0;" onclick="window.location.href='blog-post.html?id=${encodeURIComponent(p.id)}'">
             <div class="post-card-body">
                 <div class="post-card-meta">
                     <span class="post-badge ${badgeClass(p.badge)}">${p.badge}</span>
@@ -399,7 +413,7 @@ function renderPosts() {
                 <h2 class="post-card-title">${escHtml(title)}</h2>
                 <p class="post-card-desc">${escHtml(desc)}</p>
                 <div class="post-card-tags">
-                    ${p.tags.map(tag => `<span class="post-tag">#${escHtml(tag)}</span>`).join('')}
+                    ${(p.tags || []).map(tag => `<span class="post-tag">#${escHtml(tag)}</span>`).join('')}
                 </div>
             </div>
             ${p.image
@@ -411,9 +425,8 @@ function renderPosts() {
 
     renderPagination(totalPages);
 
-    // update stats
-    const allCats = [...new Set(POSTS.map(p=>p.cat))];
-    const allTags = [...new Set(POSTS.flatMap(p=>p.tags))];
+    const allCats = [...new Set(POSTS.map(p => p.cat))];
+    const allTags = [...new Set(POSTS.flatMap(p => p.tags || []))];
     document.getElementById('stat-total').textContent = POSTS.length;
     document.getElementById('stat-cats').textContent  = allCats.length;
     document.getElementById('stat-tags').textContent  = allTags.length;
@@ -476,8 +489,12 @@ window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e =
 
 function escHtml(s) { const d=document.createElement('div'); d.textContent=s; return d.innerHTML; }
 
-applyTheme(theme);
-applyLang(lang);
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(theme);
+    loadData().then(() => {
+        applyLang(lang);
+    });
+});
 </script>
 </body>
 </html>

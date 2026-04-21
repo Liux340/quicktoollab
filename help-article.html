@@ -72,14 +72,14 @@
     <div id="article-host"></div>
 </main>
 
-<script src="/help-articles.js"></script>
 <script>
 const I18N = {
     zh:{ back:'返回帮助中心', help:'帮助中心', article:'文章', intro:'介绍：', howto:'用法：', science:'科普：', notfound:'没有找到该文章，请返回帮助中心重新选择。', page_title:'帮助文章 · QuickToolLab' },
     en:{ back:'Back to Help', help:'Help', article:'Article', intro:'Intro: ', howto:'How to use: ', science:'Concept: ', notfound:'Article not found. Please go back to the help center.', page_title:'Help Article · QuickToolLab' },
     ja:{ back:'ヘルプへ戻る', help:'ヘルプ', article:'記事', intro:'紹介：', howto:'使い方：', science:'豆知識：', notfound:'記事が見つかりません。ヘルプセンターから選び直してください。', page_title:'ヘルプ記事 · QuickToolLab' }
 };
-const ARTICLES = window.HELP_ARTICLES || [];
+
+let ARTICLES = [];
 let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
 let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
@@ -89,6 +89,18 @@ function localizeField(v){
     if (v == null) return '';
     if (typeof v === 'string') return v;
     return v[lang] || v.zh || v.en || v.ja || '';
+}
+
+async function loadData() {
+    try {
+        const res = await fetch('/data/help.json');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        ARTICLES = Array.isArray(data) ? data : [];
+    } catch (err) {
+        ARTICLES = [];
+        console.error('Failed to load help article data:', err);
+    }
 }
 
 function renderArticle(){
@@ -124,15 +136,22 @@ function applyLang(l){
     document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
     renderArticle();
 }
+
 function applyTheme(t){
     theme = t;
     localStorage.setItem('pc_theme', t);
     document.documentElement.setAttribute('data-theme', t);
 }
+
 document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
 document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-applyTheme(theme);
-applyLang(lang);
+
+document.addEventListener('DOMContentLoaded', () => {
+    applyTheme(theme);
+    loadData().then(() => {
+        applyLang(lang);
+    });
+});
 </script>
 </body>
 </html>
