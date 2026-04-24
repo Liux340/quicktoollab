@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#b8d7ff" />
+  <meta name="theme-color" content="#d9e9ff" />
   <title>QuickToolLab 内容管理</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,17 +11,16 @@
   <style>
     :root {
       color-scheme: light;
-      --admin-text: #0a1730;
-      --admin-muted: #334e78;
+      --admin-text: #10203e;
+      --admin-muted: #516786;
       --admin-accent: #2f7cf6;
-      --admin-accent-strong: #195fdd;
-      --admin-panel: rgba(255, 255, 255, 0.34);
-      --admin-panel-strong: rgba(255, 255, 255, 0.5);
-      --admin-line: rgba(255, 255, 255, 0.46);
-      --admin-line-strong: rgba(255, 255, 255, 0.62);
-      --admin-shadow: 0 18px 60px rgba(20, 44, 90, 0.16);
-      --admin-radius: 24px;
-      --admin-radius-sm: 16px;
+      --admin-accent-soft: rgba(47, 124, 246, 0.12);
+      --admin-panel: rgba(255, 255, 255, 0.56);
+      --admin-panel-strong: rgba(255, 255, 255, 0.74);
+      --admin-line: rgba(255, 255, 255, 0.5);
+      --admin-shadow: 0 18px 48px rgba(22, 47, 93, 0.12);
+      --admin-radius: 22px;
+      --admin-radius-sm: 14px;
     }
 
     * {
@@ -38,10 +37,10 @@
       font-family: "Outfit", "Noto Sans SC", sans-serif;
       color: var(--admin-text);
       background:
-        radial-gradient(circle at 12% 18%, rgba(140, 196, 255, 0.52), transparent 24%),
-        radial-gradient(circle at 86% 12%, rgba(210, 170, 255, 0.38), transparent 22%),
-        radial-gradient(circle at 54% 100%, rgba(122, 243, 222, 0.3), transparent 26%),
-        linear-gradient(135deg, #b8d7ff 0%, #d9cbff 46%, #c9f7ef 100%);
+        radial-gradient(circle at 12% 18%, rgba(138, 197, 255, 0.5), transparent 24%),
+        radial-gradient(circle at 86% 12%, rgba(213, 175, 255, 0.34), transparent 22%),
+        radial-gradient(circle at 54% 100%, rgba(122, 243, 222, 0.26), transparent 26%),
+        linear-gradient(135deg, #d7e7ff 0%, #e5d9ff 48%, #d8f8f1 100%);
       background-attachment: fixed;
     }
 
@@ -56,35 +55,35 @@
     }
 
     body::before {
-      top: 46px;
-      right: -40px;
-      width: 340px;
-      height: 340px;
+      top: 42px;
+      right: -30px;
+      width: 320px;
+      height: 320px;
       background: rgba(255, 255, 255, 0.2);
     }
 
     body::after {
-      left: -60px;
-      bottom: 20px;
+      left: -70px;
+      bottom: 10px;
       width: 360px;
       height: 360px;
-      background: rgba(122, 243, 222, 0.16);
+      background: rgba(122, 243, 222, 0.14);
     }
 
     #admin-brand {
       position: fixed;
-      top: 22px;
-      left: 24px;
-      z-index: 20;
+      top: 20px;
+      left: 22px;
+      z-index: 10;
       display: flex;
       align-items: center;
       gap: 12px;
       padding: 10px 14px;
-      border: 1px solid rgba(255, 255, 255, 0.42);
+      border: 1px solid rgba(255, 255, 255, 0.44);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.42);
-      backdrop-filter: blur(20px) saturate(140%);
-      box-shadow: 0 12px 34px rgba(27, 60, 118, 0.14);
+      background: rgba(255, 255, 255, 0.38);
+      backdrop-filter: blur(18px) saturate(140%);
+      box-shadow: 0 10px 30px rgba(28, 58, 111, 0.1);
       user-select: none;
     }
 
@@ -95,11 +94,11 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      background: linear-gradient(135deg, rgba(47, 124, 246, 0.94) 0%, rgba(138, 93, 255, 0.94) 100%);
+      background: linear-gradient(135deg, rgba(47, 124, 246, 0.94) 0%, rgba(137, 92, 255, 0.94) 100%);
       color: #fff;
       font-weight: 700;
       letter-spacing: 0.04em;
-      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 10px 24px rgba(47, 124, 246, 0.22);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 10px 20px rgba(47, 124, 246, 0.2);
     }
 
     #admin-brand-text {
@@ -125,7 +124,7 @@
       z-index: 1;
     }
 
-    #nc-root a,
+    #nc-root,
     #nc-root button,
     #nc-root input,
     #nc-root select,
@@ -139,7 +138,6 @@
     #nc-root input[type="submit"] {
       border-radius: 999px !important;
       transition: transform 0.18s ease, box-shadow 0.18s ease, background-color 0.18s ease;
-      box-shadow: 0 10px 24px rgba(47, 124, 246, 0.16);
     }
 
     #nc-root button:hover,
@@ -152,95 +150,60 @@
     #nc-root input:not([type="checkbox"]):not([type="radio"]),
     #nc-root select,
     #nc-root textarea {
-      border: 1px solid var(--admin-line) !important;
       border-radius: var(--admin-radius-sm) !important;
-      background: rgba(255, 255, 255, 0.58) !important;
-      backdrop-filter: blur(18px) saturate(140%);
+      background: rgba(255, 255, 255, 0.82) !important;
       color: var(--admin-text) !important;
       box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.24);
-    }
-
-    #nc-root textarea {
-      min-height: 120px;
     }
 
     #nc-root input:focus,
     #nc-root select:focus,
     #nc-root textarea:focus {
       outline: none !important;
-      border-color: rgba(47, 124, 246, 0.48) !important;
       box-shadow: 0 0 0 4px rgba(47, 124, 246, 0.12) !important;
     }
 
-    #nc-root aside,
-    #nc-root nav,
-    #nc-root main,
-    #nc-root section,
-    #nc-root article {
-      border-color: var(--admin-line);
-    }
-
     #nc-root aside {
-      background: rgba(10, 25, 55, 0.58) !important;
-      color: #f7fbff !important;
-      backdrop-filter: blur(24px) saturate(140%);
-      border-right: 1px solid rgba(255, 255, 255, 0.18) !important;
-      box-shadow: 18px 0 40px rgba(19, 38, 74, 0.12);
-    }
-
-    #nc-root aside a,
-    #nc-root aside button,
-    #nc-root aside span,
-    #nc-root aside div {
-      color: inherit;
+      background: rgba(14, 30, 64, 0.8) !important;
+      backdrop-filter: blur(22px) saturate(140%);
+      box-shadow: 18px 0 42px rgba(18, 37, 73, 0.12);
     }
 
     #nc-root main {
       background: transparent !important;
     }
 
-    #nc-root main > div,
-    #nc-root main section,
-    #nc-root main article {
-      border-radius: var(--admin-radius);
-    }
-
     #nc-root [class*="AppHeader"],
     #nc-root [class*="ToolbarContainer"],
-    #nc-root [class*="CollectionTopContainer"] {
-      background: rgba(255, 255, 255, 0.4) !important;
-      backdrop-filter: blur(22px) saturate(140%);
-      border: 1px solid rgba(255, 255, 255, 0.28) !important;
+    #nc-root [class*="CollectionTopContainer"],
+    #nc-root [class*="TopBarContainer"] {
+      background: rgba(255, 255, 255, 0.42) !important;
+      border: 1px solid rgba(255, 255, 255, 0.3) !important;
+      backdrop-filter: blur(18px) saturate(140%);
       box-shadow: var(--admin-shadow);
     }
 
     #nc-root [class*="EditorContainer"],
     #nc-root [class*="PaneContainer"],
-    #nc-root [class*="Card"],
-    #nc-root [class*="ListCard"],
-    #nc-root [class*="EditorPane"],
     #nc-root [class*="CollectionContainer"],
-    #nc-root [class*="LoginContainer"],
-    #nc-root [class*="ObjectControl"],
-    #nc-root [class*="ListControl"],
-    #nc-root [class*="TopBarContainer"] {
-      background: var(--admin-panel) !important;
-      border: 1px solid rgba(255, 255, 255, 0.24) !important;
-      backdrop-filter: blur(24px) saturate(140%);
-      box-shadow: var(--admin-shadow);
+    #nc-root [class*="LoginContainer"] {
+      background: rgba(255, 255, 255, 0.38) !important;
+      border: 1px solid rgba(255, 255, 255, 0.28) !important;
       border-radius: var(--admin-radius) !important;
+      backdrop-filter: blur(20px) saturate(140%);
+      box-shadow: var(--admin-shadow);
     }
 
     #nc-root [class*="Card"],
     #nc-root [class*="ListCard"] {
-      background: var(--admin-panel-strong) !important;
+      background: rgba(255, 255, 255, 0.78) !important;
+      border-radius: 18px !important;
+      box-shadow: 0 10px 26px rgba(18, 37, 73, 0.06);
     }
 
     #nc-root [class*="ListCard"]:hover,
     #nc-root [class*="Card"]:hover {
-      border-color: rgba(255, 255, 255, 0.42) !important;
-      transform: translateY(-2px);
-      transition: transform 0.18s ease, border-color 0.18s ease;
+      box-shadow: 0 14px 30px rgba(18, 37, 73, 0.08);
     }
 
     #nc-root [class*="LoginContainer"] {
@@ -255,7 +218,7 @@
       font-size: 28px;
       font-weight: 700;
       letter-spacing: 0.02em;
-      color: #08162d;
+      color: var(--admin-text);
     }
 
     #nc-root [class*="LoginContainer"]::after {
@@ -266,50 +229,8 @@
       font-size: 14px;
     }
 
-    #nc-root [class*="EditorHeader"],
-    #nc-root h1,
-    #nc-root h2,
-    #nc-root h3,
-    #nc-root h4 {
-      color: var(--admin-text) !important;
-      letter-spacing: -0.02em;
-    }
-
-    #nc-root label,
-    #nc-root small,
-    #nc-root p {
-      color: var(--admin-muted);
-    }
-
-    #nc-root strong,
-    #nc-root span,
-    #nc-root div,
-    #nc-root li {
-      color: inherit;
-    }
-
-    #nc-root aside small,
-    #nc-root aside p,
-    #nc-root aside label,
-    #nc-root aside li,
-    #nc-root aside span,
-    #nc-root aside div {
-      color: #eef5ff !important;
-    }
-
-    #nc-root input::placeholder,
-    #nc-root textarea::placeholder {
-      color: rgba(51, 78, 120, 0.78) !important;
-    }
-
-    #nc-root [aria-selected="true"],
-    #nc-root [data-selected="true"] {
-      color: #08162d !important;
-    }
-
     #nc-root [data-slate-editor="true"] {
-      background: rgba(255, 255, 255, 0.18) !important;
-      backdrop-filter: blur(18px) saturate(140%);
+      background: rgba(255, 255, 255, 0.74) !important;
       border-radius: var(--admin-radius-sm) !important;
     }
 
@@ -331,7 +252,7 @@
     <span id="admin-brand-badge">Q</span>
     <span id="admin-brand-text">
       <span id="admin-brand-title">QuickToolLab</span>
-      <span id="admin-brand-subtitle">Glass CMS</span>
+      <span id="admin-brand-subtitle">CMS Dashboard</span>
     </span>
   </div>
 
