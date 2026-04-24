@@ -14,7 +14,11 @@
       "en": "A real-world case: one missing \"l\" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.",
       "ja": "ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。"
     },
-    "tags": ["SEO", "canonical", "Google Search Console"],
+    "tags": [
+      "SEO",
+      "canonical",
+      "Google Search Console"
+    ],
     "image": "https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop",
     "badge": "tech",
     "content": {
@@ -38,7 +42,11 @@
       "en": "A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.",
       "ja": "自作コメントシステムから Waline への移行過程を完全記録。"
     },
-    "tags": ["Waline", "评论系统", "JavaScript"],
+    "tags": [
+      "Waline",
+      "评论系统",
+      "JavaScript"
+    ],
     "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop",
     "badge": "tool",
     "content": {
@@ -62,7 +70,11 @@
       "en": "One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.",
       "ja": "ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。"
     },
-    "tags": ["Cloudflare", "GitHub Pages", "部署"],
+    "tags": [
+      "Cloudflare",
+      "GitHub Pages",
+      "部署"
+    ],
     "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
     "badge": "dev",
     "content": {
@@ -86,7 +98,11 @@
       "en": "Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.",
       "ja": "Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。"
     },
-    "tags": ["Canvas API", "图片压缩", "WebAssembly"],
+    "tags": [
+      "Canvas API",
+      "图片压缩",
+      "WebAssembly"
+    ],
     "image": "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop",
     "badge": "tool"
   },
@@ -105,7 +121,11 @@
       "en": "Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.",
       "ja": "テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。"
     },
-    "tags": ["CSS", "Dark Mode", "主题切换"],
+    "tags": [
+      "CSS",
+      "Dark Mode",
+      "主题切换"
+    ],
     "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop",
     "badge": "dev"
   },
@@ -124,7 +144,11 @@
       "en": "SEO for static tool sites differs from blogs — no new content, just technical SEO and backlinks. Full guide to canonical, sitemap, robots and OG tags.",
       "ja": "静的ツールサイトのSEOはブログとは異なる。技術SEOと外部リンクが鍵。"
     },
-    "tags": ["SEO", "Static Site", "技术SEO"],
+    "tags": [
+      "SEO",
+      "Static Site",
+      "技术SEO"
+    ],
     "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop",
     "badge": "tech"
   },
@@ -143,7 +167,12 @@
       "en": "After testing 30+ AI tools: Claude for stable code generation, Midjourney for image quality, Cursor for best coding IDE experience, Perplexity replacing Google in many cases.",
       "ja": "30以上のAIツールを実際に使った結論。各カテゴリのベストツールを解説。"
     },
-    "tags": ["AI", "效率工具", "Claude", "Midjourney"],
+    "tags": [
+      "AI",
+      "效率工具",
+      "Claude",
+      "Midjourney"
+    ],
     "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=340&fit=crop",
     "badge": "tech"
   },
@@ -162,7 +191,11 @@
       "en": "Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.",
       "ja": "アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。"
     },
-    "tags": ["建站", "Cloudflare", "个人项目"],
+    "tags": [
+      "建站",
+      "Cloudflare",
+      "个人项目"
+    ],
     "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop",
     "badge": "life"
   }
