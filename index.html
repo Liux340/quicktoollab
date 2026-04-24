@@ -1651,6 +1651,150 @@ const PINNED = [
     { icon:'🕷️', name:'Broken Link Check',brand:'brokenlinkcheck.com',desc:{zh:'全站扫描死链，找出所有 404 错误链接',en:'Scan your entire site for broken 404 links',ja:'サイト全体の壊れたリンクを検出'}, href:'https://www.brokenlinkcheck.com', cat:'seo' },
 ];
 
+const OSS_FALLBACK = [
+    {
+        html_url: 'https://github.com/facebook/react',
+        full_name: 'facebook/react',
+        description: {
+            zh: '构建交互式界面的主流前端库。',
+            en: 'A mainstream library for building interactive user interfaces.',
+            ja: '対話的な UI を構築する代表的なフロントエンドライブラリ。'
+        },
+        language: 'JavaScript',
+        stargazers_count: 235000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/69631?v=4' }
+    },
+    {
+        html_url: 'https://github.com/vuejs/core',
+        full_name: 'vuejs/core',
+        description: {
+            zh: '易上手、生态成熟的渐进式前端框架核心仓库。',
+            en: 'The core repository of a progressive framework with a mature ecosystem.',
+            ja: '学びやすく成熟したエコシステムを持つプログレッシブフレームワークの中核。'
+        },
+        language: 'TypeScript',
+        stargazers_count: 49000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/6128107?v=4' }
+    },
+    {
+        html_url: 'https://github.com/tailwindlabs/tailwindcss',
+        full_name: 'tailwindlabs/tailwindcss',
+        description: {
+            zh: '高效搭建界面的原子化 CSS 框架。',
+            en: 'A utility-first CSS framework for building interfaces quickly.',
+            ja: '素早く UI を組み立てられるユーティリティファースト CSS フレームワーク。'
+        },
+        language: 'TypeScript',
+        stargazers_count: 84000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/67109815?v=4' }
+    },
+    {
+        html_url: 'https://github.com/vercel/next.js',
+        full_name: 'vercel/next.js',
+        description: {
+            zh: '用于生产环境的 React 全栈框架。',
+            en: 'A production-grade full-stack framework built on React.',
+            ja: 'React ベースの本番向けフルスタックフレームワーク。'
+        },
+        language: 'JavaScript',
+        stargazers_count: 131000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/14985020?v=4' }
+    },
+    {
+        html_url: 'https://github.com/denoland/deno',
+        full_name: 'denoland/deno',
+        description: {
+            zh: '现代 JavaScript 与 TypeScript 运行时。',
+            en: 'A modern runtime for JavaScript and TypeScript.',
+            ja: 'モダンな JavaScript / TypeScript ランタイム。'
+        },
+        language: 'Rust',
+        stargazers_count: 98000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/42048915?v=4' }
+    },
+    {
+        html_url: 'https://github.com/shadcn-ui/ui',
+        full_name: 'shadcn-ui/ui',
+        description: {
+            zh: '面向产品界面的可组合组件集合。',
+            en: 'Composable UI components oriented toward product interfaces.',
+            ja: 'プロダクト UI 向けの組み合わせ可能なコンポーネント集。'
+        },
+        language: 'TypeScript',
+        stargazers_count: 83000,
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/139895814?v=4' }
+    }
+];
+
+const SOFT_FALLBACK = [
+    {
+        html_url: 'https://github.com/sharkdp/bat',
+        name: 'bat',
+        description: {
+            zh: '带语法高亮和 Git diff 的现代 cat 替代工具。',
+            en: 'A modern cat replacement with syntax highlighting and Git integration.',
+            ja: 'シンタックスハイライトと Git 連携を備えた modern cat 代替。'
+        },
+        language: 'Rust',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/277052?v=4' }
+    },
+    {
+        html_url: 'https://github.com/ogham/exa',
+        name: 'exa',
+        description: {
+            zh: '更现代的 ls 替代品，适合命令行可视化浏览。',
+            en: 'A modern replacement for ls with a friendlier terminal view.',
+            ja: 'ターミナルで見やすい ls 代替ツール。'
+        },
+        language: 'Rust',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/175525?v=4' }
+    },
+    {
+        html_url: 'https://github.com/sharkdp/fd',
+        name: 'fd',
+        description: {
+            zh: '比 find 更快更友好的文件查找工具。',
+            en: 'A simpler and faster alternative to find.',
+            ja: 'find よりシンプルで高速なファイル検索ツール。'
+        },
+        language: 'Rust',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/277052?v=4' }
+    },
+    {
+        html_url: 'https://github.com/BurntSushi/ripgrep',
+        name: 'ripgrep',
+        description: {
+            zh: '面向代码库搜索的高性能文本搜索工具。',
+            en: 'A high-performance text search tool ideal for codebases.',
+            ja: 'コードベース検索に強い高速テキスト検索ツール。'
+        },
+        language: 'Rust',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/456674?v=4' }
+    },
+    {
+        html_url: 'https://github.com/junegunn/fzf',
+        name: 'fzf',
+        description: {
+            zh: '命令行模糊搜索神器，适合文件、历史和命令导航。',
+            en: 'A fuzzy finder for files, history, and command navigation.',
+            ja: 'ファイル・履歴・コマンド移動に便利な fuzzy finder。'
+        },
+        language: 'Go',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/700826?v=4' }
+    },
+    {
+        html_url: 'https://github.com/ajeetdsouza/zoxide',
+        name: 'zoxide',
+        description: {
+            zh: '更聪明的 cd，按使用频率快速跳目录。',
+            en: 'A smarter cd that jumps to directories based on frequency.',
+            ja: '使用頻度から素早く移動できる賢い cd 代替。'
+        },
+        language: 'Rust',
+        owner: { avatar_url: 'https://avatars.githubusercontent.com/u/5403999?v=4' }
+    }
+];
+
 // ══ AI 工具数据 ═════════════════════════════════════════════════════
 const AI_TOOLS = [
     // 写作
@@ -1954,37 +2098,16 @@ async function loadDynamicContent() {
 
     try {
         const data = await fetchGitHub('/search/repositories?q=stars:%3E3000&sort=stars&order=desc&per_page=8');
-        document.getElementById('oss-host').innerHTML = (data.items || []).map(r => {
-            const col = langColor(r.language);
-            return `
-            <a class="gh-item" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
-                <img class="gh-avatar" src="${r.owner.avatar_url}" alt="" width="40" height="40" loading="lazy" decoding="async">
-                <div style="flex:1;min-width:0;">
-                    <div class="gh-repo">${escapeHtml(r.full_name)}</div>
-                    <div class="gh-desc">${escapeHtml(r.description || '')}</div>
-                    <div class="gh-foot">
-                        ${r.language ? `<span style="display:inline-flex;align-items:center;gap:6px;"><span class="lang-dot" style="background:${col}"></span>${escapeHtml(r.language)}</span>` : ''}
-                        <span>★ ${fmtStars(r.stargazers_count)}</span>
-                    </div>
-                </div>
-            </a>`;
-        }).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+        renderOssList(data.items || []);
     } catch (e) {
-        errBox('oss-host', loadDynamicContent);
+        renderOssList(OSS_FALLBACK);
     }
 
     try {
         const soft = await fetchGitHub('/search/repositories?q=topic:cli+stars:%3E400&sort=stars&order=desc&per_page=9');
-        document.getElementById('soft-host').innerHTML = (soft.items || []).map(r => `
-            <a class="soft-card" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
-                <img class="ico" src="${r.owner.avatar_url}" alt="" width="44" height="44" loading="lazy" decoding="async">
-                <h4>${escapeHtml(r.name)}</h4>
-                <p>${escapeHtml((r.description || '').slice(0, 120))}</p>
-                <span class="plat">${escapeHtml(r.language || 'OSS')}</span>
-            </a>
-        `).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+        renderSoftList(soft.items || []);
     } catch (e) {
-        errBox('soft-host', loadDynamicContent);
+        renderSoftList(SOFT_FALLBACK);
     }
 }
 
@@ -1996,6 +2119,44 @@ function fmtStars(n) {
 function langColor(name) {
     const map = { JavaScript: '#f1e05a', TypeScript: '#3178c6', Python: '#3572A5', Go: '#00ADD8', Rust: '#dea584', Ruby: '#701516', 'C++': '#f34b7d', C: '#555555', Swift: '#F05138', Kotlin: '#A97BFF', Java: '#b07219' };
     return map[name] || '#8b949e';
+}
+
+function pickLocaleText(value) {
+    if (!value) return '';
+    if (typeof value === 'string') return value;
+    return value[lang] || value.zh || value.en || value.ja || '';
+}
+
+function renderOssList(items) {
+    const t = I18N[lang];
+    document.getElementById('oss-host').innerHTML = (items || []).map(r => {
+        const col = langColor(r.language);
+        const desc = pickLocaleText(r.description || '');
+        return `
+            <a class="gh-item" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+                <img class="gh-avatar" src="${r.owner.avatar_url}" alt="" width="40" height="40" loading="lazy" decoding="async">
+                <div style="flex:1;min-width:0;">
+                    <div class="gh-repo">${escapeHtml(r.full_name)}</div>
+                    <div class="gh-desc">${escapeHtml(desc)}</div>
+                    <div class="gh-foot">
+                        ${r.language ? `<span style="display:inline-flex;align-items:center;gap:6px;"><span class="lang-dot" style="background:${col}"></span>${escapeHtml(r.language)}</span>` : ''}
+                        ${r.stargazers_count ? `<span>★ ${fmtStars(r.stargazers_count)}</span>` : ''}
+                    </div>
+                </div>
+            </a>`;
+    }).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
+}
+
+function renderSoftList(items) {
+    const t = I18N[lang];
+    document.getElementById('soft-host').innerHTML = (items || []).map(r => `
+        <a class="soft-card" href="${r.html_url}" target="_blank" rel="noopener noreferrer">
+            <img class="ico" src="${r.owner.avatar_url}" alt="" width="44" height="44" loading="lazy" decoding="async">
+            <h4>${escapeHtml(r.name)}</h4>
+            <p>${escapeHtml(pickLocaleText(r.description || '').slice(0, 120))}</p>
+            <span class="plat">${escapeHtml(r.language || 'OSS')}</span>
+        </a>
+    `).join('') || `<div class="loading">${escapeHtml(t.load_err)}</div>`;
 }
 
 applyTheme(theme);
