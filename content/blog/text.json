@@ -1,18 +1,25 @@
 {
   "readTime": 1,
-  "tags": [],
-  "id": "text",
-  "cat": "tech",
+  "badge": "tech",
   "date": "2026-04-24",
-  "title": {
-    "zh": "text",
-    "en": "text",
-    "ja": "text"
-  },
   "desc": {
-    "zh": "text",
+    "zh": "测试",
     "en": "text",
-    "ja": "text"
+    "ja": "テスト"
   },
-  "badge": "tech"
+  "cat": "tech",
+  "title": {
+    "zh": "测试",
+    "en": "text",
+    "ja": "テスト"
+  },
+  "tags": [
+    "测试"
+  ],
+  "content": {
+    "ja": "テスト",
+    "en": "text",
+    "zh": "测试"
+  },
+  "id": "text"
 }
