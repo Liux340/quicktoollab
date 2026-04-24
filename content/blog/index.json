@@ -25,31 +25,6 @@
     "id": "text"
   },
   {
-    "readTime": 5,
-    "badge": "tech",
-    "date": "2026-04-24",
-    "desc": {
-      "ja": "テスト",
-      "en": "text",
-      "zh": "测试"
-    },
-    "cat": "tech",
-    "title": {
-      "zh": "测试",
-      "en": "text",
-      "ja": "テスト"
-    },
-    "tags": [
-      "text"
-    ],
-    "content": {
-      "zh": "测试",
-      "en": "text",
-      "ja": "テスト"
-    },
-    "id": "测试"
-  },
-  {
     "id": "canonical-seo",
     "cat": "tech",
     "date": "2025-04-15",
