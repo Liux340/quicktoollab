@@ -484,7 +484,7 @@ let walineInstance = null;
 
 async function loadData() {
     try {
-        const res = await fetch('/data/posts.json');
+        const res = await fetch('/content/blog/index.json');
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         POSTS = Array.isArray(data) ? data : [];
