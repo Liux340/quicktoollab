@@ -1,5 +1,23 @@
 [
   {
+    "readTime": 1,
+    "tags": [],
+    "id": "text",
+    "cat": "tech",
+    "date": "2026-04-24",
+    "title": {
+      "zh": "text",
+      "en": "text",
+      "ja": "text"
+    },
+    "desc": {
+      "zh": "text",
+      "en": "text",
+      "ja": "text"
+    },
+    "badge": "tech"
+  },
+  {
     "id": "canonical-seo",
     "cat": "tech",
     "date": "2025-04-15",
