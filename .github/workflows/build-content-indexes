@@ -1,1 +1,39 @@
+name: Build Content Indexes
 
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "content/blog/**.json"
+      - "content/help/**.json"
+      - "scripts/build_content.py"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-indexes:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Build indexes
+        run: python scripts/build_content.py
+
+      - name: Commit updated indexes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore(content): rebuild generated indexes"
+          file_pattern: content/blog/index.json content/help/index.json data/posts.json data/help.json
