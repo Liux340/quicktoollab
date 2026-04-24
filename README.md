@@ -1,149 +1,168 @@
-# QuickToolLab · 综合在线工具站
+# QuickToolLab
 
-> 免费、纯静态、无需服务器 · 托管于 GitHub + Cloudflare Pages
+一个基于 Git 文件的纯静态工具站与内容站，托管在 GitHub + Cloudflare Pages。  
+站点包含在线工具、博客、帮助中心，以及基于 Decap CMS 的后台内容管理。
 
-🌐 **线上地址：** [https://quicktoollab.top](https://quicktoollab.top)
-
----
-
-## 项目简介
-
-QuickToolLab 是一个纯前端综合在线工具站，所有页面均为静态 HTML 文件，无需后端服务器，直接托管在 GitHub 仓库并通过 Cloudflare Pages 全球分发。
-
-内容包含：
-
-- 在线工具导航（图片处理、开发工具、格式转换等）
-- 技术文库（来自 Dev.to 的实时文章）
-- 幻灯片精选封面
-- 热门开源项目（来自 GitHub API）
-- 软件推荐
-- 评论系统（Waline，独立部署）
-
----
-
-## 文件结构
-
-```
-QuickToolLab/
-├── index.html          # 首页：工具导航 + 动态内容聚合
-├── compress.html       # PixCrush：图片压缩 & 格式转换工具
-├── help.html           # 帮助中心
-├── help-article.html   # 帮助文章详情页
-├── about.html          # 关于页
-├── privacy.html        # 隐私政策
-├── help-articles.js    # 帮助文章数据
-├── sitemap.xml         # 站点地图
-├── robots.txt          # 爬虫规则
-└── ads.txt             # Google AdSense 验证
-```
-
----
-
-## 核心功能
-
-### 🖼️ PixCrush 图片压缩工具（compress.html）
-
-- 支持 JPG、PNG、WebP、BMP、GIF 批量处理
-- **完全本地运行**，图片不上传任何服务器
-- 可调节压缩质量（10%–100%）
-- 支持设置最大输出尺寸（原尺寸 / 1920 / 1280 / 800px）
-- 单张下载 + 全部打包下载
-- 显示每张图片的压缩节省比例
-
-### 🌐 首页动态内容（index.html）
-
-- 技术文库：调用 Dev.to API 实时拉取热门文章
-- 开源类库：调用 GitHub API 展示高 Star 项目
-- 软件推荐：调用 GitHub API 展示热门 CLI 工具
-
-### 💬 评论系统
-
-基于 [Waline](https://waline.js.org/) 独立部署，评论数据存储在服务端数据库，所有访客均可查看和发表。
-
-评论服务地址：`https://comment.quicktoollab.top`
-
----
+线上地址：[https://quicktoollab.top](https://quicktoollab.top)
 
 ## 技术栈
 
-| 层级 | 技术 |
-|---|---|
-| 前端 | 纯 HTML / CSS / Vanilla JS，无框架 |
-| 字体 | Google Fonts（Noto Sans SC + JetBrains Mono） |
-| 图片处理 | HTML5 Canvas API |
-| 动态数据 | Dev.to API + GitHub API |
-| 评论系统 | Waline v3 |
-| 主题切换 | CSS Variables + localStorage |
-| 多语言 | 内置 i18n（中文 / English / 日本語） |
-| 托管 | GitHub + Cloudflare Pages |
-| 广告 | Google AdSense（`pub-8586931911554867`） |
+- 前端：HTML / CSS / Vanilla JS
+- 内容管理：Decap CMS
+- 内容存储：Git 文件（JSON）
+- 评论系统：Waline
+- 部署：GitHub + Cloudflare Pages
+- 自动索引：GitHub Actions + Python
 
----
+## 当前内容架构
+
+现在的 CMS 使用 `folder collection`，不是旧的 `files collection`。
+
+- 博客文章：`content/blog/*.json`
+- 帮助文章：`content/help/*.json`
+- 每篇文章对应一个独立文件
+- CMS 后台会把这些文件识别为独立 entries
+
+前端列表页不直接扫描目录，而是读取聚合索引：
+
+- 博客索引：`content/blog/index.json`
+- 帮助索引：`content/help/index.json`
+
+兼容输出：
+
+- `data/posts.json`
+- `data/help.json`
+
+## 目录结构
+
+```text
+QuickToolLab/
+├── admin/
+│   ├── config.yml
+│   └── index.html
+├── content/
+│   ├── blog/
+│   │   ├── *.json
+│   │   └── index.json
+│   └── help/
+│       ├── *.json
+│       └── index.json
+├── data/
+│   ├── posts.json
+│   └── help.json
+├── scripts/
+│   └── build_content.py
+├── .github/
+│   └── workflows/
+│       └── build-content-indexes.yml
+├── index.html
+├── blog.html
+├── blog-post.html
+├── help.html
+├── help-article.html
+├── about.html
+├── privacy.html
+└── compress.html
+```
+
+## CMS 工作方式
+
+CMS 配置文件：
+
+- [admin/config.yml](/D:/Code/AdSense/QuickToolLab_edit/admin/config.yml:1)
+
+后台入口：
+
+- [admin/index.html](/D:/Code/AdSense/QuickToolLab_edit/admin/index.html:1)
+
+内容编辑流程：
+
+1. 在 `/admin/` 登录 Decap CMS
+2. 新建或编辑博客/帮助文章
+3. CMS 将内容写入 GitHub 仓库中的单篇 JSON 文件
+4. GitHub Actions 自动运行 `scripts/build_content.py`
+5. 自动更新 `index.json` 和 `data/*.json`
+6. Cloudflare Pages 自动部署最新内容
+
+## 自动索引
+
+索引生成脚本：
+
+- [scripts/build_content.py](/D:/Code/AdSense/QuickToolLab_edit/scripts/build_content.py:1)
+
+自动工作流：
+
+- [.github/workflows/build-content-indexes.yml](/D:/Code/AdSense/QuickToolLab_edit/.github/workflows/build-content-indexes.yml:1)
+
+触发条件：
+
+- `content/blog/*.json` 变化
+- `content/help/*.json` 变化
+- `scripts/build_content.py` 变化
+
+生成结果：
+
+- `content/blog/index.json`
+- `content/help/index.json`
+- `data/posts.json`
+- `data/help.json`
+
+如果需要手动执行：
+
+```powershell
+cd D:\Code\AdSense\QuickToolLab_edit
+python scripts\build_content.py
+```
 
 ## 本地预览
 
-无需安装任何依赖，直接用浏览器打开即可：
+推荐使用本地静态服务器，不要直接双击 HTML。
 
-```bash
-# 克隆仓库
-git clone https://github.com/你的用户名/QuickToolLab.git
-cd QuickToolLab
-
-# 方式一：直接双击 index.html 用浏览器打开
-# 方式二：用 VS Code Live Server 插件启动本地服务
-# 方式三：Python 简易服务器
-python3 -m http.server 8080
-# 然后访问 http://localhost:8080
+```powershell
+cd D:\Code\AdSense\QuickToolLab_edit
+python -m http.server 8080
 ```
 
-> **注意：** Dev.to 和 GitHub API 在本地直接打开文件时可能触发 CORS，建议使用本地服务器方式预览。
+然后访问：
 
----
+- [http://localhost:8080](http://localhost:8080)
+- [http://localhost:8080/admin/](http://localhost:8080/admin/)
 
-## 部署方式
+## 主要页面
 
-### Cloudflare Pages（推荐）
+- 首页：`index.html`
+- 博客列表：`blog.html`
+- 博客详情：`blog-post.html?id=...`
+- 帮助列表：`help.html`
+- 帮助详情：`help-article.html?id=...`
+- 图片压缩工具：`compress.html`
+- 关于页：`about.html`
+- 隐私页：`privacy.html`
 
-1. Fork 或 Push 本仓库到你的 GitHub 账号
-2. 登录 [Cloudflare Pages](https://pages.cloudflare.com/)
-3. 新建项目 → 连接 GitHub 仓库
-4. 构建设置全部留空（纯静态，无需构建命令）
-5. 部署完成后在 Cloudflare 绑定自定义域名
-6. 在域名 DNS 处添加 Cloudflare 提供的 CNAME 记录
+## 部署说明
 
-### GitHub Pages（备选）
+### Cloudflare Pages
 
-在仓库 Settings → Pages → Source 选择 `main` 分支根目录即可。
+推荐直接连接 GitHub 仓库部署。
 
----
+- 构建命令：留空
+- 输出目录：`/`
 
-## SEO 配置
+由于这是纯静态站点，不需要额外构建框架。  
+内容索引由 GitHub Actions 预先生成并提交回仓库。
 
-每个页面均配置了：
+### GitHub Actions 权限
 
-- `<meta name="description">` 页面描述
-- `<meta name="keywords">` 关键词
-- `<link rel="canonical">` 规范链接（域名：`quicktoollab.top`）
-- Open Graph 标签（`og:title` / `og:description` / `og:url` / `og:image`）
-- Twitter Card 标签
-- 结构化 `sitemap.xml` + `robots.txt`
+为了让自动索引工作流能回写仓库，需要在 GitHub 仓库中开启：
 
----
+`Settings -> Actions -> General -> Workflow permissions -> Read and write permissions`
 
-## 隐私说明
+## 备注
 
-- **PixCrush 图片工具**：所有图片处理在浏览器本地完成，不上传任何服务器
-- **首页动态内容**：向 Dev.to 和 GitHub 发起只读 API 请求，不传递用户数据
-- **评论系统**：Waline 独立部署，仅存储评论内容、昵称和时间
-- **广告**：Google AdSense 可能使用 Cookie 投放个性化广告
-- **本地存储**：仅保存语言偏好（`pc_lang`）和主题偏好（`pc_theme`）
-
----
+- 这是 file-based CMS 架构，不依赖数据库
+- 文章列表展示依赖 `index.json`，不是浏览器目录扫描
+- `build_content.py` 是当前内容发布链路的一部分，不能删除
 
 ## License
 
-MIT License · 随意使用和修改，保留 License 声明即可。
-
----
-
-<p align="center">© 2025 QuickToolLab · Built with ❤️ · Powered by Cloudflare Pages</p>
+MIT
