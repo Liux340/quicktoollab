@@ -1,0 +1,28 @@
+{
+  "id": "regex101-debug-guide",
+  "cat": {
+    "zh": "文本与数据格式",
+    "en": "Text & Data Formats",
+    "ja": "テキスト・データ形式"
+  },
+  "title": {
+    "zh": "Regex101 正则表达式入门到排错：如何快速定位匹配失败的真实原因",
+    "en": "Regex101 debugging guide: quickly find why pattern matching fails",
+    "ja": "Regex101 デバッグ入門：マッチ失敗の原因を素早く特定する"
+  },
+  "intro": {
+    "zh": "Regex101 可以把复杂正则拆解为可视化步骤，适合日志筛选、文本提取、输入校验等场景。",
+    "en": "Regex101 visualizes complex expressions and is useful for logs, extraction tasks, and input validation.",
+    "ja": "Regex101 は複雑な正規表現を可視化でき、ログ抽出や入力検証に役立ちます。"
+  },
+  "howto": {
+    "zh": "先写最小规则完成首次匹配，再逐步增加边界与分组；每加一步都看 Explain 面板。",
+    "en": "Start with the smallest working pattern, then add boundaries and groups gradually while reading the Explain panel.",
+    "ja": "最小パターンでまず動作確認し、境界やグループを段階的に追加して Explain を確認します。"
+  },
+  "science": {
+    "zh": "贪婪匹配与惰性匹配是多数正则 bug 的源头。",
+    "en": "Greedy vs lazy matching is a common source of regex bugs.",
+    "ja": "貪欲・非貪欲マッチの違いは不具合の主要因です。"
+  }
+}

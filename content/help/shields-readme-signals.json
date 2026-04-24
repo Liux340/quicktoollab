@@ -1,0 +1,28 @@
+{
+  "id": "shields-readme-signals",
+  "cat": {
+    "zh": "数据库、安全与文档",
+    "en": "DB, Security & Docs",
+    "ja": "DB・セキュリティ・ドキュメント"
+  },
+  "title": {
+    "zh": "Shields.io 徽章设计建议：如何在 README 中展示关键信息又不造成信息过载",
+    "en": "Shields.io badge strategy: show key project signals without clutter",
+    "ja": "Shields.io バッジ設計：情報過多を避けつつ要点を伝える"
+  },
+  "intro": {
+    "zh": "Shields.io 能快速生成版本、构建、许可证等状态徽章，提升项目可读性。",
+    "en": "Shields.io provides quick badges for version, CI status, and license to improve README readability.",
+    "ja": "Shields.io はバージョン・CI・ライセンス等のバッジを簡単に作成できます。"
+  },
+  "howto": {
+    "zh": "建议只保留核心信号：版本、构建、覆盖率、许可证，其余信息放正文。",
+    "en": "Keep only core signals (version/build/coverage/license) and move the rest to documentation text.",
+    "ja": "バッジは主要指標に絞り、補足情報は本文で説明するのがおすすめです。"
+  },
+  "science": {
+    "zh": "徽章属于导航信息，数量过多会稀释真正重点。",
+    "en": "Badges are navigation signals; too many badges dilute important information.",
+    "ja": "バッジはナビ情報です。多すぎると重要な情報が埋もれます。"
+  }
+}

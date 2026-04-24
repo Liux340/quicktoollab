@@ -1,0 +1,28 @@
+{
+  "id": "codesandbox-min-repro",
+  "cat": {
+    "zh": "在线 IDE 与沙盒",
+    "en": "Online IDE & Sandbox",
+    "ja": "オンライン IDE・サンドボックス"
+  },
+  "title": {
+    "zh": "CodeSandbox 最小复现指南：如何构造能让别人一眼看懂的问题现场",
+    "en": "CodeSandbox minimal reproduction: build a clean, shareable bug case",
+    "ja": "CodeSandbox 最小再現ガイド：伝わる不具合ケースの作り方"
+  },
+  "intro": {
+    "zh": "CodeSandbox 特别适合复现前端 bug、演示方案和协作讨论。",
+    "en": "CodeSandbox is ideal for reproducing front-end bugs and sharing isolated demos.",
+    "ja": "CodeSandbox はフロント不具合の再現や共有デモに最適です。"
+  },
+  "howto": {
+    "zh": "把复现范围缩到一个页面或组件，删掉无关依赖，只保留触发路径。",
+    "en": "Shrink the repro to a single page/component and keep only dependencies required to trigger the issue.",
+    "ja": "再現範囲を 1 ページ/1 コンポーネントに絞り、必要最小限の依存だけ残します。"
+  },
+  "science": {
+    "zh": "最小复现的核心不是代码少，而是变量可控。",
+    "en": "A good minimal repro is about controllable variables, not just fewer lines.",
+    "ja": "最小再現の本質はコード量ではなく、変数を制御できることです。"
+  }
+}

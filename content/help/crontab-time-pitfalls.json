@@ -1,0 +1,28 @@
+{
+  "id": "crontab-time-pitfalls",
+  "cat": {
+    "zh": "运维网络与调试",
+    "en": "Ops, Network & Debug",
+    "ja": "運用・ネットワーク・デバッグ"
+  },
+  "title": {
+    "zh": "crontab.guru 定时任务避坑：表达式看起来对，为什么执行时间还是不对",
+    "en": "crontab.guru pitfalls: why valid expressions still run at the wrong time",
+    "ja": "crontab.guru の落とし穴：式が正しくても実行時刻がずれる理由"
+  },
+  "intro": {
+    "zh": "crontab.guru 把 Cron 表达式翻译成人话，是上线前校验定时配置的高效工具。",
+    "en": "crontab.guru translates cron syntax into plain language for quick schedule validation.",
+    "ja": "crontab.guru は Cron 式を自然文で確認でき、投入前チェックに便利です。"
+  },
+  "howto": {
+    "zh": "写完表达式先看自然语言描述，再结合服务器时区与夏令时做二次确认。",
+    "en": "Read the natural language summary and verify timezone/DST behavior before deployment.",
+    "ja": "自然文の説明を確認し、タイムゾーンや夏時間設定まで合わせて検証します。"
+  },
+  "science": {
+    "zh": "定时偏差常由时区和字段语义误解导致。",
+    "en": "Most scheduling drift issues come from timezone and field-meaning confusion.",
+    "ja": "実行ずれの多くはタイムゾーン設定や項目解釈の誤りが原因です。"
+  }
+}

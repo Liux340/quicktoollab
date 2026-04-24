@@ -1,0 +1,28 @@
+{
+  "id": "json-formatter-steps",
+  "cat": {
+    "zh": "文本与数据格式",
+    "en": "Text & Data Formats",
+    "ja": "テキスト・データ形式"
+  },
+  "title": {
+    "zh": "JSON Formatter 使用指南：格式化、校验、折叠节点三步完成结构化排查",
+    "en": "JSON Formatter workflow: format, validate, then inspect nested nodes",
+    "ja": "JSON Formatter の基本手順：整形・検証・階層確認"
+  },
+  "intro": {
+    "zh": "JSON Formatter 适合接口联调、配置文件检查和日志阅读，字段层级越深越有价值。",
+    "en": "JSON Formatter is great for API debugging, config checks, and deep nested log inspection.",
+    "ja": "JSON Formatter は API 連携確認や設定ファイル点検、深い階層のログ確認に有効です。"
+  },
+  "howto": {
+    "zh": "先格式化，再折叠外层逐级定位目标节点，最后确认字段类型。",
+    "en": "Format first, collapse outer nodes, drill into target paths, and verify field types.",
+    "ja": "先に整形し、外側の階層を折りたたんで目的ノードを絞り込み、型を確認します。"
+  },
+  "science": {
+    "zh": "JSON 语法很严格：键名必须双引号、不能有尾逗号。",
+    "en": "JSON syntax is strict: quoted keys and no trailing commas.",
+    "ja": "JSON は厳密な文法です。キーはダブルクォート、末尾カンマ不可です。"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "base64-image-tradeoffs",
+  "cat": {
+    "zh": "文本与数据格式",
+    "en": "Text & Data Formats",
+    "ja": "テキスト・データ形式"
+  },
+  "title": {
+    "zh": "图片 Base64 转换取舍：什么时候该内联，什么时候应该保留独立文件",
+    "en": "Image Base64 trade-offs: when to inline and when to keep separate files",
+    "ja": "画像 Base64 の使い分け：インライン化すべき場面と避ける場面"
+  },
+  "intro": {
+    "zh": "Base64 工具可快速把小图片嵌入文本配置，但并不总是最佳方案。",
+    "en": "Base64 tools are handy for embedding tiny assets, but they are not always optimal.",
+    "ja": "Base64 は小さな画像埋め込みに便利ですが、常に最適とは限りません。"
+  },
+  "howto": {
+    "zh": "图标级别资源可考虑内联；大图优先独立文件并走缓存。",
+    "en": "Inline icon-sized assets only; keep large images as separate files with proper caching.",
+    "ja": "アイコン程度はインライン可。大きな画像は別ファイル化してキャッシュ活用が基本です。"
+  },
+  "science": {
+    "zh": "Base64 常见体积膨胀约 33%，会增加传输和解析负担。",
+    "en": "Base64 often increases size by around 33%, adding transfer and parsing overhead.",
+    "ja": "Base64 は一般に約 33% 容量増となり、転送・解析コストが上がります。"
+  }
+}

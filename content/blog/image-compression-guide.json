@@ -1,0 +1,23 @@
+{
+  "id": "image-compression-guide",
+  "cat": "tool",
+  "date": "2025-03-28",
+  "readTime": 4,
+  "title": {
+    "zh": "PixCrush 图片压缩工具：为什么选择 Canvas API 而不是 WebAssembly",
+    "en": "PixCrush: Why Canvas API over WebAssembly for image compression",
+    "ja": "PixCrush：画像圧縮にCanvas APIを選んだ理由"
+  },
+  "desc": {
+    "zh": "浏览器端图片压缩方案对比：Canvas API 简单但质量有限，WebAssembly（squoosh）质量高但包体大。PixCrush 选择 Canvas 的权衡与决策过程。",
+    "en": "Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.",
+    "ja": "Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。"
+  },
+  "tags": [
+    "Canvas API",
+    "图片压缩",
+    "WebAssembly"
+  ],
+  "image": "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop",
+  "badge": "tool"
+}

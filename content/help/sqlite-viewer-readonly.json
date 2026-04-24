@@ -1,0 +1,28 @@
+{
+  "id": "sqlite-viewer-readonly",
+  "cat": {
+    "zh": "数据库、安全与文档",
+    "en": "DB, Security & Docs",
+    "ja": "DB・セキュリティ・ドキュメント"
+  },
+  "title": {
+    "zh": "SQLite Viewer 排查指南：如何在不破坏原库的前提下定位数据问题",
+    "en": "SQLite Viewer troubleshooting: inspect data safely in read-only flow",
+    "ja": "SQLite Viewer 解析：元データを壊さずに問題を特定する方法"
+  },
+  "intro": {
+    "zh": "SQLite Viewer 适合快速查看表结构和记录内容，适用于线上问题回溯。",
+    "en": "SQLite Viewer is useful for quickly inspecting table schemas and records during incident analysis.",
+    "ja": "SQLite Viewer はテーブル構造やレコードの迅速確認に便利です。"
+  },
+  "howto": {
+    "zh": "先备份数据库文件，再按“表结构 -> 条件查询 -> 样本导出”的顺序排查。",
+    "en": "Back up the file first, then inspect in order: schema -> filtered queries -> sample export.",
+    "ja": "先に DB ファイルをバックアップし、構造確認→条件検索→サンプル抽出の順で調査します。"
+  },
+  "science": {
+    "zh": "排查优先读操作，避免带副作用写入，才能保持证据链完整。",
+    "en": "Prioritize read-only steps to preserve evidence and avoid side effects.",
+    "ja": "調査時は読み取り優先にし、副作用のある書き込みを避けるのが基本です。"
+  }
+}

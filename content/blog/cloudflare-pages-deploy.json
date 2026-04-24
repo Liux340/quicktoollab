@@ -1,0 +1,28 @@
+{
+  "id": "cloudflare-pages-deploy",
+  "cat": "dev",
+  "date": "2025-04-05",
+  "readTime": 6,
+  "title": {
+    "zh": "GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠",
+    "en": "Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection",
+    "ja": "GitHub + Cloudflare Pages でゼロコストサイト構築"
+  },
+  "desc": {
+    "zh": "只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。",
+    "en": "One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.",
+    "ja": "ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。"
+  },
+  "tags": [
+    "Cloudflare",
+    "GitHub Pages",
+    "部署"
+  ],
+  "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
+  "badge": "dev",
+  "content": {
+    "zh": "<h2>方案概述</h2>\n<p>这套方案的核心逻辑：GitHub 存代码 → Cloudflare Pages 自动部署 → Cloudflare CDN 分发 → 用户访问。</p>\n<p>费用：只需一个域名，其余全部免费。</p>\n\n<h2>部署步骤</h2>\n<ul>\n<li>1. 把网站文件推送到 GitHub 仓库</li>\n<li>2. 登录 Cloudflare Pages，新建项目，连接 GitHub 仓库</li>\n<li>3. 构建命令留空（纯静态站），输出目录填 <code>/</code></li>\n<li>4. 绑定自定义域名，在域名商处添加 CNAME 记录</li>\n</ul>\n\n<h2>免费功能清单</h2>\n<ul>\n<li>✅ 全球 CDN 加速（200+ 节点）</li>\n<li>✅ 自动 HTTPS / TLS</li>\n<li>✅ DDoS L3/L4 防护</li>\n<li>✅ CI/CD 自动部署（push 后自动更新）</li>\n<li>✅ Web Analytics 基础统计</li>\n<li>✅ 每月 500 次构建、无限带宽</li>\n</ul>\n\n<h2>注意事项</h2>\n<p>纯静态站没有后端，不能运行 Node.js / PHP 等服务端代码。如果需要 API，可以配合 Cloudflare Workers（每天 10 万次免费请求）。</p>",
+    "en": "<h2>Architecture</h2>\n<p>GitHub stores code → Cloudflare Pages auto-deploys → Cloudflare CDN distributes → users access.</p>\n<p>Cost: one domain name fee. Everything else is free.</p>\n\n<h2>Deployment Steps</h2>\n<ul>\n<li>1. Push site files to a GitHub repository</li>\n<li>2. Log in to Cloudflare Pages, create a project, connect GitHub repo</li>\n<li>3. Leave build command empty (static site), output directory: /</li>\n<li>4. Bind custom domain, add CNAME record at your registrar</li>\n</ul>\n\n<h2>What You Get for Free</h2>\n<ul>\n<li>✅ Global CDN (200+ nodes)</li>\n<li>✅ Automatic HTTPS/TLS</li>\n<li>✅ DDoS L3/L4 protection</li>\n<li>✅ CI/CD auto-deploy on push</li>\n<li>✅ 500 monthly builds, unlimited bandwidth</li>\n</ul>",
+    "ja": "<h2>アーキテクチャ</h2>\n<p>GitHub→Cloudflare Pages自動デプロイ→Cloudflare CDN配信→ユーザーアクセス。コストはドメイン代のみ。</p>\n\n<h2>デプロイ手順</h2>\n<ul>\n<li>1. サイトファイルをGitHubにプッシュ</li>\n<li>2. Cloudflare PagesでGitHubリポジトリを接続</li>\n<li>3. ビルドコマンドは空欄、出力ディレクトリは /</li>\n<li>4. カスタムドメインを設定</li>\n</ul>"
+  }
+}

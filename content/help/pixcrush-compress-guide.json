@@ -1,0 +1,28 @@
+{
+  "id": "pixcrush-compress-guide",
+  "cat": {
+    "zh": "PixCrush",
+    "en": "PixCrush",
+    "ja": "PixCrush"
+  },
+  "title": {
+    "zh": "PixCrush 在线图片压缩工具：如何在不明显降质的情况下快速减小图片体积",
+    "en": "PixCrush Image Compression: shrink files without visible quality loss",
+    "ja": "PixCrush 画像圧縮：画質を保ちながら容量を下げる方法"
+  },
+  "intro": {
+    "zh": "PixCrush 适合站长、运营与开发者做发布前图片瘦身。它支持浏览器本地处理，不依赖上传到服务器，适用于隐私要求较高的场景。",
+    "en": "PixCrush helps teams optimize images before publishing. It runs fully in your browser and does not require uploading files to a server.",
+    "ja": "PixCrush は公開前の画像最適化に便利です。処理はブラウザ内で完結し、サーバーアップロードは不要です。"
+  },
+  "howto": {
+    "zh": "建议先统一目标宽度，再逐级调整质量参数并对比视觉效果；最后按页面场景导出 JPG 或 WebP。",
+    "en": "Set a target width first, then adjust quality step by step while checking visual output; export as JPG or WebP based on your page usage.",
+    "ja": "先に目標幅を決め、次に品質を段階調整して見た目を確認します。用途に合わせて JPG または WebP で書き出します。"
+  },
+  "science": {
+    "zh": "图片大小由像素总量、编码方式、压缩质量共同决定。只盯质量参数往往不够，分辨率控制通常更有效。",
+    "en": "File size depends on pixel count, codec, and quality level. Resolution control is often more impactful than quality alone.",
+    "ja": "容量は画素数・圧縮方式・品質値の組み合わせで決まります。品質だけでなく解像度調整が重要です。"
+  }
+}

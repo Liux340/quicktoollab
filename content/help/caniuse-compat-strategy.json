@@ -1,0 +1,28 @@
+{
+  "id": "caniuse-compat-strategy",
+  "cat": {
+    "zh": "前端设计与 UI",
+    "en": "Front-end & UI",
+    "ja": "フロントエンド・UI"
+  },
+  "title": {
+    "zh": "Can I Use 兼容性实践：如何为新 CSS/JS 特性设计可回退方案",
+    "en": "Can I Use strategy: plan safe fallback for new CSS/JS features",
+    "ja": "Can I Use 活用：新機能のフォールバック設計"
+  },
+  "intro": {
+    "zh": "Can I Use 用于查询浏览器支持度，帮助你判断新特性能否直接上线。",
+    "en": "Can I Use shows browser support so you can decide whether a feature is ready for production.",
+    "ja": "Can I Use はブラウザ対応状況を確認し、本番投入判断を助けます。"
+  },
+  "howto": {
+    "zh": "根据目标用户浏览器份额做决策：高覆盖直用，低覆盖加 polyfill 或降级策略。",
+    "en": "Decide by audience browser share: ship directly for high coverage, add polyfill/degradation when needed.",
+    "ja": "利用ユーザー環境の割合で判断し、必要なら polyfill や段階的劣化を用意します。"
+  },
+  "science": {
+    "zh": "兼容性是分层设计问题，不是简单“支持/不支持”二选一。",
+    "en": "Compatibility is a layered design decision, not a binary yes/no.",
+    "ja": "互換性は二択ではなく、段階設計で考えるべき課題です。"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "id": "css-variables-theming",
+  "cat": "dev",
+  "date": "2025-03-20",
+  "readTime": 7,
+  "title": {
+    "zh": "CSS 变量实现深色/浅色主题切换：零闪烁的关键是这一个内联脚本",
+    "en": "Flicker-free dark/light theme switching: one inline script makes all the difference",
+    "ja": "CSS変数でフリッカーなしのテーマ切替を実現する方法"
+  },
+  "desc": {
+    "zh": "页面跳转时主题闪烁的根本原因是 JS 比 CSS 渲染晚。解决方案是在 <head> 最顶部放一段内联脚本，在浏览器渲染第一帧前就设好主题。",
+    "en": "Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.",
+    "ja": "テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。"
+  },
+  "tags": [
+    "CSS",
+    "Dark Mode",
+    "主题切换"
+  ],
+  "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop",
+  "badge": "dev"
+}

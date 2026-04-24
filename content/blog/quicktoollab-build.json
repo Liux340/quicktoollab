@@ -1,0 +1,23 @@
+{
+  "id": "quicktoollab-build",
+  "cat": "life",
+  "date": "2025-02-20",
+  "readTime": 6,
+  "title": {
+    "zh": "QuickToolLab 从零到上线：一个纯静态工具站的搭建全记录",
+    "en": "QuickToolLab from zero to launch: building a pure static tool site",
+    "ja": "QuickToolLabゼロから公開：純静的ツールサイト構築の全記録"
+  },
+  "desc": {
+    "zh": "记录从想法到上线的完整过程：域名选择、设计风格确定、功能规划、Cloudflare 部署、AdSense 申请。包含所有坑点和解决方案。",
+    "en": "Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.",
+    "ja": "アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。"
+  },
+  "tags": [
+    "建站",
+    "Cloudflare",
+    "个人项目"
+  ],
+  "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop",
+  "badge": "life"
+}

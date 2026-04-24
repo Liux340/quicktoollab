@@ -1,0 +1,28 @@
+{
+  "id": "canonical-seo",
+  "cat": "tech",
+  "date": "2025-04-15",
+  "readTime": 5,
+  "title": {
+    "zh": "Canonical 标签写错一个字母，导致 6 个页面全部不被收录",
+    "en": "One typo in canonical URL blocked all 6 pages from indexing",
+    "ja": "canonical URLの誤字でページが未収録に"
+  },
+  "desc": {
+    "zh": "记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。",
+    "en": "A real-world case: one missing \"l\" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.",
+    "ja": "ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。"
+  },
+  "tags": [
+    "SEO",
+    "canonical",
+    "Google Search Console"
+  ],
+  "image": "https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop",
+  "badge": "tech",
+  "content": {
+    "zh": "<h2>问题发现</h2>\n<p>某天检查 Google Search Console，发现提交的 6 个页面状态全部是 <strong>「已被抓取 — 未收录」</strong>，理由都是 <strong>「已选择替代页面（包含正确的 canonical 标签）」</strong>。</p>\n<p>这意味着 Google 认为这些页面是\"重复内容\"，并且认为真正的\"原始\"页面在别处。</p>\n\n<h2>排查过程</h2>\n<p>仔细检查才发现问题：所有页面的 canonical 标签写的是 <code>https://quicktoolab.com/</code>，而我的真实域名是 <code>https://quicktoollab.top/</code>。</p>\n<blockquote>注意：<code>quicktoolab</code>（少一个 l）vs <code>quicktoollab</code>（正确）</blockquote>\n<p>Google 的逻辑是：canonical 标签相当于你在告诉 Google \"这个页面的权威版本在 <code>quicktoolab.com</code>\"，所以 Google 说\"好的，那我去收录 <code>quicktoolab.com</code>\"，然后你的 <code>quicktoollab.top</code> 就被当成副本丢弃了。</p>\n\n<h2>修复步骤</h2>\n<p>修复很简单，把所有页面的 canonical 链接从：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>改为：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>同时一并修复了 <code>og:url</code>、<code>og:image</code> 里的同类错误。</p>\n\n<h2>经验教训</h2>\n<p>Canonical 标签是 SEO 中最容易被忽视却影响最大的标签之一。几个关键点：</p>\n<ul>\n<li>canonical 指向的域名必须和你实际使用的域名 <strong>完全一致</strong>，包括 www 和非 www、http 和 https</li>\n<li>sitemap 里的 URL 和 canonical 指向的 URL 必须一致，否则 Google 会困惑</li>\n<li>每次新建页面后，第一件事就是检查 canonical 是否正确</li>\n</ul>\n<p>提交修复后，通过 Google Search Console 的「URL 检查」工具逐一请求重新收录，大约 2-4 周后应该会正常被索引。</p>",
+    "en": "<h2>Problem Discovery</h2>\n<p>While checking Google Search Console, all 6 submitted pages showed <strong>\"Crawled — currently not indexed\"</strong> with reason <strong>\"Duplicate, submitted URL not selected as canonical\"</strong>.</p>\n<p>This means Google considered these pages as duplicates, believing the real \"original\" version exists elsewhere.</p>\n\n<h2>Root Cause</h2>\n<p>On closer inspection: all canonical tags pointed to <code>https://quicktoolab.com/</code> while the actual domain is <code>https://quicktoollab.top/</code>.</p>\n<blockquote>Notice: <code>quicktoolab</code> (missing one \"l\") vs <code>quicktoollab</code> (correct)</blockquote>\n<p>Google's logic: canonical tells Google \"the authoritative version is at quicktoolab.com\". So Google indexed quicktoolab.com and treated quicktoollab.top as a duplicate.</p>\n\n<h2>Fix</h2>\n<p>Simple fix — update all canonical links from:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>To:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>Also fixed the same typo in <code>og:url</code> and <code>og:image</code> tags.</p>\n\n<h2>Lessons Learned</h2>\n<ul>\n<li>The canonical URL must <strong>exactly match</strong> your actual domain — including www vs non-www, http vs https</li>\n<li>Sitemap URLs and canonical URLs must match, or Google gets confused</li>\n<li>Always verify canonical tags are correct when creating new pages</li>\n</ul>",
+    "ja": "<h2>問題の発見</h2>\n<p>Google Search Consoleを確認したところ、提出した6ページすべてが<strong>「クロール済み — インデックス未登録」</strong>で、理由は<strong>「重複：ユーザーが指定したURLが正規URLとして選択されていない」</strong>でした。</p>\n\n<h2>原因の特定</h2>\n<p>よく確認すると、すべてのcanonicalタグが <code>https://quicktoolab.com/</code> を指していましたが、実際のドメインは <code>https://quicktoollab.top/</code> です。</p>\n<blockquote><code>quicktoolab</code>（lが一つ足りない）vs <code>quicktoollab</code>（正しい）</blockquote>\n\n<h2>修正方法</h2>\n<p>全ページのcanonicalを正しいドメインに修正し、og:urlとog:imageも同様に修正しました。</p>\n\n<h2>教訓</h2>\n<ul>\n<li>canonicalのURLは実際のドメインと完全に一致させること</li>\n<li>sitemapのURLとcanonicalのURLは一致させること</li>\n<li>新ページ作成時は必ずcanonicalを確認すること</li>\n</ul>"
+  }
+}

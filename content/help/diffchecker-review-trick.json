@@ -1,0 +1,28 @@
+{
+  "id": "diffchecker-review-trick",
+  "cat": {
+    "zh": "文本与数据格式",
+    "en": "Text & Data Formats",
+    "ja": "テキスト・データ形式"
+  },
+  "title": {
+    "zh": "Diffchecker 对比技巧：如何高效识别改动中真正会引发回归的问题",
+    "en": "Diffchecker review tips: detect risky changes, not just big changes",
+    "ja": "Diffchecker 活用法：回帰リスクの高い差分を見抜く"
+  },
+  "intro": {
+    "zh": "Diffchecker 用于文本与代码版本差异分析，适合发布前校对和协作审阅。",
+    "en": "Diffchecker helps compare text/code revisions before release and during team reviews.",
+    "ja": "Diffchecker は公開前の差分確認やレビューに向いています。"
+  },
+  "howto": {
+    "zh": "建议先看删除内容，再看新增内容，最后检查顺序和空白变更。",
+    "en": "Review deletions first, then additions, then ordering/whitespace changes.",
+    "ja": "削除差分を先に確認し、次に追加、最後に並び順や空白差分を見ます。"
+  },
+  "science": {
+    "zh": "回归风险常来自“删掉了关键约束”，不只是“新增很多代码”。",
+    "en": "Regressions often come from removed constraints, not only from large additions.",
+    "ja": "回帰は大量追加よりも、重要制約の削除で起きることが多いです。"
+  }
+}

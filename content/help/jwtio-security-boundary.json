@@ -1,0 +1,28 @@
+{
+  "id": "jwtio-security-boundary",
+  "cat": {
+    "zh": "数据库、安全与文档",
+    "en": "DB, Security & Docs",
+    "ja": "DB・セキュリティ・ドキュメント"
+  },
+  "title": {
+    "zh": "JWT.io 调试边界：能看懂令牌结构，但为什么还不能代表鉴权安全",
+    "en": "JWT.io limits: understanding token structure is not full auth security",
+    "ja": "JWT.io の限界：構造理解だけでは認証安全にならない理由"
+  },
+  "intro": {
+    "zh": "JWT.io 适合查看 token 结构与字段，不适合作为生产密钥验证环境。",
+    "en": "JWT.io is great for inspecting token fields, but should not be treated as a production validation environment.",
+    "ja": "JWT.io は構造確認に適していますが、本番鍵での検証環境として使うべきではありません。"
+  },
+  "howto": {
+    "zh": "把它当结构检查工具，重点核对 exp、iss、aud 等声明是否符合服务约定。",
+    "en": "Use it as a structure checker, and validate claims like exp/iss/aud against your service rules.",
+    "ja": "構造確認ツールとして使い、exp・iss・aud などのクレームをサービス仕様と照合します。"
+  },
+  "science": {
+    "zh": "JWT 安全性来自签名算法、密钥管理和服务端严格校验。",
+    "en": "JWT security depends on algorithm choice, key management, and strict server-side validation.",
+    "ja": "JWT の安全性は署名方式、鍵管理、サーバー側の厳格検証で決まります。"
+  }
+}

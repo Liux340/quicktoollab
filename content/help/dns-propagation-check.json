@@ -1,0 +1,28 @@
+{
+  "id": "dns-propagation-check",
+  "cat": {
+    "zh": "运维网络与调试",
+    "en": "Ops, Network & Debug",
+    "ja": "運用・ネットワーク・デバッグ"
+  },
+  "title": {
+    "zh": "DNS 传播检查实战：修改记录后为什么有的人能访问有的人不行",
+    "en": "DNS propagation in practice: why updates work for some users but not others",
+    "ja": "DNS 伝播の実務：更新後に人によって結果が違う理由"
+  },
+  "intro": {
+    "zh": "DNSChecker 和 WhatsMyDNS 可用于观察全球解析状态，判断记录是否传播完成。",
+    "en": "DNSChecker and WhatsMyDNS help you observe global resolution status after DNS changes.",
+    "ja": "DNSChecker / WhatsMyDNS で更新後の世界各地の解決状況を確認できます。"
+  },
+  "howto": {
+    "zh": "改记录后先核对 TTL，再按地区查询 A/CNAME 结果，确认是否逐步一致。",
+    "en": "After updating records, verify TTL and compare A/CNAME results across regions.",
+    "ja": "更新後は TTL を確認し、地域ごとに A/CNAME の結果を比較して収束を確認します。"
+  },
+  "science": {
+    "zh": "DNS 不是即时全网同步，缓存与 TTL 会造成阶段性差异。",
+    "en": "DNS is not instantly global; cache and TTL naturally create temporary inconsistency.",
+    "ja": "DNS は即時同期ではなく、キャッシュと TTL により一時的な差が生じます。"
+  }
+}

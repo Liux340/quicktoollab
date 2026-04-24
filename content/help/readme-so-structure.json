@@ -1,0 +1,28 @@
+{
+  "id": "readme-so-structure",
+  "cat": {
+    "zh": "数据库、安全与文档",
+    "en": "DB, Security & Docs",
+    "ja": "DB・セキュリティ・ドキュメント"
+  },
+  "title": {
+    "zh": "readme.so 写作框架：如何让项目文档既完整又易读",
+    "en": "readme.so structure: write complete yet readable project docs",
+    "ja": "readme.so 構成術：読みやすく漏れのない README の作り方"
+  },
+  "intro": {
+    "zh": "readme.so 提供可视化模板，适合快速搭建项目文档骨架。",
+    "en": "readme.so offers visual templates to bootstrap a solid README structure quickly.",
+    "ja": "readme.so は視覚的テンプレートで README の骨組み作成を効率化します。"
+  },
+  "howto": {
+    "zh": "优先写清项目定位、安装方式、快速开始和常见问题，再补充进阶章节。",
+    "en": "Start with project purpose, installation, quick start, and FAQ before adding advanced sections.",
+    "ja": "まず目的・導入・クイックスタート・FAQ を整え、後から詳細章を追加します。"
+  },
+  "science": {
+    "zh": "文档的价值在于降低沟通成本，结构清晰通常比语言华丽更重要。",
+    "en": "Documentation value comes from lowering communication cost, so clear structure matters most.",
+    "ja": "ドキュメントの価値は伝達コスト削減です。華麗さより構造の明快さが重要です。"
+  }
+}

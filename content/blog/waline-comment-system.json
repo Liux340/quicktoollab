@@ -1,0 +1,28 @@
+{
+  "id": "waline-comment-system",
+  "cat": "tool",
+  "date": "2025-04-10",
+  "readTime": 8,
+  "title": {
+    "zh": "把 localStorage 自制评论系统替换成 Waline 的全过程",
+    "en": "Replacing a DIY localStorage comment system with Waline",
+    "ja": "自作コメントシステムをWalineに置き換える"
+  },
+  "desc": {
+    "zh": "自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。",
+    "en": "A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.",
+    "ja": "自作コメントシステムから Waline への移行過程を完全記録。"
+  },
+  "tags": [
+    "Waline",
+    "评论系统",
+    "JavaScript"
+  ],
+  "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop",
+  "badge": "tool",
+  "content": {
+    "zh": "<h2>问题根源</h2>\n<p>原来的评论系统用 <code>localStorage</code> 存储评论数据，这是浏览器的本地存储，每台设备、每个浏览器都是完全隔离的。所以你在自己电脑上发的评论，其他访客根本看不到。</p>\n\n<h2>为什么选 Waline</h2>\n<p>Waline 是一个开源的评论系统，主要优势：</p>\n<ul>\n<li>评论存在服务端数据库，所有访客都能看到</li>\n<li>免费部署在 Vercel，配合 Cloudflare Pages 很合适</li>\n<li>支持 Markdown、表情包、邮件通知</li>\n<li>主题适配方便，通过 CSS 变量控制样式</li>\n</ul>\n\n<h2>迁移步骤</h2>\n<p>替换只涉及三处改动：</p>\n<ul>\n<li><strong>HTML</strong>：将原来的输入框、验证码等替换为一个 <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>：删除旧评论样式，加入 Waline CSS 主题变量适配</li>\n<li><strong>JS</strong>：删除所有旧评论函数，加入 Waline 初始化代码</li>\n</ul>\n\n<h2>关键代码</h2>\n<pre><code>import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';\n\nfunction initWaline(locale) {\n    if (window.__walineInstance) window.__walineInstance.destroy();\n    window.__walineInstance = init({\n        el: '#waline-container',\n        serverURL: 'https://comment.quicktoollab.top',\n        lang: locale || 'zh-CN',\n        dark: 'auto',\n    });\n}</code></pre>\n\n<h2>踩坑记录</h2>\n<p>最大的坑：替换时 <code>submitHomeComment</code> 函数末尾的闭合括号没有被一起删除，导致一个孤立的语句出现在全局作用域，造成 JS 语法错误，整个脚本崩溃，所有动态内容都加载不出来。</p>\n<p>教训：替换评论 JS 块时，一定要检查块的开头和结尾有没有残留代码。</p>",
+    "en": "<h2>The Root Problem</h2>\n<p>The original system stored comments in <code>localStorage</code> — browser-local storage that's completely isolated per device and browser. Comments you post are invisible to other visitors.</p>\n\n<h2>Why Waline</h2>\n<p>Waline stores comments in a server-side database so all visitors can see them. It deploys free on Vercel, supports Markdown and emoji, and adapts to themes via CSS variables.</p>\n\n<h2>Migration Steps</h2>\n<p>Only three changes needed:</p>\n<ul>\n<li><strong>HTML</strong>: Replace all inputs and captcha with <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>: Remove old comment styles, add Waline CSS variable theme adaptation</li>\n<li><strong>JS</strong>: Delete all old comment functions, add Waline init code</li>\n</ul>\n\n<h2>Pitfall</h2>\n<p>The biggest gotcha: a dangling closing brace from the old <code>submitHomeComment</code> function caused a JS syntax error, crashing the entire script and breaking all dynamic content loading.</p>",
+    "ja": "<h2>問題の根本原因</h2>\n<p>元のシステムは<code>localStorage</code>にコメントを保存していました。これはブラウザのローカルストレージで、デバイスやブラウザごとに完全に分離されています。</p>\n\n<h2>Walineを選んだ理由</h2>\n<p>Walineはサーバーサイドにコメントを保存するため、全訪問者がコメントを見ることができます。Vercelで無料デプロイ可能で、Markdownや絵文字にも対応しています。</p>\n\n<h2>移行手順</h2>\n<ul>\n<li>HTMLの入力フォームを<code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code>に置換</li>\n<li>古いCSSを削除し、WalineのCSSテーマ変数を追加</li>\n<li>古いJS関数を削除し、Waline初期化コードを追加</li>\n</ul>"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "id": "httpbin-api-debug",
+  "cat": {
+    "zh": "运维网络与调试",
+    "en": "Ops, Network & Debug",
+    "ja": "運用・ネットワーク・デバッグ"
+  },
+  "title": {
+    "zh": "httpbin 接口联调方法：如何验证请求头、方法与 Body 是否真实生效",
+    "en": "httpbin API debugging: verify headers, method, and payload quickly",
+    "ja": "httpbin 連携確認：ヘッダー・メソッド・本文の検証手順"
+  },
+  "intro": {
+    "zh": "httpbin 是通用请求回显服务，可用于验证客户端和网关行为。",
+    "en": "httpbin echoes requests and is useful for validating client and gateway behavior.",
+    "ja": "httpbin はリクエスト内容を返すため、クライアントやゲートウェイ検証に使えます。"
+  },
+  "howto": {
+    "zh": "优先验证 method、headers、json/body 三项核心数据，确认请求正确后再排查后端。",
+    "en": "Check method, headers, and body first; only then continue to backend-side debugging.",
+    "ja": "まず method・headers・body を確認し、送信が正しいことを確かめてからサーバー側を調査します。"
+  },
+  "science": {
+    "zh": "很多联调问题根源是请求构造细节不一致。",
+    "en": "Many integration issues are caused by subtle request-construction mismatches.",
+    "ja": "連携不具合の多くはリクエスト構築の細かな不一致です。"
+  }
+}
