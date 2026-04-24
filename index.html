@@ -483,6 +483,461 @@
         }
         .drawer-clear:hover { border-color: #f87171; color: #f87171; }
 
+        /* Design refresh overrides */
+        :root {
+            --shell: 1200px;
+            --panel: color-mix(in srgb, var(--surface) 92%, transparent);
+            --panel-2: color-mix(in srgb, var(--surface2) 88%, transparent);
+            --line-soft: color-mix(in srgb, var(--border) 76%, transparent);
+            --shadow-soft: 0 16px 40px rgba(15, 23, 42, .08);
+            --shadow-strong: 0 24px 60px rgba(15, 23, 42, .14);
+        }
+
+        [data-theme="light"] body {
+            background:
+                radial-gradient(circle at top left, rgba(249,115,22,.12), transparent 26%),
+                radial-gradient(circle at 85% 10%, rgba(20,184,166,.10), transparent 22%),
+                linear-gradient(180deg, #f7f7fb 0%, #efeff6 100%);
+        }
+
+        .nav {
+            max-width: var(--shell);
+            gap: 18px;
+        }
+
+        .nav-links {
+            gap: 6px 10px;
+        }
+
+        .nav-links a {
+            padding: 8px 12px;
+            border-radius: 999px;
+            font-size: 12px;
+            letter-spacing: .02em;
+        }
+
+        .nav-links a:hover {
+            background: color-mix(in srgb, var(--accentlo) 85%, transparent);
+        }
+
+        .nav-right {
+            gap: 8px;
+        }
+
+        .lang-sw,
+        .theme-btn {
+            box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+        }
+
+        .home-main {
+            max-width: var(--shell);
+            padding-top: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+        }
+
+        .hero-shell {
+            display: grid;
+            grid-template-columns: minmax(0, 1.45fr) minmax(300px, .9fr);
+            gap: 20px;
+            align-items: stretch;
+            margin-bottom: 0;
+        }
+
+        .hero {
+            text-align: left;
+            margin-bottom: 0;
+            padding: 42px;
+            border-radius: 32px;
+            border: 1px solid var(--line-soft);
+            background:
+                radial-gradient(circle at top right, rgba(249,115,22,.10), transparent 28%),
+                linear-gradient(140deg, color-mix(in srgb, var(--surface) 96%, transparent) 0%, color-mix(in srgb, var(--surface2) 92%, transparent) 100%);
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: auto -80px -80px auto;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(20,184,166,.16), transparent 68%);
+            pointer-events: none;
+        }
+
+        .hero-kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 12px;
+            border-radius: 999px;
+            border: 1px solid rgba(249,115,22,.24);
+            background: rgba(249,115,22,.08);
+            color: var(--accent2);
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .06em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 80px);
+            letter-spacing: 2px;
+            line-height: .95;
+            max-width: 8ch;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            margin: 0;
+            max-width: 600px;
+            font-size: 16px;
+            color: color-mix(in srgb, var(--muted) 82%, var(--text) 18%);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 26px;
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            min-height: 44px;
+            padding: 0 18px;
+            border-radius: 999px;
+            border: 1px solid var(--line-soft);
+            font-size: 13px;
+            font-weight: 700;
+            letter-spacing: .02em;
+            transition: transform .18s, border-color .18s, background .18s, color .18s;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-1px);
+        }
+
+        .hero-btn.primary {
+            background: linear-gradient(135deg, #ea580c, #f97316);
+            border-color: transparent;
+            color: #fff;
+            box-shadow: 0 14px 30px rgba(249,115,22,.22);
+        }
+
+        .hero-btn.secondary {
+            background: var(--panel);
+            color: var(--text);
+        }
+
+        .hero-btn.secondary:hover,
+        .hero-btn.ghost:hover {
+            border-color: var(--accent2);
+            color: var(--accent2);
+        }
+
+        .hero-btn.ghost {
+            background: transparent;
+            color: var(--muted);
+        }
+
+        .hero-trust {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 24px;
+        }
+
+        .trust-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 7px 12px;
+            border-radius: 999px;
+            border: 1px solid var(--line-soft);
+            background: color-mix(in srgb, var(--surface2) 76%, transparent);
+            color: var(--muted);
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .trust-pill::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--green);
+            box-shadow: 0 0 0 4px rgba(34,197,94,.14);
+        }
+
+        .hero-panel {
+            border-radius: 32px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+            box-shadow: var(--shadow-soft);
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .hero-stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .hero-stat {
+            padding: 16px 14px;
+            border-radius: 20px;
+            border: 1px solid var(--line-soft);
+            background: color-mix(in srgb, var(--surface) 88%, transparent);
+        }
+
+        .hero-stat strong {
+            display: block;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 34px;
+            line-height: .95;
+            letter-spacing: 1px;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .hero-stat span {
+            display: block;
+            font-size: 11px;
+            line-height: 1.45;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: .08em;
+        }
+
+        .hero-panel-card {
+            padding: 20px;
+            border-radius: 24px;
+            border: 1px solid rgba(249,115,22,.18);
+            background: linear-gradient(135deg, rgba(249,115,22,.08), rgba(20,184,166,.08));
+        }
+
+        .hero-panel-card h3 {
+            font-size: 18px;
+            line-height: 1.3;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+
+        .hero-panel-card p {
+            font-size: 13px;
+            line-height: 1.7;
+            color: var(--muted);
+        }
+
+        .quickstart-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 14px;
+        }
+
+        .feature-card {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-height: 220px;
+            padding: 22px;
+            border-radius: 24px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, var(--panel) 0%, color-mix(in srgb, var(--surface2) 82%, transparent) 100%);
+            box-shadow: var(--shadow-soft);
+            transition: transform .18s, border-color .18s, box-shadow .18s;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(249,115,22,.28);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .feature-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            background: var(--accentlo);
+            border: 1px solid rgba(249,115,22,.16);
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: rgba(20,184,166,.12);
+            border-color: rgba(20,184,166,.18);
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: rgba(34,197,94,.12);
+            border-color: rgba(34,197,94,.18);
+        }
+
+        .feature-tag {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            color: var(--accent2);
+        }
+
+        .feature-card h3 {
+            font-size: 20px;
+            line-height: 1.3;
+            color: var(--text);
+        }
+
+        .feature-card p {
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: auto;
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .section-surface {
+            padding: 28px;
+            border-radius: 28px;
+            border: 1px solid var(--line-soft);
+            background: linear-gradient(180deg, var(--panel) 0%, color-mix(in srgb, var(--surface2) 88%, transparent) 100%);
+            box-shadow: var(--shadow-soft);
+        }
+
+        .section-block {
+            margin-bottom: 0;
+        }
+
+        .section-head {
+            margin-bottom: 20px;
+        }
+
+        .section-title {
+            font-size: 24px;
+        }
+
+        .section-more {
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: color-mix(in srgb, var(--surface2) 84%, transparent);
+            border: 1px solid var(--line-soft);
+        }
+
+        .pinned-section {
+            margin-bottom: 0;
+            border-radius: 26px;
+            padding: 24px;
+        }
+
+        .pinned-grid {
+            gap: 12px;
+        }
+
+        .pinned-card,
+        .tool-card,
+        .ai-card,
+        .slide-card,
+        .soft-card {
+            box-shadow: 0 12px 28px rgba(15, 23, 42, .04);
+        }
+
+        .tool-card,
+        .ai-card {
+            min-height: 148px;
+            justify-content: center;
+        }
+
+        .row-2 {
+            gap: 18px;
+        }
+
+        .list-card {
+            border-radius: 18px;
+            background: color-mix(in srgb, var(--surface) 96%, transparent);
+        }
+
+        .list-item,
+        .gh-item {
+            padding: 14px 16px;
+        }
+
+        #friends .tools-grid {
+            max-width: none !important;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        }
+
+        #comments {
+            padding-bottom: 32px;
+        }
+
+        #waline-comment {
+            padding: 6px 0 0;
+        }
+
+        .footer-inner {
+            max-width: var(--shell);
+        }
+
+        @media (max-width: 980px) {
+            .hero-shell {
+                grid-template-columns: 1fr;
+            }
+
+            .quickstart-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 760px) {
+            .hero {
+                padding: 28px 22px;
+                border-radius: 26px;
+            }
+
+            .hero-panel,
+            .section-surface,
+            .pinned-section {
+                padding: 22px 18px;
+                border-radius: 22px;
+            }
+
+            .hero-stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .hero-btn {
+                width: 100%;
+            }
+        }
+
     </style>
 
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867"
@@ -592,11 +1047,70 @@
     <div class="drawer-body" id="hist-body"></div>
 </div>
 
-<main>
-    <div class="hero">
-        <h1 data-i18n="hero_title">一站式工具与内容精选</h1>
-        <p data-i18n="hero_sub">聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。</p>
-    </div>
+<main class="home-main">
+    <section class="hero hero-shell">
+        <div class="hero-copy">
+            <div class="hero-kicker" data-i18n="hero_kicker">QuickToolLab curated workspace</div>
+            <h1 data-i18n="hero_title">Tools & curated tech content</h1>
+            <p data-i18n="hero_sub">Quick links to utilities, practical reading, and trusted resources. Start with a tool, then keep going with articles and guides that actually help.</p>
+            <div class="hero-actions">
+                <a class="hero-btn primary" href="/compress.html" data-i18n="hero_cta_primary">Open PixCrush</a>
+                <a class="hero-btn secondary" href="#tools" data-i18n="hero_cta_secondary">Browse all tools</a>
+                <a class="hero-btn ghost" href="/blog.html" data-i18n="hero_cta_tertiary">Read the blog</a>
+            </div>
+            <div class="hero-trust">
+                <span class="trust-pill" data-i18n="trust_local">Local-first tools</span>
+                <span class="trust-pill" data-i18n="trust_curated">Curated resources</span>
+                <span class="trust-pill" data-i18n="trust_multilang">Multilingual content</span>
+            </div>
+        </div>
+        <aside class="hero-panel" aria-label="Highlights">
+            <div class="hero-stat-grid">
+                <div class="hero-stat">
+                    <strong>60+</strong>
+                    <span data-i18n="hero_metric_tools">Useful tools</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>20+</strong>
+                    <span data-i18n="hero_metric_articles">Articles & guides</span>
+                </div>
+                <div class="hero-stat">
+                    <strong>3</strong>
+                    <span data-i18n="hero_metric_languages">Languages</span>
+                </div>
+            </div>
+            <div class="hero-panel-card">
+                <h3 data-i18n="hero_focus_title">A cleaner path from tool to understanding</h3>
+                <p data-i18n="hero_focus_desc">Use a tool immediately, then jump into help articles or blog posts when you want more context instead of hunting around the web.</p>
+            </div>
+        </aside>
+    </section>
+
+    <section class="section-block">
+        <div class="quickstart-grid">
+            <a class="feature-card" href="/compress.html">
+                <div class="feature-icon">🖼️</div>
+                <div class="feature-tag" data-i18n="feature_tool_tag">Local Tool</div>
+                <h3 data-i18n="feature_tool_title">Compress images without leaving your browser</h3>
+                <p data-i18n="feature_tool_desc">Start with the fastest workflow on the site: upload, tune quality, compare savings, and download in one pass.</p>
+                <span class="feature-link" data-i18n="feature_open">Open now →</span>
+            </a>
+            <a class="feature-card" href="/blog.html">
+                <div class="feature-icon">📰</div>
+                <div class="feature-tag" data-i18n="feature_blog_tag">Practical Reading</div>
+                <h3 data-i18n="feature_blog_title">Read short, useful write-ups instead of generic content</h3>
+                <p data-i18n="feature_blog_desc">Browse implementation notes, tool reviews, and lessons learned that connect directly back to real workflows.</p>
+                <span class="feature-link" data-i18n="feature_read">Go to blog →</span>
+            </a>
+            <a class="feature-card" href="/help.html">
+                <div class="feature-icon">🧭</div>
+                <div class="feature-tag" data-i18n="feature_help_tag">Knowledge Base</div>
+                <h3 data-i18n="feature_help_title">Use the help center as your quick reference layer</h3>
+                <p data-i18n="feature_help_desc">Find compact guides, common use cases, and simple explanations for the tools and topics that show up across the site.</p>
+                <span class="feature-link" data-i18n="feature_explore">Explore help →</span>
+            </a>
+        </div>
+    </section>
 
     <!-- 置顶推荐区 -->
     <section class="section-block" id="pinned" style="margin-bottom:44px;">
@@ -610,7 +1124,7 @@
     </section>
 
     <!-- AI 工具专区 -->
-    <section class="section-block" id="ai-zone">
+    <section class="section-block section-surface" id="ai-zone">
         <div class="section-head">
             <h2 class="section-title"><span class="dot" style="background:#a855f7;box-shadow:0 0 0 3px rgba(168,85,247,.2);"></span><span data-i18n="sec_ai">AI 工具专区</span></h2>
         </div>
@@ -626,7 +1140,7 @@
         <div class="ai-grid" id="ai-grid"></div>
     </section>
 
-    <section class="section-block" id="tools">
+    <section class="section-block section-surface" id="tools">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_tools">在线工具</span></h2>
             <a class="section-more" href="#library" data-i18n="hint_below">向下浏览内容精选 →</a>
@@ -642,7 +1156,7 @@
         <div class="tools-host" id="tools-host"></div>
     </section>
 
-    <section class="section-block" id="slides">
+    <section class="section-block section-surface" id="slides">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_slides">幻灯片 / 精选封面</span></h2>
             <a class="section-more" href="https://dev.to" target="_blank" rel="noopener noreferrer" data-i18n="more_devto">Dev.to 更多 →</a>
@@ -651,14 +1165,14 @@
     </section>
 
     <div class="row-2">
-        <section class="section-block" id="library" style="margin-bottom:0;">
+        <section class="section-block section-surface" id="library" style="margin-bottom:0;">
             <div class="section-head">
                 <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_lib">技术文库</span></h2>
                 <a class="section-more" href="https://dev.to/top/week" target="_blank" rel="noopener noreferrer" data-i18n="more_trending">本周热门 →</a>
             </div>
             <div class="list-card" id="library-host"><div class="loading" data-i18n="loading">加载中…</div></div>
         </section>
-        <section class="section-block" id="opensource" style="margin-bottom:0;">
+        <section class="section-block section-surface" id="opensource" style="margin-bottom:0;">
             <div class="section-head">
                 <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_oss">开源类库</span></h2>
                 <a class="section-more" href="https://github.com/trending" target="_blank" rel="noopener noreferrer" data-i18n="more_github">GitHub Trending →</a>
@@ -667,7 +1181,7 @@
         </section>
     </div>
 
-    <section class="section-block" id="software" style="margin-top:44px;">
+    <section class="section-block section-surface" id="software">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_soft">软件推荐</span></h2>
             <a class="section-more" href="https://github.com/search?q=topic%3Acli+stars%3A%3E100&type=repositories&s=stars&o=desc" target="_blank" rel="noopener noreferrer" data-i18n="more_cli">CLI 工具搜索 →</a>
@@ -675,7 +1189,7 @@
         <div class="soft-grid" id="soft-host"><div class="loading skeleton" style="height:100px;border-radius:14px;grid-column:1/-1;"></div></div>
     </section>
 
-    <section class="section-block" id="friends">
+    <section class="section-block section-surface" id="friends">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_friends">友情链接</span></h2>
         </div>
@@ -684,7 +1198,7 @@
         </div>
     </section>
 
-    <section class="section-block" id="comments">
+    <section class="section-block section-surface" id="comments">
         <div class="section-head">
             <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_comments">发表评论</span></h2>
         </div>
@@ -711,8 +1225,32 @@ document.getElementById('y').textContent = new Date().getFullYear();
 const I18N = {
     zh: {
         brand_sub: '综合在线工具站',
+        hero_kicker: 'QuickToolLab 精选工作台',
         hero_title: '一站式工具与内容精选',
-        hero_sub: '聚合常用工具入口；技术文章、幻灯片封面、热门仓库与软件发现来自开放 API 实时加载，非页面写死数据。',
+        hero_sub: '把高频工具、实用内容和可信资源放在同一条路径里。先开始做事，再按需阅读博客和帮助文章，不用来回切站。',
+        hero_cta_primary: '打开 PixCrush',
+        hero_cta_secondary: '浏览全部工具',
+        hero_cta_tertiary: '阅读博客',
+        trust_local: '优先本地处理',
+        trust_curated: '精选实用资源',
+        trust_multilang: '支持三种语言',
+        hero_metric_tools: '实用工具',
+        hero_metric_articles: '文章与指南',
+        hero_metric_languages: '界面语言',
+        hero_focus_title: '从工具入口到理解闭环，更顺一点',
+        hero_focus_desc: '先完成操作，再顺手跳去帮助中心或博客补上下文，不用在网页之间来回搜同一个问题。',
+        feature_tool_tag: '本地工具',
+        feature_tool_title: '直接在浏览器里完成图片压缩',
+        feature_tool_desc: '上传、调质量、看节省比例、下载结果，一条流里做完，不需要额外安装。',
+        feature_blog_tag: '实用阅读',
+        feature_blog_title: '读短而有用的内容，不读空泛文章',
+        feature_blog_desc: '把实现记录、工具经验和实际踩坑整理成更容易消化的短文，读完能继续做事。',
+        feature_help_tag: '知识库',
+        feature_help_title: '把帮助中心当作随时可查的参考层',
+        feature_help_desc: '快速找到使用说明、适用场景和基础概念，减少重复搜索和来回试错。',
+        feature_open: '立即打开 →',
+        feature_read: '前往博客 →',
+        feature_explore: '查看帮助 →',
         nav_ai: 'AI 工具', nav_tools: '工具', nav_lib: '技术文库', nav_slides: '幻灯片', nav_oss: '开源类库', nav_soft: '软件推荐', nav_friends: '友情链接', nav_blog: '博客', nav_help: '帮助中心',
         sec_pinned: '精选推荐', sec_ai: 'AI 工具专区', sec_tools: '在线工具', sec_lib: '技术文库', sec_slides: '幻灯片 / 精选封面', sec_oss: '开源类库', sec_soft: '软件推荐', sec_friends: '友情链接', sec_comments: '发表评论',
         hint_below: '向下浏览内容精选 →',
@@ -729,8 +1267,32 @@ const I18N = {
     },
     en: {
         brand_sub: 'All-in-one tool hub',
+        hero_kicker: 'QuickToolLab curated workspace',
         hero_title: 'Tools & curated tech content',
-        hero_sub: 'Quick links to utilities; articles, slide-style cards, trending repos and CLI tools load live from public APIs — not hardcoded HTML.',
+        hero_sub: 'Keep tools, practical reading, and trusted references in one flow. Start with a task, then move into blog posts or help articles only when you need more context.',
+        hero_cta_primary: 'Open PixCrush',
+        hero_cta_secondary: 'Browse all tools',
+        hero_cta_tertiary: 'Read the blog',
+        trust_local: 'Local-first tools',
+        trust_curated: 'Curated resources',
+        trust_multilang: 'Multilingual content',
+        hero_metric_tools: 'Useful tools',
+        hero_metric_articles: 'Articles & guides',
+        hero_metric_languages: 'Languages',
+        hero_focus_title: 'A cleaner path from tool to understanding',
+        hero_focus_desc: 'Use a tool immediately, then jump into help articles or blog posts when you want more context instead of hunting around the web.',
+        feature_tool_tag: 'Local Tool',
+        feature_tool_title: 'Compress images without leaving your browser',
+        feature_tool_desc: 'Upload, tune quality, compare savings, and download the result in one smooth workflow.',
+        feature_blog_tag: 'Practical Reading',
+        feature_blog_title: 'Read useful write-ups instead of generic content',
+        feature_blog_desc: 'Browse implementation notes, tool reviews, and lessons learned that connect back to real workflows.',
+        feature_help_tag: 'Knowledge Base',
+        feature_help_title: 'Use the help center as your quick reference layer',
+        feature_help_desc: 'Find compact guides, common use cases, and simple explanations for the tools and topics across the site.',
+        feature_open: 'Open now →',
+        feature_read: 'Go to blog →',
+        feature_explore: 'Explore help →',
         nav_ai: 'AI Tools', nav_tools: 'Tools', nav_lib: 'Library', nav_slides: 'Slides', nav_oss: 'Open source', nav_soft: 'Software', nav_friends: 'Friends', nav_blog: 'Blog', nav_help: 'Help',
         sec_pinned: 'Editor picks', sec_ai: 'AI Tool Zone', sec_tools: 'Online tools', sec_lib: 'Technical library', sec_slides: 'Slides / covers', sec_oss: 'Open-source libs', sec_soft: 'Software picks', sec_friends: 'Friend links', sec_comments: 'Comments',
         hint_below: 'Browse curated content ↓',
@@ -747,8 +1309,32 @@ const I18N = {
     },
     ja: {
         brand_sub: '総合オンラインツール',
+        hero_kicker: 'QuickToolLab 厳選ワークスペース',
         hero_title: 'ツールと厳選コンテンツ',
-        hero_sub: 'よく使うツールへの入口を集約。記事・スライド風カード・人気リポジトリは公開 API から取得します（HTML に直書きしません）。',
+        hero_sub: 'よく使うツール、実用的な記事、信頼できる参考情報をひとつの流れにまとめます。まず作業を始めて、必要なときだけブログやヘルプへ進めます。',
+        hero_cta_primary: 'PixCrush を開く',
+        hero_cta_secondary: 'すべてのツールを見る',
+        hero_cta_tertiary: 'ブログを読む',
+        trust_local: 'ローカル処理優先',
+        trust_curated: '厳選リソース',
+        trust_multilang: '3言語対応',
+        hero_metric_tools: '便利なツール',
+        hero_metric_articles: '記事とガイド',
+        hero_metric_languages: '対応言語',
+        hero_focus_title: 'ツールから理解まで、移動が少ない導線',
+        hero_focus_desc: 'まずツールを使い、その後で必要に応じてヘルプやブログに移れるので、同じ内容を何度も検索しなくて済みます。',
+        feature_tool_tag: 'ローカルツール',
+        feature_tool_title: 'ブラウザ内で画像圧縮をすぐ完了',
+        feature_tool_desc: 'アップロード、品質調整、削減率の確認、ダウンロードまでを一つの流れで進められます。',
+        feature_blog_tag: '実用リーディング',
+        feature_blog_title: '抽象的ではなく、使える内容だけを読む',
+        feature_blog_desc: '実装メモ、ツールの所感、実際の学びを短く整理し、読んだあとすぐ作業に戻れます。',
+        feature_help_tag: 'ナレッジベース',
+        feature_help_title: 'ヘルプをすぐ引ける参照レイヤーとして使う',
+        feature_help_desc: '使い方、適用シーン、基礎概念をすばやく確認でき、調べ直しや試行錯誤を減らせます。',
+        feature_open: '今すぐ開く →',
+        feature_read: 'ブログへ →',
+        feature_explore: 'ヘルプを見る →',
         nav_ai: 'AI ツール', nav_tools: 'ツール', nav_lib: '技術文庫', nav_slides: 'スライド', nav_oss: 'OSS', nav_soft: 'ソフト', nav_friends: '相互リンク', nav_blog: 'ブログ', nav_help: 'ヘルプ',
         sec_pinned: '編集おすすめ', sec_ai: 'AI ツールゾーン', sec_tools: 'オンラインツール', sec_lib: '技術文庫', sec_slides: 'スライド / 表紙', sec_oss: 'オープンソース', sec_soft: 'ソフト紹介', sec_friends: '相互リンク', sec_comments: 'コメント',
         hint_below: 'コンテンツへ ↓',
