@@ -203,4 +203,72 @@ document.addEventListener('DOMContentLoaded', function() {
     applyTheme(theme);
     applyLang(lang);
     updateBadges();
+
+    // ── Scroll Reveal ──
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-scale');
+    if (revealEls.length) {
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 60);
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+        revealEls.forEach(el => revealObserver.observe(el));
+    }
+
+    // ── Nav scroll shadow ──
+    const headerEl = document.querySelector('header');
+    if (headerEl) {
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                requestAnimationFrame(() => {
+                    headerEl.classList.toggle('scrolled', window.scrollY > 10);
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+    }
+
+    // ── Hamburger menu ──
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    const navOverlay = document.querySelector('.nav-overlay');
+    if (hamburger && navLinks) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('open');
+            if (navOverlay) navOverlay.classList.toggle('open');
+            document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
+        });
+        if (navOverlay) {
+            navOverlay.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+                navOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        }
+        navLinks.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('open');
+                if (navOverlay) navOverlay.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // ── Stagger children animation helper ──
+    window.staggerReveal = function(parentSelector, childSelector) {
+        document.querySelectorAll(parentSelector).forEach(parent => {
+            const children = parent.querySelectorAll(childSelector);
+            children.forEach((child, i) => {
+                child.style.animationDelay = (i * 0.05) + 's';
+            });
+        });
+    };
 });
