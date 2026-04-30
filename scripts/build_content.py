@@ -1,10 +1,21 @@
 import json
+from datetime import date
 from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
 CONTENT_DIR = ROOT / "content"
 DATA_DIR = ROOT / "data"
+BASE_URL = "https://quicktoollab.top"
+
+STATIC_PAGES = [
+    {"loc": "/", "changefreq": "daily", "priority": "1.0"},
+    {"loc": "/blog.html", "changefreq": "weekly", "priority": "0.9"},
+    {"loc": "/compress.html", "changefreq": "monthly", "priority": "0.8"},
+    {"loc": "/help.html", "changefreq": "weekly", "priority": "0.7"},
+    {"loc": "/about.html", "changefreq": "monthly", "priority": "0.5"},
+    {"loc": "/privacy.html", "changefreq": "yearly", "priority": "0.3"},
+]
 
 
 def load_entries(folder: Path):
@@ -40,10 +51,62 @@ def build_help():
     return len(entries)
 
 
+def build_sitemap():
+    today = date.today().isoformat()
+
+    blog_entries = json.loads((CONTENT_DIR / "blog" / "index.json").read_text(encoding="utf-8"))
+    help_entries = json.loads((CONTENT_DIR / "help" / "index.json").read_text(encoding="utf-8"))
+
+    lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+    ]
+
+    # Static pages
+    for page in STATIC_PAGES:
+        lines.append(
+            f'  <url><loc>{BASE_URL}{page["loc"]}</loc>'
+            f'<lastmod>{today}</lastmod>'
+            f'<changefreq>{page["changefreq"]}</changefreq>'
+            f'<priority>{page["priority"]}</priority></url>'
+        )
+
+    # Dynamic blog posts
+    for entry in blog_entries:
+        entry_id = entry.get("id", "")
+        entry_date = entry.get("date", today)
+        lines.append(
+            f'  <url><loc>{BASE_URL}/blog-post.html?id={entry_id}</loc>'
+            f'<lastmod>{entry_date}</lastmod>'
+            f'<changefreq>weekly</changefreq>'
+            f'<priority>0.8</priority></url>'
+        )
+
+    # Dynamic help articles
+    for entry in help_entries:
+        entry_id = entry.get("id", "")
+        lines.append(
+            f'  <url><loc>{BASE_URL}/help-article.html?id={entry_id}</loc>'
+            f'<lastmod>{today}</lastmod>'
+            f'<changefreq>monthly</changefreq>'
+            f'<priority>0.6</priority></url>'
+        )
+
+    lines.append('</urlset>')
+
+    sitemap_path = ROOT / "sitemap.xml"
+    sitemap_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+
+    total_dynamic = len(blog_entries) + len(help_entries)
+    return total_dynamic
+
+
 def main():
     blog_count = build_blog()
     help_count = build_help()
+    dynamic_count = build_sitemap()
     print(f"Built content indexes: blog={blog_count}, help={help_count}")
+    print(f"Generated sitemap.xml: {len(STATIC_PAGES)} static + {dynamic_count} dynamic URLs")
 
 
 if __name__ == "__main__":
