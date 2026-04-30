@@ -36,4 +36,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore(content): rebuild generated indexes"
-          file_pattern: content/blog/index.json content/help/index.json data/posts.json data/help.json
+          file_pattern: content/blog/index.json content/help/index.json data/posts.json data/help.json sitemap.xml
