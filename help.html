@@ -18,37 +18,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/common.css">
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+
     <style>
-        :root { --accent:#f97316; --accent2:#fb923c; --accentlo:rgba(249,115,22,.12); --teal:#14b8a6; }
-        [data-theme="dark"]  { --bg:#0a0a10; --surface:#111118; --surface2:#18181f; --border:#222230; --text:#ededf5; --muted:#5a5a72; }
-        [data-theme="light"] { --bg:#f2f2f7; --surface:#ffffff; --surface2:#e8e8f0; --border:#d8d8e8; --text:#16161f; --muted:#7a7a96; }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;transition:background .3s,color .3s}
-        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0}
-        [data-theme="dark"] body::after{content:'';position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(249,115,22,.06) 0%,transparent 65%);pointer-events:none;z-index:0}
-
-        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px)}
-        .nav{max-width:1040px;margin:0 auto;padding:0 20px;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px}
-        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
-        .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff}
-        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--text)}
-        .logo-name span{color:var(--accent)}
-        .logo-sub{font-size:10px;font-weight:600;color:var(--muted);margin-top:-2px}
-        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;flex-wrap:wrap}
-        .nav-links{display:flex;gap:2px;flex-wrap:wrap}
-        .nav-link{padding:5px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s,background .2s}
-        .nav-link:hover{color:var(--text);background:var(--border)}
-        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px}
-        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif}
-        .lang-btn.active{background:var(--accent);color:#fff}
-        .lang-btn:not(.active):hover{color:var(--text)}
-        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s}
-        .theme-btn:hover{color:var(--accent);border-color:var(--accent)}
-        [data-theme="dark"] .icon-sun{display:none}
-        [data-theme="dark"] .icon-moon{display:block}
-        [data-theme="light"] .icon-sun{display:block}
-        [data-theme="light"] .icon-moon{display:none}
-
         main{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:58px 20px 100px}
         .eyebrow{display:inline-flex;align-items:center;gap:6px;padding:4px 12px;border-radius:100px;border:1px solid rgba(249,115,22,.3);background:var(--accentlo);font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;text-transform:uppercase;margin-bottom:18px}
         .title{font-family:'Bebas Neue',sans-serif;font-size:clamp(40px,8vw,70px);letter-spacing:3px;line-height:1;background:linear-gradient(120deg,var(--text) 40%,var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:16px}
@@ -94,6 +68,8 @@
             line-height:1.45;
             transition:border-color .2s, color .2s, background .2s;
             font-family:inherit;
+            text-decoration:none;
+            display:block;
         }
         .help-item:hover{color:var(--text);border-color:var(--accent2)}
         .help-item.active{
@@ -128,12 +104,9 @@
         }
         .line{font-size:14px;color:var(--muted);line-height:1.9;margin:0 0 10px}
         .line b{color:var(--accent2)}
-        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px}
-        .footer-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
-        .footer-copy{font-size:13px;color:var(--muted)}
-        .footer-links{display:flex;gap:4px;flex-wrap:wrap}
-        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s}
-        .footer-links a:hover{color:var(--text);background:var(--border)}
+
+        .nav-link{padding:5px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s,background .2s}
+        .nav-link:hover{color:var(--text);background:var(--border)}
     </style>
 </head>
 <body>
@@ -184,7 +157,7 @@
 
 <footer>
     <div class="footer-inner">
-        <span class="footer-copy">© <span id="cy"></span> QuickToolLab</span>
+        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
             <a href="/help.html" data-i18n="nav_help">帮助中心</a>
@@ -194,13 +167,12 @@
     </div>
 </footer>
 
+<script src="/scripts/i18n.js"></script>
+<script src="/scripts/common.js"></script>
 <script>
-document.getElementById('cy').textContent = new Date().getFullYear();
-
-const I18N = {
+/* ── Page-specific i18n keys ── */
+const PAGE_I18N = {
     zh:{
-        brand_sub:'综合在线工具站',
-        nav_home:'首页', nav_help:'帮助中心', nav_about:'关于', nav_privacy:'隐私政策',
         eyebrow:'帮助中心',
         page_title:'HELP<br>CENTER',
         page_lead:'这里提供工具介绍、使用方法与实用科普。每篇都是可直接上手的短文，覆盖首页最常用的工具类型和代表工具。',
@@ -208,8 +180,6 @@ const I18N = {
         page_title_tag:'帮助中心 · QuickToolLab'
     },
     en:{
-        brand_sub:'All-in-one tool hub',
-        nav_home:'Home', nav_help:'Help', nav_about:'About', nav_privacy:'Privacy',
         eyebrow:'Help Center',
         page_title:'HELP<br>CENTER',
         page_lead:'Practical notes for common tools: introductions, quick usage steps, and lightweight concepts.',
@@ -217,8 +187,6 @@ const I18N = {
         page_title_tag:'Help Center · QuickToolLab'
     },
     ja:{
-        brand_sub:'総合オンラインツール',
-        nav_home:'ホーム', nav_help:'ヘルプ', nav_about:'About', nav_privacy:'プライバシー',
         eyebrow:'ヘルプセンター',
         page_title:'HELP<br>CENTER',
         page_lead:'よく使うツールの紹介・使い方・基礎知識を短い記事でまとめています。',
@@ -228,14 +196,8 @@ const I18N = {
 };
 
 let ARTICLES = [];
-let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
-let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
-function escapeHtml(s) {
-    const d = document.createElement('div');
-    d.textContent = s || '';
-    return d.innerHTML;
-}
+function getPageStrings() { return { ...I18N[lang], ...PAGE_I18N[lang] }; }
 
 function localizeField(v) {
     if (v == null) return '';
@@ -265,36 +227,24 @@ function renderArticleList() {
     `).join('');
 }
 
-function applyLang(l) {
-    lang = l;
-    localStorage.setItem('pc_lang', l);
-    document.documentElement.lang = l;
-    const t = I18N[l];
+function applyPageI18n() {
+    const t = getPageStrings();
     document.title = t.page_title_tag;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.dataset.i18n;
         if (t[k] != null) el.innerHTML = t[k];
     });
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
+}
+
+function onLangChange() {
+    applyPageI18n();
     renderArticleList();
 }
 
-function applyTheme(t) {
-    theme = t;
-    localStorage.setItem('pc_theme', t);
-    document.documentElement.setAttribute('data-theme', t);
-}
-
-document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
-});
-
 document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(theme);
     loadData().then(() => {
-        applyLang(lang);
+        applyPageI18n();
+        renderArticleList();
     });
 });
 </script>

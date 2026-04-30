@@ -25,36 +25,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <style>
-        :root { --accent:#f97316; --accent2:#fb923c; --accentlo:rgba(249,115,22,.12); --green:#22c55e; }
-        [data-theme="dark"]  { --bg:#0a0a10; --surface:#111118; --surface2:#18181f; --border:#222230; --text:#ededf5; --muted:#5a5a72; }
-        [data-theme="light"] { --bg:#f2f2f7; --surface:#ffffff; --surface2:#e8e8f0; --border:#d8d8e8; --text:#16161f; --muted:#7a7a96; }
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;transition:background .3s,color .3s;}
-        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
-        [data-theme="dark"] body::after{content:'';position:fixed;top:-300px;left:50%;transform:translateX(-50%);width:900px;height:700px;background:radial-gradient(ellipse,rgba(249,115,22,.06) 0%,transparent 65%);pointer-events:none;z-index:0;}
+    <link rel="stylesheet" href="/styles/common.css">
 
-        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(18px);}
-        .nav{max-width:1040px;margin:0 auto;padding:0 20px;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px;padding-bottom:8px;}
-        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
-        .logo-mark{width:34px;height:34px;border-radius:9px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:18px;color:#fff;}
-        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--text);}
-        .logo-name span{color:var(--accent);}
-        .logo-sub{font-size:10px;font-weight:600;color:var(--muted);margin-top:-2px;}
-        .nav-right{display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
-        .nav-links{display:flex;gap:2px;flex-wrap:wrap;}
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+
+    <style>
         .nav-link{padding:5px 12px;border-radius:8px;font-size:13px;font-weight:500;color:var(--muted);text-decoration:none;transition:color .2s,background .2s;}
         .nav-link:hover{color:var(--text);background:var(--border);}
-        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
-        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;font-family:'Outfit',sans-serif;}
-        .lang-btn.active{background:var(--accent);color:#fff;}
-        .lang-btn:not(.active):hover{color:var(--text);}
-        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;}
-        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
-        [data-theme="dark"] .icon-sun{display:none;}
-        [data-theme="dark"] .icon-moon{display:block;}
-        [data-theme="light"] .icon-sun{display:block;}
-        [data-theme="light"] .icon-moon{display:none;}
 
         main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:60px 20px 100px;}
 
@@ -99,15 +76,6 @@
         .yn-card.warn ul li::before{content:'·';color:var(--accent);}
         [data-theme="light"] .yn-card.no ul li{color:#166534;}
         [data-theme="light"] .yn-card.warn ul li{color:#9a3412;}
-
-        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;}
-        .footer-inner{max-width:1040px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-        .footer-copy{font-size:13px;color:var(--muted);}
-        .footer-links{display:flex;gap:4px;flex-wrap:wrap;}
-        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;}
-        .footer-links a:hover{color:var(--text);background:var(--border);}
-
-        @keyframes up{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
     </style>
 </head>
 <body>
@@ -250,7 +218,7 @@
 
 <footer>
     <div class="footer-inner">
-        <span class="footer-copy">© <span id="cy"></span> QuickToolLab</span>
+        <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
             <a href="/help.html" data-i18n="nav_help">帮助中心</a>
@@ -260,13 +228,12 @@
     </div>
 </footer>
 
+<script src="/scripts/i18n.js"></script>
+<script src="/scripts/common.js"></script>
 <script>
-document.getElementById('cy').textContent = new Date().getFullYear();
-
-const I18N = {
+/* ── Page-specific i18n keys ── */
+const PAGE_I18N = {
     zh:{
-        brand_sub:'综合在线工具站',
-        nav_home:'首页', nav_help:'帮助中心', nav_about:'关于', nav_privacy:'隐私政策',
         eyebrow:'隐私政策', page_title:'PRIVACY<br>POLICY',
         page_lead:'本政策说明 QuickToolLab（含首页与 PixCrush 子页）如何处理数据：哪些在本地完成，哪些会经浏览器访问第三方。',
         update_date:'最后更新：2026 年 4 月 4 日',
@@ -306,8 +273,6 @@ const I18N = {
         page_title_tag:'隐私政策 · QuickToolLab',
     },
     en:{
-        brand_sub:'All-in-one tool hub',
-        nav_home:'Home', nav_help:'Help', nav_about:'About', nav_privacy:'Privacy',
         eyebrow:'Privacy Policy', page_title:'PRIVACY<br>POLICY',
         page_lead:'This policy describes QuickToolLab (home + PixCrush): what stays on your device and what reaches third parties via your browser.',
         update_date:'Last updated: April 4, 2026',
@@ -321,7 +286,7 @@ const I18N = {
         mh3:'Language and theme are stored only in localStorage (pc_lang, pc_theme)',
         mh4:'If AdSense is enabled, Google policies apply to ads',
         s2_title:'Home page (dynamic sections)',
-        s2_p1:'When you open or refresh the home page, scripts use fetch() to retrieve public articles and repositories from Dev.to and GitHub. Requests go from your browser to those providers, not through a QuickToolLab “upload” API. Third parties may process request metadata under their own policies. The content shown is public; we cannot identify you from it.',
+        s2_p1:'When you open or refresh the home page, scripts use fetch() to retrieve public articles and repositories from Dev.to and GitHub. Requests go from your browser to those providers, not through a QuickToolLab "upload" API. Third parties may process request metadata under their own policies. The content shown is public; we cannot identify you from it.',
         s3_title:'PixCrush (compress.html)',
         s3_p1:'When you drop images into PixCrush, the browser uses Canvas locally. Image bytes are not sent to QuickToolLab or to those APIs. Downloads use URL.createObjectURL() and are released when you close or refresh.',
         s4_title:'Local storage',
@@ -341,14 +306,12 @@ const I18N = {
         s7_title:'Children',
         s7_p1:'The site is general-purpose and not directed at children; we do not knowingly collect child-identifying data.',
         s8_title:'Changes',
-        s8_p1:'We will update the “Last updated” date for material changes. Continued use means you acknowledge the current policy.',
+        s8_p1:'We will update the "Last updated" date for material changes. Continued use means you acknowledge the current policy.',
         s9_title:'Contact',
         s9_p1:'No public contact yet.',
         page_title_tag:'Privacy Policy · QuickToolLab',
     },
     ja:{
-        brand_sub:'総合オンラインツール',
-        nav_home:'ホーム', nav_help:'ヘルプ', nav_about:'About', nav_privacy:'プライバシー',
         eyebrow:'プライバシーポリシー', page_title:'PRIVACY<br>POLICY',
         page_lead:'QuickToolLab（トップと PixCrush）におけるデータの扱いを説明します。',
         update_date:'最終更新：2026年4月4日',
@@ -389,33 +352,22 @@ const I18N = {
     }
 };
 
-let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja') ? 'ja' : navigator.language.startsWith('zh') ? 'zh' : 'en');
-let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+function getPageStrings() { return { ...I18N[lang], ...PAGE_I18N[lang] }; }
 
-function applyLang(l) {
-    lang = l;
-    localStorage.setItem('pc_lang', l);
-    document.documentElement.lang = l;
-    const t = I18N[l];
+function applyPageI18n() {
+    const t = getPageStrings();
     document.title = t.page_title_tag;
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.dataset.i18n;
         if (t[k] != null) el.innerHTML = t[k];
     });
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === l));
 }
-function applyTheme(t) {
-    theme = t;
-    localStorage.setItem('pc_theme', t);
-    document.documentElement.setAttribute('data-theme', t);
+
+function onLangChange() {
+    applyPageI18n();
 }
-document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-    if (!localStorage.getItem('pc_theme')) applyTheme(e.matches ? 'dark' : 'light');
-});
-applyTheme(theme);
-applyLang(lang);
+
+applyPageI18n();
 </script>
 </body>
 </html>

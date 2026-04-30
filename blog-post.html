@@ -20,40 +20,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/styles/common.css">
     <!-- Waline CSS -->
     <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
+
     <style>
-        :root{--accent:#f97316;--accent2:#fb923c;--accentlo:rgba(249,115,22,.12);--green:#22c55e;--teal:#14b8a6;--purple:#8b5cf6;}
-        [data-theme="dark"]{--bg:#0a0a10;--surface:#111118;--surface2:#18181f;--border:#222230;--text:#ededf5;--text2:#9090b0;--muted:#5a5a72;--code-bg:#161620;}
-        [data-theme="light"]{--bg:#f2f2f7;--surface:#ffffff;--surface2:#f0f0f8;--border:#d8d8e8;--text:#16161f;--text2:#4a4a6a;--muted:#7a7a96;--code-bg:#f6f8fa;}
-
-        *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-        html{scroll-behavior:smooth;}
-        body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;}
-        a{text-decoration:none;color:inherit;}
-
-        [data-theme="dark"] body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.025'/%3E%3C/svg%3E");pointer-events:none;z-index:0;}
-
-        /* ── Header ── */
-        header{position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(18px);transition:background .3s,border-color .3s;}
-        .nav{max-width:1160px;margin:0 auto;padding:0 20px;min-height:58px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px;}
-        .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
-        .logo-mark{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#ea580c,#f97316);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:19px;color:#fff;}
-        .logo-name{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1.5px;color:var(--text);transition:color .3s;}
-        .logo-name span{color:var(--accent);}
-        .nav-links{display:flex;align-items:center;flex-wrap:wrap;gap:4px 8px;justify-content:center;flex:1;}
-        .nav-links a{font-size:12.5px;font-weight:600;color:var(--muted);text-decoration:none;padding:6px 10px;border-radius:8px;transition:color .18s,background .18s;}
-        .nav-links a:hover,.nav-links a.active{color:var(--accent);background:var(--accentlo);}
-        .nav-right{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-        .lang-sw{display:flex;gap:2px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:3px;}
-        .lang-btn{padding:4px 9px;border-radius:7px;border:none;background:transparent;color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .18s;font-family:'Outfit',sans-serif;}
-        .lang-btn.active{background:var(--accent);color:#fff;}
-        .lang-btn:not(.active):hover{color:var(--text);}
-        .theme-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
-        .theme-btn:hover{color:var(--accent);border-color:var(--accent);}
-        [data-theme="dark"] .icon-sun{display:none;}[data-theme="dark"] .icon-moon{display:block;}
-        [data-theme="light"] .icon-sun{display:block;}[data-theme="light"] .icon-moon{display:none;}
+        [data-theme="dark"]{--code-bg:#161620;}
+        [data-theme="light"]{--code-bg:#f6f8fa;}
 
         /* ── Article Hero ── */
         .article-hero{
@@ -297,23 +272,12 @@
             z-index:200;transition:transform .1s;
         }
 
-        /* ── Footer ── */
-        footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:26px 20px;transition:border-color .3s;}
-        .footer-inner{max-width:1160px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
-        .footer-copy{font-size:13px;color:var(--muted);}
-        .footer-links{display:flex;gap:4px;flex-wrap:wrap;}
-        .footer-links a{font-size:13px;color:var(--muted);text-decoration:none;padding:4px 10px;border-radius:6px;transition:color .2s,background .2s;}
-        .footer-links a:hover{color:var(--text);background:var(--border);}
-
-        @keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
         .fade-in{animation:up .45s ease both;}
 
         /* 404 state */
         .not-found{text-align:center;padding:100px 20px;color:var(--muted);}
         .not-found h2{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--text);margin-bottom:12px;}
     </style>
-
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8586931911554867" crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -447,40 +411,35 @@
     </div>
 </footer>
 
+<script src="/scripts/i18n.js"></script>
+<script src="/scripts/common.js"></script>
 <script>
-document.getElementById('y').textContent = new Date().getFullYear();
-
-// ══ i18n ══════════════════════════════════════════════════════════════
-const I18N = {
-    zh:{ nav_home:'首页', nav_blog:'博客', nav_help:'帮助', nav_about:'关于', nav_privacy:'隐私政策',
-         comments_title:'发表评论', comments_sub:'欢迎留下你的想法，支持 Markdown 格式 ✦',
+/* ── Page-specific i18n keys ── */
+const PAGE_I18N = {
+    zh:{ comments_title:'发表评论', comments_sub:'欢迎留下你的想法，支持 Markdown 格式 ✦',
          toc_title:'目录', share_title:'分享文章', share_copy:'复制链接',
          min_read:'分钟阅读', views:'浏览', copied:'链接已复制 ✓',
          prev_post:'上一篇', next_post:'下一篇', not_found:'文章未找到',
     },
-    en:{ nav_home:'Home', nav_blog:'Blog', nav_help:'Help', nav_about:'About', nav_privacy:'Privacy',
-         comments_title:'Leave a Comment', comments_sub:'Share your thoughts. Markdown supported ✦',
+    en:{ comments_title:'Leave a Comment', comments_sub:'Share your thoughts. Markdown supported ✦',
          toc_title:'Contents', share_title:'Share', share_copy:'Copy link',
          min_read:'min read', views:'views', copied:'Link copied ✓',
          prev_post:'Previous', next_post:'Next', not_found:'Article not found',
     },
-    ja:{ nav_home:'ホーム', nav_blog:'ブログ', nav_help:'ヘルプ', nav_about:'About', nav_privacy:'プライバシー',
-         comments_title:'コメントを書く', comments_sub:'Markdownに対応しています ✦',
+    ja:{ comments_title:'コメントを書く', comments_sub:'Markdownに対応しています ✦',
          toc_title:'目次', share_title:'シェア', share_copy:'リンクをコピー',
          min_read:'分で読める', views:'閲覧', copied:'コピーしました ✓',
          prev_post:'前の記事', next_post:'次の記事', not_found:'記事が見つかりません',
     },
 };
 
-// ══ Posts data ════════════════════════════════════════════════════════
+/* ── Posts data ── */
 let POSTS = [];
-
-// ══ Load article by URL param ══════════════════════════════════════════
 const params = new URLSearchParams(location.search);
 const postId = params.get('id');
-let lang = localStorage.getItem('pc_lang') || (navigator.language.startsWith('ja')?'ja':navigator.language.startsWith('zh')?'zh':'en');
-let theme = localStorage.getItem('pc_theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');
 let walineInstance = null;
+
+function getPageStrings() { return { ...I18N[lang], ...PAGE_I18N[lang] }; }
 
 async function loadData() {
     try {
@@ -501,7 +460,7 @@ function badgeClass(b) {
 }
 
 function renderArticle() {
-    const t = I18N[lang];
+    const t = getPageStrings();
     const post = getPost(postId);
     const tocCard = document.querySelector('.toc-card');
     if (tocCard) tocCard.style.display = '';
@@ -535,7 +494,7 @@ function renderArticle() {
 
     const heroBg = document.getElementById('hero-bg');
     heroBg.style.background = '';
-    if (post.image) heroBg.innerHTML = `<img src="${post.image}" alt="${escHtml(title)}">`;
+    if (post.image) heroBg.innerHTML = `<img src="${post.image}" alt="${escapeHtml(title)}">`;
     else {
         heroBg.innerHTML = '';
         heroBg.style.background = 'linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%)';
@@ -551,7 +510,7 @@ function renderArticle() {
     document.getElementById('article-views').textContent = `${Math.floor(Math.random()*800+200)} ${t.views}`;
 
     document.getElementById('article-tags').innerHTML = (post.tags || []).map(tag =>
-        `<span class="article-tag">#${escHtml(tag)}</span>`
+        `<span class="article-tag">#${escapeHtml(tag)}</span>`
     ).join('');
 
     document.getElementById('article-prose').innerHTML = content;
@@ -563,7 +522,7 @@ function renderArticle() {
             const id = `heading-${i}`;
             h.id = id;
             const isH3 = h.tagName === 'H3';
-            return `<li class="toc-item ${isH3?'h3':''}"><a href="#${id}">${escHtml(h.textContent)}</a></li>`;
+            return `<li class="toc-item ${isH3?'h3':''}"><a href="#${id}">${escapeHtml(h.textContent)}</a></li>`;
         }).join('');
     } else {
         tocList.innerHTML = '';
@@ -574,13 +533,13 @@ function renderArticle() {
     const prev = idx >= 0 ? POSTS[idx + 1] : null;
     const next = idx >= 0 ? POSTS[idx - 1] : null;
     const navHtml = [
-        prev ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(prev.id)}"><div class="post-nav-arrow">‹</div><div><div class="post-nav-label">${t.prev_post}</div><div class="post-nav-title">${escHtml(prev.title[lang]||prev.title.zh)}</div></div></a>` : '<div></div>',
-        next ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(next.id)}" style="text-align:right;flex-direction:row-reverse"><div class="post-nav-arrow">›</div><div><div class="post-nav-label">${t.next_post}</div><div class="post-nav-title">${escHtml(next.title[lang]||next.title.zh)}</div></div></a>` : '<div></div>',
+        prev ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(prev.id)}"><div class="post-nav-arrow">‹</div><div><div class="post-nav-label">${t.prev_post}</div><div class="post-nav-title">${escapeHtml(prev.title[lang]||prev.title.zh)}</div></div></a>` : '<div></div>',
+        next ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(next.id)}" style="text-align:right;flex-direction:row-reverse"><div class="post-nav-arrow">›</div><div><div class="post-nav-label">${t.next_post}</div><div class="post-nav-title">${escapeHtml(next.title[lang]||next.title.zh)}</div></div></a>` : '<div></div>',
     ];
     document.getElementById('post-nav').innerHTML = navHtml.join('');
 }
 
-// ══ Waline init ════════════════════════════════════════════════════════
+/* ── Waline init ── */
 function initWaline(locale) {
     if (walineInstance) walineInstance.destroy();
     import('https://unpkg.com/@waline/client@v3/dist/waline.js').then(({ init }) => {
@@ -596,12 +555,12 @@ function initWaline(locale) {
                 'https://unpkg.com/@waline/emojis@1.2.0/weibo',
                 'https://unpkg.com/@waline/emojis@1.2.0/bilibili',
             ],
-            locale: { placeholder: I18N[lang].comments_sub },
+            locale: { placeholder: PAGE_I18N[lang].comments_sub },
         });
     });
 }
 
-// ══ TOC active state ══════════════════════════════════════════════════
+/* ── TOC active state ── */
 function updateTocActive() {
     const headings = [...document.querySelectorAll('#article-prose h2,#article-prose h3')];
     const scrollY  = window.scrollY + 100;
@@ -614,7 +573,7 @@ function updateTocActive() {
     });
 }
 
-// ══ Reading progress ══════════════════════════════════════════════════
+/* ── Reading progress ── */
 function updateProgress() {
     const docH = document.documentElement.scrollHeight - window.innerHeight;
     const prog = docH > 0 ? window.scrollY / docH : 0;
@@ -625,10 +584,10 @@ function updateProgress() {
 
 window.addEventListener('scroll', () => { updateProgress(); updateTocActive(); }, { passive:true });
 
-// ══ Share functions ════════════════════════════════════════════════════
+/* ── Share functions ── */
 function copyLink() {
+    const t = getPageStrings();
     navigator.clipboard.writeText(location.href).then(() => {
-        const t = I18N[lang];
         const btn = document.querySelector('.share-btn');
         const orig = btn.querySelector('[data-i18n="share_copy"]');
         if (orig) { const o=orig.textContent; orig.textContent=t.copied; setTimeout(()=>orig.textContent=o,2000); }
@@ -640,33 +599,27 @@ function shareTwitter() {
     window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(location.href)}`, '_blank');
 }
 
-// ══ i18n + theme ══════════════════════════════════════════════════════
-function applyLang(l) {
-    lang = l; localStorage.setItem('pc_lang', l);
-    document.documentElement.lang = l;
-    const t = I18N[l];
-    document.querySelectorAll('[data-i18n]').forEach(el => { const k=el.dataset.i18n; if(t[k]) el.textContent=t[k]; });
-    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang===l));
+/* ── Page i18n application ── */
+function applyPageI18n() {
+    const t = getPageStrings();
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+        const k = el.dataset.i18n;
+        if (t[k] != null) el.textContent = t[k];
+    });
+}
+
+function onLangChange() {
+    applyPageI18n();
     renderArticle();
-    initWaline(l==='zh'?'zh-CN':l==='ja'?'ja':'en');
+    initWaline(lang==='zh'?'zh-CN':lang==='ja'?'ja':'en');
     updateTocActive();
     updateProgress();
 }
-function applyTheme(t) {
-    theme = t; localStorage.setItem('pc_theme', t);
-    document.documentElement.setAttribute('data-theme', t);
-}
-
-document.querySelectorAll('.lang-btn').forEach(b => b.addEventListener('click', () => applyLang(b.dataset.lang)));
-document.getElementById('theme-btn').addEventListener('click', () => applyTheme(theme==='dark'?'light':'dark'));
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => { if(!localStorage.getItem('pc_theme')) applyTheme(e.matches?'dark':'light'); });
-
-function escHtml(s) { const d=document.createElement('div'); d.textContent=s || ''; return d.innerHTML; }
 
 document.addEventListener('DOMContentLoaded', () => {
-    applyTheme(theme);
     loadData().then(() => {
-        applyLang(lang);
+        applyPageI18n();
+        renderArticle();
         updateProgress();
     });
 });
