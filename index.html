@@ -46,6 +46,24 @@
         .hero-trust { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
         .trust-pill { display: inline-flex; align-items: center; gap: 8px; padding: 7px 12px; border-radius: 999px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: color-mix(in srgb, var(--surface2) 76%, transparent); color: var(--muted); font-size: 12px; font-weight: 600; }
         .trust-pill::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 4px rgba(34,197,94,.14); }
+        .home-search { margin-top: 26px; position: relative; max-width: 620px; }
+        .home-search-box { display: flex; align-items: center; gap: 12px; min-height: 54px; padding: 0 16px; border-radius: 16px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: color-mix(in srgb, var(--surface) 94%, transparent); box-shadow: 0 14px 34px rgba(15,23,42,.08); }
+        .home-search-box svg { flex-shrink: 0; color: var(--accent); }
+        .home-search input { width: 100%; border: 0; outline: 0; background: transparent; color: var(--text); font: 600 15px/1.2 'Outfit', sans-serif; }
+        .home-search input::placeholder { color: var(--muted); font-weight: 500; }
+        .home-search-clear { display: none; width: 28px; height: 28px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; flex-shrink: 0; align-items: center; justify-content: center; transition: color .15s, border-color .15s, background .15s; }
+        .home-search-clear.show { display: flex; }
+        .home-search-clear:hover { color: var(--text); border-color: var(--accent2); background: var(--surface2); }
+        .home-search-kbd { flex-shrink: 0; border: 1px solid var(--border); border-bottom-width: 2px; border-radius: 7px; padding: 2px 7px; color: var(--muted); font-size: 11px; font-weight: 700; background: var(--surface2); }
+        .home-search-results { display: none; position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 8px); max-height: 360px; overflow: auto; padding: 8px; border-radius: 16px; border: 1px solid var(--border); background: color-mix(in srgb, var(--surface) 98%, transparent); box-shadow: var(--shadow-lg); }
+        .home-search-results.open { display: block; }
+        .search-result { display: grid; grid-template-columns: 36px minmax(0,1fr) auto; align-items: center; gap: 10px; padding: 10px; border-radius: 12px; color: inherit; text-decoration: none; transition: background .15s, transform .15s; }
+        .search-result:hover, .search-result.active { background: var(--surface2); transform: translateY(-1px); }
+        .search-result-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--accentlo); border: 1px solid rgba(249,115,22,.16); font-size: 15px; }
+        .search-result-title { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--text); }
+        .search-result-meta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 11px; color: var(--muted); margin-top: 2px; }
+        .search-result-kind { justify-self: end; padding: 3px 8px; border-radius: 999px; background: var(--surface2); color: var(--muted); font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+        .search-empty { padding: 24px 12px; text-align: center; color: var(--muted); font-size: 13px; }
         .hero-panel { border-radius: 32px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent) 0%, color-mix(in srgb, var(--surface2) 88%, transparent) 100%); box-shadow: 0 16px 40px rgba(15,23,42,.08); padding: 24px; display: flex; flex-direction: column; gap: 16px; }
         .hero-stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
         .hero-stat { padding: 16px 14px; border-radius: 20px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: color-mix(in srgb, var(--surface) 88%, transparent); }
@@ -120,6 +138,14 @@
         .pinned-name { font-size: 13px; font-weight: 700; color: var(--text); line-height: 1.3; }
         .pinned-brand { font-size: 10px; font-weight: 600; color: var(--accent); letter-spacing: .3px; }
         .pinned-desc { font-size: 11.5px; color: var(--muted); line-height: 1.55; }
+        .continue-section { display: none; }
+        .continue-section.show { display: block; }
+        .continue-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+        .continue-card { display: flex; align-items: center; gap: 10px; min-height: 64px; padding: 12px; border-radius: 14px; border: 1px solid var(--border); background: var(--surface); color: inherit; text-decoration: none; box-shadow: 0 12px 28px rgba(15,23,42,.04); transition: border-color .18s, transform .18s, background .18s; }
+        .continue-card:hover { border-color: var(--accent); background: var(--surface2); transform: translateY(-2px); }
+        .continue-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; background: var(--accentlo); border: 1px solid rgba(249,115,22,.18); flex-shrink: 0; }
+        .continue-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; font-weight: 700; color: var(--text); }
+        .continue-sub { margin-top: 2px; font-size: 11px; color: var(--muted); }
 
         /* ── Dynamic Lists ── */
         .row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
@@ -195,6 +221,8 @@
             .hero-stat-grid { grid-template-columns: 1fr; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .hero-btn { width: 100%; }
+            .home-search-results { max-height: 300px; }
+            .home-search-kbd { display: none; }
         }
     </style>
 
@@ -292,6 +320,17 @@
                 <a class="hero-btn secondary" href="#tools" data-i18n="hero_cta_secondary">浏览全部工具</a>
                 <a class="hero-btn ghost" href="/blog.html" data-i18n="hero_cta_tertiary">阅读博客</a>
             </div>
+            <div class="home-search" role="search">
+                <div class="home-search-box">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+                    <input id="home-search-input" type="search" autocomplete="off" placeholder="Search tools, AI apps, and quick picks" aria-label="Search QuickToolLab">
+                    <button class="home-search-clear" id="home-search-clear" type="button" aria-label="Clear search">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+                    </button>
+                    <span class="home-search-kbd">/</span>
+                </div>
+                <div class="home-search-results" id="home-search-results" role="listbox" aria-label="Search results"></div>
+            </div>
             <div class="hero-trust">
                 <span class="trust-pill" data-i18n="trust_local">优先本地处理</span>
                 <span class="trust-pill" data-i18n="trust_curated">精选实用资源</span>
@@ -343,6 +382,11 @@
             <div class="pinned-badge">⭐ 编辑推荐</div>
             <div class="pinned-grid" id="pinned-grid"></div>
         </div>
+    </section>
+
+    <section class="section-block section-surface reveal continue-section" id="continue-section">
+        <div class="section-head"><h2 class="section-title"><span class="dot"></span><span>Continue where you left off</span></h2></div>
+        <div class="continue-grid" id="continue-grid"></div>
     </section>
 
     <section class="section-block section-surface reveal" id="ai-zone">

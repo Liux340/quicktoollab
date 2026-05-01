@@ -172,6 +172,25 @@
         .btn-primary:disabled { opacity: .4; cursor: not-allowed; transform: none; }
 
         #file-list { display: flex; flex-direction: column; gap: 10px; }
+        .result-summary {
+            display: none; grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px; margin: 0 0 14px;
+        }
+        .result-summary.show { display: grid; }
+        .summary-card {
+            background: var(--surface); border: 1px solid var(--border);
+            border-radius: 14px; padding: 14px 16px;
+        }
+        .summary-label {
+            display: block; color: var(--muted); font-size: 11px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: .08em;
+            margin-bottom: 6px;
+        }
+        .summary-value {
+            display: block; color: var(--text); font-size: 20px;
+            font-weight: 700; line-height: 1.1;
+        }
+        .summary-value.good { color: var(--green); }
         .file-item {
             background: var(--surface); border: 1px solid var(--border);
             border-radius: 14px; padding: 14px 18px;
@@ -212,6 +231,14 @@
             text-decoration: none; margin-top: 6px; transition: background .18s;
         }
         .download-link:hover { background: rgba(34,197,94,.2); }
+        .preview-btn {
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 5px 12px; border-radius: 8px; margin-top: 6px; margin-left: 6px;
+            border: 1px solid rgba(249,115,22,.22); background: var(--accentlo);
+            color: var(--accent2); font-size: 12px; font-weight: 600;
+            cursor: pointer; font-family: 'Outfit', sans-serif; transition: background .18s, border-color .18s;
+        }
+        .preview-btn:hover { background: rgba(249,115,22,.18); border-color: var(--accent2); }
         .remove-btn {
             width: 28px; height: 28px; border-radius: 7px;
             border: 1px solid var(--border); background: transparent;
@@ -244,9 +271,46 @@
 
         /* footer override */
         .footer-inner { max-width: 1040px; }
+        .toast {
+            position: fixed; left: 50%; bottom: 26px; z-index: 400;
+            transform: translate(-50%, 16px); opacity: 0; pointer-events: none;
+            min-width: min(360px, calc(100vw - 32px)); padding: 12px 16px;
+            border-radius: 14px; border: 1px solid rgba(34,197,94,.26);
+            background: color-mix(in srgb, var(--surface) 96%, transparent);
+            box-shadow: var(--shadow-lg); color: var(--text); font-size: 13px;
+            font-weight: 700; text-align: center; transition: opacity .2s, transform .2s;
+        }
+        .toast.show { opacity: 1; transform: translate(-50%, 0); }
+        .preview-modal {
+            position: fixed; inset: 0; z-index: 380; display: none;
+            align-items: center; justify-content: center; padding: 22px;
+            background: rgba(0,0,0,.58); backdrop-filter: blur(8px);
+        }
+        .preview-modal.open { display: flex; }
+        .preview-dialog {
+            width: min(960px, 100%); max-height: min(760px, calc(100vh - 44px));
+            overflow: hidden; display: flex; flex-direction: column;
+            border-radius: 18px; border: 1px solid var(--border);
+            background: var(--surface); box-shadow: var(--shadow-lg);
+        }
+        .preview-head {
+            display: flex; align-items: center; justify-content: space-between; gap: 12px;
+            padding: 14px 16px; border-bottom: 1px solid var(--border);
+        }
+        .preview-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 700; color: var(--text); }
+        .preview-close { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; flex-shrink: 0; }
+        .preview-close:hover { color: var(--text); border-color: var(--accent2); }
+        .preview-body { padding: 16px; overflow: auto; }
+        .preview-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+        .preview-pane { min-width: 0; border: 1px solid var(--border); border-radius: 14px; overflow: hidden; background: var(--surface2); }
+        .preview-pane-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 10px 12px; border-bottom: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--muted); }
+        .preview-pane img { display: block; width: 100%; height: min(46vh, 420px); object-fit: contain; background: repeating-conic-gradient(color-mix(in srgb, var(--border) 32%, transparent) 0 25%, transparent 0 50%) 50% / 18px 18px; }
 
         @keyframes spin { to { transform: rotate(360deg); } }
         .spin { animation: spin .8s linear infinite; }
+        @media (max-width: 720px) { .result-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 720px) { .preview-grid { grid-template-columns: 1fr; } .preview-pane img { height: 260px; } }
+        @media (max-width: 480px) { .result-summary { grid-template-columns: 1fr; } .file-item { align-items: flex-start; } .preview-btn { margin-left: 0; } }
     </style>
 </head>
 <body>
@@ -364,6 +428,12 @@
                 </button>
             </div>
         </div>
+        <div class="result-summary" id="result-summary" aria-live="polite">
+            <div class="summary-card"><span class="summary-label" data-i18n="sum_files">Files done</span><span class="summary-value" id="sum-files">0</span></div>
+            <div class="summary-card"><span class="summary-label" data-i18n="sum_original">Original</span><span class="summary-value" id="sum-original">0 KB</span></div>
+            <div class="summary-card"><span class="summary-label" data-i18n="sum_output">Output</span><span class="summary-value" id="sum-output">0 KB</span></div>
+            <div class="summary-card"><span class="summary-label" data-i18n="sum_saved">Saved</span><span class="summary-value good" id="sum-saved">0%</span></div>
+        </div>
         <div id="file-list"></div>
     </div>
 
@@ -385,6 +455,29 @@
         </div>
     </div>
 </main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="preview-modal" id="preview-modal" aria-hidden="true">
+    <div class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-title">
+        <div class="preview-head">
+            <div class="preview-title" id="preview-title">Preview</div>
+            <button class="preview-close" id="preview-close" type="button" aria-label="Close preview">×</button>
+        </div>
+        <div class="preview-body">
+            <div class="preview-grid">
+                <div class="preview-pane">
+                    <div class="preview-pane-head"><span data-i18n="preview_original">Original</span><span id="preview-original-meta"></span></div>
+                    <img id="preview-original-img" alt="">
+                </div>
+                <div class="preview-pane">
+                    <div class="preview-pane-head"><span data-i18n="preview_output">Output</span><span id="preview-output-meta"></span></div>
+                    <img id="preview-output-img" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <footer>
     <div class="footer-inner">
@@ -410,11 +503,15 @@ const PAGE_I18N = {
         btn_clear:'清空', btn_start:'开始处理', btn_processing:'处理中…', btn_dl_all:'全部下载',
         s_waiting:'等待中', s_processing:'处理中', s_done:'完成', s_error:'失败',
         dl_label:'下载', saving:'节省',
+        unsupported:'请先选择图片文件',
         feat1_t:'隐私安全', feat1_d:'所有处理完全在浏览器本地完成，图片从不上传到任何服务器，数据零泄露。',
         feat2_t:'无需安装', feat2_d:'打开网页即可使用，无需下载任何软件，支持 Chrome、Safari、Edge 等主流浏览器。',
         feat3_t:'批量处理', feat3_d:'一次拖入多张图片，统一设置格式和质量，批量转换下载，效率翻倍。',
         page_title:'PixCrush · 图片压缩 & 格式转换',
         back_home:'返回首页',
+        sum_files:'已完成', sum_original:'原始大小', sum_output:'输出大小', sum_saved:'节省',
+        toast_done:'已完成 {count} 个文件处理',
+        preview:'预览', preview_original:'原图', preview_output:'输出图',
     },
     en:{
         hero_title:'Compress<br>& Convert', hero_sub:'Batch process images locally — no uploads, fully private.',
@@ -424,11 +521,15 @@ const PAGE_I18N = {
         btn_clear:'Clear', btn_start:'Process', btn_processing:'Processing…', btn_dl_all:'Download all',
         s_waiting:'Waiting', s_processing:'Processing', s_done:'Done', s_error:'Error',
         dl_label:'Download', saving:'saved',
+        unsupported:'Please choose image files',
         feat1_t:'Private & Secure', feat1_d:"Everything runs in your browser. Your images never leave your device.",
         feat2_t:'No Install Needed', feat2_d:'Works in any modern browser — Chrome, Safari, Edge. No plugins required.',
         feat3_t:'Batch Processing', feat3_d:'Drop multiple images, set format & quality once, download all.',
         page_title:'PixCrush · Image Compressor & Converter',
         back_home:'Home',
+        sum_files:'Files done', sum_original:'Original', sum_output:'Output', sum_saved:'Saved',
+        toast_done:'Done: {count} file(s) processed',
+        preview:'Preview', preview_original:'Original', preview_output:'Output',
     },
     ja:{
         hero_title:'画像圧縮<br>フォーマット変換', hero_sub:'ローカル処理で完結。サーバーへのアップロード不要、プライバシー安全。',
@@ -438,18 +539,22 @@ const PAGE_I18N = {
         btn_clear:'クリア', btn_start:'処理開始', btn_processing:'処理中…', btn_dl_all:'全てダウンロード',
         s_waiting:'待機中', s_processing:'処理中', s_done:'完了', s_error:'エラー',
         dl_label:'ダウンロード', saving:'削減',
+        unsupported:'画像ファイルを選択してください',
         feat1_t:'プライバシー保護', feat1_d:'全処理はブラウザ内で完結。画像はどのサーバーにもアップロードされません。',
         feat2_t:'インストール不要', feat2_d:'Chrome・Safari・Edge などのブラウザで即利用可能。プラグイン不要。',
         feat3_t:'一括処理', feat3_d:'複数画像を一度にドロップ、形式と品質をまとめて設定してダウンロード。',
         page_title:'PixCrush · 画像圧縮・変換ツール',
         back_home:'トップへ',
+        sum_files:'完了数', sum_original:'元サイズ', sum_output:'出力', sum_saved:'削減',
+        toast_done:'{count} 件の処理が完了しました',
+        preview:'プレビュー', preview_original:'元画像', preview_output:'出力画像',
     }
 };
 
 function getPageStrings() { return { ...I18N[lang], ...PAGE_I18N[lang] }; }
 
 /* ══ Core state ════════════════════════════════ */
-let files = [], outputFormat = 'jpeg', maxWidth = 0;
+let files = [], outputFormat = 'jpeg', maxWidth = 0, lastCompleteCount = 0;
 
 document.querySelectorAll('.fmt-btn').forEach(b => b.addEventListener('click', () => {
     document.querySelectorAll('.fmt-btn').forEach(x => x.classList.remove('active'));
@@ -465,23 +570,31 @@ qSlider.addEventListener('input', () => { qVal.textContent = qSlider.value + '%'
 
 /* ══ Drop / select ═════════════════════════════ */
 const dz = document.getElementById('dropzone');
+const fileInput = document.getElementById('file-input');
+dz.addEventListener('click', e => {
+    if (!e.target.closest('button')) fileInput.click();
+});
 dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
 dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
 dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('drag-over'); addFiles(e.dataTransfer.files); });
-document.getElementById('file-input').addEventListener('change', e => addFiles(e.target.files));
+fileInput.addEventListener('change', e => addFiles(e.target.files));
 
 function addFiles(list) {
+    let added = 0;
     Array.from(list).forEach(f => {
         if (!f.type.startsWith('image/')) return;
         const id = Date.now() + Math.random();
         const entry = { id, file: f, thumb: null, status: 'waiting', outputUrl: null, outputName: null, outputSize: null };
         files.push(entry);
+        added++;
         const r = new FileReader();
         r.onload = e2 => { entry.thumb = e2.target.result; renderList(); };
         r.readAsDataURL(f);
     });
+    if (!added && list && list.length) showToast(getPageStrings().unsupported);
+    fileInput.value = '';
     renderList();
-    document.getElementById('queue-section').style.display = 'block';
+    if (added) document.getElementById('queue-section').style.display = 'block';
 }
 
 /* ══ Render ════════════════════════════════════ */
@@ -491,6 +604,7 @@ function renderList() {
     if (!files.length) {
         list.innerHTML = '';
         document.getElementById('queue-section').style.display = 'none';
+        updateSummary();
         return;
     }
     list.innerHTML = files.map(f => {
@@ -528,6 +642,7 @@ function renderList() {
     }).join('');
     const allDone = files.length > 0 && files.every(f => f.status === 'done');
     document.getElementById('dl-all-btn').style.display = allDone ? 'flex' : 'none';
+    updateSummary();
 }
 
 function removeFile(id) {
@@ -536,7 +651,7 @@ function removeFile(id) {
 }
 
 document.getElementById('clear-btn').addEventListener('click', () => {
-    files = []; renderList(); document.getElementById('file-input').value = '';
+    files = []; lastCompleteCount = 0; renderList(); document.getElementById('file-input').value = '';
 });
 
 document.getElementById('convert-btn').addEventListener('click', async () => {
@@ -551,6 +666,8 @@ document.getElementById('convert-btn').addEventListener('click', async () => {
     }
     btn.disabled = false;
     btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg> ${getPageStrings().btn_start}`;
+    const done = files.filter(f => f.status === 'done').length;
+    if (done) showToast(formatDoneMessage(done));
 });
 
 async function processFile(entry) {
@@ -597,7 +714,89 @@ function fmt(b) {
     return (b/1048576).toFixed(2) + ' MB';
 }
 
+function updateSummary() {
+    const summary = document.getElementById('result-summary');
+    if (!summary) return;
+    const done = files.filter(f => f.status === 'done' && f.outputSize != null);
+    summary.classList.toggle('show', done.length > 0);
+    if (!done.length) return;
+    const original = done.reduce((sum, f) => sum + f.file.size, 0);
+    const output = done.reduce((sum, f) => sum + f.outputSize, 0);
+    const saved = original ? Math.round((1 - output / original) * 100) : 0;
+    document.getElementById('sum-files').textContent = String(done.length);
+    document.getElementById('sum-original').textContent = fmt(original);
+    document.getElementById('sum-output').textContent = fmt(output);
+    document.getElementById('sum-saved').textContent = saved > 0 ? `${saved}%` : `+${Math.abs(saved)}%`;
+    lastCompleteCount = done.length;
+    enhancePreviewButtons();
+}
+
+function enhancePreviewButtons() {
+    files.filter(f => f.status === 'done').forEach(f => {
+        const item = document.querySelector(`.file-item[data-id="${CSS.escape(String(f.id))}"]`);
+        if (!item || item.querySelector('.preview-btn')) return;
+        const info = item.querySelector('.file-info');
+        if (!info) return;
+        const btn = document.createElement('button');
+        btn.className = 'preview-btn';
+        btn.type = 'button';
+        btn.innerHTML = `<svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg> ${getPageStrings().preview}`;
+        btn.addEventListener('click', () => openPreview(f.id));
+        info.appendChild(btn);
+    });
+}
+
+function showToast(message) {
+    const toast = document.getElementById('toast');
+    if (!toast) return;
+    toast.textContent = message;
+    toast.classList.add('show');
+    clearTimeout(showToast.timer);
+    showToast.timer = setTimeout(() => toast.classList.remove('show'), 2600);
+}
+
+function formatDoneMessage(count) {
+    const template = getPageStrings().toast_done || 'Done: {count} file(s) processed';
+    return template.replace('{count}', count);
+}
+
 /* ══ Page i18n ════════════════════════════════════ */
+function openPreview(id) {
+    const entry = files.find(f => String(f.id) === String(id));
+    if (!entry || entry.status !== 'done') return;
+    const modal = document.getElementById('preview-modal');
+    const title = document.getElementById('preview-title');
+    const originalImg = document.getElementById('preview-original-img');
+    const outputImg = document.getElementById('preview-output-img');
+    const originalMeta = document.getElementById('preview-original-meta');
+    const outputMeta = document.getElementById('preview-output-meta');
+    title.textContent = entry.file.name;
+    originalImg.src = entry.thumb || '';
+    outputImg.src = entry.outputUrl || '';
+    originalMeta.textContent = fmt(entry.file.size);
+    outputMeta.textContent = fmt(entry.outputSize);
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    document.getElementById('preview-close').focus();
+}
+
+function closePreview() {
+    const modal = document.getElementById('preview-modal');
+    if (!modal) return;
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+}
+
+document.getElementById('preview-close').addEventListener('click', closePreview);
+document.getElementById('preview-modal').addEventListener('click', e => {
+    if (e.target.id === 'preview-modal') closePreview();
+});
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('preview-modal').classList.contains('open')) closePreview();
+});
+
 function applyPageI18n() {
     const t = getPageStrings();
     document.title = t.page_title;
