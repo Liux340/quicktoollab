@@ -4,6 +4,197 @@
 
 let currentAiCat = 'all';
 let currentToolCat = 'all';
+let searchItems = [];
+let activeSearchIndex = 0;
+
+function homeUiText(key) {
+    const copy = {
+        zh: {
+            searchPlaceholder: '\u641c\u7d22\u5de5\u5177\u3001AI \u5e94\u7528\u548c\u7cbe\u9009\u63a8\u8350',
+            noResults: '\u6682\u65f6\u6ca1\u6709\u5339\u914d\u7684\u5de5\u5177',
+            recent: '\u6700\u8fd1\u4f7f\u7528',
+            favorite: '\u5df2\u6536\u85cf',
+            quickPick: '\u7cbe\u9009',
+            tool: '\u5de5\u5177',
+            continueTitle: '\u7ee7\u7eed\u4e0a\u6b21\u4f7f\u7528',
+            ai: 'AI'
+        },
+        en: {
+            searchPlaceholder: 'Search tools, AI apps, and quick picks',
+            noResults: 'No matching tools yet',
+            recent: 'Recently used',
+            favorite: 'Favorite',
+            quickPick: 'Quick pick',
+            tool: 'Tool',
+            continueTitle: 'Continue where you left off',
+            ai: 'AI'
+        },
+        ja: {
+            searchPlaceholder: '\u30c4\u30fc\u30eb\u3001AI\u30a2\u30d7\u30ea\u3001\u63a8\u5968\u3092\u691c\u7d22',
+            noResults: '\u4e00\u81f4\u3059\u308b\u30c4\u30fc\u30eb\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093',
+            recent: '\u6700\u8fd1\u4f7f\u7528',
+            favorite: '\u304a\u6c17\u306b\u5165\u308a',
+            quickPick: '\u63a8\u5968',
+            tool: '\u30c4\u30fc\u30eb',
+            continueTitle: '\u524d\u56de\u306e\u7d9a\u304d',
+            ai: 'AI'
+        }
+    };
+    return (copy[lang] && copy[lang][key]) || copy.en[key] || key;
+}
+
+function normalizeSearchText(value) {
+    return String(value || '').toLowerCase().trim();
+}
+
+function buildSearchItems() {
+    const items = [];
+    const seen = new Set();
+    const pushItem = item => {
+        if (!item || !item.href || seen.has(item.href)) return;
+        seen.add(item.href);
+        items.push({
+            icon: item.icon || '#',
+            title: item.title || item.name || item.href,
+            meta: item.meta || item.brand || item.tag || '',
+            kind: item.kind || homeUiText('tool'),
+            href: item.href,
+            internal: item.internal || item.int || item.href.startsWith('/')
+        });
+    };
+
+    getFavs().forEach(x => pushItem({ ...x, meta: homeUiText('favorite'), kind: homeUiText('favorite') }));
+    getHist().forEach(x => pushItem({ ...x, meta: homeUiText('recent'), kind: homeUiText('recent') }));
+    PINNED.forEach(x => pushItem({ ...x, title: x.name, meta: x.brand, kind: homeUiText('quickPick') }));
+    AI_TOOLS.forEach(x => pushItem({ ...x, title: x.name, meta: x.tag, kind: homeUiText('ai') }));
+
+    const cats = TOOLS[lang] || TOOLS.en;
+    cats.forEach(cat => (cat.items || []).forEach(x => {
+        pushItem({ ...x, meta: cat.title, kind: homeUiText('tool'), internal: x.int });
+    }));
+
+    searchItems = items;
+    return items;
+}
+
+function openSearchItem(item) {
+    if (!item) return;
+    addHist(item.href, item.title, item.icon);
+    renderContinueSection();
+    if (item.internal) window.location.href = item.href;
+    else window.open(item.href, '_blank', 'noopener,noreferrer');
+}
+
+function renderSearchResults(query) {
+    const box = document.getElementById('home-search-results');
+    const clear = document.getElementById('home-search-clear');
+    if (!box) return;
+    const q = normalizeSearchText(query);
+    if (clear) clear.classList.toggle('show', Boolean(q));
+    if (!q) {
+        box.classList.remove('open');
+        box.innerHTML = '';
+        box.__results = [];
+        return;
+    }
+    const results = buildSearchItems().filter(item => {
+        return [item.title, item.meta, item.kind, item.href].some(part => normalizeSearchText(part).includes(q));
+    }).slice(0, 9);
+    activeSearchIndex = 0;
+    box.classList.add('open');
+    if (!results.length) {
+        box.innerHTML = `<div class="search-empty">${escapeHtml(homeUiText('noResults'))}</div>`;
+        return;
+    }
+    box.innerHTML = results.map((item, index) => `
+        <a class="search-result ${index === 0 ? 'active' : ''}" href="${item.href}" ${item.internal ? '' : 'target="_blank" rel="noopener noreferrer"'} data-search-index="${index}" role="option">
+            <span class="search-result-icon">${escapeHtml(item.icon)}</span>
+            <span>
+                <span class="search-result-title">${escapeHtml(item.title)}</span>
+                <span class="search-result-meta">${escapeHtml(item.meta || item.href)}</span>
+            </span>
+            <span class="search-result-kind">${escapeHtml(item.kind)}</span>
+        </a>
+    `).join('');
+    box.querySelectorAll('.search-result').forEach((el, index) => {
+        el.addEventListener('click', e => {
+            e.preventDefault();
+            openSearchItem(results[index]);
+        });
+    });
+    box.__results = results;
+}
+
+function setActiveSearchResult(nextIndex) {
+    const box = document.getElementById('home-search-results');
+    if (!box || !box.__results || !box.__results.length) return;
+    activeSearchIndex = (nextIndex + box.__results.length) % box.__results.length;
+    box.querySelectorAll('.search-result').forEach((el, index) => {
+        el.classList.toggle('active', index === activeSearchIndex);
+    });
+}
+
+function initHomeSearch() {
+    const input = document.getElementById('home-search-input');
+    const box = document.getElementById('home-search-results');
+    const clear = document.getElementById('home-search-clear');
+    if (!input || !box) return;
+    input.placeholder = homeUiText('searchPlaceholder');
+    input.addEventListener('input', () => renderSearchResults(input.value));
+    input.addEventListener('focus', () => renderSearchResults(input.value));
+    if (clear) {
+        clear.addEventListener('click', () => {
+            input.value = '';
+            renderSearchResults('');
+            input.focus();
+        });
+    }
+    input.addEventListener('keydown', e => {
+        if (e.key === 'ArrowDown') { e.preventDefault(); setActiveSearchResult(activeSearchIndex + 1); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); setActiveSearchResult(activeSearchIndex - 1); }
+        else if (e.key === 'Enter') {
+            const item = box.__results && box.__results[activeSearchIndex];
+            if (item) { e.preventDefault(); openSearchItem(item); }
+        } else if (e.key === 'Escape') {
+            box.classList.remove('open');
+            input.blur();
+        }
+    });
+    document.addEventListener('click', e => {
+        if (!e.target.closest('.home-search')) box.classList.remove('open');
+    });
+    document.addEventListener('keydown', e => {
+        const target = e.target;
+        const isTyping = target && ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+        if (e.key === '/' && !isTyping && !e.ctrlKey && !e.metaKey && !e.altKey) {
+            e.preventDefault();
+            input.focus();
+        }
+    });
+}
+
+function renderContinueSection() {
+    const section = document.getElementById('continue-section');
+    const grid = document.getElementById('continue-grid');
+    if (!section || !grid) return;
+    const title = section.querySelector('.section-title span:last-child');
+    if (title) title.textContent = homeUiText('continueTitle');
+    const hist = getHist().slice(0, 6);
+    section.classList.toggle('show', hist.length > 0);
+    if (!hist.length) {
+        grid.innerHTML = '';
+        return;
+    }
+    grid.innerHTML = hist.map(x => `
+        <a class="continue-card" href="${x.href}" ${x.href.startsWith('/') ? '' : 'target="_blank" rel="noopener noreferrer"'} onclick="addHist('${x.href}','${escapeHtml(x.name)}','${escapeHtml(x.icon)}')">
+            <span class="continue-icon">${escapeHtml(x.icon)}</span>
+            <span style="min-width:0;">
+                <span class="continue-name">${escapeHtml(x.name)}</span>
+                <span class="continue-sub">${escapeHtml(homeUiText('recent'))}</span>
+            </span>
+        </a>
+    `).join('');
+}
 
 /* ── Render Pinned ── */
 function renderPinned() {
@@ -225,9 +416,12 @@ function onLangChange() {
         const k = el.dataset.i18n;
         if (t[k] != null) el.textContent = t[k];
     });
+    const searchInput = document.getElementById('home-search-input');
+    if (searchInput) searchInput.placeholder = homeUiText('searchPlaceholder');
     renderPinned();
     renderAiTools(currentAiCat);
     renderTools();
+    renderContinueSection();
     renderFavDrawer();
     renderHistDrawer();
     loadDynamicContent();
@@ -248,6 +442,8 @@ document.addEventListener('DOMContentLoaded', function() {
     renderPinned();
     renderAiTools('all');
     renderTools();
+    renderContinueSection();
+    initHomeSearch();
     loadDynamicContent();
 
     // AI tab switch

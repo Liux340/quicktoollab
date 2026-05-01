@@ -94,6 +94,7 @@ function addHist(href, name, icon) {
     hist.unshift({ href, name, icon, time: Date.now() });
     setHist(hist.slice(0, 30));
     updateBadges();
+    if (typeof renderContinueSection === 'function') renderContinueSection();
     if (typeof renderHistDrawer === 'function') renderHistDrawer();
 }
 
@@ -107,15 +108,53 @@ function updateBadges() {
 }
 
 /* ── Drawer ── */
+let activeDrawer = null;
+let drawerReturnFocus = null;
+
 function openDrawer(drawerId, overlayId) {
-    document.getElementById(drawerId).classList.add('open');
-    document.getElementById(overlayId).classList.add('open');
+    const drawer = document.getElementById(drawerId);
+    const overlay = document.getElementById(overlayId);
+    if (!drawer || !overlay) return;
+    drawerReturnFocus = document.activeElement;
+    activeDrawer = { drawerId, overlayId };
+    drawer.setAttribute('role', 'dialog');
+    drawer.setAttribute('aria-modal', 'true');
+    drawer.setAttribute('aria-hidden', 'false');
+    drawer.classList.add('open');
+    overlay.classList.add('open');
     document.body.style.overflow = 'hidden';
+    const firstFocus = drawer.querySelector('button, a, [tabindex]:not([tabindex="-1"])');
+    if (firstFocus) firstFocus.focus();
 }
 function closeDrawer(drawerId, overlayId) {
-    document.getElementById(drawerId).classList.remove('open');
-    document.getElementById(overlayId).classList.remove('open');
+    const drawer = document.getElementById(drawerId);
+    const overlay = document.getElementById(overlayId);
+    if (!drawer || !overlay) return;
+    drawer.classList.remove('open');
+    drawer.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('open');
     document.body.style.overflow = '';
+    activeDrawer = null;
+    if (drawerReturnFocus && typeof drawerReturnFocus.focus === 'function') drawerReturnFocus.focus();
+    drawerReturnFocus = null;
+}
+
+function closeActiveOverlays() {
+    if (activeDrawer) {
+        closeDrawer(activeDrawer.drawerId, activeDrawer.overlayId);
+        return true;
+    }
+    const navLinks = document.querySelector('.nav-links.open');
+    const hamburger = document.querySelector('.hamburger.active');
+    const navOverlay = document.querySelector('.nav-overlay.open');
+    if (navLinks || hamburger || navOverlay) {
+        if (hamburger) hamburger.classList.remove('active');
+        if (navLinks) navLinks.classList.remove('open');
+        if (navOverlay) navOverlay.classList.remove('open');
+        document.body.style.overflow = '';
+        return true;
+    }
+    return false;
 }
 
 /* ── API with Cache ── */
@@ -195,6 +234,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (histClose) histClose.addEventListener('click', () => closeDrawer('hist-drawer','hist-overlay'));
     if (favOverlay) favOverlay.addEventListener('click', () => closeDrawer('fav-drawer','fav-overlay'));
     if (histOverlay) histOverlay.addEventListener('click', () => closeDrawer('hist-drawer','hist-overlay'));
+    document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeActiveOverlays();
+    });
 
     // Footer year
     const yearEl = document.getElementById('y');
