@@ -1,0 +1,23 @@
+{
+  "readTime": 5,
+  "badge": "tech",
+  "date": "2026-05-03",
+  "desc": {
+    "zh": "介绍AI改写工具的使用方法与实际应用场景",
+    "en": "Learn how to use AI rewrite tools effectively",
+    "ja": "AIリライトツールの使い方と活用方法"
+  },
+  "cat": "tool",
+  "title": {
+    "zh": "AI改写工具完整指南：从入门到实战",
+    "en": "Complete Guide to AI Rewrite Tools",
+    "ja": "AI文章リライトツール完全ガイド"
+  },
+  "tags": [],
+  "content": {
+    "zh": "AI改写工具正在改变内容创作方式。通过输入原始文本，AI可以快速生成更流畅、更自然的表达。\n\n使用步骤：\n\n输入原文\n点击生成\n选择最优结果\n\n适用场景：\n\n写作优化\nSEO内容生成\n学术表达润色\n\n未来，AI改写将成为内容创作者的基础工具。",
+    "en": "AI rewrite tools are transforming how we create content. By inputting raw text, AI can generate more natural and fluent expressions.\n\nSteps:\n\nInput text\nClick generate\nChoose the best result\n\nUse cases:\n\nWriting improvement\nSEO content\nAcademic rewriting\n\nAI rewriting will become essential for creators.",
+    "ja": "AIリライトツールはコンテンツ制作を大きく変えています。入力した文章をより自然で読みやすく改善できます。\n\n手順：\n\nテキスト入力\n生成ボタンをクリック\n最適な結果を選択\n\n活用例：\n\n文章改善\nSEO対策\n学術文章"
+  },
+  "id": "ai-rewrite-guide-001"
+}
