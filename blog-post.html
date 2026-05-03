@@ -12,12 +12,12 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" id="meta-desc" content="QuickToolLab 博客文章">
-    <link rel="canonical" id="canonical" href="https://quicktoollab.top/blog-post.html">
+    <meta name="description" id="meta-desc" content="QuickToolLab 博客文章：记录工具站建设、PixCrush 图片压缩、SEO、部署、前端实现与开发者工具实践经验。">
+    <link rel="canonical" id="canonical" href="https://quicktoollab.top/blog-post">
     <meta property="og:type" content="article">
-    <meta property="og:url" id="og-url" content="https://quicktoollab.top/blog-post.html">
+    <meta property="og:url" id="og-url" content="https://quicktoollab.top/blog-post">
     <meta property="og:title" id="og-title" content="博客文章 · QuickToolLab">
-    <meta property="og:description" id="og-desc" content="QuickToolLab 博客文章">
+    <meta property="og:description" id="og-desc" content="QuickToolLab 博客文章：工具站建设、PixCrush、SEO、部署和开发者工具实践。">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="google-adsense-account" content="ca-pub-8586931911554867">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
@@ -298,10 +298,10 @@
         </a>
         <nav class="nav-links">
             <a href="/" data-i18n="nav_home">首页</a>
-            <a href="/compress.html">PixCrush</a>
-            <a href="/blog.html" class="active" data-i18n="nav_blog">博客</a>
-            <a href="/help.html" data-i18n="nav_help">帮助</a>
-            <a href="/about.html" data-i18n="nav_about">关于</a>
+            <a href="/compress">PixCrush</a>
+            <a href="/blog" class="active" data-i18n="nav_blog">博客</a>
+            <a href="/help" data-i18n="nav_help">帮助</a>
+            <a href="/about" data-i18n="nav_about">关于</a>
         </nav>
         <button class="hamburger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
         <div class="nav-overlay"></div>
@@ -327,7 +327,7 @@
         <div class="article-breadcrumb">
             <a href="/">首页</a>
             <span>›</span>
-            <a href="/blog.html" data-i18n="nav_blog">博客</a>
+            <a href="/blog" data-i18n="nav_blog">博客</a>
             <span>›</span>
             <span id="breadcrumb-title">文章</span>
         </div>
@@ -410,9 +410,9 @@
         <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
-            <a href="/blog.html" data-i18n="nav_blog">博客</a>
-            <a href="/about.html" data-i18n="nav_about">关于</a>
-            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+            <a href="/blog" data-i18n="nav_blog">博客</a>
+            <a href="/about" data-i18n="nav_about">关于</a>
+            <a href="/privacy" data-i18n="nav_privacy">隐私政策</a>
         </div>
     </div>
 </footer>
@@ -498,7 +498,7 @@ function renderArticle() {
     if (!post) {
         document.title = `404 · QuickToolLab`;
         document.getElementById('meta-desc').content = t.not_found;
-        const missingUrl = `https://quicktoollab.top/blog-post.html${postId ? `?id=${encodeURIComponent(postId)}` : ''}`;
+        const missingUrl = `https://quicktoollab.top/blog-post${postId ? `?id=${encodeURIComponent(postId)}` : ''}`;
         document.getElementById('canonical').href = missingUrl;
         document.getElementById('og-url').content = missingUrl;
         document.getElementById('og-title').content = `404 · QuickToolLab`;
@@ -513,7 +513,7 @@ function renderArticle() {
         document.getElementById('post-nav').innerHTML = '';
         document.getElementById('hero-bg').innerHTML = '';
         document.getElementById('hero-bg').style.background = 'linear-gradient(135deg, var(--surface) 0%, var(--surface2) 100%)';
-        document.getElementById('article-prose').innerHTML = `<div class="not-found"><h2>404</h2><p>${t.not_found}</p><a href="/blog.html" style="color:var(--accent)">← ${t.nav_blog}</a></div>`;
+        document.getElementById('article-prose').innerHTML = `<div class="not-found"><h2>404</h2><p>${t.not_found}</p><a href="/blog" style="color:var(--accent)">← ${t.nav_blog}</a></div>`;
         if (tocCard) tocCard.style.display = 'none';
         return;
     }
@@ -524,7 +524,7 @@ function renderArticle() {
 
     document.title = `${title} · QuickToolLab`;
     document.getElementById('meta-desc').content = desc;
-    const canonicalUrl = `https://quicktoollab.top/blog-post.html?id=${encodeURIComponent(post.id)}`;
+    const canonicalUrl = `https://quicktoollab.top/blog-post?id=${encodeURIComponent(post.id)}`;
     document.getElementById('canonical').href = canonicalUrl;
     document.getElementById('og-url').content = canonicalUrl;
     document.getElementById('og-title').content = `${title} · QuickToolLab`;

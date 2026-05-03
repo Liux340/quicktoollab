@@ -13,9 +13,9 @@
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="了解 QuickToolLab — 综合在线工具站：工具导航、技术文库与开源精选；内含 PixCrush 本地图片压缩工具。">
-    <link rel="canonical" href="https://quicktoollab.top/about.html">
+    <link rel="canonical" href="https://quicktoollab.top/about">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://quicktoollab.top/about.html">
+    <meta property="og:url" content="https://quicktoollab.top/about">
     <meta property="og:title" content="关于 · QuickToolLab">
     <meta property="og:description" content="QuickToolLab 综合在线工具站：工具入口、动态技术内容、PixCrush 图片工具。">
     <meta name="twitter:card" content="summary">
@@ -84,9 +84,9 @@
         <div class="nav-right">
             <div class="nav-links">
                 <a href="/" class="nav-link" data-i18n="nav_home">首页</a>
-                <a href="/help.html" class="nav-link" data-i18n="nav_help">帮助中心</a>
-                <a href="/compress.html" class="nav-link">PixCrush</a>
-                <a href="/privacy.html" class="nav-link" data-i18n="nav_privacy">隐私政策</a>
+                <a href="/help" class="nav-link" data-i18n="nav_help">帮助中心</a>
+                <a href="/compress" class="nav-link">PixCrush</a>
+                <a href="/privacy" class="nav-link" data-i18n="nav_privacy">隐私政策</a>
             </div>
             <button class="hamburger" type="button" aria-label="Menu"><span></span><span></span><span></span></button>
             <div class="nav-overlay"></div>
@@ -173,9 +173,9 @@
         <span class="footer-copy">© <span id="y"></span> QuickToolLab</span>
         <div class="footer-links">
             <a href="/" data-i18n="nav_home">首页</a>
-            <a href="/help.html" data-i18n="nav_help">帮助中心</a>
-            <a href="/about.html" data-i18n="nav_about">关于</a>
-            <a href="/privacy.html" data-i18n="nav_privacy">隐私政策</a>
+            <a href="/help" data-i18n="nav_help">帮助中心</a>
+            <a href="/about" data-i18n="nav_about">关于</a>
+            <a href="/privacy" data-i18n="nav_privacy">隐私政策</a>
         </div>
     </div>
 </footer>
@@ -192,7 +192,7 @@ const PAGE_I18N = {
         s1_p1:'本站定位为「导航 + 轻阅读」：工具区提供站内外常用入口（含本站自研的 PixCrush 图片压缩页）；文库、幻灯片卡片、开源与软件推荐等板块通过浏览器 fetch 请求 Dev.to、GitHub 等公开 API，列表内容随接口实时变化，而非写死在 HTML 里。',
         s1_p2:'静态页面由 GitHub 等托管，经 Cloudflare Pages 或同类 CDN 分发，访问速度快、部署简单。',
         s2_title:'PixCrush 是什么',
-        s2_p1:'<strong>PixCrush</strong> 是本站旗下的独立页面（<a href="/compress.html">/compress.html</a>），专门做图片压缩与格式转换：在浏览器本地用 Canvas 处理，图片不上传服务器。它与首页的「动态内容区」相互独立——使用 PixCrush 时不会触发 Dev.to / GitHub 的文章列表请求（除非你同时打开了首页并正在加载）。',
+        s2_p1:'<strong>PixCrush</strong> 是本站旗下的独立页面（<a href="/compress">/compress</a>），专门做图片压缩与格式转换：在浏览器本地用 Canvas 处理，图片不上传服务器。它与首页的「动态内容区」相互独立——使用 PixCrush 时不会触发 Dev.to / GitHub 的文章列表请求（除非你同时打开了首页并正在加载）。',
         s3_title:'首页亮点',
         f1_t:'工具矩阵', f1_d:'多类常用开发/办公工具入口，一站收藏。',
         f2_t:'动态内容', f2_d:'文库与推荐列表来自公开 API，随热门度变化。',
@@ -214,7 +214,7 @@ const PAGE_I18N = {
         s1_p1:'We combine navigation with light reading: the tools section lists useful links (including our PixCrush image tool). Library, slides, open-source, and software blocks are filled by fetch() calls to public APIs — content is not hardcoded in HTML.',
         s1_p2:'Static files are hosted on GitHub (or similar) and served via Cloudflare Pages or another CDN.',
         s2_title:'What is PixCrush',
-        s2_p1:'<strong>PixCrush</strong> is a separate page (<a href="/compress.html">/compress.html</a>) for image compression and conversion. It runs entirely in your browser with Canvas; images are not uploaded. It is independent from the home page feeds (unless you have both pages open and loading).',
+        s2_p1:'<strong>PixCrush</strong> is a separate page (<a href="/compress">/compress</a>) for image compression and conversion. It runs entirely in your browser with Canvas; images are not uploaded. It is independent from the home page feeds (unless you have both pages open and loading).',
         s3_title:'Home highlights',
         f1_t:'Tool grid', f1_d:'Many hand-picked utility links in one place.',
         f2_t:'Live lists', f2_d:'Trending content from public APIs.',
@@ -236,7 +236,7 @@ const PAGE_I18N = {
         s1_p1:'「ナビゲーション＋軽い読み物」として設計しています。ツール欄には当サイトの PixCrush（画像圧縮）へのリンクも含みます。文庫・スライド・OSS・ソフト紹介は Dev.to や GitHub の公開 API を fetch で取得し、HTML に直書きしません。',
         s1_p2:'静的ファイルは GitHub 等でホストし、Cloudflare Pages など CDN で配信しています。',
         s2_title:'PixCrush とは',
-        s2_p1:'<strong>PixCrush</strong> は別ページ（<a href="/compress.html">/compress.html</a>）で提供する画像圧縮・変換ツールです。Canvas でブラウザ内のみ処理し、画像はアップロードされません。トップページの動的リストとは独立しています（両方同時に開いて読み込み中の場合を除く）。',
+        s2_p1:'<strong>PixCrush</strong> は別ページ（<a href="/compress">/compress</a>）で提供する画像圧縮・変換ツールです。Canvas でブラウザ内のみ処理し、画像はアップロードされません。トップページの動的リストとは独立しています（両方同時に開いて読み込み中の場合を除く）。',
         s3_title:'トップの特徴',
         f1_t:'ツール一覧', f1_d:'よく使うユーティリティへの入口。',
         f2_t:'動的リスト', f2_d:'公開 API から取得するトレンドコンテンツ。',
