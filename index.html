@@ -12,7 +12,7 @@
         })();
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="QuickToolLab 综合在线工具站：常用开发工具入口、技术文库、幻灯片精选、热门开源项目与软件推荐。内容来自 Dev.to、GitHub 等实时数据。">
+    <meta name="description" content="QuickToolLab 综合在线工具站：内置 PixCrush 本地图片压缩工具，提供开发者常用工具导航、原创使用指南、帮助文章与精选技术资源。">
     <meta name="keywords" content="在线工具,开发者工具,技术文库,开源项目,软件推荐,QuickToolLab">
     <meta name="theme-color" content="#0a0a10">
     <link rel="canonical" href="https://quicktoollab.top/">
@@ -86,6 +86,21 @@
         .feature-card h3 { font-size: 20px; line-height: 1.3; color: var(--text); }
         .feature-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
         .feature-link { display: inline-flex; align-items: center; gap: 6px; margin-top: auto; font-size: 13px; font-weight: 700; color: var(--text); }
+        .workflow-band { display: grid; grid-template-columns: .9fr repeat(3, 1fr); gap: 14px; align-items: stretch; padding: 22px; border-radius: 26px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: linear-gradient(135deg, rgba(20,184,166,.09), rgba(249,115,22,.08)); box-shadow: 0 16px 40px rgba(15,23,42,.08); }
+        .workflow-intro { display: flex; flex-direction: column; justify-content: center; gap: 8px; }
+        .workflow-intro .eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--accent2); }
+        .workflow-intro h2 { font-size: 23px; line-height: 1.25; color: var(--text); }
+        .workflow-step { min-height: 150px; padding: 18px; border-radius: 18px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: color-mix(in srgb, var(--surface) 90%, transparent); }
+        .workflow-step strong { display: inline-flex; width: 30px; height: 30px; align-items: center; justify-content: center; border-radius: 10px; background: var(--accent); color: #fff; font-size: 13px; margin-bottom: 12px; }
+        .workflow-step h3 { font-size: 15px; line-height: 1.35; color: var(--text); margin-bottom: 8px; }
+        .workflow-step p { font-size: 13px; line-height: 1.65; color: var(--muted); }
+        .owned-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; }
+        .owned-card { display: flex; flex-direction: column; gap: 10px; min-height: 190px; padding: 18px; border-radius: 18px; border: 1px solid var(--border); background: var(--surface); color: inherit; text-decoration: none; box-shadow: 0 12px 28px rgba(15,23,42,.04); transition: transform .18s, border-color .18s, background .18s; }
+        .owned-card:hover { transform: translateY(-2px); border-color: var(--accent); background: var(--surface2); }
+        .owned-card .owned-type { width: fit-content; padding: 4px 8px; border-radius: 999px; background: var(--accentlo); color: var(--accent2); font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; }
+        .owned-card h3 { font-size: 15px; line-height: 1.35; color: var(--text); }
+        .owned-card p { font-size: 12.5px; line-height: 1.65; color: var(--muted); }
+        .resource-note { margin: -8px 0 18px; font-size: 13px; line-height: 1.7; color: var(--muted); max-width: 760px; }
 
         /* ── Sections ── */
         .section-surface { padding: 28px; border-radius: 28px; border: 1px solid color-mix(in srgb, var(--border) 76%, transparent); background: linear-gradient(180deg, color-mix(in srgb, var(--surface) 92%, transparent) 0%, color-mix(in srgb, var(--surface2) 88%, transparent) 100%); box-shadow: 0 16px 40px rgba(15,23,42,.08); }
@@ -216,13 +231,14 @@
         .drawer-clear:hover { border-color: #f87171; color: #f87171; }
 
         /* ── Responsive ── */
-        @media (max-width: 980px) { .hero-shell { grid-template-columns: 1fr; } .quickstart-grid { grid-template-columns: 1fr; } .row-2 { grid-template-columns: 1fr; } }
+        @media (max-width: 980px) { .hero-shell { grid-template-columns: 1fr; } .quickstart-grid { grid-template-columns: 1fr; } .workflow-band { grid-template-columns: 1fr; } .owned-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .row-2 { grid-template-columns: 1fr; } }
         @media (max-width: 760px) {
             .hero { padding: 28px 22px; border-radius: 26px; }
             .hero-panel, .section-surface, .pinned-section { padding: 22px 18px; border-radius: 22px; }
             .hero-stat-grid { grid-template-columns: 1fr; }
             .hero-actions { flex-direction: column; align-items: stretch; }
             .hero-btn { width: 100%; }
+            .owned-grid { grid-template-columns: 1fr; }
             .home-search-results { max-height: 300px; }
             .home-search-kbd { display: none; }
             .search-head span:last-child { display: none; }
@@ -382,6 +398,60 @@
         </div>
     </section>
 
+    <section class="section-block reveal">
+        <div class="workflow-band">
+            <div class="workflow-intro">
+                <span class="eyebrow" data-i18n="workflow_kicker">工作流</span>
+                <h2 data-i18n="workflow_title">先处理任务，再补足判断依据</h2>
+            </div>
+            <div class="workflow-step">
+                <strong>1</strong>
+                <h3 data-i18n="workflow_1_title">打开工具</h3>
+                <p data-i18n="workflow_1_desc">先用 PixCrush 或常用开发工具完成当前任务，不把时间浪费在搜索入口上。</p>
+            </div>
+            <div class="workflow-step">
+                <strong>2</strong>
+                <h3 data-i18n="workflow_2_title">查看说明</h3>
+                <p data-i18n="workflow_2_desc">遇到格式、兼容性或隐私边界问题时，跳到帮助中心快速确认。</p>
+            </div>
+            <div class="workflow-step">
+                <strong>3</strong>
+                <h3 data-i18n="workflow_3_title">阅读复盘</h3>
+                <p data-i18n="workflow_3_desc">通过博客文章了解实现过程、踩坑记录和 SEO/部署经验。</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-block section-surface reveal" id="guides">
+        <div class="section-head">
+            <h2 class="section-title"><span class="dot"></span><span data-i18n="sec_guides">原创指南</span></h2>
+            <a class="section-more" href="/blog.html" data-i18n="more_guides">查看全部文章 →</a>
+        </div>
+        <p class="resource-note" data-i18n="guides_note">这些内容来自本站自己的工具实践和维护记录，用来补充外部资源列表之外的判断依据。</p>
+        <div class="owned-grid">
+            <a class="owned-card" href="/blog-post.html?id=image-compression-guide">
+                <span class="owned-type" data-i18n="guide_type_tool">工具实践</span>
+                <h3 data-i18n="guide_1_title">PixCrush 为什么选择 Canvas API</h3>
+                <p data-i18n="guide_1_desc">了解本地图片压缩的质量、隐私和性能取舍。</p>
+            </a>
+            <a class="owned-card" href="/blog-post.html?id=seo-tool-sites">
+                <span class="owned-type" data-i18n="guide_type_seo">SEO</span>
+                <h3 data-i18n="guide_2_title">单页工具站 SEO 优化实战</h3>
+                <p data-i18n="guide_2_desc">从 canonical、sitemap 到内容厚度，整理工具站上线检查点。</p>
+            </a>
+            <a class="owned-card" href="/help-article.html?id=pixcrush-compress-guide">
+                <span class="owned-type" data-i18n="guide_type_help">帮助</span>
+                <h3 data-i18n="guide_3_title">如何压缩图片又尽量不明显降质</h3>
+                <p data-i18n="guide_3_desc">快速理解质量参数、尺寸限制和适合导出的格式。</p>
+            </a>
+            <a class="owned-card" href="/blog-post.html?id=quicktoollab-build">
+                <span class="owned-type" data-i18n="guide_type_build">建站记录</span>
+                <h3 data-i18n="guide_4_title">QuickToolLab 从零到上线</h3>
+                <p data-i18n="guide_4_desc">记录静态站、内容索引、隐私披露和部署链路。</p>
+            </a>
+        </div>
+    </section>
+
     <section class="section-block reveal" id="pinned">
         <div class="section-head"><h2 class="section-title"><span class="dot"></span><span data-i18n="sec_pinned">精选推荐</span></h2></div>
         <div class="pinned-section">
@@ -427,6 +497,7 @@
 
     <section class="section-block section-surface reveal" id="slides">
         <div class="section-head"><h2 class="section-title"><span class="dot"></span><span data-i18n="sec_slides">幻灯片 / 精选封面</span></h2><a class="section-more" href="https://dev.to" target="_blank" rel="noopener noreferrer" data-i18n="more_devto">Dev.to 更多 →</a></div>
+        <p class="resource-note" data-i18n="external_note">下面是来自公开 API 的外部技术资源，用于发现趋势；核心工具和原创说明已放在页面上方。</p>
         <div id="slides-host"><div class="loading skeleton" style="height:120px;border-radius:14px;"></div></div>
     </section>
 
