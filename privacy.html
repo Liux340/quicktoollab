@@ -21,6 +21,7 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="隐私政策 · QuickToolLab">
     <meta name="twitter:description" content="QuickToolLab 隐私政策。">
+    <meta name="google-adsense-account" content="ca-pub-8586931911554867">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -114,8 +115,8 @@
     <div style="animation:up .45s ease both;">
         <div class="page-eyebrow" data-i18n="eyebrow">隐私政策</div>
         <h1 class="page-title" data-i18n="page_title">PRIVACY<br>POLICY</h1>
-        <p class="page-lead" data-i18n="page_lead">本政策说明 QuickToolLab（含首页与 PixCrush 子页）如何处理数据：哪些在本地完成，哪些会经浏览器访问第三方。</p>
-        <p class="update-date" data-i18n="update_date">最后更新：2026 年 4 月 4 日</p>
+        <p class="page-lead" data-i18n="page_lead">本政策说明 QuickToolLab（含首页与 PixCrush 子页）如何处理数据、广告 Cookie 与第三方服务：哪些在本地完成，哪些会经浏览器访问第三方。</p>
+        <p class="update-date" data-i18n="update_date">最后更新：2026 年 5 月 3 日</p>
     </div>
 
     <div class="highlight-banner">
@@ -142,7 +143,7 @@
                         <li data-i18n="mh1">浏览首页时，浏览器会向 Dev.to、GitHub 请求公开接口以展示列表；你的 IP 等连接信息可能按对方政策被记录</li>
                         <li data-i18n="mh2">CDN / 托管方（如 Cloudflare）可能产生基础访问日志</li>
                         <li data-i18n="mh3">语言与主题偏好仅保存在本机 localStorage（pc_lang、pc_theme）</li>
-                        <li data-i18n="mh4">若启用 Google AdSense，广告相关数据遵循 Google 政策</li>
+                        <li data-i18n="mh4">本站已加载 Google AdSense；Google 可能使用 Cookie、网络信标、IP 地址或其他标识符来投放、衡量和防止广告滥用</li>
                     </ul>
                 </div>
             </div>
@@ -185,6 +186,7 @@
                 <li data-i18n="tp3"></li>
                 <li data-i18n="tp4"></li>
                 <li data-i18n="tp5"></li>
+                <li data-i18n="tp6"></li>
             </ul>
         </div>
     </div>
@@ -192,7 +194,7 @@
     <div class="section">
         <div class="section-header"><div class="section-num">6</div><h2 data-i18n="s6_title">Cookie</h2></div>
         <div class="card">
-            <p data-i18n="s6_p1">QuickToolLab 自身不为功能目的设置 Cookie。若启用 Google AdSense，Google 可能通过广告脚本设置 Cookie。你也可以在浏览器中限制第三方 Cookie。</p>
+            <p data-i18n="s6_p1">QuickToolLab 自身不为核心工具功能设置 Cookie。本站已启用 Google AdSense，Google 及其合作伙伴可能使用 Cookie、网络信标、IP 地址、设备信息或其他标识符来投放广告、衡量效果、限制频次并防止欺诈。你可以通过 Google 广告设置管理个性化广告，也可以在浏览器中限制第三方 Cookie。来自欧洲经济区、英国或瑞士的访问者如看到同意提示，可按提示管理广告同意状态。</p>
         </div>
     </div>
 
@@ -237,8 +239,8 @@
 const PAGE_I18N = {
     zh:{
         eyebrow:'隐私政策', page_title:'PRIVACY<br>POLICY',
-        page_lead:'本政策说明 QuickToolLab（含首页与 PixCrush 子页）如何处理数据：哪些在本地完成，哪些会经浏览器访问第三方。',
-        update_date:'最后更新：2026 年 4 月 4 日',
+        page_lead:'本政策说明 QuickToolLab（含首页与 PixCrush 子页）如何处理数据、广告 Cookie 与第三方服务：哪些在本地完成，哪些会经浏览器访问第三方。',
+        update_date:'最后更新：2026 年 5 月 3 日',
         tldr:'<strong>简而言之：</strong>我们不运营「用户上传图片到服务器」的服务。PixCrush 仅在本地处理图片；首页展示的文章与仓库列表由浏览器向 Dev.to、GitHub 请求公开数据。语言与主题存在你的浏览器本地。',
         s1_title:'我们不经由 QuickToolLab 服务器收集的内容',
         not_collected:'本站不收集', may_happen:'访问时可能发生',
@@ -247,7 +249,7 @@ const PAGE_I18N = {
         mh1:'浏览首页时，浏览器会向 Dev.to、GitHub 请求公开接口以展示列表；你的 IP 等连接信息可能按对方政策被记录',
         mh2:'CDN / 托管方（如 Cloudflare）可能产生基础访问日志',
         mh3:'语言与主题偏好仅保存在本机 localStorage（pc_lang、pc_theme）',
-        mh4:'若启用 Google AdSense，广告相关数据遵循 Google 政策',
+        mh4:'本站已加载 Google AdSense；Google 可能使用 Cookie、网络信标、IP 地址或其他标识符来投放、衡量和防止广告滥用',
         s2_title:'首页（动态内容区）',
         s2_p1:'当你打开或刷新首页时，页面中的 JavaScript 会使用 fetch 从 Dev.to、GitHub 等获取文章与仓库列表。这些请求从你的浏览器直接发往第三方，不经过我们自建的「上传用户图片」类接口。第三方可能根据其隐私政策处理请求元数据（如 IP）。展示的内容为公开数据，我们无法获知你的个人身份。',
         s3_title:'PixCrush 页面（compress.html）',
@@ -263,9 +265,10 @@ const PAGE_I18N = {
         tp2:'<strong>Cloudflare（或同类 CDN）</strong> — 静态站点托管与加速；可能记录访问日志。见 <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare 隐私政策</a>。',
         tp3:'<strong>Dev.to</strong> — 首页文章列表来自其公开 API；请求自你的浏览器发出。见 <a href="https://dev.to/privacy" target="_blank" rel="noopener">Dev.to 隐私说明</a>。',
         tp4:'<strong>GitHub</strong> — 首页仓库列表来自 GitHub REST API；请求自你的浏览器发出，并受匿名接口频率限制。见 <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub 隐私声明</a>。',
-        tp5:'<strong>Google AdSense（若已启用）</strong> — 广告与 Cookie 遵循 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隐私政策</a>；可在 <a href="https://adssettings.google.com/" target="_blank" rel="noopener">广告设置</a> 中管理。',
+        tp5:'<strong>Google AdSense</strong> — 本站用于展示广告。Google 可能使用 Cookie、网络信标、IP 地址、设备信息或其他标识符来投放广告、衡量效果、限制频次并防止欺诈。见 <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google 隐私政策</a>。',
+        tp6:'<strong>Google 合作伙伴数据使用</strong> — Google 说明其如何使用合作伙伴网站或应用中的信息：<a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google 如何使用数据</a>；你也可以在 <a href="https://adssettings.google.com/" target="_blank" rel="noopener">广告设置</a> 中管理个性化广告。',
         s6_title:'Cookie',
-        s6_p1:'QuickToolLab 自身不为功能目的设置 Cookie。若启用 Google AdSense，Google 可能通过广告脚本设置 Cookie。你也可以在浏览器中限制第三方 Cookie。',
+        s6_p1:'QuickToolLab 自身不为核心工具功能设置 Cookie。本站已启用 Google AdSense，Google 及其合作伙伴可能使用 Cookie、网络信标、IP 地址、设备信息或其他标识符来投放广告、衡量效果、限制频次并防止欺诈。你可以通过 Google 广告设置管理个性化广告，也可以在浏览器中限制第三方 Cookie。来自欧洲经济区、英国或瑞士的访问者如看到同意提示，可按提示管理广告同意状态。',
         s7_title:'未成年人',
         s7_p1:'本站为通用信息与工具导航，不面向儿童做营销，也不主动收集可识别未成年人身份的数据。',
         s8_title:'政策变更',
@@ -276,8 +279,8 @@ const PAGE_I18N = {
     },
     en:{
         eyebrow:'Privacy Policy', page_title:'PRIVACY<br>POLICY',
-        page_lead:'This policy describes QuickToolLab (home + PixCrush): what stays on your device and what reaches third parties via your browser.',
-        update_date:'Last updated: April 4, 2026',
+        page_lead:'This policy describes QuickToolLab (home + PixCrush): what stays on your device, what reaches third parties through your browser, and how advertising cookies may be used.',
+        update_date:'Last updated: May 3, 2026',
         tldr:'<strong>In short:</strong> We do not run a service that uploads your images to our servers. PixCrush processes images locally. The home page loads public lists from Dev.to and GitHub using your browser. Language and theme prefs stay in localStorage.',
         s1_title:'What we do not collect on our servers',
         not_collected:'We do not collect', may_happen:'May occur when you browse',
@@ -286,7 +289,7 @@ const PAGE_I18N = {
         mh1:'On the home page your browser calls Dev.to and GitHub APIs; those services may log connection metadata such as IP per their policies',
         mh2:'The CDN/host (e.g. Cloudflare) may keep basic access logs',
         mh3:'Language and theme are stored only in localStorage (pc_lang, pc_theme)',
-        mh4:'If AdSense is enabled, Google policies apply to ads',
+        mh4:'Google AdSense is loaded on this site; Google may use cookies, web beacons, IP addresses, or other identifiers for ad delivery, measurement, frequency capping, and abuse prevention',
         s2_title:'Home page (dynamic sections)',
         s2_p1:'When you open or refresh the home page, scripts use fetch() to retrieve public articles and repositories from Dev.to and GitHub. Requests go from your browser to those providers, not through a QuickToolLab "upload" API. Third parties may process request metadata under their own policies. The content shown is public; we cannot identify you from it.',
         s3_title:'PixCrush (compress.html)',
@@ -302,9 +305,10 @@ const PAGE_I18N = {
         tp2:'<strong>Cloudflare (or similar CDN)</strong> — hosting; may log visits. <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare policy</a>.',
         tp3:'<strong>Dev.to</strong> — public API for article lists. <a href="https://dev.to/privacy" target="_blank" rel="noopener">Dev.to privacy</a>.',
         tp4:'<strong>GitHub</strong> — public REST API for repository lists; subject to rate limits. <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub privacy</a>.',
-        tp5:'<strong>Google AdSense (if enabled)</strong> — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>; <a href="https://adssettings.google.com/" target="_blank" rel="noopener">Ad settings</a>.',
+        tp5:'<strong>Google AdSense</strong> — used to display ads on this site. Google may use cookies, web beacons, IP addresses, device information, or other identifiers for ad delivery, measurement, frequency capping, and fraud prevention. See the <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google Privacy Policy</a>.',
+        tp6:'<strong>Google partner-site data use</strong> — Google explains how it uses information from partner sites and apps here: <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">How Google uses data</a>. You can manage personalization in <a href="https://adssettings.google.com/" target="_blank" rel="noopener">Ad settings</a>.',
         s6_title:'Cookies',
-        s6_p1:'QuickToolLab does not set functional cookies itself. AdSense may set cookies if enabled.',
+        s6_p1:'QuickToolLab does not set cookies for the core tool features itself. Google AdSense is enabled on this site, and Google and its partners may use cookies, web beacons, IP addresses, device information, or other identifiers for ad delivery, measurement, frequency capping, and fraud prevention. You can manage personalized ads in Google Ad settings and restrict third-party cookies in your browser. Visitors from the EEA, UK, or Switzerland may manage ad consent through any consent prompt shown to them.',
         s7_title:'Children',
         s7_p1:'The site is general-purpose and not directed at children; we do not knowingly collect child-identifying data.',
         s8_title:'Changes',
@@ -315,8 +319,8 @@ const PAGE_I18N = {
     },
     ja:{
         eyebrow:'プライバシーポリシー', page_title:'PRIVACY<br>POLICY',
-        page_lead:'QuickToolLab（トップと PixCrush）におけるデータの扱いを説明します。',
-        update_date:'最終更新：2026年4月4日',
+        page_lead:'QuickToolLab（トップと PixCrush）におけるデータ、広告 Cookie、第三者サービスの扱いを説明します。',
+        update_date:'最終更新：2026年5月3日',
         tldr:'<strong>要約：</strong>画像を当社サーバーにアップロードするサービスではありません。PixCrush はローカル処理のみ。トップページのリストはブラウザから Dev.to / GitHub の公開 API を取得します。言語・テーマは localStorage に保存されます。',
         s1_title:'当サイトサーバーで収集しないもの',
         not_collected:'収集しない', may_happen:'閲覧時に起こりうること',
@@ -325,7 +329,7 @@ const PAGE_I18N = {
         mh1:'トップ表示のためブラウザが Dev.to / GitHub にリクエストします。IP 等は各社ポリシーに従い記録される場合があります',
         mh2:'CDN（例：Cloudflare）がアクセスログを取る場合があります',
         mh3:'言語・テーマは localStorage（pc_lang、pc_theme）のみ',
-        mh4:'AdSense 有効時は Google のポリシーが適用されます',
+        mh4:'当サイトでは Google AdSense を読み込みます。Google は Cookie、Web ビーコン、IP アドレス、その他の識別子を広告配信・測定・不正防止に使用する場合があります',
         s2_title:'トップページ（動的エリア）',
         s2_p1:'トップを開くと、スクリプトが Dev.to や GitHub の公開 API を fetch で取得します。リクエストは利用者のブラウザから直接送られます。第三者は自社ポリシーに基づき接続情報を処理する場合があります。',
         s3_title:'PixCrush（compress.html）',
@@ -341,9 +345,10 @@ const PAGE_I18N = {
         tp2:'<strong>Cloudflare 等 CDN</strong> — <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener">Cloudflare</a>',
         tp3:'<strong>Dev.to</strong> — <a href="https://dev.to/privacy" target="_blank" rel="noopener">Dev.to</a>',
         tp4:'<strong>GitHub API</strong> — <a href="https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement" target="_blank" rel="noopener">GitHub</a>',
-        tp5:'<strong>Google AdSense（任意）</strong> — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google</a>',
+        tp5:'<strong>Google AdSense</strong> — 広告表示に使用します。Google は Cookie、Web ビーコン、IP アドレス、端末情報、その他の識別子を広告配信・測定・頻度制限・不正防止に使用する場合があります。<a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google プライバシー</a>',
+        tp6:'<strong>Google パートナーサイトでのデータ利用</strong> — Google の説明：<a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener">Google によるデータ利用</a>。広告のカスタマイズは <a href="https://adssettings.google.com/" target="_blank" rel="noopener">広告設定</a> で管理できます。',
         s6_title:'Cookie',
-        s6_p1:'当サイト自体は機能目的の Cookie を設定しません。AdSense 利用時は Google の Cookie が使われる場合があります。',
+        s6_p1:'QuickToolLab 自体は主要なツール機能のために Cookie を設定しません。当サイトでは Google AdSense を有効にしており、Google およびそのパートナーは Cookie、Web ビーコン、IP アドレス、端末情報、その他の識別子を広告配信・測定・頻度制限・不正防止に使用する場合があります。ブラウザ設定や Google の広告設定で管理できます。',
         s7_title:'未成年者',
         s7_p1:'一般的な情報・ツールサイトであり、児童を対象としたマーケティングは行いません。',
         s8_title:'変更',

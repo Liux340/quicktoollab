@@ -37,14 +37,16 @@
         .line b{color:var(--accent2)}
         .empty{padding:18px;border:1px solid var(--border);background:var(--surface);border-radius:12px;color:var(--muted)}
     </style>
-    <link rel="canonical" href="https://quicktoollab.top/help-article.html">
+    <meta name="description" id="meta-desc" content="QuickToolLab 帮助文章">
+    <link rel="canonical" id="canonical" href="https://quicktoollab.top/help-article.html">
     <meta property="og:type" content="article">
-    <meta property="og:url" content="https://quicktoollab.top/help-article.html">
-    <meta property="og:title" content="帮助文章 · QuickToolLab">
-    <meta property="og:description" content="QuickToolLab 帮助文章">
+    <meta property="og:url" id="og-url" content="https://quicktoollab.top/help-article.html">
+    <meta property="og:title" id="og-title" content="帮助文章 · QuickToolLab">
+    <meta property="og:description" id="og-desc" content="QuickToolLab 帮助文章">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="帮助文章 · QuickToolLab">
     <meta name="twitter:description" content="QuickToolLab 帮助文章">
+    <meta name="google-adsense-account" content="ca-pub-8586931911554867">
 </head>
 <body>
 <header>
@@ -112,13 +114,26 @@ function renderArticle(){
     const host = document.getElementById('article-host');
     document.title = t.page_title;
     if (!a) {
+        const missingUrl = 'https://quicktoollab.top/help-article.html' + (id ? '?id=' + encodeURIComponent(id) : '');
+        document.getElementById('canonical').href = missingUrl;
+        document.getElementById('og-url').content = missingUrl;
+        document.getElementById('og-title').content = '404 · QuickToolLab';
+        document.getElementById('og-desc').content = t.notfound;
         host.innerHTML = '<div class="empty">' + escapeHtml(t.notfound) + '</div>';
         return;
     }
-    document.title = localizeField(a.title) + ' · QuickToolLab';
+    const title = localizeField(a.title);
+    const desc = localizeField(a.intro);
+    const url = 'https://quicktoollab.top/help-article.html?id=' + encodeURIComponent(a.id);
+    document.title = title + ' · QuickToolLab';
+    document.getElementById('meta-desc').content = desc;
+    document.getElementById('canonical').href = url;
+    document.getElementById('og-url').content = url;
+    document.getElementById('og-title').content = title + ' · QuickToolLab';
+    document.getElementById('og-desc').content = desc;
     host.innerHTML = `
         <div class="cat">${escapeHtml(localizeField(a.cat))}</div>
-        <h1>${escapeHtml(localizeField(a.title))}</h1>
+        <h1>${escapeHtml(title)}</h1>
         <div class="card">
             <p class="line"><b>${escapeHtml(t.intro)}</b>${escapeHtml(localizeField(a.intro))}</p>
             <p class="line"><b>${escapeHtml(t.howto)}</b>${escapeHtml(localizeField(a.howto))}</p>

@@ -15,7 +15,11 @@
     <meta name="description" id="meta-desc" content="QuickToolLab 博客文章">
     <link rel="canonical" id="canonical" href="https://quicktoollab.top/blog-post.html">
     <meta property="og:type" content="article">
+    <meta property="og:url" id="og-url" content="https://quicktoollab.top/blog-post.html">
+    <meta property="og:title" id="og-title" content="博客文章 · QuickToolLab">
+    <meta property="og:description" id="og-desc" content="QuickToolLab 博客文章">
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="google-adsense-account" content="ca-pub-8586931911554867">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><path d='M8 10h6l4 6 6-6v14H8V10z' fill='none' stroke='%23f97316' stroke-width='2' stroke-linejoin='round'/><circle cx='11' cy='22' r='2' fill='%2322c55e'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -461,6 +465,30 @@ function badgeClass(b) {
     return {tech:'badge-tech',tool:'badge-tool',dev:'badge-dev',life:'badge-life'}[b]||'badge-tech';
 }
 
+function sanitizeArticleHtml(html) {
+    const allowedTags = new Set(['A','P','H2','H3','H4','UL','OL','LI','STRONG','EM','B','I','CODE','PRE','BLOCKQUOTE','BR','HR']);
+    const allowedAttrs = { A: new Set(['href','target','rel']) };
+    const tpl = document.createElement('template');
+    tpl.innerHTML = html || '';
+
+    [...tpl.content.querySelectorAll('*')].forEach(el => {
+        if (!allowedTags.has(el.tagName)) {
+            el.replaceWith(...el.childNodes);
+            return;
+        }
+        [...el.attributes].forEach(attr => {
+            const allowed = allowedAttrs[el.tagName] && allowedAttrs[el.tagName].has(attr.name);
+            const unsafeUrl = /^(href|src)$/i.test(attr.name) && /^\s*javascript:/i.test(attr.value);
+            if (!allowed || /^on/i.test(attr.name) || unsafeUrl) el.removeAttribute(attr.name);
+        });
+        if (el.tagName === 'A') {
+            el.setAttribute('rel', 'noopener noreferrer');
+            if (el.href && !el.getAttribute('target')) el.setAttribute('target', '_blank');
+        }
+    });
+    return tpl.innerHTML;
+}
+
 function renderArticle() {
     const t = getPageStrings();
     const post = getPost(postId);
@@ -470,7 +498,11 @@ function renderArticle() {
     if (!post) {
         document.title = `404 · QuickToolLab`;
         document.getElementById('meta-desc').content = t.not_found;
-        document.getElementById('canonical').href = `https://quicktoollab.top/blog-post.html${postId ? `?id=${encodeURIComponent(postId)}` : ''}`;
+        const missingUrl = `https://quicktoollab.top/blog-post.html${postId ? `?id=${encodeURIComponent(postId)}` : ''}`;
+        document.getElementById('canonical').href = missingUrl;
+        document.getElementById('og-url').content = missingUrl;
+        document.getElementById('og-title').content = `404 · QuickToolLab`;
+        document.getElementById('og-desc').content = t.not_found;
         document.getElementById('article-title').textContent = t.not_found;
         document.getElementById('breadcrumb-title').textContent = t.not_found;
         document.getElementById('article-date').textContent = '—';
@@ -492,7 +524,11 @@ function renderArticle() {
 
     document.title = `${title} · QuickToolLab`;
     document.getElementById('meta-desc').content = desc;
-    document.getElementById('canonical').href = `https://quicktoollab.top/blog-post.html?id=${encodeURIComponent(post.id)}`;
+    const canonicalUrl = `https://quicktoollab.top/blog-post.html?id=${encodeURIComponent(post.id)}`;
+    document.getElementById('canonical').href = canonicalUrl;
+    document.getElementById('og-url').content = canonicalUrl;
+    document.getElementById('og-title').content = `${title} · QuickToolLab`;
+    document.getElementById('og-desc').content = desc;
 
     const heroBg = document.getElementById('hero-bg');
     heroBg.style.background = '';
@@ -515,7 +551,7 @@ function renderArticle() {
         `<span class="article-tag">#${escapeHtml(tag)}</span>`
     ).join('');
 
-    document.getElementById('article-prose').innerHTML = content;
+    document.getElementById('article-prose').innerHTML = sanitizeArticleHtml(content);
 
     const headings = document.getElementById('article-prose').querySelectorAll('h2,h3');
     const tocList  = document.getElementById('toc-list');

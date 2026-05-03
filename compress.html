@@ -25,6 +25,7 @@
     <meta name="twitter:title" content="PixCrush · 免费图片压缩 & 格式转换工具">
     <meta name="twitter:description" content="免费在线图片压缩与格式转换，支持 JPG、PNG、WebP 批量处理，本地运行不上传服务器。">
     <meta name="twitter:image" content="https://quicktoollab.top/og-image.png">
+    <meta name="google-adsense-account" content="ca-pub-8586931911554867">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%230a0a10'/><rect x='5' y='9' width='14' height='11' rx='2' fill='none' stroke='%23f97316' stroke-width='2'/><circle cx='9' cy='13' r='1.5' fill='%23f97316'/><polyline points='5,17 10,13 14,16 18,12 22,15' fill='none' stroke='%23f97316' stroke-width='1.5' stroke-linejoin='round'/><path d='M20 14 L27 14 M24 11 L27 14 L24 17' fill='none' stroke='%23fb923c' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/></svg>">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -298,6 +299,7 @@
             padding: 14px 16px; border-bottom: 1px solid var(--border);
         }
         .preview-title { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 14px; font-weight: 700; color: var(--text); }
+        .preview-saving { flex-shrink: 0; padding: 4px 10px; border-radius: 999px; background: rgba(34,197,94,.12); border: 1px solid rgba(34,197,94,.22); color: var(--green); font-size: 12px; font-weight: 800; }
         .preview-close { width: 32px; height: 32px; border-radius: 8px; border: 1px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; flex-shrink: 0; }
         .preview-close:hover { color: var(--text); border-color: var(--accent2); }
         .preview-body { padding: 16px; overflow: auto; }
@@ -309,8 +311,12 @@
         @keyframes spin { to { transform: rotate(360deg); } }
         .spin { animation: spin .8s linear infinite; }
         @media (max-width: 720px) { .result-summary { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-        @media (max-width: 720px) { .preview-grid { grid-template-columns: 1fr; } .preview-pane img { height: 260px; } }
-        @media (max-width: 480px) { .result-summary { grid-template-columns: 1fr; } .file-item { align-items: flex-start; } .preview-btn { margin-left: 0; } }
+        @media (max-width: 720px) { .preview-grid { grid-template-columns: 1fr; } .preview-pane img { height: 260px; } .preview-saving { display: none; } }
+        @media (max-width: 560px) {
+            .file-item { display: grid; grid-template-columns: 52px 1fr 32px; align-items: start; }
+            .file-status { grid-column: 2 / 4; text-align: left; }
+        }
+        @media (max-width: 480px) { .result-summary { grid-template-columns: 1fr; } .preview-btn { margin-left: 0; } }
     </style>
 </head>
 <body>
@@ -462,6 +468,7 @@
     <div class="preview-dialog" role="dialog" aria-modal="true" aria-labelledby="preview-title">
         <div class="preview-head">
             <div class="preview-title" id="preview-title">Preview</div>
+            <div class="preview-saving" id="preview-saving">0%</div>
             <button class="preview-close" id="preview-close" type="button" aria-label="Close preview">×</button>
         </div>
         <div class="preview-body">
@@ -512,6 +519,7 @@ const PAGE_I18N = {
         sum_files:'已完成', sum_original:'原始大小', sum_output:'输出大小', sum_saved:'节省',
         toast_done:'已完成 {count} 个文件处理',
         preview:'预览', preview_original:'原图', preview_output:'输出图',
+        preview_saved:'节省',
     },
     en:{
         hero_title:'Compress<br>& Convert', hero_sub:'Batch process images locally — no uploads, fully private.',
@@ -530,6 +538,7 @@ const PAGE_I18N = {
         sum_files:'Files done', sum_original:'Original', sum_output:'Output', sum_saved:'Saved',
         toast_done:'Done: {count} file(s) processed',
         preview:'Preview', preview_original:'Original', preview_output:'Output',
+        preview_saved:'saved',
     },
     ja:{
         hero_title:'画像圧縮<br>フォーマット変換', hero_sub:'ローカル処理で完結。サーバーへのアップロード不要、プライバシー安全。',
@@ -548,6 +557,7 @@ const PAGE_I18N = {
         sum_files:'完了数', sum_original:'元サイズ', sum_output:'出力', sum_saved:'削減',
         toast_done:'{count} 件の処理が完了しました',
         preview:'プレビュー', preview_original:'元画像', preview_output:'出力画像',
+        preview_saved:'削減',
     }
 };
 
@@ -770,11 +780,14 @@ function openPreview(id) {
     const outputImg = document.getElementById('preview-output-img');
     const originalMeta = document.getElementById('preview-original-meta');
     const outputMeta = document.getElementById('preview-output-meta');
+    const saving = document.getElementById('preview-saving');
+    const saved = entry.file.size ? Math.round((1 - entry.outputSize / entry.file.size) * 100) : 0;
     title.textContent = entry.file.name;
     originalImg.src = entry.thumb || '';
     outputImg.src = entry.outputUrl || '';
     originalMeta.textContent = fmt(entry.file.size);
     outputMeta.textContent = fmt(entry.outputSize);
+    saving.textContent = saved > 0 ? `${getPageStrings().preview_saved} ${saved}%` : `+${Math.abs(saved)}%`;
     modal.classList.add('open');
     modal.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
