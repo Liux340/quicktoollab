@@ -1,227 +1,394 @@
 [
   {
-    "id": "canonical-seo",
-    "cat": "tech",
-    "date": "2025-04-15",
-    "readTime": 5,
+    "id": "base64-image-tradeoffs",
+    "cat": {
+      "zh": "文本与数据格式",
+      "en": "Text & Data Formats",
+      "ja": "テキスト・データ形式"
+    },
     "title": {
-      "zh": "Canonical 标签写错一个字母，导致 6 个页面全部不被收录",
-      "en": "One typo in canonical URL blocked all 6 pages from indexing",
-      "ja": "canonical URLの誤字でページが未収録に"
+      "zh": "图片 Base64 转换取舍：什么时候该内联，什么时候应该保留独立文件",
+      "en": "Image Base64 trade-offs: when to inline and when to keep separate files",
+      "ja": "画像 Base64 の使い分け：インライン化すべき場面と避ける場面"
     },
-    "desc": {
-      "zh": "记录一次真实踩坑：quicktoolab.com 和 quicktoollab.top 相差一个 l，Google 直接把所有页面判定为副本不收录，从发现到修复的全过程。",
-      "en": "A real-world case: one missing \"l\" in the domain made Google treat all pages as duplicates. Here is the full story from discovery to fix.",
-      "ja": "ドメインの一文字違いでGoogleが全ページを重複コンテンツ判定。発見から修正までの全記録。"
+    "intro": {
+      "zh": "Base64 工具可快速把小图片嵌入文本配置，但并不总是最佳方案。",
+      "en": "Base64 tools are handy for embedding tiny assets, but they are not always optimal.",
+      "ja": "Base64 は小さな画像埋め込みに便利ですが、常に最適とは限りません。"
     },
-    "tags": [
-      "SEO",
-      "canonical",
-      "Google Search Console"
-    ],
-    "image": "https://images.unsplash.com/photo-1555066931-4365d14431b9?w=1200&h=600&fit=crop",
-    "badge": "tech",
-    "content": {
-      "zh": "<h2>问题发现</h2>\n<p>某天检查 Google Search Console，发现提交的 6 个页面状态全部是 <strong>「已被抓取 — 未收录」</strong>，理由都是 <strong>「已选择替代页面（包含正确的 canonical 标签）」</strong>。</p>\n<p>这意味着 Google 认为这些页面是\"重复内容\"，并且认为真正的\"原始\"页面在别处。</p>\n\n<h2>排查过程</h2>\n<p>仔细检查才发现问题：所有页面的 canonical 标签写的是 <code>https://quicktoolab.com/</code>，而我的真实域名是 <code>https://quicktoollab.top/</code>。</p>\n<blockquote>注意：<code>quicktoolab</code>（少一个 l）vs <code>quicktoollab</code>（正确）</blockquote>\n<p>Google 的逻辑是：canonical 标签相当于你在告诉 Google \"这个页面的权威版本在 <code>quicktoolab.com</code>\"，所以 Google 说\"好的，那我去收录 <code>quicktoolab.com</code>\"，然后你的 <code>quicktoollab.top</code> 就被当成副本丢弃了。</p>\n\n<h2>修复步骤</h2>\n<p>修复很简单，把所有页面的 canonical 链接从：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>改为：</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>同时一并修复了 <code>og:url</code>、<code>og:image</code> 里的同类错误。</p>\n\n<h2>经验教训</h2>\n<p>Canonical 标签是 SEO 中最容易被忽视却影响最大的标签之一。几个关键点：</p>\n<ul>\n<li>canonical 指向的域名必须和你实际使用的域名 <strong>完全一致</strong>，包括 www 和非 www、http 和 https</li>\n<li>sitemap 里的 URL 和 canonical 指向的 URL 必须一致，否则 Google 会困惑</li>\n<li>每次新建页面后，第一件事就是检查 canonical 是否正确</li>\n</ul>\n<p>提交修复后，通过 Google Search Console 的「URL 检查」工具逐一请求重新收录，大约 2-4 周后应该会正常被索引。</p>",
-      "en": "<h2>Problem Discovery</h2>\n<p>While checking Google Search Console, all 6 submitted pages showed <strong>\"Crawled — currently not indexed\"</strong> with reason <strong>\"Duplicate, submitted URL not selected as canonical\"</strong>.</p>\n<p>This means Google considered these pages as duplicates, believing the real \"original\" version exists elsewhere.</p>\n\n<h2>Root Cause</h2>\n<p>On closer inspection: all canonical tags pointed to <code>https://quicktoolab.com/</code> while the actual domain is <code>https://quicktoollab.top/</code>.</p>\n<blockquote>Notice: <code>quicktoolab</code> (missing one \"l\") vs <code>quicktoollab</code> (correct)</blockquote>\n<p>Google's logic: canonical tells Google \"the authoritative version is at quicktoolab.com\". So Google indexed quicktoolab.com and treated quicktoollab.top as a duplicate.</p>\n\n<h2>Fix</h2>\n<p>Simple fix — update all canonical links from:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoolab.com/\"&gt;</code></pre>\n<p>To:</p>\n<pre><code>&lt;link rel=\"canonical\" href=\"https://quicktoollab.top/\"&gt;</code></pre>\n<p>Also fixed the same typo in <code>og:url</code> and <code>og:image</code> tags.</p>\n\n<h2>Lessons Learned</h2>\n<ul>\n<li>The canonical URL must <strong>exactly match</strong> your actual domain — including www vs non-www, http vs https</li>\n<li>Sitemap URLs and canonical URLs must match, or Google gets confused</li>\n<li>Always verify canonical tags are correct when creating new pages</li>\n</ul>",
-      "ja": "<h2>問題の発見</h2>\n<p>Google Search Consoleを確認したところ、提出した6ページすべてが<strong>「クロール済み — インデックス未登録」</strong>で、理由は<strong>「重複：ユーザーが指定したURLが正規URLとして選択されていない」</strong>でした。</p>\n\n<h2>原因の特定</h2>\n<p>よく確認すると、すべてのcanonicalタグが <code>https://quicktoolab.com/</code> を指していましたが、実際のドメインは <code>https://quicktoollab.top/</code> です。</p>\n<blockquote><code>quicktoolab</code>（lが一つ足りない）vs <code>quicktoollab</code>（正しい）</blockquote>\n\n<h2>修正方法</h2>\n<p>全ページのcanonicalを正しいドメインに修正し、og:urlとog:imageも同様に修正しました。</p>\n\n<h2>教訓</h2>\n<ul>\n<li>canonicalのURLは実際のドメインと完全に一致させること</li>\n<li>sitemapのURLとcanonicalのURLは一致させること</li>\n<li>新ページ作成時は必ずcanonicalを確認すること</li>\n</ul>"
+    "howto": {
+      "zh": "图标级别资源可考虑内联；大图优先独立文件并走缓存。",
+      "en": "Inline icon-sized assets only; keep large images as separate files with proper caching.",
+      "ja": "アイコン程度はインライン可。大きな画像は別ファイル化してキャッシュ活用が基本です。"
+    },
+    "science": {
+      "zh": "Base64 常见体积膨胀约 33%，会增加传输和解析负担。",
+      "en": "Base64 often increases size by around 33%, adding transfer and parsing overhead.",
+      "ja": "Base64 は一般に約 33% 容量増となり、転送・解析コストが上がります。"
     }
   },
   {
-    "id": "waline-comment-system",
-    "cat": "tool",
-    "date": "2025-04-10",
-    "readTime": 8,
+    "id": "caniuse-compat-strategy",
+    "cat": {
+      "zh": "前端设计与 UI",
+      "en": "Front-end & UI",
+      "ja": "フロントエンド・UI"
+    },
     "title": {
-      "zh": "把 localStorage 自制评论系统替换成 Waline 的全过程",
-      "en": "Replacing a DIY localStorage comment system with Waline",
-      "ja": "自作コメントシステムをWalineに置き換える"
+      "zh": "Can I Use 兼容性实践：如何为新 CSS/JS 特性设计可回退方案",
+      "en": "Can I Use strategy: plan safe fallback for new CSS/JS features",
+      "ja": "Can I Use 活用：新機能のフォールバック設計"
     },
-    "desc": {
-      "zh": "自己写的评论系统只有本地能看见，换成 Waline 后所有访客都能看到评论。本文记录了从分析旧代码到精准三点替换的完整迁移过程。",
-      "en": "A self-made comment system visible only locally — migrated to Waline so all visitors can interact. Full migration walkthrough included.",
-      "ja": "自作コメントシステムから Waline への移行過程を完全記録。"
+    "intro": {
+      "zh": "Can I Use 用于查询浏览器支持度，帮助你判断新特性能否直接上线。",
+      "en": "Can I Use shows browser support so you can decide whether a feature is ready for production.",
+      "ja": "Can I Use はブラウザ対応状況を確認し、本番投入判断を助けます。"
     },
-    "tags": [
-      "Waline",
-      "评论系统",
-      "JavaScript"
-    ],
-    "image": "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1200&h=600&fit=crop",
-    "badge": "tool",
-    "content": {
-      "zh": "<h2>问题根源</h2>\n<p>原来的评论系统用 <code>localStorage</code> 存储评论数据，这是浏览器的本地存储，每台设备、每个浏览器都是完全隔离的。所以你在自己电脑上发的评论，其他访客根本看不到。</p>\n\n<h2>为什么选 Waline</h2>\n<p>Waline 是一个开源的评论系统，主要优势：</p>\n<ul>\n<li>评论存在服务端数据库，所有访客都能看到</li>\n<li>免费部署在 Vercel，配合 Cloudflare Pages 很合适</li>\n<li>支持 Markdown、表情包、邮件通知</li>\n<li>主题适配方便，通过 CSS 变量控制样式</li>\n</ul>\n\n<h2>迁移步骤</h2>\n<p>替换只涉及三处改动：</p>\n<ul>\n<li><strong>HTML</strong>：将原来的输入框、验证码等替换为一个 <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>：删除旧评论样式，加入 Waline CSS 主题变量适配</li>\n<li><strong>JS</strong>：删除所有旧评论函数，加入 Waline 初始化代码</li>\n</ul>\n\n<h2>关键代码</h2>\n<pre><code>import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';\n\nfunction initWaline(locale) {\n    if (window.__walineInstance) window.__walineInstance.destroy();\n    window.__walineInstance = init({\n        el: '#waline-container',\n        serverURL: 'https://comment.quicktoollab.top',\n        lang: locale || 'zh-CN',\n        dark: 'auto',\n    });\n}</code></pre>\n\n<h2>踩坑记录</h2>\n<p>最大的坑：替换时 <code>submitHomeComment</code> 函数末尾的闭合括号没有被一起删除，导致一个孤立的语句出现在全局作用域，造成 JS 语法错误，整个脚本崩溃，所有动态内容都加载不出来。</p>\n<p>教训：替换评论 JS 块时，一定要检查块的开头和结尾有没有残留代码。</p>",
-      "en": "<h2>The Root Problem</h2>\n<p>The original system stored comments in <code>localStorage</code> — browser-local storage that's completely isolated per device and browser. Comments you post are invisible to other visitors.</p>\n\n<h2>Why Waline</h2>\n<p>Waline stores comments in a server-side database so all visitors can see them. It deploys free on Vercel, supports Markdown and emoji, and adapts to themes via CSS variables.</p>\n\n<h2>Migration Steps</h2>\n<p>Only three changes needed:</p>\n<ul>\n<li><strong>HTML</strong>: Replace all inputs and captcha with <code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code></li>\n<li><strong>CSS</strong>: Remove old comment styles, add Waline CSS variable theme adaptation</li>\n<li><strong>JS</strong>: Delete all old comment functions, add Waline init code</li>\n</ul>\n\n<h2>Pitfall</h2>\n<p>The biggest gotcha: a dangling closing brace from the old <code>submitHomeComment</code> function caused a JS syntax error, crashing the entire script and breaking all dynamic content loading.</p>",
-      "ja": "<h2>問題の根本原因</h2>\n<p>元のシステムは<code>localStorage</code>にコメントを保存していました。これはブラウザのローカルストレージで、デバイスやブラウザごとに完全に分離されています。</p>\n\n<h2>Walineを選んだ理由</h2>\n<p>Walineはサーバーサイドにコメントを保存するため、全訪問者がコメントを見ることができます。Vercelで無料デプロイ可能で、Markdownや絵文字にも対応しています。</p>\n\n<h2>移行手順</h2>\n<ul>\n<li>HTMLの入力フォームを<code>&lt;div id=\"waline-container\"&gt;&lt;/div&gt;</code>に置換</li>\n<li>古いCSSを削除し、WalineのCSSテーマ変数を追加</li>\n<li>古いJS関数を削除し、Waline初期化コードを追加</li>\n</ul>"
+    "howto": {
+      "zh": "根据目标用户浏览器份额做决策：高覆盖直用，低覆盖加 polyfill 或降级策略。",
+      "en": "Decide by audience browser share: ship directly for high coverage, add polyfill/degradation when needed.",
+      "ja": "利用ユーザー環境の割合で判断し、必要なら polyfill や段階的劣化を用意します。"
+    },
+    "science": {
+      "zh": "兼容性是分层设计问题，不是简单“支持/不支持”二选一。",
+      "en": "Compatibility is a layered design decision, not a binary yes/no.",
+      "ja": "互換性は二択ではなく、段階設計で考えるべき課題です。"
     }
   },
   {
-    "id": "cloudflare-pages-deploy",
-    "cat": "dev",
-    "date": "2025-04-05",
-    "readTime": 6,
+    "id": "codesandbox-min-repro",
+    "cat": {
+      "zh": "在线 IDE 与沙盒",
+      "en": "Online IDE & Sandbox",
+      "ja": "オンライン IDE・サンドボックス"
+    },
     "title": {
-      "zh": "GitHub + Cloudflare Pages 零成本建站，DDoS 防护免费附赠",
-      "en": "Zero-cost hosting with GitHub + Cloudflare Pages and free DDoS protection",
-      "ja": "GitHub + Cloudflare Pages でゼロコストサイト構築"
+      "zh": "CodeSandbox 最小复现指南：如何构造能让别人一眼看懂的问题现场",
+      "en": "CodeSandbox minimal reproduction: build a clean, shareable bug case",
+      "ja": "CodeSandbox 最小再現ガイド：伝わる不具合ケースの作り方"
     },
-    "desc": {
-      "zh": "只需一个域名费用，就能拥有全球 CDN 加速、自动 HTTPS、DDoS 防护和 CI/CD 自动部署。",
-      "en": "One domain fee, and you get global CDN, auto HTTPS, DDoS protection, and CI/CD.",
-      "ja": "ドメイン代だけでCDN・HTTPS・DDoS防護・CI/CDを手に入れる。"
+    "intro": {
+      "zh": "CodeSandbox 特别适合复现前端 bug、演示方案和协作讨论。",
+      "en": "CodeSandbox is ideal for reproducing front-end bugs and sharing isolated demos.",
+      "ja": "CodeSandbox はフロント不具合の再現や共有デモに最適です。"
     },
-    "tags": [
-      "Cloudflare",
-      "GitHub Pages",
-      "部署"
-    ],
-    "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1200&h=600&fit=crop",
-    "badge": "dev",
-    "content": {
-      "zh": "<h2>方案概述</h2>\n<p>这套方案的核心逻辑：GitHub 存代码 → Cloudflare Pages 自动部署 → Cloudflare CDN 分发 → 用户访问。</p>\n<p>费用：只需一个域名，其余全部免费。</p>\n\n<h2>部署步骤</h2>\n<ul>\n<li>1. 把网站文件推送到 GitHub 仓库</li>\n<li>2. 登录 Cloudflare Pages，新建项目，连接 GitHub 仓库</li>\n<li>3. 构建命令留空（纯静态站），输出目录填 <code>/</code></li>\n<li>4. 绑定自定义域名，在域名商处添加 CNAME 记录</li>\n</ul>\n\n<h2>免费功能清单</h2>\n<ul>\n<li>✅ 全球 CDN 加速（200+ 节点）</li>\n<li>✅ 自动 HTTPS / TLS</li>\n<li>✅ DDoS L3/L4 防护</li>\n<li>✅ CI/CD 自动部署（push 后自动更新）</li>\n<li>✅ Web Analytics 基础统计</li>\n<li>✅ 每月 500 次构建、无限带宽</li>\n</ul>\n\n<h2>注意事项</h2>\n<p>纯静态站没有后端，不能运行 Node.js / PHP 等服务端代码。如果需要 API，可以配合 Cloudflare Workers（每天 10 万次免费请求）。</p>",
-      "en": "<h2>Architecture</h2>\n<p>GitHub stores code → Cloudflare Pages auto-deploys → Cloudflare CDN distributes → users access.</p>\n<p>Cost: one domain name fee. Everything else is free.</p>\n\n<h2>Deployment Steps</h2>\n<ul>\n<li>1. Push site files to a GitHub repository</li>\n<li>2. Log in to Cloudflare Pages, create a project, connect GitHub repo</li>\n<li>3. Leave build command empty (static site), output directory: /</li>\n<li>4. Bind custom domain, add CNAME record at your registrar</li>\n</ul>\n\n<h2>What You Get for Free</h2>\n<ul>\n<li>✅ Global CDN (200+ nodes)</li>\n<li>✅ Automatic HTTPS/TLS</li>\n<li>✅ DDoS L3/L4 protection</li>\n<li>✅ CI/CD auto-deploy on push</li>\n<li>✅ 500 monthly builds, unlimited bandwidth</li>\n</ul>",
-      "ja": "<h2>アーキテクチャ</h2>\n<p>GitHub→Cloudflare Pages自動デプロイ→Cloudflare CDN配信→ユーザーアクセス。コストはドメイン代のみ。</p>\n\n<h2>デプロイ手順</h2>\n<ul>\n<li>1. サイトファイルをGitHubにプッシュ</li>\n<li>2. Cloudflare PagesでGitHubリポジトリを接続</li>\n<li>3. ビルドコマンドは空欄、出力ディレクトリは /</li>\n<li>4. カスタムドメインを設定</li>\n</ul>"
+    "howto": {
+      "zh": "把复现范围缩到一个页面或组件，删掉无关依赖，只保留触发路径。",
+      "en": "Shrink the repro to a single page/component and keep only dependencies required to trigger the issue.",
+      "ja": "再現範囲を 1 ページ/1 コンポーネントに絞り、必要最小限の依存だけ残します。"
+    },
+    "science": {
+      "zh": "最小复现的核心不是代码少，而是变量可控。",
+      "en": "A good minimal repro is about controllable variables, not just fewer lines.",
+      "ja": "最小再現の本質はコード量ではなく、変数を制御できることです。"
     }
   },
   {
-    "id": "image-compression-guide",
-    "cat": "tool",
-    "date": "2025-03-28",
-    "readTime": 4,
+    "id": "crontab-time-pitfalls",
+    "cat": {
+      "zh": "运维网络与调试",
+      "en": "Ops, Network & Debug",
+      "ja": "運用・ネットワーク・デバッグ"
+    },
     "title": {
-      "zh": "PixCrush 图片压缩工具：为什么选择 Canvas API 而不是 WebAssembly",
-      "en": "PixCrush: Why Canvas API over WebAssembly for image compression",
-      "ja": "PixCrush：画像圧縮にCanvas APIを選んだ理由"
+      "zh": "crontab.guru 定时任务避坑：表达式看起来对，为什么执行时间还是不对",
+      "en": "crontab.guru pitfalls: why valid expressions still run at the wrong time",
+      "ja": "crontab.guru の落とし穴：式が正しくても実行時刻がずれる理由"
     },
-    "desc": {
-      "zh": "浏览器端图片压缩方案对比：Canvas API 简单但质量有限，WebAssembly（squoosh）质量高但包体大。PixCrush 选择 Canvas 的权衡与决策过程。",
-      "en": "Comparing Canvas API vs WebAssembly for browser-based compression. Why PixCrush chose simplicity over maximum quality.",
-      "ja": "Canvas APIとWebAssemblyの比較。PixCrushがCanvas APIを選んだトレードオフ。"
+    "intro": {
+      "zh": "crontab.guru 把 Cron 表达式翻译成人话，是上线前校验定时配置的高效工具。",
+      "en": "crontab.guru translates cron syntax into plain language for quick schedule validation.",
+      "ja": "crontab.guru は Cron 式を自然文で確認でき、投入前チェックに便利です。"
     },
-    "tags": [
-      "Canvas API",
-      "图片压缩",
-      "WebAssembly"
-    ],
-    "image": "https://images.unsplash.com/photo-1542744094-24638eff58bb?w=600&h=340&fit=crop",
-    "badge": "tool",
-    "content": {
-      "zh": "<h2>压缩工具的取舍</h2>\n<p>图片压缩并不是越狠越好。对于一个在线工具页，真正要平衡的是文件体积、视觉质量、浏览器兼容性、加载速度和隐私边界。PixCrush 选择 Canvas API，是因为它能在不上传图片的前提下完成大多数日常压缩任务。</p>\n<p>WebAssembly 方案通常可以获得更细的编码控制和更好的 WebP/AVIF 质量，但代价是包体变大、首次加载更慢、移动端内存压力更高。对轻量静态站来说，这些成本并不总是值得。</p>\n\n<h2>Canvas API 适合什么场景</h2>\n<ul>\n<li>把截图、博客封面、产品图压到更适合网页展示的尺寸。</li>\n<li>批量把大图转成 JPEG 或 WebP，减少上传到 CMS 前的体积。</li>\n<li>在浏览器本地预览质量变化，不让原图离开设备。</li>\n<li>给非专业用户提供少量参数：格式、质量、最大宽高。</li>\n</ul>\n\n<h2>它的边界</h2>\n<p>Canvas 的编码能力依赖浏览器，不同浏览器对格式和质量参数的处理并不完全一致。比如 GIF 动图通常会被当成静态帧处理，透明 PNG 转成 JPEG 会丢失透明通道，极高压缩率也会产生块状噪点。</p>\n<p>因此 PixCrush 更适合日常网页图片优化，而不是替代专业图像处理软件。页面需要清楚告诉用户这些边界，避免把“免费压缩”包装成万能方案。</p>\n\n<h2>最终选择</h2>\n<p>我把第一版核心放在稳定和可解释上：所有处理都在本地完成，压缩前后体积可见，用户可以按需调质量和尺寸。后续如果引入 WebAssembly，也会作为高级模式，而不是让首屏为少数重度场景付出成本。</p>",
-      "en": "<h2>The trade-off behind image compression</h2>\n<p>Image compression is not simply about making files as small as possible. A browser tool has to balance size, visual quality, compatibility, load speed, and privacy. PixCrush uses the Canvas API because it covers common daily compression tasks without uploading images anywhere.</p>\n<p>WebAssembly encoders can offer more control and often better WebP or AVIF results, but they increase bundle size, first-load time, and memory pressure on mobile devices. For a lightweight static site, that cost is not always justified.</p>\n\n<h2>Where Canvas works well</h2>\n<ul>\n<li>Resizing screenshots, blog covers, and product images for web publishing.</li>\n<li>Converting large images to JPEG or WebP before uploading them to a CMS.</li>\n<li>Previewing quality changes locally without sending the original image away.</li>\n<li>Keeping controls understandable: format, quality, and max dimensions.</li>\n</ul>\n\n<h2>Where it falls short</h2>\n<p>Canvas encoding depends on the browser. Format support and quality parameters can behave differently across engines. Animated GIFs may become still frames, transparent PNGs lose transparency when converted to JPEG, and aggressive compression can create blocking artifacts.</p>\n<p>That means PixCrush is best for everyday web-image optimization, not as a replacement for professional image software.</p>\n\n<h2>The final decision</h2>\n<p>The first version prioritizes stability and explainability: local processing, visible before/after size, adjustable quality, and clear limits. If WebAssembly support is added later, it should be an advanced option rather than a cost paid by every visitor.</p>",
-      "ja": "<h2>画像圧縮のトレードオフ</h2>\n<p>画像圧縮は単に小さくすればよいものではありません。サイズ、画質、互換性、読み込み速度、プライバシーを同時に考える必要があります。PixCrush は画像をアップロードせずに日常的な圧縮を行うため Canvas API を選びました。</p>\n<p>WebAssembly は高品質なエンコードに向きますが、初回読み込みやメモリ使用量の負担が増えます。軽量な静的サイトでは常に最適とは限りません。</p>\n\n<h2>Canvas が向く場面</h2>\n<ul>\n<li>スクリーンショットやブログ画像をウェブ向けに小さくする。</li>\n<li>CMS に入れる前に JPEG / WebP へ変換する。</li>\n<li>元画像を送信せずローカルで品質を確認する。</li>\n</ul>\n\n<h2>制限</h2>\n<p>Canvas のエンコードはブラウザ依存です。GIF アニメーション、透明 PNG、極端な圧縮では期待と違う結果になる場合があります。</p>"
+    "howto": {
+      "zh": "写完表达式先看自然语言描述，再结合服务器时区与夏令时做二次确认。",
+      "en": "Read the natural language summary and verify timezone/DST behavior before deployment.",
+      "ja": "自然文の説明を確認し、タイムゾーンや夏時間設定まで合わせて検証します。"
+    },
+    "science": {
+      "zh": "定时偏差常由时区和字段语义误解导致。",
+      "en": "Most scheduling drift issues come from timezone and field-meaning confusion.",
+      "ja": "実行ずれの多くはタイムゾーン設定や項目解釈の誤りが原因です。"
     }
   },
   {
-    "id": "css-variables-theming",
-    "cat": "dev",
-    "date": "2025-03-20",
-    "readTime": 7,
+    "id": "diffchecker-review-trick",
+    "cat": {
+      "zh": "文本与数据格式",
+      "en": "Text & Data Formats",
+      "ja": "テキスト・データ形式"
+    },
     "title": {
-      "zh": "CSS 变量实现深色/浅色主题切换：零闪烁的关键是这一个内联脚本",
-      "en": "Flicker-free dark/light theme switching: one inline script makes all the difference",
-      "ja": "CSS変数でフリッカーなしのテーマ切替を実現する方法"
+      "zh": "Diffchecker 对比技巧：如何高效识别改动中真正会引发回归的问题",
+      "en": "Diffchecker review tips: detect risky changes, not just big changes",
+      "ja": "Diffchecker 活用法：回帰リスクの高い差分を見抜く"
     },
-    "desc": {
-      "zh": "页面跳转时主题闪烁的根本原因是 JS 比 CSS 渲染晚。解决方案是在 <head> 最顶部放一段内联脚本，在浏览器渲染第一帧前就设好主题。",
-      "en": "Theme flicker on navigation happens because JS runs after the first paint. The fix is a tiny inline script at the very top of <head>.",
-      "ja": "テーマのちらつきはJSが初回レンダリング後に実行されるため。headの先頭にインラインスクリプトを置くことで解決。"
+    "intro": {
+      "zh": "Diffchecker 用于文本与代码版本差异分析，适合发布前校对和协作审阅。",
+      "en": "Diffchecker helps compare text/code revisions before release and during team reviews.",
+      "ja": "Diffchecker は公開前の差分確認やレビューに向いています。"
     },
-    "tags": [
-      "CSS",
-      "Dark Mode",
-      "主题切换"
-    ],
-    "image": "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=600&h=340&fit=crop",
-    "badge": "dev",
-    "content": {
-      "zh": "<h2>为什么会闪烁</h2>\n<p>深色/浅色主题闪烁通常发生在页面第一次绘制之后。浏览器先按照默认 CSS 渲染页面，然后 JavaScript 读取 localStorage，最后再把主题类名或属性加到 html 上。中间这一下就会出现白屏闪、暗屏闪或按钮颜色跳变。</p>\n<p>解决思路不是把主题脚本写得更复杂，而是把决定主题的那几行代码放到 head 最前面，让浏览器在加载主 CSS 前就知道当前主题。</p>\n\n<h2>QuickToolLab 的实现</h2>\n<p>每个页面顶部都有一段很短的内联脚本：先读 pc_theme；如果没有用户偏好，就读取 prefers-color-scheme；随后把 data-theme 写到 documentElement。主 CSS 只需要根据 data-theme 定义变量。</p>\n<pre><code>:root { --surface: #fff; --text: #111; }\n[data-theme=\"dark\"] { --surface: #101018; --text: #f7f7fb; }</code></pre>\n<p>这种方式的好处是组件不需要知道当前主题。按钮、卡片、导航和工具区都只引用变量，主题切换时改的是变量表，而不是逐个改样式。</p>\n\n<h2>需要注意的细节</h2>\n<ul>\n<li>内联脚本必须放在主样式表之前，否则第一帧仍可能用默认主题。</li>\n<li>localStorage 读取要包裹在简单逻辑里，避免隐私模式或异常环境导致整页脚本失败。</li>\n<li>语言和主题都写入 html 属性后，CSS 和无障碍工具都能更早拿到状态。</li>\n<li>如果页面有 iframe、评论组件或第三方广告，它们可能有自己的主题策略，需要单独适配。</li>\n</ul>\n\n<h2>为什么适合静态站</h2>\n<p>静态站没有服务端渲染主题的机会，前端第一帧就更重要。CSS 变量配合早期内联脚本，能在不引入框架的情况下获得接近 SSR 的稳定体验。</p>",
-      "en": "<h2>Why theme flicker happens</h2>\n<p>Dark/light flicker usually happens after the first paint. The browser renders the default CSS, then JavaScript reads localStorage, then the page finally applies a theme class or attribute. That short delay is enough to make the background or buttons flash.</p>\n<p>The fix is to decide the theme before the main stylesheet matters. A tiny inline script at the top of head reads the saved preference or prefers-color-scheme and writes data-theme on the html element.</p>\n\n<h2>The QuickToolLab pattern</h2>\n<p>Components do not need to know the active theme. They use variables, and each theme only changes the variable table.</p>\n<pre><code>:root { --surface: #fff; --text: #111; }\n[data-theme=\"dark\"] { --surface: #101018; --text: #f7f7fb; }</code></pre>\n<p>This keeps navigation, cards, buttons, and tool panels consistent without duplicating styles.</p>\n\n<h2>Details that matter</h2>\n<ul>\n<li>Place the inline script before the main CSS file.</li>\n<li>Keep localStorage access small and defensive.</li>\n<li>Write state to the html element so CSS and accessibility tooling see it early.</li>\n<li>Third-party widgets, comments, and ads may need separate theme handling.</li>\n</ul>\n\n<h2>Why it fits static sites</h2>\n<p>Static sites cannot rely on server-rendered theme state. CSS variables plus an early inline script provide a stable first paint without adding a framework.</p>",
-      "ja": "<h2>ちらつきの原因</h2>\n<p>テーマのちらつきは初回描画の後に起こります。ブラウザが既定 CSS で描画し、その後 JavaScript が localStorage を読み、最後にテーマ属性を付けるためです。</p>\n<p>対策は head の先頭でテーマを決めることです。保存済み設定または prefers-color-scheme を読み、html に data-theme を付けます。</p>\n\n<h2>実装パターン</h2>\n<p>コンポーネントは現在のテーマを意識せず、CSS 変数だけを参照します。</p>\n<pre><code>:root { --surface: #fff; --text: #111; }\n[data-theme=\"dark\"] { --surface: #101018; --text: #f7f7fb; }</code></pre>\n\n<h2>注意点</h2>\n<ul>\n<li>内联スクリプトはメイン CSS より前に置く。</li>\n<li>localStorage の処理は短く安全にする。</li>\n<li>広告やコメントなど第三者ウィジェットは別途調整が必要です。</li>\n</ul>"
+    "howto": {
+      "zh": "建议先看删除内容，再看新增内容，最后检查顺序和空白变更。",
+      "en": "Review deletions first, then additions, then ordering/whitespace changes.",
+      "ja": "削除差分を先に確認し、次に追加、最後に並び順や空白差分を見ます。"
+    },
+    "science": {
+      "zh": "回归风险常来自“删掉了关键约束”，不只是“新增很多代码”。",
+      "en": "Regressions often come from removed constraints, not only from large additions.",
+      "ja": "回帰は大量追加よりも、重要制約の削除で起きることが多いです。"
     }
   },
   {
-    "id": "seo-tool-sites",
-    "cat": "tech",
-    "date": "2025-03-12",
-    "readTime": 9,
+    "id": "dns-propagation-check",
+    "cat": {
+      "zh": "运维网络与调试",
+      "en": "Ops, Network & Debug",
+      "ja": "運用・ネットワーク・デバッグ"
+    },
     "title": {
-      "zh": "单页工具网站 SEO 优化实战：从零到 Google 收录的完整路径",
-      "en": "SEO for single-page tool sites: the complete path from zero to Google indexing",
-      "ja": "ツールサイトSEO：ゼロからGoogle収録までの完全ガイド"
+      "zh": "DNS 传播检查实战：修改记录后为什么有的人能访问有的人不行",
+      "en": "DNS propagation in practice: why updates work for some users but not others",
+      "ja": "DNS 伝播の実務：更新後に人によって結果が違う理由"
     },
-    "desc": {
-      "zh": "静态工具站的 SEO 和博客不同：没有新内容产生，全靠技术 SEO 和外链。本文详解 canonical、sitemap、robots、OG 标签的最佳配置。",
-      "en": "SEO for static tool sites differs from blogs — no new content, just technical SEO and backlinks. Full guide to canonical, sitemap, robots and OG tags.",
-      "ja": "静的ツールサイトのSEOはブログとは異なる。技術SEOと外部リンクが鍵。"
+    "intro": {
+      "zh": "DNSChecker 和 WhatsMyDNS 可用于观察全球解析状态，判断记录是否传播完成。",
+      "en": "DNSChecker and WhatsMyDNS help you observe global resolution status after DNS changes.",
+      "ja": "DNSChecker / WhatsMyDNS で更新後の世界各地の解決状況を確認できます。"
     },
-    "tags": [
-      "SEO",
-      "Static Site",
-      "技术SEO"
-    ],
-    "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&h=340&fit=crop",
-    "badge": "tech",
-    "content": {
-      "zh": "<h2>工具站 SEO 的难点</h2>\n<p>单页工具站和博客不同。博客天然会产生新文章，而工具站常常只有几个固定页面。如果页面只是一个输入框或外链列表，搜索引擎很难判断它为什么值得收录。</p>\n<p>我的做法是把每个工具页拆成三个层次：先让功能可用，再解释适用场景，最后补上隐私、限制和常见错误。这样页面既能完成任务，也能回答用户搜索这个工具时真正关心的问题。</p>\n\n<h2>基础配置清单</h2>\n<ul>\n<li>每个页面都要有唯一 title、description 和 canonical。</li>\n<li>sitemap 中提交的 URL 必须和 canonical 一致，尤其是带 query id 的详情页。</li>\n<li>robots.txt 允许公开页面抓取，同时屏蔽后台、预览或无内容页面。</li>\n<li>OG 标签用于分享预览，但不要和 canonical 域名写成两个版本。</li>\n<li>内容页必须有正文，不要只显示摘要或加载失败占位。</li>\n</ul>\n\n<h2>内容价值怎么补</h2>\n<p>工具站最容易犯的错误是把“导航”当成“内容”。外部工具推荐可以存在，但最好加上原创筛选理由，例如适合什么人、免费额度如何、有没有隐私风险、和同类工具相比差异在哪里。</p>\n<p>对于本站，PixCrush 是核心自研工具，所以 compress.html 要优先保持完整体验。其他外部工具入口则通过帮助文章和博客补充使用边界，而不是只让用户点走。</p>\n\n<h2>收录后的维护</h2>\n<p>上线后建议定期检查 Search Console：是否出现重复网页、已抓取未编入索引、备用 canonical、404 或重定向错误。每次新增 JSON 内容后都应重新生成 sitemap，并抽查详情页 canonical 是否带上正确的 id。</p>",
-      "en": "<h2>Why tool-site SEO is different</h2>\n<p>A tool site does not behave like a blog. Blogs naturally publish new posts, while tools often stay on the same few URLs. If a page is only an input box or a list of outbound links, search engines have little reason to see it as a useful result.</p>\n<p>The practical approach is to make each page useful in three layers: the feature must work, the page should explain when to use it, and it should state privacy boundaries, limitations, and common mistakes.</p>\n\n<h2>Technical checklist</h2>\n<ul>\n<li>Give every page a unique title, description, and canonical URL.</li>\n<li>Keep sitemap URLs consistent with canonical tags, especially detail pages using query ids.</li>\n<li>Let crawlers access public pages while blocking admin and preview areas.</li>\n<li>Keep OG URLs on the same domain and scheme as canonical URLs.</li>\n<li>Do not index pages that only show summaries, loading placeholders, or thin content.</li>\n</ul>\n\n<h2>Adding real value</h2>\n<p>The common mistake is treating navigation as content. External tool recommendations are fine, but they should include original selection notes: who the tool is for, where the free tier stops, what privacy trade-offs exist, and how it compares with alternatives.</p>\n<p>For QuickToolLab, PixCrush is the core owned tool, so the compression page should be the strongest page. External links should be supported by help articles and blog notes that explain how to choose and use them.</p>\n\n<h2>After indexing</h2>\n<p>After launch, Search Console should be checked for duplicate pages, crawled-not-indexed reports, alternate canonical choices, 404s, and redirects. Whenever JSON content changes, rebuild the sitemap and spot-check detail page canonical tags.</p>",
-      "ja": "<h2>ツールサイト SEO の難しさ</h2>\n<p>ツールサイトはブログと違い、新しい記事が自然に増えるわけではありません。入力欄や外部リンクだけのページでは、検索エンジンに価値が伝わりにくくなります。</p>\n<p>各ページは三層で考えると安定します。機能が使えること、使い所を説明すること、プライバシーや制限、よくある間違いを明記することです。</p>\n\n<h2>基本チェックリスト</h2>\n<ul>\n<li>ページごとに固有の title、description、canonical を設定する。</li>\n<li>sitemap と canonical を一致させる。</li>\n<li>公開ページはクロール可能にし、管理画面は noindex にする。</li>\n<li>OG URL と canonical のドメインを一致させる。</li>\n<li>要約だけの薄い詳細ページを作らない。</li>\n</ul>\n\n<h2>価値の追加方法</h2>\n<p>外部ツール紹介には、選定理由、向いている用途、無料枠、プライバシー上の注意、代替候補を添えると独自性が出ます。</p>"
+    "howto": {
+      "zh": "改记录后先核对 TTL，再按地区查询 A/CNAME 结果，确认是否逐步一致。",
+      "en": "After updating records, verify TTL and compare A/CNAME results across regions.",
+      "ja": "更新後は TTL を確認し、地域ごとに A/CNAME の結果を比較して収束を確認します。"
+    },
+    "science": {
+      "zh": "DNS 不是即时全网同步，缓存与 TTL 会造成阶段性差异。",
+      "en": "DNS is not instantly global; cache and TTL naturally create temporary inconsistency.",
+      "ja": "DNS は即時同期ではなく、キャッシュと TTL により一時的な差が生じます。"
     }
   },
   {
-    "id": "ai-tools-2025",
-    "cat": "tech",
-    "date": "2025-03-05",
-    "readTime": 10,
+    "id": "httpbin-api-debug",
+    "cat": {
+      "zh": "运维网络与调试",
+      "en": "Ops, Network & Debug",
+      "ja": "運用・ネットワーク・デバッグ"
+    },
     "title": {
-      "zh": "2025 年 AI 工具全景：从写作到编程，哪些真正提升了效率",
-      "en": "AI tools landscape 2025: which ones actually boost productivity",
-      "ja": "2025年AIツール全景：本当に生産性を上げるツールは"
+      "zh": "httpbin 接口联调方法：如何验证请求头、方法与 Body 是否真实生效",
+      "en": "httpbin API debugging: verify headers, method, and payload quickly",
+      "ja": "httpbin 連携確認：ヘッダー・メソッド・本文の検証手順"
     },
-    "desc": {
-      "zh": "亲测了 30+ 款 AI 工具后的真实感受：Claude 写代码最稳，Midjourney 出图质量最高，Cursor 是目前编程体验最好的 IDE，Perplexity 已经能替代 Google 部分场景。",
-      "en": "After testing 30+ AI tools: Claude for stable code generation, Midjourney for image quality, Cursor for best coding IDE experience, Perplexity replacing Google in many cases.",
-      "ja": "30以上のAIツールを実際に使った結論。各カテゴリのベストツールを解説。"
+    "intro": {
+      "zh": "httpbin 是通用请求回显服务，可用于验证客户端和网关行为。",
+      "en": "httpbin echoes requests and is useful for validating client and gateway behavior.",
+      "ja": "httpbin はリクエスト内容を返すため、クライアントやゲートウェイ検証に使えます。"
     },
-    "tags": [
-      "AI",
-      "效率工具",
-      "Claude",
-      "Midjourney"
-    ],
-    "image": "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600&h=340&fit=crop",
-    "badge": "tech",
-    "content": {
-      "zh": "<h2>先说结论</h2>\n<p>2025 年的 AI 工具已经不适合只按“模型强不强”来比较。真正影响效率的是工作流：它能不能接住你的输入、保留上下文、给出可验证结果，并且在出错时让你快速修正。</p>\n<p>我把常用工具分成四类：写作与研究、编程、图像与视频、知识检索。不同类别的评判标准不同，不能用同一张榜单解决所有问题。</p>\n\n<h2>写作与研究</h2>\n<p>写作工具适合做提纲、改写、摘要和风格统一，但不应该直接替代事实核查。涉及价格、法律、医学、产品规格和新闻时，需要回到原始来源。Perplexity 这类搜索型工具的优势是能把答案和来源放在一起，但来源质量仍要人工判断。</p>\n\n<h2>编程工具</h2>\n<p>编程场景里，我更看重上下文管理和可运行验证。Cursor、Claude Code、Codex 这类工具的价值不只是生成代码，而是能读项目结构、定位相关文件、修改后运行测试。小脚本可以让模型一次完成，大型改动则要把任务拆成可验证的步骤。</p>\n<ul>\n<li>适合 AI 的任务：样板代码、测试补全、迁移重复逻辑、解释陌生模块。</li>\n<li>不适合完全托管的任务：安全边界、账务逻辑、权限系统和没有测试的核心重构。</li>\n</ul>\n\n<h2>图像与视频</h2>\n<p>Midjourney、Firefly、Runway 等工具在视觉探索上很强，但商业使用要特别注意授权、人物肖像、商标和素材来源。对于工具站来说，AI 图更适合做辅助封面或概念草图，不应该替代真实产品截图和可验证界面。</p>\n\n<h2>我的使用原则</h2>\n<p>AI 工具最适合做“第二大脑”和“加速器”，不适合成为唯一判断者。高频工作可以建立模板，低频高风险工作要保留人工审核。最终能提升效率的不是工具数量，而是你能否把它们放进稳定流程里。</p>",
-      "en": "<h2>The short version</h2>\n<p>In 2025, AI tools should not be compared only by raw model strength. Productivity depends on workflow: whether the tool accepts your inputs, preserves context, produces verifiable output, and lets you correct mistakes quickly.</p>\n<p>I group the tools into four areas: writing and research, programming, image/video creation, and knowledge search. Each category needs different criteria.</p>\n\n<h2>Writing and research</h2>\n<p>Writing tools are useful for outlines, rewriting, summaries, and tone alignment, but they should not replace fact checking. For prices, law, medicine, product specs, and current events, go back to primary sources. Search-oriented tools are helpful because they pair answers with citations, but source quality still needs human judgment.</p>\n\n<h2>Programming</h2>\n<p>For coding, context management and runnable verification matter more than clever snippets. Tools such as Cursor, Claude Code, and Codex are useful when they can read the project, find related files, edit code, and run tests.</p>\n<ul>\n<li>Good AI tasks: boilerplate, test coverage, repetitive migrations, and explaining unfamiliar modules.</li>\n<li>High-risk tasks: security boundaries, billing logic, permission systems, and untested core refactors.</li>\n</ul>\n\n<h2>Image and video</h2>\n<p>Midjourney, Firefly, Runway, and similar tools are strong for visual exploration. Commercial use still requires care around licensing, likenesses, trademarks, and source material. For tool sites, generated images work best as supporting covers or concept art, not as replacements for real product screenshots.</p>\n\n<h2>My rule of thumb</h2>\n<p>AI tools work best as a second brain and accelerator, not as the only decision maker. Repeated work deserves templates; rare high-risk work deserves human review. The real productivity gain comes from stable workflows, not from collecting more tools.</p>",
-      "ja": "<h2>結論</h2>\n<p>2025 年の AI ツールはモデル性能だけでは比較できません。重要なのは、入力を受け止め、文脈を保ち、検証可能な結果を出し、間違いを直しやすいワークフローです。</p>\n<p>用途は文章・調査、プログラミング、画像・動画、知識検索に分けて考えます。</p>\n\n<h2>文章と調査</h2>\n<p>AI は構成案、要約、表現調整に向いています。ただし価格、法律、医療、仕様、ニュースでは一次情報の確認が必要です。</p>\n\n<h2>プログラミング</h2>\n<p>コードでは文脈管理と実行確認が重要です。プロジェクトを読み、関連ファイルを見つけ、修正後にテストできるツールほど実用的です。</p>\n<ul>\n<li>向く作業：定型コード、テスト補完、繰り返し移行、陌生なモジュールの説明。</li>\n<li>慎重に扱う作業：セキュリティ、課金、権限、テストなしの大規模変更。</li>\n</ul>\n\n<h2>画像と動画</h2>\n<p>生成 AI は探索に強い一方、商用利用では権利、肖像、商標、素材来源を確認する必要があります。</p>"
+    "howto": {
+      "zh": "优先验证 method、headers、json/body 三项核心数据，确认请求正确后再排查后端。",
+      "en": "Check method, headers, and body first; only then continue to backend-side debugging.",
+      "ja": "まず method・headers・body を確認し、送信が正しいことを確かめてからサーバー側を調査します。"
+    },
+    "science": {
+      "zh": "很多联调问题根源是请求构造细节不一致。",
+      "en": "Many integration issues are caused by subtle request-construction mismatches.",
+      "ja": "連携不具合の多くはリクエスト構築の細かな不一致です。"
     }
   },
   {
-    "id": "quicktoollab-build",
-    "cat": "life",
-    "date": "2025-02-20",
-    "readTime": 6,
+    "id": "json-formatter-steps",
+    "cat": {
+      "zh": "文本与数据格式",
+      "en": "Text & Data Formats",
+      "ja": "テキスト・データ形式"
+    },
     "title": {
-      "zh": "QuickToolLab 从零到上线：一个纯静态工具站的搭建全记录",
-      "en": "QuickToolLab from zero to launch: building a pure static tool site",
-      "ja": "QuickToolLabゼロから公開：純静的ツールサイト構築の全記録"
+      "zh": "JSON Formatter 使用指南：格式化、校验、折叠节点三步完成结构化排查",
+      "en": "JSON Formatter workflow: format, validate, then inspect nested nodes",
+      "ja": "JSON Formatter の基本手順：整形・検証・階層確認"
     },
-    "desc": {
-      "zh": "记录从想法到上线的完整过程：域名选择、设计风格确定、功能规划、Cloudflare 部署、AdSense 申请。包含所有坑点和解决方案。",
-      "en": "Complete record from idea to launch: domain selection, design decisions, feature planning, Cloudflare deployment, and AdSense application. All pitfalls included.",
-      "ja": "アイデアから公開まで：ドメイン選択、デザイン、機能計画、Cloudflare展開、AdSense申請の全記録。"
+    "intro": {
+      "zh": "JSON Formatter 适合接口联调、配置文件检查和日志阅读，字段层级越深越有价值。",
+      "en": "JSON Formatter is great for API debugging, config checks, and deep nested log inspection.",
+      "ja": "JSON Formatter は API 連携確認や設定ファイル点検、深い階層のログ確認に有効です。"
     },
-    "tags": [
-      "建站",
-      "Cloudflare",
-      "个人项目"
-    ],
-    "image": "https://images.unsplash.com/photo-1593720213428-28a5b9e94613?w=600&h=340&fit=crop",
-    "badge": "life",
-    "content": {
-      "zh": "<h2>为什么做 QuickToolLab</h2>\n<p>我最初想解决的不是“再做一个导航站”，而是把每天反复打开的工具、参考文章和小型知识卡片放在一个稳定入口里。图片压缩、JSON 格式化、正则测试、DNS 查询、代码沙盒这些需求都很碎，但碎需求最怕来回切站和临时搜索。</p>\n<p>所以 QuickToolLab 的第一版目标很克制：首页负责快速找到工具，PixCrush 负责一个真正可用的本地图片处理场景，博客和帮助中心负责解释每个工具什么时候该用、有哪些边界。</p>\n\n<h2>技术选择</h2>\n<p>站点使用纯 HTML、CSS 和 Vanilla JS，是为了降低部署和维护成本。内容保存在 JSON 文件里，再通过脚本生成索引；这样既能保持静态站的速度，也能在后续接入 CMS 时保留清晰的数据结构。</p>\n<ul>\n<li>托管层：Cloudflare Pages，负责 HTTPS、CDN 和自动部署。</li>\n<li>内容层：content 目录保存单篇 JSON，构建脚本输出 index.json 和 sitemap。</li>\n<li>工具层：PixCrush 在浏览器内用 Canvas 完成压缩，不上传图片。</li>\n<li>体验层：localStorage 只保存语言、主题、收藏和最近使用记录。</li>\n</ul>\n\n<h2>上线时踩过的坑</h2>\n<p>最容易忽略的是规范 URL、站点地图和真实内容厚度。静态站上线很快，但如果 canonical 指错、sitemap 没同步、详情页只有摘要，搜索引擎和广告审核都会把它当成不完整站点看待。</p>\n<p>我的处理顺序是：先固定域名和 canonical，再补 robots、ads.txt、隐私政策，最后把每个可索引页面补成独立有价值的内容，而不是只做卡片列表。</p>\n\n<h2>下一步</h2>\n<p>QuickToolLab 后续会继续减少纯外部链接的比例：每个工具入口旁边补充使用建议、常见错误和替代方案。这样用户不是只被送到另一个网站，而是在本站先获得判断依据。</p>",
-      "en": "<h2>Why QuickToolLab exists</h2>\n<p>The goal was not to make another bookmark page. I wanted one dependable entry point for the tiny tasks developers repeat every day: compressing images, formatting JSON, testing regular expressions, checking DNS, opening a sandbox, or comparing docs.</p>\n<p>The first version stayed intentionally small. The home page helps people find a tool quickly, PixCrush provides one real local image workflow, and the blog/help sections explain when a tool is useful and where its limits are.</p>\n\n<h2>Technical choices</h2>\n<p>The site uses plain HTML, CSS, and Vanilla JS to keep deployment simple. Content lives in JSON files and a small build script generates indexes and the sitemap, which keeps the project static while still giving it a maintainable content model.</p>\n<ul>\n<li>Hosting: Cloudflare Pages for HTTPS, CDN, and auto deploys.</li>\n<li>Content: one JSON file per article, with generated index.json files.</li>\n<li>Tools: PixCrush compresses images locally in the browser with Canvas.</li>\n<li>Preferences: localStorage stores language, theme, favorites, and recent tools.</li>\n</ul>\n\n<h2>Launch lessons</h2>\n<p>The easy-to-miss parts were canonical URLs, sitemap consistency, and page depth. A static site can go online quickly, but if detail pages only contain summaries, search and ad review systems may treat them as unfinished or low-value pages.</p>\n<p>The fix order was simple: lock the domain and canonical tags, add robots.txt, ads.txt, and a realistic privacy policy, then turn every indexable page into something useful on its own.</p>\n\n<h2>What comes next</h2>\n<p>QuickToolLab will keep adding original notes beside external tools: when to use them, common mistakes, privacy boundaries, and alternatives. That makes the site more than a redirect layer.</p>",
-      "ja": "<h2>QuickToolLab を作った理由</h2>\n<p>目的は単なるリンク集ではありません。画像圧縮、JSON 整形、正規表現テスト、DNS 確認、サンドボックス起動など、毎日少しずつ発生する作業を一つの入口にまとめることでした。</p>\n<p>初期版では範囲を絞りました。トップは工具を素早く探す場所、PixCrush は実際に使えるローカル画像処理、ブログとヘルプは使い所と注意点を説明する場所です。</p>\n\n<h2>技術選定</h2>\n<p>構成は HTML、CSS、Vanilla JS の静的サイトです。記事は JSON に保存し、スクリプトで index.json と sitemap を生成します。静的サイトの速さを保ちながら、内容を管理しやすくするためです。</p>\n<ul>\n<li>ホスティング：Cloudflare Pages。</li>\n<li>コンテンツ：記事ごとの JSON と生成済みインデックス。</li>\n<li>ツール：PixCrush は Canvas でブラウザ内処理。</li>\n<li>設定：言語、テーマ、收藏、履歴は localStorage。</li>\n</ul>\n\n<h2>公開時の学び</h2>\n<p>canonical、sitemap、ページ本文の厚みは特に重要でした。詳細ページが要約だけだと、検索や広告審査では未完成または低価値に見えます。</p>\n<p>まずドメインと canonical を固定し、robots.txt、ads.txt、プライバシーポリシーを整え、各ページを独立した内容として読めるようにしました。</p>"
+    "howto": {
+      "zh": "先格式化，再折叠外层逐级定位目标节点，最后确认字段类型。",
+      "en": "Format first, collapse outer nodes, drill into target paths, and verify field types.",
+      "ja": "先に整形し、外側の階層を折りたたんで目的ノードを絞り込み、型を確認します。"
+    },
+    "science": {
+      "zh": "JSON 语法很严格：键名必须双引号、不能有尾逗号。",
+      "en": "JSON syntax is strict: quoted keys and no trailing commas.",
+      "ja": "JSON は厳密な文法です。キーはダブルクォート、末尾カンマ不可です。"
+    }
+  },
+  {
+    "id": "jwtio-security-boundary",
+    "cat": {
+      "zh": "数据库、安全与文档",
+      "en": "DB, Security & Docs",
+      "ja": "DB・セキュリティ・ドキュメント"
+    },
+    "title": {
+      "zh": "JWT.io 调试边界：能看懂令牌结构，但为什么还不能代表鉴权安全",
+      "en": "JWT.io limits: understanding token structure is not full auth security",
+      "ja": "JWT.io の限界：構造理解だけでは認証安全にならない理由"
+    },
+    "intro": {
+      "zh": "JWT.io 适合查看 token 结构与字段，不适合作为生产密钥验证环境。",
+      "en": "JWT.io is great for inspecting token fields, but should not be treated as a production validation environment.",
+      "ja": "JWT.io は構造確認に適していますが、本番鍵での検証環境として使うべきではありません。"
+    },
+    "howto": {
+      "zh": "把它当结构检查工具，重点核对 exp、iss、aud 等声明是否符合服务约定。",
+      "en": "Use it as a structure checker, and validate claims like exp/iss/aud against your service rules.",
+      "ja": "構造確認ツールとして使い、exp・iss・aud などのクレームをサービス仕様と照合します。"
+    },
+    "science": {
+      "zh": "JWT 安全性来自签名算法、密钥管理和服务端严格校验。",
+      "en": "JWT security depends on algorithm choice, key management, and strict server-side validation.",
+      "ja": "JWT の安全性は署名方式、鍵管理、サーバー側の厳格検証で決まります。"
+    }
+  },
+  {
+    "id": "pixcrush-compress-guide",
+    "cat": {
+      "zh": "PixCrush",
+      "en": "PixCrush",
+      "ja": "PixCrush"
+    },
+    "title": {
+      "zh": "PixCrush 在线图片压缩工具：如何在不明显降质的情况下快速减小图片体积",
+      "en": "PixCrush Image Compression: shrink files without visible quality loss",
+      "ja": "PixCrush 画像圧縮：画質を保ちながら容量を下げる方法"
+    },
+    "intro": {
+      "zh": "PixCrush 适合站长、运营与开发者做发布前图片瘦身。它支持浏览器本地处理，不依赖上传到服务器，适用于隐私要求较高的场景。",
+      "en": "PixCrush helps teams optimize images before publishing. It runs fully in your browser and does not require uploading files to a server.",
+      "ja": "PixCrush は公開前の画像最適化に便利です。処理はブラウザ内で完結し、サーバーアップロードは不要です。"
+    },
+    "howto": {
+      "zh": "建议先统一目标宽度，再逐级调整质量参数并对比视觉效果；最后按页面场景导出 JPG 或 WebP。",
+      "en": "Set a target width first, then adjust quality step by step while checking visual output; export as JPG or WebP based on your page usage.",
+      "ja": "先に目標幅を決め、次に品質を段階調整して見た目を確認します。用途に合わせて JPG または WebP で書き出します。"
+    },
+    "science": {
+      "zh": "图片大小由像素总量、编码方式、压缩质量共同决定。只盯质量参数往往不够，分辨率控制通常更有效。",
+      "en": "File size depends on pixel count, codec, and quality level. Resolution control is often more impactful than quality alone.",
+      "ja": "容量は画素数・圧縮方式・品質値の組み合わせで決まります。品質だけでなく解像度調整が重要です。"
+    }
+  },
+  {
+    "id": "readme-so-structure",
+    "cat": {
+      "zh": "数据库、安全与文档",
+      "en": "DB, Security & Docs",
+      "ja": "DB・セキュリティ・ドキュメント"
+    },
+    "title": {
+      "zh": "readme.so 写作框架：如何让项目文档既完整又易读",
+      "en": "readme.so structure: write complete yet readable project docs",
+      "ja": "readme.so 構成術：読みやすく漏れのない README の作り方"
+    },
+    "intro": {
+      "zh": "readme.so 提供可视化模板，适合快速搭建项目文档骨架。",
+      "en": "readme.so offers visual templates to bootstrap a solid README structure quickly.",
+      "ja": "readme.so は視覚的テンプレートで README の骨組み作成を効率化します。"
+    },
+    "howto": {
+      "zh": "优先写清项目定位、安装方式、快速开始和常见问题，再补充进阶章节。",
+      "en": "Start with project purpose, installation, quick start, and FAQ before adding advanced sections.",
+      "ja": "まず目的・導入・クイックスタート・FAQ を整え、後から詳細章を追加します。"
+    },
+    "science": {
+      "zh": "文档的价值在于降低沟通成本，结构清晰通常比语言华丽更重要。",
+      "en": "Documentation value comes from lowering communication cost, so clear structure matters most.",
+      "ja": "ドキュメントの価値は伝達コスト削減です。華麗さより構造の明快さが重要です。"
+    }
+  },
+  {
+    "id": "regex101-debug-guide",
+    "cat": {
+      "zh": "文本与数据格式",
+      "en": "Text & Data Formats",
+      "ja": "テキスト・データ形式"
+    },
+    "title": {
+      "zh": "Regex101 正则表达式入门到排错：如何快速定位匹配失败的真实原因",
+      "en": "Regex101 debugging guide: quickly find why pattern matching fails",
+      "ja": "Regex101 デバッグ入門：マッチ失敗の原因を素早く特定する"
+    },
+    "intro": {
+      "zh": "Regex101 可以把复杂正则拆解为可视化步骤，适合日志筛选、文本提取、输入校验等场景。",
+      "en": "Regex101 visualizes complex expressions and is useful for logs, extraction tasks, and input validation.",
+      "ja": "Regex101 は複雑な正規表現を可視化でき、ログ抽出や入力検証に役立ちます。"
+    },
+    "howto": {
+      "zh": "先写最小规则完成首次匹配，再逐步增加边界与分组；每加一步都看 Explain 面板。",
+      "en": "Start with the smallest working pattern, then add boundaries and groups gradually while reading the Explain panel.",
+      "ja": "最小パターンでまず動作確認し、境界やグループを段階的に追加して Explain を確認します。"
+    },
+    "science": {
+      "zh": "贪婪匹配与惰性匹配是多数正则 bug 的源头。",
+      "en": "Greedy vs lazy matching is a common source of regex bugs.",
+      "ja": "貪欲・非貪欲マッチの違いは不具合の主要因です。"
+    }
+  },
+  {
+    "id": "shields-readme-signals",
+    "cat": {
+      "zh": "数据库、安全与文档",
+      "en": "DB, Security & Docs",
+      "ja": "DB・セキュリティ・ドキュメント"
+    },
+    "title": {
+      "zh": "Shields.io 徽章设计建议：如何在 README 中展示关键信息又不造成信息过载",
+      "en": "Shields.io badge strategy: show key project signals without clutter",
+      "ja": "Shields.io バッジ設計：情報過多を避けつつ要点を伝える"
+    },
+    "intro": {
+      "zh": "Shields.io 能快速生成版本、构建、许可证等状态徽章，提升项目可读性。",
+      "en": "Shields.io provides quick badges for version, CI status, and license to improve README readability.",
+      "ja": "Shields.io はバージョン・CI・ライセンス等のバッジを簡単に作成できます。"
+    },
+    "howto": {
+      "zh": "建议只保留核心信号：版本、构建、覆盖率、许可证，其余信息放正文。",
+      "en": "Keep only core signals (version/build/coverage/license) and move the rest to documentation text.",
+      "ja": "バッジは主要指標に絞り、補足情報は本文で説明するのがおすすめです。"
+    },
+    "science": {
+      "zh": "徽章属于导航信息，数量过多会稀释真正重点。",
+      "en": "Badges are navigation signals; too many badges dilute important information.",
+      "ja": "バッジはナビ情報です。多すぎると重要な情報が埋もれます。"
+    }
+  },
+  {
+    "id": "sqlite-viewer-readonly",
+    "cat": {
+      "zh": "数据库、安全与文档",
+      "en": "DB, Security & Docs",
+      "ja": "DB・セキュリティ・ドキュメント"
+    },
+    "title": {
+      "zh": "SQLite Viewer 排查指南：如何在不破坏原库的前提下定位数据问题",
+      "en": "SQLite Viewer troubleshooting: inspect data safely in read-only flow",
+      "ja": "SQLite Viewer 解析：元データを壊さずに問題を特定する方法"
+    },
+    "intro": {
+      "zh": "SQLite Viewer 适合快速查看表结构和记录内容，适用于线上问题回溯。",
+      "en": "SQLite Viewer is useful for quickly inspecting table schemas and records during incident analysis.",
+      "ja": "SQLite Viewer はテーブル構造やレコードの迅速確認に便利です。"
+    },
+    "howto": {
+      "zh": "先备份数据库文件，再按“表结构 -> 条件查询 -> 样本导出”的顺序排查。",
+      "en": "Back up the file first, then inspect in order: schema -> filtered queries -> sample export.",
+      "ja": "先に DB ファイルをバックアップし、構造確認→条件検索→サンプル抽出の順で調査します。"
+    },
+    "science": {
+      "zh": "排查优先读操作，避免带副作用写入，才能保持证据链完整。",
+      "en": "Prioritize read-only steps to preserve evidence and avoid side effects.",
+      "ja": "調査時は読み取り優先にし、副作用のある書き込みを避けるのが基本です。"
     }
   }
 ]
