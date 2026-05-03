@@ -10,11 +10,11 @@ BASE_URL = "https://quicktoollab.top"
 
 STATIC_PAGES = [
     {"loc": "/", "changefreq": "daily", "priority": "1.0"},
-    {"loc": "/blog.html", "changefreq": "weekly", "priority": "0.9"},
-    {"loc": "/compress.html", "changefreq": "monthly", "priority": "0.8"},
-    {"loc": "/help.html", "changefreq": "weekly", "priority": "0.7"},
-    {"loc": "/about.html", "changefreq": "monthly", "priority": "0.5"},
-    {"loc": "/privacy.html", "changefreq": "yearly", "priority": "0.3"},
+    {"loc": "/blog", "changefreq": "weekly", "priority": "0.9"},
+    {"loc": "/compress", "changefreq": "monthly", "priority": "0.8"},
+    {"loc": "/help", "changefreq": "weekly", "priority": "0.7"},
+    {"loc": "/about", "changefreq": "monthly", "priority": "0.5"},
+    {"loc": "/privacy", "changefreq": "yearly", "priority": "0.3"},
 ]
 
 
@@ -76,7 +76,7 @@ def build_sitemap():
         entry_id = entry.get("id", "")
         entry_date = entry.get("date", today)
         lines.append(
-            f'  <url><loc>{BASE_URL}/blog-post.html?id={entry_id}</loc>'
+            f'  <url><loc>{BASE_URL}/blog-post?id={entry_id}</loc>'
             f'<lastmod>{entry_date}</lastmod>'
             f'<changefreq>weekly</changefreq>'
             f'<priority>0.8</priority></url>'
@@ -86,7 +86,7 @@ def build_sitemap():
     for entry in help_entries:
         entry_id = entry.get("id", "")
         lines.append(
-            f'  <url><loc>{BASE_URL}/help-article.html?id={entry_id}</loc>'
+            f'  <url><loc>{BASE_URL}/help-article?id={entry_id}</loc>'
             f'<lastmod>{today}</lastmod>'
             f'<changefreq>monthly</changefreq>'
             f'<priority>0.6</priority></url>'

@@ -66,7 +66,7 @@ const AI_TOOLS = [
 const TOOLS = {
     zh: [
         { title: '本站 · 本地', items: [
-            { href: '/compress.html', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
+            { href: '/compress', icon: '🖼', title: 'PixCrush 图片压缩', tag: '本地', int: true },
         ]},
         { title: '文本与数据格式', items: [
             { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
@@ -127,7 +127,7 @@ const TOOLS = {
     ],
     en: [
         { title: 'On-site · local', items: [
-            { href: '/compress.html', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
+            { href: '/compress', icon: '🖼', title: 'PixCrush images', tag: 'Local', int: true },
         ]},
         { title: 'Text & data formats', items: [
             { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
@@ -188,7 +188,7 @@ const TOOLS = {
     ],
     ja: [
         { title: '当サイト · ローカル', items: [
-            { href: '/compress.html', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
+            { href: '/compress', icon: '🖼', title: 'PixCrush 画像', tag: 'ローカル', int: true },
         ]},
         { title: 'テキスト・データ形式', items: [
             { href: 'https://regex101.com', icon: '.*', title: 'Regex101', tag: 'WEB' },
