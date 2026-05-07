@@ -1,6 +1,3 @@
-http://quicktoollab.top/* https://quicktoollab.top/:splat 301
-http://www.quicktoollab.top/* https://quicktoollab.top/:splat 301
-https://www.quicktoollab.top/* https://quicktoollab.top/:splat 301
 /index.html / 301
 /blog.html /blog 301
 /compress.html /compress 301
