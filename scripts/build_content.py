@@ -51,6 +51,18 @@ def build_help():
     return len(entries)
 
 
+def build_friends():
+    source_path = CONTENT_DIR / "friends" / "links.json"
+    links = []
+    if source_path.exists():
+        payload = json.loads(source_path.read_text(encoding="utf-8"))
+        links = payload.get("links", [])
+
+    links.sort(key=lambda item: (item.get("order", 100), item.get("name", "").lower()))
+    write_json(DATA_DIR / "friends.json", {"links": links})
+    return len(links)
+
+
 def build_sitemap():
     today = date.today().isoformat()
 
@@ -104,8 +116,9 @@ def build_sitemap():
 def main():
     blog_count = build_blog()
     help_count = build_help()
+    friends_count = build_friends()
     dynamic_count = build_sitemap()
-    print(f"Built content indexes: blog={blog_count}, help={help_count}")
+    print(f"Built content indexes: blog={blog_count}, help={help_count}, friends={friends_count}")
     print(f"Generated sitemap.xml: {len(STATIC_PAGES)} static + {dynamic_count} dynamic URLs")
 
 
