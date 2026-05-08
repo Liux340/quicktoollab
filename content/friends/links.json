@@ -1,3 +1,10 @@
 {
-  "links": []
+  "links": [
+    {
+      "order": 100,
+      "enabled": true,
+      "name": "免费在线图片编辑器",
+      "url": "https://ps.quicktoollab.top/"
+    }
+  ]
 }
