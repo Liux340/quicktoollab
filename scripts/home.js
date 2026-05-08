@@ -17,7 +17,11 @@ function homeUiText(key) {
             quickPick: '\u7cbe\u9009',
             tool: '\u5de5\u5177',
             continueTitle: '\u7ee7\u7eed\u4e0a\u6b21\u4f7f\u7528',
-            ai: 'AI'
+            resultCount: '\u4e2a\u7ed3\u679c',
+            keyboardHint: '\u4e0a\u4e0b\u9009\u62e9\u3001Enter \u6253\u5f00',
+            ai: 'AI',
+            friendEmpty: '\u6682\u672a\u6dfb\u52a0\u53cb\u60c5\u94fe\u63a5',
+            friendLoadError: '\u53cb\u94fe\u52a0\u8f7d\u5931\u8d25'
         },
         en: {
             searchPlaceholder: 'Search tools, AI apps, and quick picks',
@@ -27,7 +31,11 @@ function homeUiText(key) {
             quickPick: 'Quick pick',
             tool: 'Tool',
             continueTitle: 'Continue where you left off',
-            ai: 'AI'
+            resultCount: 'results',
+            keyboardHint: 'Arrow keys + Enter',
+            ai: 'AI',
+            friendEmpty: 'No friend links yet',
+            friendLoadError: 'Could not load friend links'
         },
         ja: {
             searchPlaceholder: '\u30c4\u30fc\u30eb\u3001AI\u30a2\u30d7\u30ea\u3001\u63a8\u5968\u3092\u691c\u7d22',
@@ -37,7 +45,11 @@ function homeUiText(key) {
             quickPick: '\u63a8\u5968',
             tool: '\u30c4\u30fc\u30eb',
             continueTitle: '\u524d\u56de\u306e\u7d9a\u304d',
-            ai: 'AI'
+            resultCount: '\u4ef6\u306e\u7d50\u679c',
+            keyboardHint: '\u4e0a\u4e0b\u3067\u9078\u629e\u3001Enter \u3067\u958b\u304f',
+            ai: 'AI',
+            friendEmpty: '\u53cb\u60c5\u30ea\u30f3\u30af\u306f\u307e\u3060\u3042\u308a\u307e\u305b\u3093',
+            friendLoadError: '\u53cb\u60c5\u30ea\u30f3\u30af\u3092\u8aad\u307f\u8fbc\u3081\u307e\u305b\u3093'
         }
     };
     return (copy[lang] && copy[lang][key]) || copy.en[key] || key;
@@ -106,7 +118,12 @@ function renderSearchResults(query) {
         box.innerHTML = `<div class="search-empty">${escapeHtml(homeUiText('noResults'))}</div>`;
         return;
     }
-    box.innerHTML = results.map((item, index) => `
+    box.innerHTML = `
+        <div class="search-head">
+            <span>${results.length} ${escapeHtml(homeUiText('resultCount'))}</span>
+            <span>${escapeHtml(homeUiText('keyboardHint'))}</span>
+        </div>
+    ` + results.map((item, index) => `
         <a class="search-result ${index === 0 ? 'active' : ''}" href="${item.href}" ${item.internal ? '' : 'target="_blank" rel="noopener noreferrer"'} data-search-index="${index}" role="option">
             <span class="search-result-icon">${escapeHtml(item.icon)}</span>
             <span>
@@ -409,6 +426,60 @@ function renderSoftList(items) {
 }
 
 /* ── Language change handler ── */
+function normalizeFriendUrl(url) {
+    const value = String(url || '').trim();
+    if (!value) return '';
+    if (/^https?:\/\//i.test(value)) return value;
+    return `https://${value}`;
+}
+
+function renderFriends(payload) {
+    const host = document.getElementById('friends-host');
+    if (!host) return;
+
+    const links = ((payload && payload.links) || [])
+        .filter(item => item && item.enabled !== false && item.name && item.url)
+        .sort((a, b) => (a.order || 100) - (b.order || 100) || String(a.name).localeCompare(String(b.name)));
+
+    if (!links.length) {
+        host.innerHTML = `<div class="loading" style="grid-column:1/-1;">${escapeHtml(homeUiText('friendEmpty'))}</div>`;
+        return;
+    }
+
+    host.innerHTML = links.map(item => {
+        const href = normalizeFriendUrl(item.url);
+        const desc = pickLocaleText(item.desc || '');
+        const tag = item.tag || '';
+        const icon = item.icon || String(item.name).trim().slice(0, 1).toUpperCase();
+        const iconHtml = /^https?:\/\//i.test(icon)
+            ? `<img src="${escapeHtml(icon)}" alt="" loading="lazy" decoding="async">`
+            : escapeHtml(icon.slice(0, 4));
+
+        return `
+            <a class="friend-card" href="${escapeHtml(href)}" target="_blank" rel="noopener noreferrer">
+                <span class="friend-icon">${iconHtml}</span>
+                <span class="friend-body">
+                    <span class="friend-name">${escapeHtml(item.name)}</span>
+                    <span class="friend-desc">${escapeHtml(desc || href)}</span>
+                </span>
+                ${tag ? `<span class="friend-tag">${escapeHtml(tag)}</span>` : ''}
+            </a>
+        `;
+    }).join('');
+}
+
+async function loadFriends() {
+    const host = document.getElementById('friends-host');
+    if (!host) return;
+    try {
+        const res = await fetch('/data/friends.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        renderFriends(await res.json());
+    } catch (error) {
+        host.innerHTML = `<div class="loading" style="grid-column:1/-1;">${escapeHtml(homeUiText('friendLoadError'))}</div>`;
+    }
+}
+
 function onLangChange() {
     const t = I18N[lang];
     document.title = t.page_title;
@@ -424,6 +495,7 @@ function onLangChange() {
     renderContinueSection();
     renderFavDrawer();
     renderHistDrawer();
+    loadFriends();
     loadDynamicContent();
 }
 
@@ -444,6 +516,7 @@ document.addEventListener('DOMContentLoaded', function() {
     renderTools();
     renderContinueSection();
     initHomeSearch();
+    loadFriends();
     loadDynamicContent();
 
     // AI tab switch
