@@ -97,6 +97,34 @@ collections:
           - { label: "dev", value: "dev" }
           - { label: "life", value: "life" }
 
+  - name: "friends"
+    label: "友情链接"
+    files:
+      - label: "友情链接列表"
+        name: "links"
+        file: "content/friends/links.json"
+        format: "json"
+        fields:
+          - label: "友情链接"
+            name: "links"
+            widget: "list"
+            summary: "{{fields.name}}"
+            fields:
+              - { label: "站点名称", name: "name", widget: "string" }
+              - { label: "链接地址", name: "url", widget: "string", hint: "请填写完整地址，例如 https://example.com" }
+              - { label: "图标/首字母", name: "icon", widget: "string", required: false, hint: "可填一个字母、简短缩写或 emoji" }
+              - { label: "标签", name: "tag", widget: "string", required: false }
+              - label: "简介"
+                name: "desc"
+                widget: "object"
+                required: false
+                fields:
+                  - { label: "中文", name: "zh", widget: "text", required: false }
+                  - { label: "English", name: "en", widget: "text", required: false }
+                  - { label: "日本語", name: "ja", widget: "text", required: false }
+              - { label: "排序", name: "order", widget: "number", default: 100, required: false, value_type: "int" }
+              - { label: "启用", name: "enabled", widget: "boolean", default: true, required: false }
+
   - name: "help"
     label: "帮助文章"
     label_singular: "帮助文章"
