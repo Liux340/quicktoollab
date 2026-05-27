@@ -36,6 +36,9 @@
         .line{font-size:15px;color:var(--muted);margin-bottom:12px}
         .line b{color:var(--accent2)}
         .empty{padding:18px;border:1px solid var(--border);background:var(--surface);border-radius:12px;color:var(--muted)}
+        .review-ready{padding:20px;border:1px solid var(--border);background:var(--surface);border-radius:14px;color:var(--muted);line-height:1.8}
+        .review-ready h1{font-size:28px;margin-bottom:12px;color:var(--text)}
+        .review-ready ul{margin:12px 0 0 20px}
     </style>
     <meta name="description" id="meta-desc" content="QuickToolLab 帮助文章：提供 PixCrush、开发工具、格式转换、网络排查、安全边界和常用在线工具的使用说明。">
     <link rel="canonical" id="canonical" href="https://quicktoollab.top/help-article">
@@ -71,7 +74,17 @@
 
 <main>
     <div class="crumb"><a href="/">首页</a> / <a href="/help" data-i18n="help">帮助中心</a> / <span data-i18n="article">文章</span></div>
-    <div id="article-host"></div>
+    <div id="article-host">
+        <section class="review-ready">
+            <h1>QuickToolLab 帮助文章</h1>
+            <p>帮助中心提供 PixCrush 图片压缩、格式转换、JSON/正则/DNS 等开发工具使用说明。每篇文章都会说明适用场景、操作步骤和关键概念，帮助用户在打开外部工具前先理解它是否适合当前任务。</p>
+            <ul>
+                <li>PixCrush 相关内容强调本地处理、格式选择、质量参数和隐私边界。</li>
+                <li>开发工具内容覆盖最小复现、接口调试、兼容性检查和安全注意事项。</li>
+                <li>运维与网络内容用于快速判断 DNS、HTTP 请求、定时任务和数据库查看问题。</li>
+            </ul>
+        </section>
+    </div>
 </main>
 
 <script src="/scripts/i18n.js"></script>
@@ -79,9 +92,9 @@
 <script>
 /* ── Page-specific i18n keys ── */
 const PAGE_I18N = {
-    zh:{ back:'返回帮助中心', help:'帮助中心', article:'文章', intro:'介绍：', howto:'用法：', science:'科普：', notfound:'没有找到该文章，请返回帮助中心重新选择。', page_title:'帮助文章 · QuickToolLab' },
-    en:{ back:'Back to Help', help:'Help', article:'Article', intro:'Intro: ', howto:'How to use: ', science:'Concept: ', notfound:'Article not found. Please go back to the help center.', page_title:'Help Article · QuickToolLab' },
-    ja:{ back:'ヘルプへ戻る', help:'ヘルプ', article:'記事', intro:'紹介：', howto:'使い方：', science:'豆知識：', notfound:'記事が見つかりません。ヘルプセンターから選び直してください。', page_title:'ヘルプ記事 · QuickToolLab' }
+    zh:{ back:'返回帮助中心', help:'帮助中心', article:'文章', intro:'介绍：', howto:'用法：', science:'科普：', checklist:'检查：', boundary:'边界：', notfound:'没有找到该文章，请返回帮助中心重新选择。', page_title:'帮助文章 · QuickToolLab' },
+    en:{ back:'Back to Help', help:'Help', article:'Article', intro:'Intro: ', howto:'How to use: ', science:'Concept: ', checklist:'Check: ', boundary:'Boundary: ', notfound:'Article not found. Please go back to the help center.', page_title:'Help Article · QuickToolLab' },
+    ja:{ back:'ヘルプへ戻る', help:'ヘルプ', article:'記事', intro:'紹介：', howto:'使い方：', science:'豆知識：', checklist:'確認：', boundary:'注意：', notfound:'記事が見つかりません。ヘルプセンターから選び直してください。', page_title:'ヘルプ記事 · QuickToolLab' }
 };
 
 let ARTICLES = [];
@@ -93,6 +106,25 @@ function localizeField(v){
     if (v == null) return '';
     if (typeof v === 'string') return v;
     return v[lang] || v.zh || v.en || v.ja || '';
+}
+
+function helpExtraText(a) {
+    const title = localizeField(a.title);
+    const copy = {
+        zh: {
+            check: `${title} 适合在实际操作前快速确认目标、限制和输出结果。建议先小范围测试，再把同样的步骤应用到正式文件或生产环境。`,
+            boundary: '如果结果涉及账号权限、隐私数据、费用、线上发布或安全配置，请不要只依赖单个工具的输出；应结合官方文档、备份和人工复核。'
+        },
+        en: {
+            check: `${title} is best used as a quick pre-task check for goals, limits, and expected output. Test on a small sample before applying the workflow to production files or live systems.`,
+            boundary: 'If the result affects account permissions, private data, costs, publishing, or security settings, do not rely on a single tool output. Check official documentation, keep backups, and review manually.'
+        },
+        ja: {
+            check: `${title} は、作業前に目的、制限、出力結果を確認するために役立ちます。本番ファイルや公開環境に適用する前に、小さな範囲で試してください。`,
+            boundary: '権限、個人情報、費用、公開、セキュリティ設定に関わる場合は、一つのツール結果だけに頼らず、公式資料、バックアップ、人の確認を組み合わせてください。'
+        }
+    };
+    return copy[lang] || copy.en;
 }
 
 async function loadData() {
@@ -125,6 +157,7 @@ function renderArticle(){
     const title = localizeField(a.title);
     const desc = localizeField(a.intro);
     const url = 'https://quicktoollab.top/help-article?id=' + encodeURIComponent(a.id);
+    const extra = helpExtraText(a);
     document.title = title + ' · QuickToolLab';
     document.getElementById('meta-desc').content = desc;
     document.getElementById('canonical').href = url;
@@ -138,6 +171,8 @@ function renderArticle(){
             <p class="line"><b>${escapeHtml(t.intro)}</b>${escapeHtml(localizeField(a.intro))}</p>
             <p class="line"><b>${escapeHtml(t.howto)}</b>${escapeHtml(localizeField(a.howto))}</p>
             <p class="line"><b>${escapeHtml(t.science)}</b>${escapeHtml(localizeField(a.science))}</p>
+            <p class="line"><b>${escapeHtml(t.checklist || 'Check: ')}</b>${escapeHtml(extra.check)}</p>
+            <p class="line"><b>${escapeHtml(t.boundary || 'Boundary: ')}</b>${escapeHtml(extra.boundary)}</p>
         </div>`;
 }
 

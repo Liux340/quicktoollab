@@ -281,6 +281,9 @@
         /* 404 state */
         .not-found{text-align:center;padding:100px 20px;color:var(--muted);}
         .not-found h2{font-family:'Bebas Neue',sans-serif;font-size:48px;color:var(--text);margin-bottom:12px;}
+        .review-ready{padding:22px;border:1px solid var(--border);border-radius:16px;background:var(--surface);color:var(--muted);line-height:1.8;margin-bottom:22px;}
+        .review-ready h2{color:var(--text);font-size:22px;margin-bottom:10px;}
+        .review-ready ul{margin:12px 0 0 20px;}
     </style>
 </head>
 <body>
@@ -354,7 +357,17 @@
     <!-- Main content -->
     <div class="article-body">
         <div class="article-tags" id="article-tags"></div>
-        <div class="prose" id="article-prose"></div>
+        <div class="prose" id="article-prose">
+            <section class="review-ready">
+                <h2>QuickToolLab 原创技术文章</h2>
+                <p>这里收录 QuickToolLab 的建站记录、PixCrush 图片压缩实践、静态站 SEO、Cloudflare Pages 部署、前端主题实现和开发者工具使用经验。每篇文章都围绕一个实际问题展开，包含背景、排查过程、实现取舍和可复用的检查清单。</p>
+                <ul>
+                    <li>如果你正在优化工具站，可以阅读 canonical、sitemap、robots 与内容厚度相关记录。</li>
+                    <li>如果你需要压缩图片，可以查看 PixCrush 的 Canvas API 方案、质量参数和隐私边界。</li>
+                    <li>如果你维护静态站，可以参考 Cloudflare Pages、CMS 内容索引与前端主题切换经验。</li>
+                </ul>
+            </section>
+        </div>
         <div class="license-block">
             <div class="license-icon">©</div>
             <div class="license-text">
@@ -571,8 +584,8 @@ function renderArticle() {
     const prev = idx >= 0 ? POSTS[idx + 1] : null;
     const next = idx >= 0 ? POSTS[idx - 1] : null;
     const navHtml = [
-        prev ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(prev.id)}"><div class="post-nav-arrow">‹</div><div><div class="post-nav-label">${t.prev_post}</div><div class="post-nav-title">${escapeHtml(prev.title[lang]||prev.title.zh)}</div></div></a>` : '<div></div>',
-        next ? `<a class="post-nav-card" href="blog-post.html?id=${encodeURIComponent(next.id)}" style="text-align:right;flex-direction:row-reverse"><div class="post-nav-arrow">›</div><div><div class="post-nav-label">${t.next_post}</div><div class="post-nav-title">${escapeHtml(next.title[lang]||next.title.zh)}</div></div></a>` : '<div></div>',
+        prev ? `<a class="post-nav-card" href="/blog-post?id=${encodeURIComponent(prev.id)}"><div class="post-nav-arrow">‹</div><div><div class="post-nav-label">${t.prev_post}</div><div class="post-nav-title">${escapeHtml(prev.title[lang]||prev.title.zh)}</div></div></a>` : '<div></div>',
+        next ? `<a class="post-nav-card" href="/blog-post?id=${encodeURIComponent(next.id)}" style="text-align:right;flex-direction:row-reverse"><div class="post-nav-arrow">›</div><div><div class="post-nav-label">${t.next_post}</div><div class="post-nav-title">${escapeHtml(next.title[lang]||next.title.zh)}</div></div></a>` : '<div></div>',
     ];
     document.getElementById('post-nav').innerHTML = navHtml.join('');
 }

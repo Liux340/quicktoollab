@@ -358,7 +358,7 @@ function renderPosts() {
         var title = p.title[lang] || p.title.zh;
         var desc  = p.desc[lang]  || p.desc.zh;
         var delay = i * 0.06;
-        return '<article class="post-card" style="animation:up .5s ' + delay + 's ease both;opacity:0;" onclick="window.location.href=\'blog-post.html?id=' + encodeURIComponent(p.id) + '\'">' +
+        return '<article class="post-card" style="animation:up .5s ' + delay + 's ease both;opacity:0;" onclick="window.location.href=\'/blog-post?id=' + encodeURIComponent(p.id) + '\'">' +
             '<div class="post-card-body">' +
                 '<div class="post-card-meta">' +
                     '<span class="post-badge ' + badgeClass(p.badge) + '">' + p.badge + '</span>' +
